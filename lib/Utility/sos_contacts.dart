@@ -19,11 +19,12 @@ class SosContact {
       SosContact(name: json["name"] as String, phone: json["phone"] as String);
 }
 
-/// Strips formatting from a phone number and turns a 00 prefix into +.
+/// Strips formatting from a phone number, drops the "(0)" trunk prefix
+/// written after country codes and turns a 00 prefix into +.
 /// Local numbers (e.g. 06...) are left as they are; the SIM's network
 /// routes them.
 String normalizePhoneNumber(String raw) {
-  var phone = raw.replaceAll(RegExp(r"[^\d+]"), "");
+  var phone = raw.replaceAll("(0)", "").replaceAll(RegExp(r"[^\d+]"), "");
   if (phone.startsWith("00")) phone = "+${phone.substring(2)}";
   return phone;
 }
