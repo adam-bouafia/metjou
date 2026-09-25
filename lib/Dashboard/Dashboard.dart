@@ -5,7 +5,6 @@ import 'package:location/location.dart';
 import 'package:permission_handler/permission_handler.dart' as appPermissions;
 import 'package:pinput/pin_put/pin_put.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:metjou/Dashboard/ContactScreens/phonebook_view.dart';
 import 'package:metjou/Dashboard/Home.dart';
 import 'package:metjou/Dashboard/ContactScreens/MyContacts.dart';
 import 'package:background_sms/background_sms.dart';
@@ -27,7 +26,6 @@ class _DashboardState extends State<Dashboard> {
   int currentPage = 0;
   bool pinChanged = false;
   SharedPreferences prefs;
-  List<Widget> screens = [Home(), MyContactsScreen()];
 
   final TextEditingController _pinPutController = TextEditingController();
   final FocusNode _pinPutFocusNode = FocusNode();
@@ -270,9 +268,8 @@ class _DashboardState extends State<Dashboard> {
       floatingActionButton: currentPage == 1
           ? FloatingActionButton(
               backgroundColor: Colors.white,
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => PhoneBook()));
+              onPressed: () async {
+                if (await pickSosContact()) setState(() {});
               },
               child: Image.asset(
                 "assets/add-contact.png",
@@ -342,7 +339,7 @@ class _DashboardState extends State<Dashboard> {
           ),
         ),
       ),
-      body: SafeArea(child: screens[currentPage]),
+      body: SafeArea(child: currentPage == 0 ? Home() : MyContactsScreen()),
     );
   }
 }

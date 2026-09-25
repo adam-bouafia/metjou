@@ -3,8 +3,9 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:metjou/Dashboard/ContactScreens/phonebook_view.dart';
+import 'package:metjou/Dashboard/ContactScreens/MyContacts.dart';
 import 'package:metjou/Utility/background_services.dart';
+import 'package:metjou/Utility/sos_contacts.dart';
 import 'package:workmanager/workmanager.dart';
 import 'package:get/get.dart';
 
@@ -17,7 +18,7 @@ class SafeHome extends StatefulWidget {
 
 class _SafeHomeState extends State<SafeHome> {
   bool getHomeSafeActivated = false;
-  List<String> numbers = [];
+  List<SosContact> numbers = [];
 
   @override
   void initState() {
@@ -112,8 +113,7 @@ class _SafeHomeState extends State<SafeHome> {
                               BackgroundServices.simplePeriodicTask ,
                               tag: "3",
                               inputData: {
-                                "contact":
-                                    numbers[selectedContact].split("***")[1]
+                                "contact": numbers[selectedContact].phone
                               },
                               frequency: Duration(minutes: 15),
                             );
@@ -130,7 +130,7 @@ class _SafeHomeState extends State<SafeHome> {
                         child: FutureBuilder(
                             future: getSOSNumbers(),
                             builder: (context,
-                                AsyncSnapshot<List<String>> snapshot) {
+                                AsyncSnapshot<List<SosContact>> snapshot) {
                               final contacts = snapshot.data ?? [];
                               if (contacts.isNotEmpty) {
                                 return ListView.separated(
@@ -142,7 +142,7 @@ class _SafeHomeState extends State<SafeHome> {
                                       );
                                     },
                                     itemBuilder: (context, index) {
-                                      String contactData = contacts[index];
+                                      final contactData = contacts[index];
                                       return ListTile(
                                         onTap: () {
                                           setModalState(() {
@@ -154,9 +154,9 @@ class _SafeHomeState extends State<SafeHome> {
                                               AssetImage("assets/user.png"),
                                         ),
                                         title:
-                                            Text(contactData.split("***")[0]),
+                                            Text(contactData.name),
                                         subtitle:
-                                            Text(contactData.split("***")[1]),
+                                            Text(contactData.phone),
                                         trailing: selectedContact == index
                                             ? Icon(
                                                 Icons.check_circle,
@@ -167,14 +167,9 @@ class _SafeHomeState extends State<SafeHome> {
                                     });
                               } else {
                                 return ListTile(
-                                  onTap: () {
-                                    Navigator.pop(context);
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => PhoneBook(),
-                                      ),
-                                    );
+                                  onTap: () async {
+                                    await pickSosContact();
+                                    setModalState(() {});
                                   },
                                   title: Text("aucunctt".tr),
                                   subtitle:
@@ -193,11 +188,8 @@ class _SafeHomeState extends State<SafeHome> {
         });
   }
 
-  Future<List<String>> getSOSNumbers() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    numbers = prefs.getStringList("numbers") ?? [];
-
+  Future<List<SosContact>> getSOSNumbers() async {
+    numbers = await loadSosContacts();
     return numbers;
   }
 
