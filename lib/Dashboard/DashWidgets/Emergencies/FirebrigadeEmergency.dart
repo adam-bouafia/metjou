@@ -57,7 +57,6 @@ class FireEmergency extends StatelessWidget {
                         Text(
                           "pomp".tr,
                           style: TextStyle(
-                              fontFamily: 'metaplusmedium',
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize:
@@ -66,7 +65,6 @@ class FireEmergency extends StatelessWidget {
                         Text(
                           "pompurg".tr,
                           style: TextStyle(
-                              fontFamily: 'metaplusmedium',
                               color: Colors.white,
                               fontSize:
                                   MediaQuery.of(context).size.width * 0.035),
@@ -82,7 +80,6 @@ class FireEmergency extends StatelessWidget {
                             child: Text(
                               "1 4",
                               style: TextStyle(
-                                  fontFamily: 'metaplusmedium',
                                   color:Color(0xffFA7D82),
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18),

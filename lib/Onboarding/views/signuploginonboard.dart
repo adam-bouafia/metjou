@@ -105,8 +105,7 @@ class CenterNextButton extends StatelessWidget {
                                 children: [
                                   Text(
                                     'onbsignup'.tr,
-                                    style: TextStyle(fontFamily: 'metaplusmedium',
-                                      color: Colors.white,
+                                    style: TextStyle(color: Colors.white,
                                       fontSize: 18,
                                       fontWeight: FontWeight.w500,
                                     ),

@@ -108,7 +108,7 @@ class _ChangePinScreenState extends State<ChangePinScreen> {
             padding: const EdgeInsets.all(18.0),
             child: Text(
               widget.pin == -1111 ? "creerpin".tr : "chpin".tr,
-              style: TextStyle(fontFamily: 'metaplusmedium',fontSize: 35, fontWeight: FontWeight.w900),
+              style: TextStyle(fontSize: 35, fontWeight: FontWeight.w900),
             ),
           ),
           Center(
@@ -199,8 +199,7 @@ class _ChangePinScreenState extends State<ChangePinScreen> {
                       child: Center(
                           child: Text(
                         "fait".tr,
-                        style: TextStyle(fontFamily: 'metaplusmedium',
-                            fontWeight: FontWeight.bold, color: Colors.white),
+                        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
                       )),
                     ),
                   ),

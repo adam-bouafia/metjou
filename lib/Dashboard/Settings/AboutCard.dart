@@ -40,8 +40,7 @@ class AboutCard extends StatelessWidget {
                     ListTile(
                       title: Text(
                         title,
-                        style: TextStyle(fontFamily: 'metaplusmedium',
-                            fontWeight: FontWeight.bold, fontSize: 20),
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                       ),
                       subtitle: Text(subtitle),
                     ),

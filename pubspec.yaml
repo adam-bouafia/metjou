@@ -48,6 +48,12 @@ flutter:
     - assets/onboarding/
 
   fonts:
-    - family: metaplusmedium
+    # Readex Pro (SIL OFL 1.1, see assets/fonts/OFL.txt), subset to Latin
+    # and Arabic.
+    - family: ReadexPro
       fonts:
-        - asset: assets/fonts/metaplusmedium.ttf
+        - asset: assets/fonts/ReadexPro-Regular.ttf
+        - asset: assets/fonts/ReadexPro-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/ReadexPro-Bold.ttf
+          weight: 700

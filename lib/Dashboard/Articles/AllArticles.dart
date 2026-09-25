@@ -146,8 +146,7 @@ class _AllArticlesState extends State<AllArticles>
                                           left: 8.0, bottom: 8),
                                       child: Text(
                                         articleTitle[index],
-                                        style: TextStyle(fontFamily: 'metaplusmedium',
-                                            fontWeight: FontWeight.bold,
+                                        style: TextStyle(fontWeight: FontWeight.bold,
                                             fontSize: MediaQuery.of(context)
                                                     .size
                                                     .width *

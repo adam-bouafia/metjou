@@ -97,8 +97,7 @@ class SafeCarousel extends StatelessWidget {
                                   const EdgeInsets.only(left: 8.0, bottom: 8),
                               child: Text(
                                 articleTitle[index],
-                                style: TextStyle(fontFamily: 'metaplusmedium',
-                                    fontWeight: FontWeight.bold,
+                                style: TextStyle(fontWeight: FontWeight.bold,
                                     fontSize:
                                         MediaQuery.of(context).size.width *
                                             0.05,

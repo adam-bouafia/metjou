@@ -33,7 +33,7 @@ class _LetsbeginState extends State<Letsbegin> {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(32.0))),
             title: Text('choislang'.tr,
-                style: TextStyle(fontFamily: 'metaplusmedium',fontSize: 22,)),
+                style: TextStyle(fontSize: 22,)),
             backgroundColor: Color(0xfff5ebe2),
             contentPadding: EdgeInsets.only(top: 16.0, bottom: 16.0,left: 16.0,right: 16.0),
             content: Container(

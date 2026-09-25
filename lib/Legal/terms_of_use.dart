@@ -20,7 +20,7 @@ class TermsOfUse extends StatelessWidget {
           children: [
             TextSpan(
               text: "\nTermes Conditions",
-              style: TextStyle(fontFamily: 'metaplusmedium',fontWeight: FontWeight.bold),
+              style: TextStyle(fontWeight: FontWeight.bold),
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
                   showModal(
@@ -37,7 +37,7 @@ class TermsOfUse extends StatelessWidget {
             TextSpan(text: " et "),
             TextSpan(
               text: "Politique de confidentialité! ",
-              style: TextStyle(fontFamily: 'metaplusmedium',fontWeight: FontWeight.bold),
+              style: TextStyle(fontWeight: FontWeight.bold),
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
                   showDialog(

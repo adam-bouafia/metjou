@@ -36,7 +36,7 @@ class AboutUs extends StatelessWidget {
           children: [
             Text(
               "propos".tr,
-              style: TextStyle(fontFamily: 'metaplusmedium',color: Colors.black, fontSize: 26),
+              style: TextStyle(color: Colors.black, fontSize: 26),
             ),
             SizedBox(
               width: 10,

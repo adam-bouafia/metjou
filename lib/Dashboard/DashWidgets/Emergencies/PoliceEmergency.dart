@@ -55,7 +55,6 @@ class PoliceEmergency extends StatelessWidget {
                         Text(
                           "pol".tr,
                           style: TextStyle(
-                              fontFamily: 'metaplusmedium',
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize:
@@ -64,7 +63,6 @@ class PoliceEmergency extends StatelessWidget {
                         Text(
                           "En cas d'urgence, appelez ce numéro",
                           style: TextStyle(
-                              fontFamily: 'metaplusmedium',
                               color: Colors.white,
                               fontSize:
                                   MediaQuery.of(context).size.width * 0.035),
@@ -80,7 +78,6 @@ class PoliceEmergency extends StatelessWidget {
                             child: Text(
                               "1 7",
                               style: TextStyle(
-                                  fontFamily: 'metaplusmedium',
                                   color:Color(0xff5C5EDD),
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18),

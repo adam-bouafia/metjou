@@ -13,8 +13,7 @@ class DashAppbar extends StatelessWidget {
     return ListTile(
       title: Text(
         sweetSayings[quoteIndex][0],
-        style: TextStyle(fontFamily: 'metaplusmedium',
-          color: Colors.grey[600],
+        style: TextStyle(color: Colors.grey[600],
         ),
       ),
       subtitle: GestureDetector(
@@ -23,8 +22,7 @@ class DashAppbar extends StatelessWidget {
         },
         child: Text(
           sweetSayings[quoteIndex][1],
-          style: TextStyle(fontFamily: 'metaplusmedium',
-              color: Colors.black,
+          style: TextStyle(color: Colors.black,
               fontWeight: FontWeight.bold,
               fontSize: MediaQuery.of(context).size.width * 0.06),
         ),

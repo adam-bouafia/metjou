@@ -52,7 +52,6 @@ class AmbulanceEmergency extends StatelessWidget {
                       Text(
                         'ambulance'.tr,
                         style: TextStyle(
-                            fontFamily: 'metaplusmedium',
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: MediaQuery.of(context).size.width * 0.06),
@@ -60,7 +59,6 @@ class AmbulanceEmergency extends StatelessWidget {
                       Text(
                         "amburg".tr,
                         style: TextStyle(
-                          fontFamily: 'metaplusmedium',
                           color: Colors.white,
                           fontSize: MediaQuery.of(context).size.width * 0.035,
                         ),
@@ -76,7 +74,6 @@ class AmbulanceEmergency extends StatelessWidget {
                           child: Text(
                             "1 0 5 5",
                             style: TextStyle(
-                                fontFamily: 'metaplusmedium',
                                 color:Color(0xffEEC0C6).withOpacity(0.8),
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18),

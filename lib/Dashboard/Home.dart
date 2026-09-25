@@ -57,8 +57,7 @@ class _HomeState extends State<Home> {
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           "urg".tr,
-                          style: TextStyle(fontFamily: 'metaplusmedium',
-                              fontWeight: FontWeight.bold, fontSize: 20),
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                         ),
                       ),
                       TextButton(
@@ -70,7 +69,7 @@ class _HomeState extends State<Home> {
                             ),
                           );
                         },
-                        child: Text("vps".tr, style: TextStyle(fontFamily: 'metaplusmedium',color: Colors.blueAccent)),
+                        child: Text("vps".tr, style: TextStyle(color: Colors.blueAccent)),
                       ),
                     ],
                   ),
@@ -81,7 +80,7 @@ class _HomeState extends State<Home> {
                       const EdgeInsets.only(left: 16.0, bottom: 10, top: 10),
                   child: Text(
                     "dcvls".tr,
-                    style: TextStyle(fontFamily: 'metaplusmedium',fontWeight: FontWeight.bold, fontSize: 20),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
                 ),
                 LiveSafe(),

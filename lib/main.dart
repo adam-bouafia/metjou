@@ -67,9 +67,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'MetJou',
       theme: ThemeData(
-        fontFamily: 'metaplusmedium',
-        //primarySwatch: Colors.kPrimaryColor,
-        //primarySwatch: Colors.red,
+        fontFamily: 'ReadexPro',
+        colorSchemeSeed: const Color(0xffB271AA),
       ),
       home: FutureBuilder(
           future: isAppOpeningForFirstTime(),

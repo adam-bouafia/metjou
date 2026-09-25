@@ -73,7 +73,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 borderRadius: BorderRadius.all(Radius.circular(32.0))),
             title: Text('chln'.tr,
                 style: TextStyle(
-                  fontFamily: 'metaplusmedium',
                   fontSize: 22,
                 )),
             backgroundColor: Color(0xffffffff),
@@ -156,7 +155,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             child: Text(
               "regl".tr,
               style: TextStyle(
-                  fontFamily: 'metaplusmedium',
                   fontSize: 35,
                   fontWeight: FontWeight.w900),
             ),
@@ -211,7 +209,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
                   "noti".tr,
-                  style: TextStyle(fontFamily: 'metaplusmedium', fontSize: 20),
+                  style: TextStyle(fontSize: 20),
                 ),
               ),
               Expanded(child: Divider())
@@ -310,7 +308,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             child: Text(
               "sfdes".tr,
               style:
-                  TextStyle(fontFamily: 'metaplusmedium', color: Colors.grey),
+                  TextStyle(color: Colors.grey),
             ),
           ),
           Row(
@@ -319,7 +317,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
                   "app".tr,
-                  style: TextStyle(fontFamily: 'metaplusmedium', fontSize: 20),
+                  style: TextStyle(fontSize: 20),
                 ),
               ),
               Expanded(child: Divider())

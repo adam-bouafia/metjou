@@ -50,8 +50,7 @@ class PolicyDialog extends StatelessWidget {
               width: double.infinity,
               child: Text(
                 "ferm".tr,
-                style: TextStyle(fontFamily: 'metaplusmedium',
-                  fontSize: 20,
+                style: TextStyle(fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: Theme.of(context).textTheme.labelLarge?.color,
                 ),
