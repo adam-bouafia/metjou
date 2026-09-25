@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:metjou/Onboarding/views/onboarding_page.dart';
 
 class Letsbegin extends StatefulWidget {
   final AnimationController animationController;
@@ -44,7 +45,6 @@ class _LetsbeginState extends State<Letsbegin> {
                       padding: const EdgeInsets.all(8.0),
                       child: GestureDetector(child: Text(locale[index]['name']),
                         onTap: (){
-                        print(locale[index]['name']);
                         updateLanguage(locale[index]['locale']);
                       },),
                     );
@@ -74,99 +74,58 @@ class _LetsbeginState extends State<Letsbegin> {
     ));
     return SlideTransition(
       position: _introductionanimation,
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.width,
-              child: Image.asset(
-                'assets/onboarding/introduction_image.webp',
-                fit: BoxFit.fitHeight,
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 24),
+          child: Column(
+            children: [
+              Expanded(
+                child: Image.asset(
+                  'assets/onboarding/introduction_image.webp',
+                  fit: BoxFit.contain,
+                ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
-              child: Text(
+              const SizedBox(height: 24),
+              Text(
                 "MetJou",
-                style: TextStyle(fontFamily: 'metaplusmedium',fontSize: 25.0, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(),
-              child: Text(
+              const SizedBox(height: 12),
+              Text(
                 'onbletbegdesc'.tr,
-                style: TextStyle(fontFamily: 'metaplusmedium',fontSize: 16,),
+                style: TextStyle(fontSize: 16, height: 1.4),
                 textAlign: TextAlign.center,
               ),
-            ),
-            SizedBox(
-              height: 48,
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).padding.bottom + 10),
-              child: InkWell(
-                onTap: () {
-                  widget.animationController.animateTo(0.2);
-                },
-                child: Container(
-                  height: 45,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                          backgroundColor: Color(0xffB271AA),
-                          //backgroundColor: Colors.kPrimaryColor,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50))
-                      ),
-                      onPressed: (){
-                      buildLanguageDialog(context);
-                    },
-                    child: Text(
-                      'changelang'.tr,
-                      style: TextStyle(fontFamily: 'metaplusmedium',
-                        fontSize: 16,
-                        color: Colors.white,
-                       ),
-                      ),
-                    ),
+              const SizedBox(height: 40),
+              SizedBox(
+                width: double.infinity,
+                child: FilledButton(
+                  style: FilledButton.styleFrom(
+                    backgroundColor: onboardingPrimary,
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+                  ),
+                  onPressed: () => widget.animationController.animateTo(0.2),
+                  child: Text('onbletbegwelc'.tr, style: TextStyle(fontSize: 18)),
                 ),
               ),
-            ),
-
-            SizedBox(
-              height: 55,
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).padding.bottom ),
-              child: InkWell(
-                onTap: () {
-                  widget.animationController.animateTo(0.2);
-                },
-                child: Container(
-                  height: 55,
-                  padding: EdgeInsets.only(
-                    left: 15.0,
-                    right: 15.0,
-                    top: 15.0,
-                    bottom: 15.0,
+              const SizedBox(height: 12),
+              SizedBox(
+                width: double.infinity,
+                child: OutlinedButton.icon(
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: onboardingPrimary,
+                    side: const BorderSide(color: onboardingPrimary),
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
                   ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(38.0),
-                    color: Color(0xffB271AA),
-                  ),
-                  child: Text(
-                    'onbletbegwelc'.tr,
-                    style: TextStyle(fontFamily: 'metaplusmedium',
-                      fontSize: 20,
-                      color: Colors.white,
-                    ),
-                  ),
+                  onPressed: () => buildLanguageDialog(context),
+                  icon: const Icon(Icons.language),
+                  label: Text('changelang'.tr, style: TextStyle(fontSize: 16)),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

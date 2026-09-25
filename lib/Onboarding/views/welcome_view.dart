@@ -1,85 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:metjou/Onboarding/views/onboarding_page.dart';
 
 class WelcomeView extends StatelessWidget {
-  final AnimationController animationController;
   const WelcomeView({super.key, required this.animationController});
+
+  final AnimationController animationController;
 
   @override
   Widget build(BuildContext context) {
-    final _firstHalfAnimation =
-        Tween<Offset>(begin: Offset(1, 0), end: Offset(0, 0)).animate(
-      CurvedAnimation(
-        parent: animationController,
-        curve: Interval(
-          0.6,
-          0.8,
-          curve: Curves.fastOutSlowIn,
-        ),
-      ),
-    );
-    final _secondHalfAnimation =
-        Tween<Offset>(begin: Offset(0, 0), end: Offset(-1, 0)).animate(
-      CurvedAnimation(
-        parent: animationController,
-        curve: Interval(
-          0.8,
-          1.0,
-          curve: Curves.fastOutSlowIn,
-        ),
-      ),
-    );
-
-    final _welcomeFirstHalfAnimation =
-        Tween<Offset>(begin: Offset(2, 0), end: Offset(0, 0))
-            .animate(CurvedAnimation(
-      parent: animationController,
-      curve: Interval(
-        0.6,
-        0.8,
-        curve: Curves.fastOutSlowIn,
-      ),
-    ));
-
-    final _welcomeImageAnimation =
-        Tween<Offset>(begin: Offset(4, 0), end: Offset(0, 0))
-            .animate(CurvedAnimation(
-      parent: animationController,
-      curve: Interval(
-        0.6,
-        0.8,
-        curve: Curves.fastOutSlowIn,
-      ),
-    ));
-    return SlideTransition(
-      position: _firstHalfAnimation,
-      child: SlideTransition(
-        position: _secondHalfAnimation,
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: 100),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SlideTransition(
-                position: _welcomeImageAnimation,
-                child: Container(
-                  child: Image.asset(
-                    'assets/onboarding/welcome.webp',
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ),
-              SlideTransition(
-                position: _welcomeFirstHalfAnimation,
-                child: Text(
-                  'onbwelcome'.tr,
-                  style: TextStyle(fontFamily: 'metaplusmedium',fontSize: 25.0, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+    return OnboardingPage(
+      animationController: animationController,
+      start: 0.6,
+      image: 'assets/onboarding/welcome.webp',
+      title: 'onbwelcome'.tr,
+      text: 'onbletbegdesc'.tr,
     );
   }
 }
