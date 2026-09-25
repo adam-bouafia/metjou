@@ -1,15 +1,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- SOS alert -->
     <uses-permission android:name="android.permission.SEND_SMS"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <!-- Location link in alerts; background for Safe Shake and Get-Home Safe -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION"/>
 
     <application
         android:label="MetJou"
@@ -49,6 +50,10 @@
 
          In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin. -->
     <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW"/>
+            <data android:scheme="https"/>
+        </intent>
         <intent>
             <action android:name="android.intent.action.PROCESS_TEXT"/>
             <data android:mimeType="text/plain"/>
