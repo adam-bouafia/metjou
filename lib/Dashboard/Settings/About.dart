@@ -21,9 +21,9 @@ class AboutUs extends StatelessWidget {
           "assets/logoss.png",
           height: 50,
         ),
-        applicationName: "Dhayen",
+        applicationName: "MetJou",
         applicationLegalese:
-            "Dhayen fournit une solution aux problèmes de la communauté, une application entièrement conviviale et un besoin de l'heure, visant à vous connecter à ceux qui s'occupent de vous!");
+            "MetJou fournit une solution aux problèmes de la communauté, une application entièrement conviviale et un besoin de l'heure, visant à vous connecter à ceux qui s'occupent de vous!");
   }
 
   @override
@@ -72,9 +72,9 @@ class AboutUs extends StatelessWidget {
         children: [
           AboutCard(
             desc:
-                "Dhayen est une application mobile vigilante qui permet à l'utilisateur de rester connecté avec ceux qui s'en soucient ! Il donne à l'utilisateur la possibilité de partager l'emplacement en direct avec les personnes concernées via des alertes SOS et permet à l'utilisateur d'accéder aux services d'urgence. Soyez témoin de l'incident malheureux qui se produit et appelez à l'aide. C'est votre compagnon personnel.",
+                "MetJou est une application mobile vigilante qui permet à l'utilisateur de rester connecté avec ceux qui s'en soucient ! Il donne à l'utilisateur la possibilité de partager l'emplacement en direct avec les personnes concernées via des alertes SOS et permet à l'utilisateur d'accéder aux services d'urgence. Soyez témoin de l'incident malheureux qui se produit et appelez à l'aide. C'est votre compagnon personnel.",
             subtitle: "Vous méritez la sécurité!",
-            title: "Dhayen",
+            title: "MetJou",
             sizeFactor: 1.8,
           ),
           Padding(

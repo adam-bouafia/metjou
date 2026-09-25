@@ -1,8 +1,8 @@
 List<List<String>> sweetSayings = [
-  ["Dhayen", "Yakfi"],
-  ["Dhayen", "Stop"],
-  ["Dhayen", "يكفي"],
-  ["Dhayen", "Stop"],
+  ["MetJou", "Yakfi"],
+  ["MetJou", "Stop"],
+  ["MetJou", "يكفي"],
+  ["MetJou", "Stop"],
 ];
 
 List<String> articleTitle = [

@@ -88,7 +88,7 @@ class _LetsbeginState extends State<Letsbegin> {
             Padding(
               padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
               child: Text(
-                "Dhayen",
+                "MetJou",
                 style: TextStyle(fontFamily: 'metaplusmedium',fontSize: 25.0, fontWeight: FontWeight.bold),
               ),
             ),

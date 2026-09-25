@@ -97,7 +97,7 @@ class MyApp extends StatelessWidget {
       translations: LocaleString(),
       locale: Locale('fr', 'FR'),
       debugShowCheckedModeBanner: false,
-      title: 'Dhayen',
+      title: 'MetJou',
       theme: ThemeData(
         fontFamily: 'metaplusmedium',
         //primarySwatch: Colors.kPrimaryColor,
