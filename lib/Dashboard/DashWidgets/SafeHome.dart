@@ -131,10 +131,10 @@ class _SafeHomeState extends State<SafeHome> {
                             future: getSOSNumbers(),
                             builder: (context,
                                 AsyncSnapshot<List<String>> snapshot) {
-                              if (snapshot.hasData &&
-                                  snapshot.data.isNotEmpty) {
+                              final contacts = snapshot.data ?? [];
+                              if (contacts.isNotEmpty) {
                                 return ListView.separated(
-                                    itemCount: snapshot.data.length,
+                                    itemCount: contacts.length,
                                     separatorBuilder: (context, index) {
                                       return Divider(
                                         indent: 20,
@@ -142,7 +142,7 @@ class _SafeHomeState extends State<SafeHome> {
                                       );
                                     },
                                     itemBuilder: (context, index) {
-                                      String contactData = snapshot.data[index];
+                                      String contactData = contacts[index];
                                       return ListTile(
                                         onTap: () {
                                           setModalState(() {

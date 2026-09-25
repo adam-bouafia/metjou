@@ -10,7 +10,7 @@ import 'package:metjou/Utility/background_services.dart';
 import 'package:vibration/vibration.dart';
 import 'package:workmanager/workmanager.dart';
 import 'package:metjou/Dashboard/Dashboard.dart';
-import 'onboarding/onboarding_screen.dart';
+import 'package:metjou/Onboarding/onboarding_screen.dart';
 import 'package:get/get.dart';
 
 

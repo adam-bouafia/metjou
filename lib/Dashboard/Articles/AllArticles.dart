@@ -14,7 +14,7 @@ class AllArticles extends StatefulWidget {
 
 class _AllArticlesState extends State<AllArticles>
     with TickerProviderStateMixin {
-  AnimationController _controller;
+  late AnimationController _controller;
 
   @override
   void dispose() {
@@ -55,13 +55,13 @@ class _AllArticlesState extends State<AllArticles>
                 fit: BoxFit.fitWidth,
                 alignment: Alignment.topCenter,
               ),
-              color: Colors.grey[50].withOpacity(0.3),
+              color: Colors.grey[50]!.withValues(alpha: 0.3),
             ),
             child: CustomScrollView(
               slivers: <Widget>[
                 SliverAppBar(
                   expandedHeight: 188.0,
-                  backgroundColor: Colors.grey[50].withOpacity(0.3),
+                  backgroundColor: Colors.grey[50]!.withValues(alpha: 0.3),
                   flexibleSpace: FlexibleSpaceBar(
                     background: Lottie.asset(
                       "assets/reading.json",

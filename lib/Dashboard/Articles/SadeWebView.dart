@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:metjou/Utility/constants.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class SafeWebView extends StatelessWidget {
+class SafeWebView extends StatefulWidget {
   const SafeWebView({super.key, required this.url, required this.title, required this.index});
 
   final int index;
@@ -11,17 +9,19 @@ class SafeWebView extends StatelessWidget {
   final String url;
 
   @override
+  State<SafeWebView> createState() => _SafeWebViewState();
+}
+
+class _SafeWebViewState extends State<SafeWebView> {
+  late final WebViewController _controller = WebViewController()
+    ..setJavaScriptMode(JavaScriptMode.unrestricted)
+    ..loadRequest(Uri.parse(widget.url));
+
+  @override
   Widget build(BuildContext context) {
-    
-    return WebView(
-      initialUrl: url,
-      /*appBar: CupertinoNavigationBar(
-        middle: Text(title),
-        trailing: CircleAvatar(
-          backgroundColor: Colors.grey[200],
-          backgroundImage: NetworkImage(imageSliders[index]),
-        ),
-      ),*/
+    return Scaffold(
+      appBar: AppBar(title: Text(widget.title, overflow: TextOverflow.ellipsis)),
+      body: WebViewWidget(controller: _controller),
     );
   }
 }

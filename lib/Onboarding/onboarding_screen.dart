@@ -19,7 +19,7 @@ class OnboardingScreen extends StatefulWidget {
 
 class _OnboardingScreenState
     extends State<OnboardingScreen> with TickerProviderStateMixin {
-  AnimationController _animationController;
+  late AnimationController _animationController;
 
   @override
   void initState() {
