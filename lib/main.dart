@@ -1,91 +1,61 @@
-import 'dart:async';
-import 'package:metjou/Utility/localeString.dart';
 import 'package:audio_background_record/audio_background_record.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_background_service/flutter_background_service.dart';
-import 'package:shake/shake.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:metjou/Utility/background_services.dart';
-import 'package:vibration/vibration.dart';
-import 'package:workmanager/workmanager.dart';
+import 'package:get/get.dart';
 import 'package:metjou/Dashboard/Dashboard.dart';
 import 'package:metjou/Onboarding/onboarding_screen.dart';
-import 'package:get/get.dart';
+import 'package:metjou/Utility/background_services.dart';
+import 'package:metjou/Utility/localeString.dart';
+import 'package:shake/shake.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vibration/vibration.dart';
+import 'package:workmanager/workmanager.dart';
 
+Future<void> _onShake() async {
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.reload();
+  final sendSmsOption = prefs.getBool("smsSend") ?? false;
+  final audioRecordOption = prefs.getBool("bgRecord") ?? false;
+  if (!sendSmsOption && !audioRecordOption) return;
 
+  // Vibration feedback so the user knows the shake was registered.
+  if (await Vibration.hasVibrator()) {
+    Vibration.vibrate(duration: 2000);
+  }
 
-void main() async {
+  if (sendSmsOption) {
+    BackgroundServices.sendSms();
+  }
+
+  final recorder = AudioBackgroundRecord.getInstance();
+  if (audioRecordOption && (await recorder.isRecordingServiceRunning() ?? false)) {
+    if (await recorder.isRecording() ?? false) {
+      recorder.stopRecording();
+    } else {
+      recorder.startRecording();
+    }
+  }
+}
+
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  BackgroundServices.checkService() ;
+  await BackgroundServices.init();
+  await BackgroundServices.checkService();
 
-  ShakeDetector.autoStart(
-      shakeThresholdGravity: 5,
-      onPhoneShake: () async {
-        var prefs = await SharedPreferences.getInstance();
-        await prefs.reload();
-        bool sendSmsOption = prefs.getBool("smsSend") ?? false;
-        bool audioRecordOption = (prefs.getBool("bgRecord") ?? false);
-        //Vibration feedback for shaking the phone
-        if (sendSmsOption || audioRecordOption) {
-          if (await Vibration.hasVibrator()) {
-            if (await Vibration.hasCustomVibrationsSupport()) {
-              Vibration.vibrate(duration: 2000);
-            } else {
-              Vibration.vibrate();
-              await Future.delayed(Duration(milliseconds: 500));
-              Vibration.vibrate();
-            }
-          }
-        }
+  ShakeDetector.autoStart(shakeThresholdGravity: 5, onPhoneShake: (_) => _onShake());
+  await Workmanager().initialize(callbackDispatcher);
 
-        //sms send config
-        String link = '';
-        //if (sms send is enabled in the shared preference , then perceed with the following routine
-        if (sendSmsOption) {
-          BackgroundServices.sendSms();
-        } else {
-          print("sms send fonctionality is desactivated");
-        }
-
-        var isServiceStarted = await AudioBackgroundRecord.getInstance()
-            .isRecordingServiceRunning();
-        var isRecording =
-            await AudioBackgroundRecord.getInstance().isRecording();
-        if (isServiceStarted) {
-          if (isRecording == false) {
-            if (audioRecordOption == true) {
-              AudioBackgroundRecord.getInstance().startRecording();
-              print("bg recording is activated");
-            } else {
-              print("bg recording is deactivated");
-            }
-          } else {
-            AudioBackgroundRecord.getInstance().stopRecording();
-          }
-        }
-        //AudioBackgroundRecord.getInstance().configure(savetoDirectory: path);
-      });
-
-
-  Workmanager().initialize(
-    callbackDispatcher,
-    isInDebugMode: false,
-  );
-
-  SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
-    runApp(MyApp());
-  });
+  await SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   Future<bool> isAppOpeningForFirstTime() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool result = prefs.getBool("appOpenedBefore") ?? false;
-    // if (!result) {
-    //   prefs.setBool("appOpenedBefore", true);
-    // }
     return result;
   }
 
@@ -105,7 +75,7 @@ class MyApp extends StatelessWidget {
           future: isAppOpeningForFirstTime(),
           builder: (context, AsyncSnapshot<bool> snap) {
             if (snap.hasData) {
-              if (snap.data) {
+              if (snap.data!) {
                 return Dashboard(); //Dashboard
               } else {
                 return OnboardingScreen();

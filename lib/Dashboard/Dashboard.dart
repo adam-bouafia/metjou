@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:location/location.dart';
-import 'package:permission_handler/permission_handler.dart' as appPermissions;
-import 'package:pinput/pin_put/pin_put.dart';
+import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:metjou/Dashboard/Home.dart';
 import 'package:metjou/Dashboard/ContactScreens/MyContacts.dart';
-import 'package:background_sms/background_sms.dart';
-import 'package:get/get.dart';
+import 'package:metjou/Utility/background_services.dart';
+import 'package:metjou/Utility/pin_input.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key, this.pageIndex = 0});
@@ -16,16 +14,13 @@ class Dashboard extends StatefulWidget {
   final int pageIndex;
 
   @override
-  _DashboardState createState() => _DashboardState(currentPage: pageIndex);
+  State<Dashboard> createState() => _DashboardState();
 }
 
 class _DashboardState extends State<Dashboard> {
-  _DashboardState({this.currentPage = 0});
-
   bool alerted = false;
-  int currentPage = 0;
-  bool pinChanged = false;
-  SharedPreferences prefs;
+  late int currentPage = widget.pageIndex;
+  SharedPreferences? prefs;
 
   final TextEditingController _pinPutController = TextEditingController();
   final FocusNode _pinPutFocusNode = FocusNode();
@@ -34,135 +29,64 @@ class _DashboardState extends State<Dashboard> {
   void initState() {
     super.initState();
     checkAlertSharedPreferences();
-
     checkPermission();
   }
 
-  checkAlertSharedPreferences() async {
+  @override
+  void dispose() {
+    _pinPutController.dispose();
+    _pinPutFocusNode.dispose();
+    super.dispose();
+  }
+
+  Future<void> checkAlertSharedPreferences() async {
     prefs = await SharedPreferences.getInstance();
-    if (mounted)
+    if (mounted) {
       setState(() {
-        alerted = prefs.getBool("alerted") ?? false;
+        alerted = prefs!.getBool("alerted") ?? false;
       });
-  }
-  checkPermission() async {
-    appPermissions.PermissionStatus conPer =
-        await appPermissions.Permission.contacts.status;
-    appPermissions.PermissionStatus locPer =
-        await appPermissions.Permission.location.status;
-    appPermissions.PermissionStatus phonePer =
-        await appPermissions.Permission.phone.status;
-    appPermissions.PermissionStatus smsPer =
-        await appPermissions.Permission.sms.status;
-    appPermissions.PermissionStatus micPer =
-        await appPermissions.Permission.microphone.status;
-    appPermissions.PermissionStatus stoPer =
-        await appPermissions.Permission.storage.status;
-
-    if (stoPer != appPermissions.PermissionStatus.granted) {
-      await appPermissions.Permission.storage.request();
-    }
-    if (micPer != appPermissions.PermissionStatus.granted) {
-      await appPermissions.Permission.microphone.request();
-    }
-    if (conPer != appPermissions.PermissionStatus.granted) {
-      await appPermissions.Permission.contacts.request();
-    }
-    if (locPer != appPermissions.PermissionStatus.granted) {
-      await appPermissions.Permission.location.request();
-    }
-    if (phonePer != appPermissions.PermissionStatus.granted) {
-      await appPermissions.Permission.phone.request();
-    }
-    if (smsPer != appPermissions.PermissionStatus.granted) {
-      await appPermissions.Permission.sms.request();
     }
   }
 
-  sendSMS(String phoneNumber, String message,) async {
-    var result = await BackgroundSms.sendMessage(
-        phoneNumber: phoneNumber, message: message);
-    if (result == SmsStatus.sent) {
-      return Fluttertoast.showToast(
-        msg: 'Sending Alert...',
-        backgroundColor: Colors.blue,
+  /// Asks once for everything the alert path needs. Background location has
+  /// to be requested after foreground location on Android 11+.
+  Future<void> checkPermission() async {
+    await [
+      Permission.location,
+      Permission.sms,
+      Permission.phone,
+      Permission.microphone,
+      Permission.notification,
+    ].request();
+    if (await Permission.location.isGranted) {
+      await Permission.locationAlways.request();
+    }
+  }
+
+  Future<void> sendAlertSMS(bool isAlert) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool("alerted", isAlert);
+    setState(() => alerted = isAlert);
+
+    if (!isAlert) {
+      Fluttertoast.showToast(msg: "Contacts are being notified about false SOS.");
+    }
+    final sent = await BackgroundServices.sendSosAlert(isAlert
+        ? "SOSPin activated, Help me"
+        : "I am safe now, please ignore my SOS alert.");
+
+    if (sent == 0) {
+      await prefs.setBool("alerted", false);
+      if (mounted) setState(() => alerted = false);
+      Fluttertoast.showToast(
+        msg: 'No Contacts Found!',
+        backgroundColor: Colors.red,
       );
-    } else if (result == SmsStatus.sent) {
-      return Fluttertoast.showToast(
+    } else if (isAlert) {
+      Fluttertoast.showToast(
         msg: 'Alert Sent Successfully!',
         backgroundColor: Colors.green,
       );
-    } else if (result == SmsStatus.failed) {
-      return Fluttertoast.showToast(
-        msg: 'Failure! Check your credits & Network Signals!',
-        backgroundColor: Colors.red,
-      );
-    } else {
-      return Fluttertoast.showToast(
-        msg: 'Failed to send SMS. Try Again!',
-        backgroundColor: Colors.red,
-      );
-    }
-  }
-
-  sendAlertSMS(bool isAlert) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      prefs.setBool("alerted", isAlert);
-      alerted = isAlert;
-    });
-    checkPermission();
-
-    prefs.setBool("alerted", isAlert);
-    List<String> numbers = prefs.getStringList("numbers") ?? [];
-    LocationData myLocation;
-    String error;
-    Location location = new Location();
-    String link = '';
-    try {
-      myLocation = await location.getLocation();
-      var currentLocation = myLocation;
-
-      if (numbers.isEmpty) {
-        setState(() {
-          prefs.setBool("alerted", false);
-          alerted = false;
-        });
-        return Fluttertoast.showToast(
-          msg: 'No Contacts Found!',
-          backgroundColor: Colors.red,
-        );
-      } else {
-        String li =
-            "http://maps.google.com/?q=${currentLocation.latitude},${currentLocation.longitude}";
-        if (isAlert) {
-          link = "SOSPin activated, Help me\n$li";
-        } else {
-          Fluttertoast.showToast(
-              msg: "Contacts are being notified about false SOS.");
-          link = "Get-home Safe activated,every 15 min an SMS will be sent, track me here\n$li";
-        }
-
-        for (int i = 0; i < numbers.length; i++) {
-          sendSMS(numbers[i].split("***")[1], link);
-        }
-      }
-    } on PlatformException catch (e) {
-      if (e.code == 'PERMISSION_DENIED') {
-        error = 'Please grant permission';
-        print('Error due to Denied: $error');
-      }
-      if (e.code == 'PERMISSION_DENIED_NEVER_ASK') {
-        error = 'Permission denied- please enable it from app settings';
-        print("Error due to not Asking: $error");
-      }
-      myLocation = null;
-
-      prefs.setBool("alerted", false);
-
-      setState(() {
-        alerted = false;
-      });
     }
   }
 
@@ -211,38 +135,16 @@ class _DashboardState extends State<Dashboard> {
                 Container(
                   margin: const EdgeInsets.all(20.0),
                   padding: const EdgeInsets.all(20.0),
-                  child: PinPut(
-                    onSaved: (value) {
-                      print(value);
-                    },
-                    fieldsCount: 4,
-                    onSubmit: (String pin) =>
-                        _showSnackBar(pin, context, userPin),
-                    focusNode: _pinPutFocusNode,
+                  child: pinInput(
                     controller: _pinPutController,
-                    submittedFieldDecoration: _pinPutDecoration.copyWith(
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    selectedFieldDecoration: _pinPutDecoration,
-                    followingFieldDecoration: _pinPutDecoration.copyWith(
-                      borderRadius: BorderRadius.circular(5.0),
-                      border: Border.all(
-                        color: Colors.deepPurpleAccent.withOpacity(.5),
-                      ),
-                    ),
+                    focusNode: _pinPutFocusNode,
+                    onCompleted: (pin) => _showSnackBar(pin, context, userPin),
                   ),
                 ),
               ],
             ),
           );
         });
-  }
-
-  BoxDecoration get _pinPutDecoration {
-    return BoxDecoration(
-      border: Border.all(color: Colors.deepPurpleAccent),
-      borderRadius: BorderRadius.circular(15.0),
-    );
   }
 
   void _showSnackBar(String pin, BuildContext context, int userPin) {
@@ -253,7 +155,9 @@ class _DashboardState extends State<Dashboard> {
       sendAlertSMS(false);
       _pinPutController.clear();
       _pinPutFocusNode.unfocus();
+      Navigator.pop(context);
     } else {
+      _pinPutController.clear();
       Fluttertoast.showToast(
         msg: 'Wrong Pin! Please try again',
       );
@@ -280,8 +184,7 @@ class _DashboardState extends State<Dashboard> {
               backgroundColor: Color(0xFFFB9580),
               onPressed: () async {
                 if (alerted) {
-                  int pin = (prefs.getInt('pin') ?? -1111);
-                  print('User $pin .');
+                  int pin = (prefs?.getInt('pin') ?? -1111);
                   if (pin == -1111) {
                     sendAlertSMS(false);
                   } else {

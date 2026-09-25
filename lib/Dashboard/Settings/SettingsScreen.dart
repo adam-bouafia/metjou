@@ -1,17 +1,10 @@
-import 'dart:ffi';
-import 'dart:io';
-
 import 'package:audio_background_record/audio_background_record.dart';
-import 'package:background_location/background_location.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:metjou/Dashboard/Settings/About.dart';
 import 'package:metjou/Dashboard/Settings/ChangePin.dart';
 import 'package:metjou/Utility/background_services.dart';
-import 'package:easy_folder_picker/FolderPicker.dart';
-import 'package:duration_picker_dialog_box/duration_picker_dialog_box.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -24,37 +17,37 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool switchValue = false;
   bool switchAudioRecord = false;
 
-  void _checks() async {
-    await checkService();
-    setState(() {});
-  }
-
   @override
   void initState() {
     super.initState();
-    if (mounted) {
-      _checks();
-    }
+    checkService();
   }
 
-  Directory selectedDirectory;
+  static const _recordDurations = [
+    Duration(minutes: 5),
+    Duration(minutes: 15),
+    Duration(minutes: 30),
+    Duration(hours: 1),
+  ];
 
-  void _selectDirectory(BuildContext context) async {
-    Directory directory = selectedDirectory;
-    directory ??= Directory(FolderPicker.rootPath);
-    Directory newDirectory = await FolderPicker.pick(
-      allowFolderCreation: true,
+  Future<void> _selectRecordDuration(BuildContext context) async {
+    final selected = await showDialog<Duration>(
       context: context,
-      rootDirectory: directory,
+      builder: (context) => SimpleDialog(
+        title: Text("Audio Record timer"),
+        children: [
+          for (final d in _recordDurations)
+            SimpleDialogOption(
+              onPressed: () => Navigator.pop(context, d),
+              child: Text("${d.inMinutes} min"),
+            ),
+        ],
+      ),
     );
-    if (newDirectory.absolute != null) {
-      AudioBackgroundRecord.getInstance()
-          .configure(savetoDirectory: newDirectory.absolute.path);
+    if (selected != null) {
+      await AudioBackgroundRecord.getInstance()
+          .configure(maxDurationInMillis: selected.inMilliseconds);
     }
-    setState(() {
-      selectedDirectory = newDirectory;
-      //print(selectedDirectory);
-    });
   }
 
   final List locale = [
@@ -96,7 +89,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       child: GestureDetector(
                         child: Text(locale[index]['name']),
                         onTap: () {
-                          print(locale[index]['name']);
                           updateLanguage(locale[index]['locale']);
 
                         },
@@ -114,110 +106,31 @@ class _SettingsScreenState extends State<SettingsScreen> {
         });
   }
 
-  // buildDurationSelectionDialog(BuildContext context){
-  //   showDialog(context: context,
-  //       builder: (builder){
-  //         return AlertDialog(
-  //           shape: RoundedRectangleBorder(
-  //               borderRadius: BorderRadius.all(Radius.circular(32.0))),
-  //           title: Text( "Max Duration",//'chln'.tr,
-  //               style: TextStyle(fontFamily: 'metaplusmedium',fontSize: 22,)),
-  //           backgroundColor: Color(0xffffffff),
-  //           contentPadding: EdgeInsets.only(top: 16.0, bottom: 16.0,left: 16.0,right: 16.0),
-  //           content: Container(
-  //             width: double.maxFinite,
-  //             child: ListView.separated(
-  //                 shrinkWrap: true,
-  //                 itemBuilder: (context,index){
-  //                   return Padding(
-  //                     padding: const EdgeInsets.all(8.0),
-  //                     child: GestureDetector(child: Text(locale[index]['name']),onTap: (){
-  //                       print(locale[index]['name']);
-  //                       updateLanguage(locale[index]['locale']);
-  //                     },),
-  //                   );
-  //                 }, separatorBuilder: (context,index){
-  //               return Divider(
-  //                 color: Color(0xff000000),
-  //               );
-  //             }, itemCount: locale.length
-  //             ),
-  //           ),
-  //         );
-  //       }
-  //   );
-  // }
-
   Future<int> checkPIN() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int pin = (prefs.getInt('pin') ?? -1111);
-    print('User $pin .');
     return pin;
   }
 
-  void checkService() async {
-    //bool running = await FlutterBackgroundService().isServiceRunning();
-    switchAudioRecord =
-        (await SharedPreferences.getInstance()).getBool("bgRecord") ?? false;
-    switchValue =
-        (await SharedPreferences.getInstance()).getBool("smsSend") ?? false;
-
+  Future<void> checkService() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (!mounted) return;
+    setState(() {
+      switchAudioRecord = prefs.getBool("bgRecord") ?? false;
+      switchValue = prefs.getBool("smsSend") ?? false;
+    });
   }
 
-  //
-  // void controllSafeShake(bool val) async {
-  //   Trace ShakeStoppedTimes = FirebasePerformance.instance.newTrace('Shake service Stopped Times trace');
-  //   await ShakeStoppedTimes.start();
-  //   if (val) {
-  //     FlutterBackgroundService.initialize(onStart);
-  //   } else {
-  //     FlutterBackgroundService().sendData(
-  //       {"action": "stopService"},
-  //     );
-  //   }
-  //   await ShakeStoppedTimes.stop();
-  // }
-
-  void controllSafeShake(bool val) async {
-    var prefs = await SharedPreferences.getInstance();
-    prefs.setBool("smsSend", val);
-    switch (val) {
-      case true:
-      //TODO translate
-        BackgroundServices.showSmsNotification(
-          title: "Safe Shake activated!",
-          content: "Be strong, We are with you!",);
-
-        BackgroundLocation.startLocationService(
-          distanceFilter: 20,
-        );
-
-        break;
-      case false:
-        BackgroundServices.cancelSmsNotification();
-        BackgroundLocation.stopLocationService();
-        break;
-    }
+  Future<void> controllSafeShake(bool val) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool("smsSend", val);
+    await BackgroundServices.setSafeShake(val);
   }
 
-  void controlAudioBgRecord(bool val) async {
-    var prefs = await SharedPreferences.getInstance();
-    prefs.setBool("bgRecord", val);
-    switch (val) {
-      case true:
-        AudioBackgroundRecord.getInstance()
-          ..startRecordingService()
-          ..setOnRecordStatusChangedCallback(
-              BackgroundServices.audioRecordCallBack);
-        BackgroundServices.showAudioRecordNotification(
-            title: "Audio Recording",
-            content: "Audio Recording service is ready");
-        break;
-      case false:
-        AudioBackgroundRecord.getInstance().stopRecordingService();
-        BackgroundServices.cancelaudioRecordNotification();
-        break;
-    }
+  Future<void> controlAudioBgRecord(bool val) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool("bgRecord", val);
+    await BackgroundServices.setAudioRecording(val);
   }
 
   @override
@@ -258,7 +171,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              ChangePinScreen(pin: snapshot.data),
+                              ChangePinScreen(pin: snapshot.data!),
                         ),
                       );
                     },
@@ -377,45 +290,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ListTile(
             trailing: IconButton(
               icon: Icon(Icons.keyboard_arrow_right),
-              onPressed: () {
-                _selectDirectory(context);
-              },
-            ),
-            leading: CircleAvatar(
-              backgroundColor: Colors.grey[200],
-              child: Center(
-                child: Image.asset("assets/directory.png", height: 24),
-              ),
-            ),
-            title: Text("Audio Record directory"), //TODO Translation
-            subtitle: Text(
-                "change audio record directory where you wish you want:".tr),
-          ),
-          Divider(
-            indent: 40,
-            endIndent: 40,
-          ),
-          ListTile(
-            trailing: IconButton(
-              icon: Icon(Icons.keyboard_arrow_right),
-              onPressed: () async {
-                showDurationPicker(
-                  context: context,
-                  initialDuration: Duration(
-                      // minutes: 32,
-                      // hours: 23,
-                      // seconds: 54,
-                      // milliseconds: 23,
-                      milliseconds: await AudioBackgroundRecord.getInstance()
-                          .getMaxRecordDuration()),
-                  durationPickerMode: DurationPickerMode.Hour,
-                )?.then((value) async {
-                  if (value != null)
-                    await AudioBackgroundRecord.getInstance().configure(
-                      maxDurationInMillis: value.inMilliseconds,
-                    );
-                });
-              },
+              onPressed: () => _selectRecordDuration(context),
             ),
             leading: CircleAvatar(
               backgroundColor: Colors.grey[200],
