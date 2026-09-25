@@ -1,17 +1,27 @@
-M3ak is the first Prototype for Dhayen Application.
-![M3ak App Prototype](https://media.licdn.com/dms/image/D4D12AQEsQBf4X0v_Ug/article-cover_image-shrink_600_2000/0/1687277686294?e=1713398400&v=beta&t=aJuS1wPcaptjUjlqojnokRtAffQOiNY4bS4Vn1jofAk "M3ak App Prototype")
+# MetJou
 
-The application's "Safe Shake" mode allows you to alert your loved ones by simply shaking your phone. 📳
+MetJou ("met jou", Dutch for "with you") is a personal safety app built with Flutter.
 
-An alert SMS will be sent to the individuals you have selected, ensuring that help is just a shake away. 
+Shake your phone when you are in danger and MetJou sends an SMS with your live location to up to three trusted contacts. The app also gives one-tap access to emergency numbers (police, ambulance, fire brigade) and nearby safe spots such as police stations, hospitals and pharmacies.
 
-You can activate this mode when entering risky locations or whenever you feel threatened.
+## Status
 
-I am immensely proud to have contributed to this important initiative, leveraging technology to promote safety, empowerment, and the fight against gender-based violence. 🙌
-Join me in downloading the "Dhayen" app and supporting the cause of a violence-free society for women and girls.
+Work in progress. The codebase is being modernised from the 2022 prototype:
 
-📲 Download the app now:
+- Rebrand from M3ak/Dhayen to MetJou
+- Dependency upgrade to current Flutter and Dart 3 (null safety)
+- Localisation: Dutch (default), English, French, Arabic, Spanish
+- Emergency numbers and content adapted for the Netherlands (112, 0900-8844)
 
-🔗 Google Play Store: [Download from Google Play](https://play.google.com/store/apps/details?id=com.dhayen.dhayen_app&hl=en&gl=US)
+## Setup
 
-🔗 Apple App Store: [Download from Apple App Store](https://apps.apple.com/us/app/dhayen/id1659553365)
+Firebase config files are not committed. Generate them for your own Firebase project:
+
+    dart pub global activate flutterfire_cli
+    flutterfire configure
+
+This creates `lib/firebase_options.dart`, `android/app/google-services.json` and `ios/Runner/GoogleService-Info.plist`, all of which are gitignored.
+
+## Origin
+
+Based on the [M3ak prototype](https://github.com/adam-bouafia/M3ak-Mobile-Application-Prototype), originally developed in Tunisia in 2022.
