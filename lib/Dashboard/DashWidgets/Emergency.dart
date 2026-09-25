@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:Dhayen/Dashboard/DashWidgets/Emergencies/AmbulanceEmergency.dart';
-import 'package:Dhayen/Dashboard/DashWidgets/Emergencies/FirebrigadeEmergency.dart';
-import 'package:Dhayen/Dashboard/DashWidgets/Emergencies/PoliceEmergency.dart';
+import 'package:metjou/Dashboard/DashWidgets/Emergencies/AmbulanceEmergency.dart';
+import 'package:metjou/Dashboard/DashWidgets/Emergencies/FirebrigadeEmergency.dart';
+import 'package:metjou/Dashboard/DashWidgets/Emergencies/PoliceEmergency.dart';
 
 class Emergency extends StatelessWidget {
   const Emergency({Key key}) : super(key: key);

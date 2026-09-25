@@ -5,8 +5,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:Dhayen/Dashboard/Dashboard.dart';
-import 'package:Dhayen/utility/animations/bottomAnimation.dart';
+import 'package:metjou/Dashboard/Dashboard.dart';
+import 'package:metjou/Utility/animations/bottomAnimation.dart';
 
 class PhoneBook extends StatefulWidget {
   @override

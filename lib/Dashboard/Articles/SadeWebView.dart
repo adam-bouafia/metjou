@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:Dhayen/Utility/constants.dart';
+import 'package:metjou/Utility/constants.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class SafeWebView extends StatelessWidget {

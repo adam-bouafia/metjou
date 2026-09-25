@@ -8,9 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:Dhayen/Dashboard/Settings/About.dart';
-import 'package:Dhayen/Dashboard/Settings/ChangePin.dart';
-import 'package:Dhayen/Utility/background_services.dart';
+import 'package:metjou/Dashboard/Settings/About.dart';
+import 'package:metjou/Dashboard/Settings/ChangePin.dart';
+import 'package:metjou/Utility/background_services.dart';
 import 'package:easy_folder_picker/FolderPicker.dart';
 import 'package:duration_picker_dialog_box/duration_picker_dialog_box.dart';
 

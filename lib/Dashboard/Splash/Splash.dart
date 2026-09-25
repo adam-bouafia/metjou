@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:Dhayen/Dashboard/Dashboard.dart';
+import 'package:metjou/Dashboard/Dashboard.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key key}) : super(key: key);

@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:Dhayen/Dashboard/Articles/ArticleDesc.dart';
-import 'package:Dhayen/Dashboard/Articles/SadeWebView.dart';
-import 'package:Dhayen/Utility/constants.dart';
+import 'package:metjou/Dashboard/Articles/ArticleDesc.dart';
+import 'package:metjou/Dashboard/Articles/SadeWebView.dart';
+import 'package:metjou/Utility/constants.dart';
 
 class AllArticles extends StatefulWidget {
   AllArticles({Key key}) : super(key: key);

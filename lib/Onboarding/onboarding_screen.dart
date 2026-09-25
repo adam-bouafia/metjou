@@ -1,10 +1,10 @@
-import 'package:Dhayen/Onboarding/views/micstoraccess_view.dart';
-import 'package:Dhayen/Onboarding/views/letsbegin_view.dart';
-import 'package:Dhayen/Onboarding/views/locationacess_view.dart';
-import 'package:Dhayen/Onboarding/views/smsaccess_view.dart';
-import 'package:Dhayen/onboarding/views/signuploginonboard.dart';
-import 'package:Dhayen/onboarding/views/top_back_skip_view.dart';
-import 'package:Dhayen/onboarding/views/welcome_view.dart';
+import 'package:metjou/Onboarding/views/micstoraccess_view.dart';
+import 'package:metjou/Onboarding/views/letsbegin_view.dart';
+import 'package:metjou/Onboarding/views/locationacess_view.dart';
+import 'package:metjou/Onboarding/views/smsaccess_view.dart';
+import 'package:metjou/Onboarding/views/signuploginonboard.dart';
+import 'package:metjou/Onboarding/views/top_back_skip_view.dart';
+import 'package:metjou/Onboarding/views/welcome_view.dart';
 import 'package:flutter/material.dart';
 import '../login/screens/signup_screen.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:Dhayen/Dashboard/Settings/AboutCard.dart';
+import 'package:metjou/Dashboard/Settings/AboutCard.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:get/get.dart';
 

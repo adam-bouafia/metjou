@@ -1,9 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:Dhayen/Dashboard/Articles/ArticleDesc.dart';
-import 'package:Dhayen/Dashboard/Articles/SadeWebView.dart';
-import 'package:Dhayen/Utility/constants.dart';
+import 'package:metjou/Dashboard/Articles/ArticleDesc.dart';
+import 'package:metjou/Dashboard/Articles/SadeWebView.dart';
+import 'package:metjou/Utility/constants.dart';
 
 class SafeCarousel extends StatelessWidget {
   const SafeCarousel({Key key}) : super(key: key);

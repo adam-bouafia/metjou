@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:Dhayen/Dashboard/Settings/SettingsScreen.dart';
-import 'package:Dhayen/utility/constants.dart';
+import 'package:metjou/Dashboard/Settings/SettingsScreen.dart';
+import 'package:metjou/Utility/constants.dart';
 
 class DashAppbar extends StatelessWidget {
   DashAppbar({Key key, this.getRandomInt, this.quoteIndex}) : super(key: key);

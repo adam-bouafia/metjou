@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:Dhayen/Utility/constants.dart';
+import 'package:metjou/Utility/constants.dart';
 
 class ArticleDesc extends StatelessWidget {
   const ArticleDesc({Key key, this.index}) : super(key: key);

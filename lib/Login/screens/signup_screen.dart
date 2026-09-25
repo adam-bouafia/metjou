@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:Dhayen/login/reusable_widgets/reusable_widget.dart';
-import 'package:Dhayen/login/utils/color_utils.dart';
+import 'package:metjou/Login/reusable_widgets/reusable_widget.dart';
+import 'package:metjou/Login/utils/color_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:Dhayen/Login/utils/terms_of_use.dart';
+import 'package:metjou/Login/utils/terms_of_use.dart';
 import '../../Dashboard/Splash/Splash.dart';
 import 'package:get/get.dart';
 

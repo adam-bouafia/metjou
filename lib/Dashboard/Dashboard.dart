@@ -6,9 +6,9 @@ import 'package:location/location.dart';
 import 'package:permission_handler/permission_handler.dart' as appPermissions;
 import 'package:pinput/pin_put/pin_put.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:Dhayen/Dashboard/ContactScreens/phonebook_view.dart';
-import 'package:Dhayen/Dashboard/Home.dart';
-import 'package:Dhayen/Dashboard/ContactScreens/MyContacts.dart';
+import 'package:metjou/Dashboard/ContactScreens/phonebook_view.dart';
+import 'package:metjou/Dashboard/Home.dart';
+import 'package:metjou/Dashboard/ContactScreens/MyContacts.dart';
 import 'package:background_sms/background_sms.dart';
 import 'package:get/get.dart';
 

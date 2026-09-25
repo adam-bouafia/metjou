@@ -1,9 +1,9 @@
 import 'package:firebase_performance/firebase_performance.dart';
 import 'package:flutter/material.dart';
-import 'package:Dhayen/Dashboard/DashWidgets/LiveSafeSpots/BusStationCard.dart';
-import 'package:Dhayen/Dashboard/DashWidgets/LiveSafeSpots/HospitalCard.dart';
-import 'package:Dhayen/Dashboard/DashWidgets/LiveSafeSpots/PharmacyCard.dart';
-import 'package:Dhayen/Dashboard/DashWidgets/LiveSafeSpots/PoliceStationCard.dart';
+import 'package:metjou/Dashboard/DashWidgets/LiveSafeSpots/BusStationCard.dart';
+import 'package:metjou/Dashboard/DashWidgets/LiveSafeSpots/HospitalCard.dart';
+import 'package:metjou/Dashboard/DashWidgets/LiveSafeSpots/PharmacyCard.dart';
+import 'package:metjou/Dashboard/DashWidgets/LiveSafeSpots/PoliceStationCard.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 

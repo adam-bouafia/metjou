@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:Dhayen/Login/utils/terms_of_use.dart';
-import 'package:Dhayen/login/reusable_widgets/reusable_widget.dart';
-import 'package:Dhayen/login/screens/reset_password.dart';
-import 'package:Dhayen/login/screens/signup_screen.dart';
-import 'package:Dhayen/login/utils/color_utils.dart';
+import 'package:metjou/Login/utils/terms_of_use.dart';
+import 'package:metjou/Login/reusable_widgets/reusable_widget.dart';
+import 'package:metjou/Login/screens/reset_password.dart';
+import 'package:metjou/Login/screens/signup_screen.dart';
+import 'package:metjou/Login/utils/color_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../Dashboard/Splash/Splash.dart';

@@ -1,7 +1,7 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:Dhayen/Login/dialogs/policy_dialog.dart';
+import 'package:metjou/Login/dialogs/policy_dialog.dart';
 import 'package:get/get.dart';
 
 class TermsOfUse extends StatelessWidget {

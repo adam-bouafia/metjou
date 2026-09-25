@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:Dhayen/Utility/localeString.dart';
+import 'package:metjou/Utility/localeString.dart';
 import 'package:audio_background_record/audio_background_record.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,10 +7,10 @@ import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:shake/shake.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:Dhayen/Utility/background_services.dart';
+import 'package:metjou/Utility/background_services.dart';
 import 'package:vibration/vibration.dart';
 import 'package:workmanager/workmanager.dart';
-import 'package:Dhayen/Dashboard/Dashboard.dart';
+import 'package:metjou/Dashboard/Dashboard.dart';
 import 'onboarding/onboarding_screen.dart';
 import 'package:get/get.dart';
 

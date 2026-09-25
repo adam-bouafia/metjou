@@ -1,12 +1,12 @@
 import 'dart:math';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:Dhayen/Dashboard/Articles/AllArticles.dart';
-import 'package:Dhayen/Dashboard/DashWidgets/DashAppbar.dart';
-import 'package:Dhayen/Dashboard/DashWidgets/Emergency.dart';
-import 'package:Dhayen/Dashboard/DashWidgets/LiveSafe.dart';
-import 'package:Dhayen/Dashboard/Articles/SafeCarousel.dart';
-import 'package:Dhayen/Dashboard/DashWidgets/SafeHome.dart';
+import 'package:metjou/Dashboard/Articles/AllArticles.dart';
+import 'package:metjou/Dashboard/DashWidgets/DashAppbar.dart';
+import 'package:metjou/Dashboard/DashWidgets/Emergency.dart';
+import 'package:metjou/Dashboard/DashWidgets/LiveSafe.dart';
+import 'package:metjou/Dashboard/Articles/SafeCarousel.dart';
+import 'package:metjou/Dashboard/DashWidgets/SafeHome.dart';
 
 class Home extends StatefulWidget {
   const Home({Key key}) : super(key: key);
