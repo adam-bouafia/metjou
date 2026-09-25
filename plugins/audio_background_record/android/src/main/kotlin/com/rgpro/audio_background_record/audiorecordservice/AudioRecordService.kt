@@ -1,246 +1,183 @@
 package com.rgpro.audio_background_record.audiorecordservice
 
-import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.Service
-import android.content.ContentResolver
 import android.content.Intent
-
-import android.media.AudioManager
-import android.media.AudioRecordingConfiguration
+import android.content.pm.ServiceInfo
 import android.media.MediaRecorder
 import android.media.MediaRecorder.MEDIA_RECORDER_INFO_MAX_DURATION_REACHED
 import android.media.MediaRecorder.MEDIA_RECORDER_INFO_MAX_FILESIZE_REACHED
 import android.os.Binder
 import android.os.Build
 import android.os.IBinder
-import android.provider.MediaStore
 import android.util.Log
-import android.widget.Toast
 import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
+import androidx.core.app.ServiceCompat
 import com.rgpro.audio_background_record.R
 import java.io.IOException
-import java.lang.IllegalStateException
-import java.util.*
+import java.util.UUID
 
+/**
+ * Foreground service of type "microphone". It has to be started while the
+ * app is visible; after that it may record while the app is in background.
+ */
 class AudioRecordService : Service(), MediaRecorder.OnInfoListener {
     companion object {
-        val TAG = AudioRecordService.javaClass.name
-        private var default_outDirectory = "";
-        var DEFAULT_OUT_DIRECTORY: String =""
-            get() = default_outDirectory
-        val default_MaxDuration = 20000 // 20 seconds
-        //default notification Text
-        private var notificationText = mutableMapOf<String,String> ().also{
-            it.put("title", "Audio Recording Service" )
-            it.put("ready","Service is ready to record")
-            it.put("recording" , "Recording")
+        val TAG: String = AudioRecordService::class.java.name
+        private const val CHANNEL_ID = "audioRecordNotification"
+        private const val NOTIFICATION_ID = 7
+        var DEFAULT_OUT_DIRECTORY: String = ""
+            private set
+        const val default_MaxDuration = 20000 // 20 seconds
 
-        }
-        public fun updateNotificationKeyValue(source : Map<String,String> ) {
-            if(source.containsKey("title"))
-                AudioRecordService.notificationText["title"]= source["title"] as String
+        private val notificationText = mutableMapOf(
+            "title" to "Audio Recording Service",
+            "ready" to "Service is ready to record",
+            "recording" to "Recording",
+        )
 
-            if(source.containsKey("ready"))
-                AudioRecordService.notificationText["ready"]= source["ready"] as String
-
-            if(source.containsKey("recording"))
-                AudioRecordService.notificationText["recording"]= source["recording"]as String
+        fun updateNotificationKeyValue(source: Map<String, String>) {
+            for (key in listOf("title", "ready", "recording")) {
+                source[key]?.let { notificationText[key] = it }
+            }
         }
     }
 
-    inner class AudioRecordServiceBridge(service: AudioRecordService) : Binder() {
-        val service: AudioRecordService = service;
-    }
-    interface OnRecordStatusChangedListener{
-        fun onStatusChanged(state : Int , errorMsg : String? = null ) ;
+    inner class AudioRecordServiceBridge(val service: AudioRecordService) : Binder()
+
+    interface OnRecordStatusChangedListener {
+        fun onStatusChanged(state: Int, errorMsg: String? = null)
     }
 
     private var recorder: MediaRecorder? = null
-    private var binder = AudioRecordServiceBridge(this)
-    private var filename: String = ""
+    private val binder = AudioRecordServiceBridge(this)
     private var isRecording = false
-    private val id: Int = 7
-
-//    private lateinit var notificationMgr: NotificationManager
-
     private var outDirectory: String? = null
-    private var maxDuration : Int? = default_MaxDuration
+    private var maxDuration: Int = default_MaxDuration
 
-    private var _onStatusChangedListener : OnRecordStatusChangedListener? =null
-    public var onStatusChangedListener: OnRecordStatusChangedListener?
-        get() {
-            return _onStatusChangedListener
-        }
-        set(value) {
-            _onStatusChangedListener = value
-        }
+    var onStatusChangedListener: OnRecordStatusChangedListener? = null
 
-
-    override fun onBind(intent: Intent): IBinder? {
-        return binder
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        recorder?.let {
-            if(isRecording)
-                it.stop()
-            it.release();
-        }
-        //notificationMgr.cancel(id)
-    }
-
+    override fun onBind(intent: Intent): IBinder = binder
 
     override fun onCreate() {
         super.onCreate()
-        //notificationMgr = getSystemService(NOTIFICATION_SERVICE) as NotificationManager;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name = "audioRecordNotification"
-            val descriptionText = ""
-            val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val channel = NotificationChannel("audioRecordNotification", name, importance).apply {
-                description = descriptionText
+            val channel = NotificationChannel(
+                CHANNEL_ID, notificationText.getValue("title"), NotificationManager.IMPORTANCE_LOW
+            )
+            getSystemService(NotificationManager::class.java).createNotificationChannel(channel)
+        }
+        DEFAULT_OUT_DIRECTORY = filesDir.absolutePath
+    }
+
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        updateNotification()
+        return START_STICKY
+    }
+
+    override fun onDestroy() {
+        stopRecording()
+        super.onDestroy()
+    }
+
+    private fun updateNotification() {
+        val notification = NotificationCompat.Builder(this, CHANNEL_ID)
+            .setContentTitle(notificationText["title"])
+            .setContentText(notificationText[if (isRecording) "recording" else "ready"])
+            .setSmallIcon(R.drawable.ic_bg_service_small)
+            .setOngoing(true)
+            .build()
+        val type = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            ServiceInfo.FOREGROUND_SERVICE_TYPE_MICROPHONE
+        } else {
+            0
+        }
+        ServiceCompat.startForeground(this, NOTIFICATION_ID, notification, type)
+    }
+
+    private fun prepareNewRecorderInstance(): MediaRecorder? {
+        val newRecorder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            MediaRecorder(this)
+        } else {
+            @Suppress("DEPRECATION")
+            MediaRecorder()
+        }
+        return try {
+            newRecorder.apply {
+                setOnInfoListener(this@AudioRecordService)
+                setAudioSource(MediaRecorder.AudioSource.MIC)
+                setOutputFormat(MediaRecorder.OutputFormat.AAC_ADTS)
+                setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
             }
-            //notificationMgr.createNotificationChannel(channel)
-        }
-        default_outDirectory = this.application.baseContext.externalCacheDir?.absolutePath!!;
-
-//        updateNotification()
-
-    }
-
-//    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-//        Log.d(TAG, "onStartCommand: service onStartCommand started")
-//        //instance = this
-//        intent?.let {
-//            if (it.getBooleanExtra("startAuto", false)) {
-//                this.startRecording()
-//            }
-//        }
-//        return super.onStartCommand(intent, flags, startId)
-//    }
-
-
-//    private fun updateNotification() {
-//        val nb = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            NotificationCompat.Builder(this.applicationContext, "audioRecordNotification")
-//        } else {
-//            NotificationCompat.Builder(this.applicationContext)
-//        }
-//        nb.setContentTitle(notificationText.get("title"))
-//            .setContentText(
-//                if (isRecording()) {
-//                    notificationText.get("recording")
-//                } else {
-//                    notificationText.get("ready")
-//                }
-//            )
-//            .setSmallIcon(R.drawable.ic_bg_service_small)
-//
-//        notificationMgr.notify(id, nb.build())
-//    }
-
-
-    private fun prepareNewRecorderInstance(): Boolean {
-
-        recorder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            MediaRecorder(this.application.baseContext)
-        } else {
-            MediaRecorder();
-        }
-        try {
-            recorder?.setOnInfoListener(this)
-            recorder?.setAudioSource(MediaRecorder.AudioSource.MIC)
-            //recorder?.setOutputFormat(MediaRecorder.OutputFormat.MPEG_2_TS);
-            recorder?.setOutputFormat(MediaRecorder.OutputFormat.AAC_ADTS);
-            recorder?.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
-
         } catch (e: Exception) {
-            Log.e(TAG, "error ${e.message}");
-            recorder?.release();
-            recorder = null;
-            onStatusChangedListener?.onStatusChanged(0,e.message) // error
-            return false;
+            Log.e(TAG, "recorder setup failed", e)
+            newRecorder.release()
+            onStatusChangedListener?.onStatusChanged(0, e.message)
+            null
         }
-        return true;
     }
 
-    public fun startRecording() {
-        prepareNewRecorderInstance()
-        val outputDir = if (outDirectory!=null) {
-            outDirectory
-        } else {
-            default_outDirectory
-        }
-        filename = "$outputDir/${UUID.randomUUID()}.mp3"
-        recorder?.setOutputFile(filename);
-
-        recorder?.setMaxDuration(maxDuration!!)
-
+    fun startRecording() {
+        val newRecorder = prepareNewRecorderInstance() ?: return
+        val outputDir = outDirectory ?: DEFAULT_OUT_DIRECTORY
         try {
-
-
-            recorder?.prepare();
-            recorder?.start();
-            isRecording = true;
-            onStatusChangedListener?.onStatusChanged(1,null);
-
-//            updateNotification();
-
-        
-            Log.d(TAG, "startRecording: started")
+            newRecorder.setOutputFile("$outputDir/${UUID.randomUUID()}.aac")
+            newRecorder.setMaxDuration(maxDuration)
+            newRecorder.prepare()
+            newRecorder.start()
+            recorder = newRecorder
+            isRecording = true
+            updateNotification()
+            onStatusChangedListener?.onStatusChanged(1, null)
         } catch (e: IOException) {
-            isRecording = false;
-            Log.e(TAG, "startRecording: ", e)
-            onStatusChangedListener?.onStatusChanged(0,e.message) // error
+            recordingFailed(newRecorder, e)
         } catch (e: IllegalStateException) {
-            isRecording = false;
-            Log.e(TAG, "startRecording: ", e)
-            onStatusChangedListener?.onStatusChanged(0,e.message) // error
+            recordingFailed(newRecorder, e)
         }
-
     }
 
-    public fun stopRecording() {
+    private fun recordingFailed(failed: MediaRecorder, e: Exception) {
+        Log.e(TAG, "startRecording failed", e)
+        failed.release()
+        isRecording = false
+        onStatusChangedListener?.onStatusChanged(0, e.message)
+    }
+
+    fun stopRecording() {
         recorder?.let {
-            if(isRecording) {
+            if (isRecording) {
                 try {
                     it.stop()
-                    onStatusChangedListener?.onStatusChanged(2,null);
-                } catch (e:Exception) {
-                    onStatusChangedListener?.onStatusChanged(0,e.message) // error
+                    onStatusChangedListener?.onStatusChanged(2, null)
+                } catch (e: Exception) {
+                    onStatusChangedListener?.onStatusChanged(0, e.message)
                 }
-
             }
             it.release()
-
         }
-        isRecording = false;
-
-//        updateNotification();
-
-        Log.d(TAG, "stopRecording $onStatusChangedListener")
+        recorder = null
+        if (isRecording) {
+            isRecording = false
+            updateNotification()
+        }
     }
 
-    public fun isRecording(): Boolean {
-        return isRecording;
+    fun isRecording(): Boolean = isRecording
+
+    fun setOutputDirectory(directory: String) {
+        outDirectory = directory
     }
-    public fun setOutputDirectory(directory :String) {
-        //TODO check if the directory is valid
-        outDirectory = directory ;
-    }
-    public fun setMaxDuration(duration: Int){
-        Log.d(TAG,"max duration set to $duration")
-        maxDuration = duration ;
+
+    fun setMaxDuration(duration: Int) {
+        maxDuration = duration
     }
 
     override fun onInfo(mr: MediaRecorder?, what: Int, extra: Int) {
-        if(what == MEDIA_RECORDER_INFO_MAX_DURATION_REACHED ||
-            what == MEDIA_RECORDER_INFO_MAX_FILESIZE_REACHED){
-            this.stopRecording()
+        if (what == MEDIA_RECORDER_INFO_MAX_DURATION_REACHED ||
+            what == MEDIA_RECORDER_INFO_MAX_FILESIZE_REACHED
+        ) {
+            stopRecording()
         }
     }
 }

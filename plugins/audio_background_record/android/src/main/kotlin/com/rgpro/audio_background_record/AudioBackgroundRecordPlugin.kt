@@ -3,6 +3,7 @@ package com.rgpro.audio_background_record
 import android.content.*
 import android.content.Context.MODE_PRIVATE
 import androidx.annotation.NonNull
+import androidx.core.content.ContextCompat
 import android.os.IBinder
 import android.util.Log
 import com.rgpro.audio_background_record.audiorecordservice.AudioRecordService
@@ -87,14 +88,14 @@ class AudioBackgroundRecordPlugin: FlutterPlugin, MethodCallHandler,ServiceConne
 
         result.success(true)
       }else{
-        if(context.startService(audioRecordServiceIntent)!=null) {
-          Log.d(TAG,"service started successfully" )
-          context.bindService(audioRecordServiceIntent,this,0);
-
-          result.success(true);
-        }else{
-          Log.e(TAG,"service starting failed" )
-          result.success(false);
+        try {
+          ContextCompat.startForegroundService(context, audioRecordServiceIntent)
+          context.bindService(audioRecordServiceIntent, this, 0)
+          result.success(true)
+        } catch (e: Exception) {
+          // Android 12+ refuses to start a foreground service from background.
+          Log.e(TAG, "service starting failed", e)
+          result.success(false)
         }
       }
     }else if(call.method == "stopService"){

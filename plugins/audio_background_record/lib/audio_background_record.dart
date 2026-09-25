@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'audio_background_record_platform_interface.dart';
 
