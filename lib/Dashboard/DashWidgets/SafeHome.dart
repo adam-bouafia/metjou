@@ -151,7 +151,7 @@ class _SafeHomeState extends State<SafeHome> {
                                         },
                                         leading: CircleAvatar(
                                           backgroundImage:
-                                              AssetImage("assets/user.png"),
+                                              AssetImage("assets/user.webp"),
                                         ),
                                         title:
                                             Text(contactData.name),
@@ -246,7 +246,7 @@ class _SafeHomeState extends State<SafeHome> {
                 ClipRRect(
                     borderRadius: BorderRadius.circular(20),
                     child: Image.asset(
-                      "assets/route.jpg",
+                      "assets/route.webp",
                       height: 140,
                     ))
               ],

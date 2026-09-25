@@ -40,7 +40,7 @@ class DashAppbar extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(4.0),
             child: Image.asset(
-              "assets/settings.png",
+              "assets/settings.webp",
               height: 24,
             ),
           ),

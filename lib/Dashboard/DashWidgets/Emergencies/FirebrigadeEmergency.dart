@@ -46,7 +46,7 @@ class FireEmergency extends StatelessWidget {
                       radius: 25,
                       child: Center(
                           child: Image.asset(
-                        "assets/flame.png",
+                        "assets/flame.webp",
                         height: 35,
                       ))),
                   Expanded(

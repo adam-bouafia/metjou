@@ -87,7 +87,7 @@ class Locationaccess extends StatelessWidget {
                   child: Container(
                     constraints: BoxConstraints(maxWidth: 400, maxHeight: 300),
                     child: Image.asset(
-                      'assets/onboarding/Clip.gif',
+                      'assets/onboarding/Clip.webp',
                       fit: BoxFit.contain,
                     ),
                   ),

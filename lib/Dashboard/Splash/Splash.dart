@@ -41,7 +41,7 @@ class _SplashState extends State<Splash> {
               child: Padding(
                 padding: EdgeInsets.only(top: 80),
                 child: Image.asset(
-                  "assets/logosplash.png",
+                  "assets/logosplash.webp",
                   height: 180,
                 ),
               ),

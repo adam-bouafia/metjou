@@ -25,7 +25,7 @@ class PoliceStationCard extends StatelessWidget {
                   width: 50,
                   child: Center(
                       child: Image.asset(
-                    "assets/police.png",
+                    "assets/police.webp",
                     height: 32,
                   ))),
             ),

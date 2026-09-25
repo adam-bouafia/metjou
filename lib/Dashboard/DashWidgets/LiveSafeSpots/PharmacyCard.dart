@@ -24,7 +24,7 @@ class PharmacyCard extends StatelessWidget {
                   width: 50,
                   child: Center(
                       child: Image.asset(
-                    "assets/pharmacy.png",
+                    "assets/pharmacy.webp",
                     height: 32,
                   ))),
             ),

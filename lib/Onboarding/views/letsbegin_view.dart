@@ -80,7 +80,7 @@ class _LetsbeginState extends State<Letsbegin> {
             SizedBox(
               height: MediaQuery.of(context).size.width,
               child: Image.asset(
-                'assets/onboarding/introduction_image.gif',
+                'assets/onboarding/introduction_image.webp',
                 fit: BoxFit.fitHeight,
               ),
             ),

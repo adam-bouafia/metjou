@@ -178,7 +178,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     leading: CircleAvatar(
                       backgroundColor: Colors.grey[200],
                       child: Center(
-                        child: Image.asset("assets/pin.png"),
+                        child: Image.asset("assets/pin.webp"),
                       ),
                     ),
                     title: Text(
@@ -225,7 +225,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               backgroundColor: Colors.grey[200],
               child: Center(
                   child: Image.asset(
-                "assets/language.jpg",
+                "assets/language.webp",
                 height: 24,
               )),
             ),
@@ -252,7 +252,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               backgroundColor: Colors.grey[200],
               child: Center(
                   child: Image.asset(
-                "assets/shake.png",
+                "assets/shake.webp",
                 height: 24,
               )),
             ),
@@ -275,7 +275,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               backgroundColor: Colors.grey[200],
               child: Center(
                   child: Image.asset(
-                "assets/record.png",
+                "assets/record.webp",
                 height: 24,
               )),
             ),
@@ -295,7 +295,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             leading: CircleAvatar(
               backgroundColor: Colors.grey[200],
               child: Center(
-                child: Image.asset("assets/timer.png", height: 24),
+                child: Image.asset("assets/timer.webp", height: 24),
               ),
             ),
             title: Text("Audio Record timer"), //TODO Translation
@@ -335,7 +335,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               backgroundColor: Colors.grey[200],
               child: Center(
                   child: Image.asset(
-                "assets/info.png",
+                "assets/info.webp",
                 height: 24,
               )),
             ),

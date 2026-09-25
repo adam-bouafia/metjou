@@ -64,7 +64,7 @@ class AboutCard extends StatelessWidget {
               backgroundColor: Colors.white,
               child: Center(
                   child: Image.asset(
-                "assets/logoss.png",
+                "assets/logoss.webp",
                 height: 85,
               )),
             ),

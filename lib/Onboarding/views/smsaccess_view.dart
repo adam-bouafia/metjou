@@ -118,7 +118,7 @@ class Smsaccess extends StatelessWidget {
                   child: Container(
                     constraints: BoxConstraints(maxWidth: 550, maxHeight: 450),
                     child: Image.asset(
-                      'assets/onboarding/mood_dairy_image.gif',
+                      'assets/onboarding/mood_dairy_image.webp',
                       fit: BoxFit.contain,
                     ),
                   ),

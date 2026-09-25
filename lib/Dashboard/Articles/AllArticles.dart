@@ -50,7 +50,7 @@ class _AllArticlesState extends State<AllArticles>
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(
-                  'assets/bg-top.png',
+                  'assets/bg-top.webp',
                 ),
                 fit: BoxFit.fitWidth,
                 alignment: Alignment.topCenter,

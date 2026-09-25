@@ -18,7 +18,7 @@ class AboutUs extends StatelessWidget {
         context: context,
         applicationVersion: "1.0.0",
         applicationIcon: Image.asset(
-          "assets/logoss.png",
+          "assets/logoss.webp",
           height: 50,
         ),
         applicationName: "MetJou",
@@ -44,7 +44,7 @@ class AboutUs extends StatelessWidget {
         GestureDetector(
           onTap: _launchURL,
             child: Image.asset(
-              "assets/information.png",
+              "assets/information.webp",
               height: 26,
             )
         ),
@@ -90,7 +90,7 @@ class AboutUs extends StatelessWidget {
                   leading: CircleAvatar(
                     backgroundColor: Colors.grey[100],
                     child: Center(
-                      child: Image.asset("assets/card.png", height: 30),
+                      child: Image.asset("assets/card.webp", height: 30),
                     ),
                   ),
                   trailing: Icon(Icons.arrow_forward_ios_rounded),

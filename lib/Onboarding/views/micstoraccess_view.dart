@@ -87,7 +87,7 @@ class ContactAccess extends StatelessWidget {
                   child: Container(
                     constraints: BoxConstraints(maxWidth: 600, maxHeight: 450),
                     child: Image.asset(
-                      'assets/onboarding/care_image.gif',
+                      'assets/onboarding/care_image.webp',
                       fit: BoxFit.fill,
                     ),
                   ),

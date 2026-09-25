@@ -113,7 +113,7 @@ class _ChangePinScreenState extends State<ChangePinScreen> {
           ),
           Center(
             child: Image.asset(
-              "assets/pin.png",
+              "assets/pin.webp",
               height: 70,
             ),
           ),

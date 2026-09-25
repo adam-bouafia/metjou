@@ -64,7 +64,7 @@ class WelcomeView extends StatelessWidget {
                 position: _welcomeImageAnimation,
                 child: Container(
                   child: Image.asset(
-                    'assets/onboarding/welcome.gif',
+                    'assets/onboarding/welcome.webp',
                     fit: BoxFit.contain,
                   ),
                 ),

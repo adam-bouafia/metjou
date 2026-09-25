@@ -131,7 +131,7 @@ class _DashboardState extends State<Dashboard> {
                     ),
                   ],
                 ),
-                Image.asset("assets/pin.png"),
+                Image.asset("assets/pin.webp"),
                 Container(
                   margin: const EdgeInsets.all(20.0),
                   padding: const EdgeInsets.all(20.0),
@@ -176,7 +176,7 @@ class _DashboardState extends State<Dashboard> {
                 if (await pickSosContact()) setState(() {});
               },
               child: Image.asset(
-                "assets/add-contact.png",
+                "assets/add-contact.webp",
                 height: 60,
               ),
             )
@@ -199,14 +199,14 @@ class _DashboardState extends State<Dashboard> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Image.asset(
-                          "assets/alarm.png",
+                          "assets/alarm.webp",
                           height: 24,
                         ),
                         Text("stop".tr)
                       ],
                     )
                   : Image.asset(
-                      "assets/icons/alert.png",
+                      "assets/icons/alert.webp",
                       height: 36,
                     ),
             ),
@@ -227,7 +227,7 @@ class _DashboardState extends State<Dashboard> {
                       });
                   },
                   child: Image.asset(
-                    "assets/home.png",
+                    "assets/home.webp",
                     height: 40,
                   )),
               InkWell(
@@ -237,7 +237,7 @@ class _DashboardState extends State<Dashboard> {
                         currentPage = 1;
                       });
                   },
-                  child: Image.asset("assets/phone_red.png", height: 40)),
+                  child: Image.asset("assets/phone_red.webp", height: 40)),
             ],
           ),
         ),

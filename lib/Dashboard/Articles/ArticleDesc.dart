@@ -45,7 +45,7 @@ class ArticleDesc extends StatelessWidget {
             leading: CircleAvatar(
               backgroundColor: Colors.grey[100],
               child: Center(
-                child: Image.asset("assets/un.png"),
+                child: Image.asset("assets/un.webp"),
               ),
             ),
             title: Text("UN WOMEN"),

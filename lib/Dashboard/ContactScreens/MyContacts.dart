@@ -50,7 +50,7 @@ class _MyContactsScreenState extends State<MyContactsScreen> {
           ),
           backgroundColor: Colors.transparent,
           leading: IconButton(
-            icon: Image.asset("assets/phone_red.png"),
+            icon: Image.asset("assets/phone_red.webp"),
             onPressed: () {},
           )),
       body: FutureBuilder(
@@ -97,7 +97,7 @@ class _MyContactsScreenState extends State<MyContactsScreen> {
                           child: ListTile(
                             leading: CircleAvatar(
                               backgroundColor: Colors.grey[200],
-                              backgroundImage: AssetImage("assets/user.png"),
+                              backgroundImage: AssetImage("assets/user.webp"),
                             ),
                             title: Text(contact.name),
                             subtitle: Text(contact.phone),
