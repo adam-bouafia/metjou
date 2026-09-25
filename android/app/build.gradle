@@ -52,7 +52,7 @@ android {
 
     defaultConfig {
 
-        applicationId "com.dhayen.dhayen_application"
+        applicationId "io.github.adambouafia.metjou"
         minSdkVersion 21
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
