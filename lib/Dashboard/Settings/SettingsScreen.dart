@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:audio_background_record/audio_background_record.dart';
 import 'package:background_location/background_location.dart';
-import 'package:firebase_performance/firebase_performance.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:get/get.dart';

@@ -1,4 +1,3 @@
-import 'package:firebase_performance/firebase_performance.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -109,8 +108,6 @@ class _DashboardState extends State<Dashboard> {
   }
 
   sendAlertSMS(bool isAlert) async {
-    Trace sospinTrace = FirebasePerformance.instance.newTrace('SOS-Pin trace');
-    await sospinTrace.start();
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       prefs.setBool("alerted", isAlert);
@@ -169,7 +166,6 @@ class _DashboardState extends State<Dashboard> {
         alerted = false;
       });
     }
-    await sospinTrace.stop();
   }
 
   showPinModelBottomSheet(int userPin) {

@@ -48,8 +48,6 @@ dependencies:
   url_launcher: ^6.0.10
   vibration: ^1.7.3
   timelines: ^0.1.0
-  firebase_core: ^1.17.0
-  firebase_auth: ^3.3.18
   font_awesome_flutter: ^9.0.0
   flutter_rating_bar: ^4.0.0
   animations: ^2.0.0
@@ -58,7 +56,6 @@ dependencies:
   background_sms: ^0.0.4
   background_location: ^0.8.1
   workmanager: ^0.5.0
-  firebase_performance: ^0.8.2+1
   get: ^4.6.5
   flutter_sound: ^9.2.13
   audio_background_record :

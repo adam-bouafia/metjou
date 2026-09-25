@@ -1,4 +1,3 @@
-import 'package:firebase_performance/firebase_performance.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -14,12 +13,9 @@ class MyContactsScreen extends StatefulWidget {
 
 class _MyContactsScreenState extends State<MyContactsScreen> {
   Future<List<String>> checkforContacts() async {
-    Trace contactaddTrace = FirebasePerformance.instance.newTrace('Contact-Add trace');
-    await contactaddTrace.start();
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> contacts = prefs.getStringList("numbers") ?? [];
     print(contacts);
-    await contactaddTrace.stop();
     return contacts;
   }
 

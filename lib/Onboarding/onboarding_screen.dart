@@ -6,7 +6,8 @@ import 'package:metjou/Onboarding/views/signuploginonboard.dart';
 import 'package:metjou/Onboarding/views/top_back_skip_view.dart';
 import 'package:metjou/Onboarding/views/welcome_view.dart';
 import 'package:flutter/material.dart';
-import '../login/screens/signup_screen.dart';
+import 'package:metjou/Dashboard/Splash/Splash.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({Key key}) : super(key: key);
@@ -108,12 +109,15 @@ class _OnboardingScreenState
       _animationController?.animateTo(0.8);
     } else if (_animationController.value > 0.6 &&
         _animationController.value <= 0.8) {
-      _signUpClick();
+      _finishOnboarding();
     }
   }
 
-  void _signUpClick() {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => SignUpScreen()));
-    }
+  Future<void> _finishOnboarding() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool("appOpenedBefore", true);
+    if (!mounted) return;
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => Splash()));
+  }
   }

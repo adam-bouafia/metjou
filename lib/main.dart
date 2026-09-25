@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:shake/shake.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:metjou/Utility/background_services.dart';
 import 'package:vibration/vibration.dart';
 import 'package:workmanager/workmanager.dart';
@@ -18,7 +17,6 @@ import 'package:get/get.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
   BackgroundServices.checkService() ;
 
   ShakeDetector.autoStart(

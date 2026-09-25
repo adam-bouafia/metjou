@@ -1,4 +1,3 @@
-import 'package:firebase_performance/firebase_performance.dart';
 import 'package:flutter/material.dart';
 import 'package:metjou/Dashboard/DashWidgets/LiveSafeSpots/BusStationCard.dart';
 import 'package:metjou/Dashboard/DashWidgets/LiveSafeSpots/HospitalCard.dart';
@@ -11,8 +10,6 @@ class LiveSafe extends StatelessWidget {
   const LiveSafe({Key key}) : super(key: key);
 
   static Future<void> openMap(String location) async {
-    Trace EmergenciesMapsTrace = FirebasePerformance.instance.newTrace('Emergencies-Maps-Trace');
-    await EmergenciesMapsTrace.start();
     String googleUrl =
         'https://www.google.com/maps/search/?api=1&query=$location';
 
@@ -23,7 +20,6 @@ class LiveSafe extends StatelessWidget {
       Fluttertoast.showToast(
           msg: "Quelque chose s'est mal passé! Appelez les numéros d'urgence.");
     }
-    await EmergenciesMapsTrace.stop();
   }
 
   @override

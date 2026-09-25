@@ -1,7 +1,7 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../login/screens/signin_screen.dart';
+import 'package:metjou/Legal/terms_of_use.dart';
 
 class CenterNextButton extends StatelessWidget {
   final AnimationController animationController;
@@ -136,37 +136,9 @@ class CenterNextButton extends StatelessWidget {
             padding: const EdgeInsets.only(top: 8),
             child: SlideTransition(
               position: _loginTextMoveAnimation,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'onbvousavez'.tr,
-                    style: TextStyle(fontFamily: 'metaplusmedium',
-                      color: Colors.grey,
-                      fontSize: 14,
-                      fontWeight: FontWeight.normal,
-                    ),
-                  ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    elevation: 0.0,
-                    primary: Colors.white.withOpacity(0)),
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SignInScreen()));
-                },
-                    child: Text('onbident'.tr,
-                        style: TextStyle(fontFamily: 'metaplusmedium',
-                        color: Color(0xffB271AA),
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                 ),
-                ],
+              child: TermsOfUse(),
             ),
           ),
-         ),
       ],
       ),
     );

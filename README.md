@@ -15,12 +15,10 @@ Work in progress. The codebase is being modernised from the 2022 prototype:
 
 ## Setup
 
-Firebase config files are not committed. Generate them for your own Firebase project:
+    flutter pub get
+    flutter run
 
-    dart pub global activate flutterfire_cli
-    flutterfire configure
-
-This creates `lib/firebase_options.dart`, `android/app/google-services.json` and `ios/Runner/GoogleService-Info.plist`, all of which are gitignored.
+No account or backend is needed; contacts and settings stay on the device.
 
 ## Origin
 
