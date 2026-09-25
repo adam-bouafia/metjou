@@ -12,7 +12,7 @@ import 'package:background_sms/background_sms.dart';
 import 'package:get/get.dart';
 
 class Dashboard extends StatefulWidget {
-  const Dashboard({Key key, this.pageIndex = 0}) : super(key: key);
+  const Dashboard({super.key, this.pageIndex = 0});
 
   final int pageIndex;
 

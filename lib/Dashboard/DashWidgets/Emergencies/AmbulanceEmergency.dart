@@ -3,7 +3,7 @@ import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:get/get.dart';
 
 class AmbulanceEmergency extends StatelessWidget {
-  const AmbulanceEmergency({Key key}) : super(key: key);
+  const AmbulanceEmergency({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -3,7 +3,7 @@ import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:get/get.dart';
 
 class PoliceEmergency extends StatelessWidget {
-  const PoliceEmergency({Key key}) : super(key: key);
+  const PoliceEmergency({super.key});
 
   _callNumber(number) async {
     await FlutterPhoneDirectCaller.callNumber(number);

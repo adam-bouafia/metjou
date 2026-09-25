@@ -9,7 +9,7 @@ import 'package:metjou/Dashboard/Articles/SafeCarousel.dart';
 import 'package:metjou/Dashboard/DashWidgets/SafeHome.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key key}) : super(key: key);
+  const Home({super.key});
 
   @override
   _HomeState createState() => _HomeState();

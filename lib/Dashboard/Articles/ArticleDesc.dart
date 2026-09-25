@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:metjou/Utility/constants.dart';
 
 class ArticleDesc extends StatelessWidget {
-  const ArticleDesc({Key key, this.index}) : super(key: key);
+  const ArticleDesc({super.key, required this.index});
 
   final int index;
 
@@ -71,7 +71,7 @@ class ArticleDesc extends StatelessWidget {
 }
 
 class ArticleImage extends StatelessWidget {
-  const ArticleImage({Key key, this.imageStr}) : super(key: key);
+  const ArticleImage({super.key, required this.imageStr});
 
   final String imageStr;
 

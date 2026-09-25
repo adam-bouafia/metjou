@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PoliceStationCard extends StatelessWidget {
-  const PoliceStationCard({Key key, this.openMapFunc}) : super(key: key);
+  const PoliceStationCard({super.key, required this.openMapFunc});
 
   final Function openMapFunc;
 

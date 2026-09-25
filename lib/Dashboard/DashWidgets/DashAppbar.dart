@@ -3,7 +3,7 @@ import 'package:metjou/Dashboard/Settings/SettingsScreen.dart';
 import 'package:metjou/Utility/constants.dart';
 
 class DashAppbar extends StatelessWidget {
-  DashAppbar({Key key, this.getRandomInt, this.quoteIndex}) : super(key: key);
+  DashAppbar({super.key, required this.getRandomInt, required this.quoteIndex});
 
   final Function getRandomInt;
   final int quoteIndex;

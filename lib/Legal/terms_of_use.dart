@@ -5,9 +5,8 @@ import 'package:metjou/Legal/policy_dialog.dart';
 import 'package:get/get.dart';
 
 class TermsOfUse extends StatelessWidget {
-  const TermsOfUse({
-    Key key,
-  }) : super(key: key);
+  const TermsOfUse({super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +16,7 @@ class TermsOfUse extends StatelessWidget {
         textAlign: TextAlign.center,
         text: TextSpan(
           text: "crecp".tr,
-          style: Theme.of(context).textTheme.bodyText1,
+          style: Theme.of(context).textTheme.bodyMedium,
           children: [
             TextSpan(
               text: "\nTermes Conditions",

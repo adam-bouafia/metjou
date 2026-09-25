@@ -6,7 +6,7 @@ import 'package:metjou/Dashboard/Articles/SadeWebView.dart';
 import 'package:metjou/Utility/constants.dart';
 
 class AllArticles extends StatefulWidget {
-  AllArticles({Key key}) : super(key: key);
+  AllArticles({super.key});
 
   @override
   _AllArticlesState createState() => _AllArticlesState();

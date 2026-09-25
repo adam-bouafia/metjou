@@ -4,8 +4,7 @@ import 'package:get/get.dart';
 class Letsbegin extends StatefulWidget {
   final AnimationController animationController;
 
-  const Letsbegin({Key key, this.animationController})
-      : super(key: key);
+  const Letsbegin({super.key, required this.animationController});
 
   @override
   _LetsbeginState createState() => _LetsbeginState();
@@ -115,8 +114,8 @@ class _LetsbeginState extends State<Letsbegin> {
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                          primary: Color(0xffB271AA),
-                          //primary: Colors.kPrimaryColor,
+                          backgroundColor: Color(0xffB271AA),
+                          //backgroundColor: Colors.kPrimaryColor,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(50))
                       ),

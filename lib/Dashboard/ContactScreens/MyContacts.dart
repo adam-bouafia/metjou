@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MyContactsScreen extends StatefulWidget {
-  const MyContactsScreen({Key key}) : super(key: key);
+  const MyContactsScreen({super.key});
 
   @override
   _MyContactsScreenState createState() => _MyContactsScreenState();

@@ -4,7 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:get/get.dart';
 
 class AboutUs extends StatelessWidget {
-  const AboutUs({Key key}) : super(key: key);
+  const AboutUs({super.key});
   _launchURL() async {
     const url = 'https://www.efi-ife.org/';
     if (await canLaunch(url)) {

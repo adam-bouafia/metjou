@@ -14,7 +14,7 @@ import 'package:easy_folder_picker/FolderPicker.dart';
 import 'package:duration_picker_dialog_box/duration_picker_dialog_box.dart';
 
 class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({Key key}) : super(key: key);
+  const SettingsScreen({super.key});
 
   @override
   _SettingsScreenState createState() => _SettingsScreenState();

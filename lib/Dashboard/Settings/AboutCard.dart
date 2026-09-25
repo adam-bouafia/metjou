@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 
 class AboutCard extends StatelessWidget {
   AboutCard(
-      {Key key,
+      {super.key,
       this.asset,
       this.desc,
       this.subtitle,
       this.title,
-      this.sizeFactor})
-      : super(key: key);
+      this.sizeFactor});
 
   final String asset;
   final String desc;

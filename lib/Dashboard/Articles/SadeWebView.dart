@@ -4,8 +4,7 @@ import 'package:metjou/Utility/constants.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class SafeWebView extends StatelessWidget {
-  const SafeWebView({Key key, this.url, this.title, this.index})
-      : super(key: key);
+  const SafeWebView({super.key, required this.url, required this.title, required this.index});
 
   final int index;
   final String title;

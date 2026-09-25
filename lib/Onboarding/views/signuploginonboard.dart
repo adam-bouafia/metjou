@@ -7,8 +7,7 @@ class CenterNextButton extends StatelessWidget {
   final AnimationController animationController;
   final VoidCallback onNextClick;
   const CenterNextButton(
-      {Key key, this.animationController, this.onNextClick})
-      : super(key: key);
+      {super.key, this.animationController, this.onNextClick});
 
   @override
   Widget build(BuildContext context) {

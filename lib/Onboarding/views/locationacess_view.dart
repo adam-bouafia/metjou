@@ -5,8 +5,7 @@ import 'package:permission_handler/permission_handler.dart';
 class Locationaccess extends StatelessWidget {
   final AnimationController animationController;
 
-  const Locationaccess({Key key, this.animationController})
-      : super(key: key);
+  const Locationaccess({super.key, required this.animationController});
 
   @override
   Widget build(BuildContext context) {
@@ -114,8 +113,8 @@ class Locationaccess extends StatelessWidget {
                 child: ElevatedButton(
                     onPressed:checkpermission_location,
                     style: ElevatedButton.styleFrom(
-                      primary: Color(0xffB271AA),
-                      onPrimary: Colors.white,
+                      backgroundColor: Color(0xffB271AA),
+                      foregroundColor: Colors.white,
                       shadowColor: Color(0xffB271AA),
                       elevation: 6,
                       shape: RoundedRectangleBorder(

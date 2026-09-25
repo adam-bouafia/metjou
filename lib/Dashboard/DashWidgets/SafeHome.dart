@@ -9,7 +9,7 @@ import 'package:workmanager/workmanager.dart';
 import 'package:get/get.dart';
 
 class SafeHome extends StatefulWidget {
-  const SafeHome({Key key}) : super(key: key);
+  const SafeHome({super.key});
 
   @override
   _SafeHomeState createState() => _SafeHomeState();

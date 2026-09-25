@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
 
 class ChangePinScreen extends StatefulWidget {
-  const ChangePinScreen({Key key, this.pin}) : super(key: key);
+  const ChangePinScreen({super.key, required this.pin});
 
   final int pin;
 

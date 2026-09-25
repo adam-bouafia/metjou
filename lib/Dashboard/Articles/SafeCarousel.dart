@@ -6,7 +6,7 @@ import 'package:metjou/Dashboard/Articles/SadeWebView.dart';
 import 'package:metjou/Utility/constants.dart';
 
 class SafeCarousel extends StatelessWidget {
-  const SafeCarousel({Key key}) : super(key: key);
+  const SafeCarousel({super.key});
 
   void navigateToRoute(
     BuildContext context,

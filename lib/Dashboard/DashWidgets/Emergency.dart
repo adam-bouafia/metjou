@@ -4,7 +4,7 @@ import 'package:metjou/Dashboard/DashWidgets/Emergencies/FirebrigadeEmergency.da
 import 'package:metjou/Dashboard/DashWidgets/Emergencies/PoliceEmergency.dart';
 
 class Emergency extends StatelessWidget {
-  const Emergency({Key key}) : super(key: key);
+  const Emergency({super.key});
 
   @override
   Widget build(BuildContext context) {
