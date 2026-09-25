@@ -1,0 +1,6 @@
+{
+    // Flutter builds android/ itself; the Java extension's Gradle import only
+    // starts extra daemons (on the system Java 25 JRE, which has no javac).
+    "java.import.gradle.enabled": false,
+    "java.configuration.updateBuildConfiguration": "disabled"
+}
