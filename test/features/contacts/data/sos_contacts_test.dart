@@ -53,4 +53,21 @@ void main() {
       expect(await loadSosContacts(), hasLength(maxSosContacts));
     });
   });
+
+  group('isValidPhoneNumber', () {
+    for (final (input, valid) in [
+      ('06 1234 5678', true),
+      ('+31 6 12345678', true),
+      ('0031612345678', true),
+      ('020-6236565', true),
+      ('112', false),
+      ('abc', false),
+      ('', false),
+      ('+1234567890123456', false),
+    ]) {
+      test('"$input" is ${valid ? 'valid' : 'invalid'}', () {
+        expect(isValidPhoneNumber(input), valid);
+      });
+    }
+  });
 }
