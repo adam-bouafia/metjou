@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:metjou/core/localization/app_locale.dart';
 import 'package:metjou/core/theme/app_theme.dart';
+import 'package:metjou/core/widgets/quick_exit_button.dart';
 import 'package:metjou/features/fake_call/presentation/fake_call_sheet.dart';
 import 'package:metjou/features/siren/presentation/siren_screen.dart';
 
@@ -26,6 +27,12 @@ class QuickTools extends StatelessWidget {
           context,
           MaterialPageRoute(builder: (_) => const SirenScreen()),
         ),
+      ),
+      (
+        Icons.exit_to_app_rounded,
+        l10n.quickExit,
+        const [Latte.lavender, Latte.blue],
+        quickExit,
       ),
     ];
     return Padding(
@@ -72,7 +79,8 @@ class _ToolTile extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: Ink(
-          height: 84,
+          height: 100,
+          padding: const EdgeInsets.symmetric(horizontal: 6),
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: colors,
@@ -87,11 +95,14 @@ class _ToolTile extends StatelessWidget {
               const SizedBox(height: 6),
               Text(
                 label,
-                maxLines: 1,
+                maxLines: 2,
+                textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w500,
+                  fontSize: 13,
+                  height: 1.15,
                 ),
               ),
             ],
