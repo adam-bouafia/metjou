@@ -4,6 +4,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:metjou/features/home/presentation/home.dart';
+import 'package:metjou/features/home/presentation/widgets/glass_dock.dart';
+import 'package:metjou/features/home/presentation/widgets/sos_button.dart';
 import 'package:metjou/features/contacts/presentation/my_contacts.dart';
 import 'package:metjou/core/services/background_services.dart';
 import 'package:metjou/core/widgets/pin_input.dart';
@@ -154,69 +156,42 @@ class _DashboardState extends State<Dashboard> {
     }
   }
 
+  Future<void> _onSosPressed() async {
+    if (!alerted) {
+      sendAlertSMS(true);
+      return;
+    }
+    final pin = prefs?.getInt('pin') ?? -1111;
+    if (pin == -1111) {
+      sendAlertSMS(false);
+    } else {
+      showPinModelBottomSheet(pin);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       floatingActionButton: currentPage == 1
           ? FloatingActionButton(
-              backgroundColor: Theme.of(
-                context,
-              ).colorScheme.surfaceContainerHighest,
               onPressed: () async {
                 if (await pickSosContact(context)) setState(() {});
               },
-              child: Image.asset("assets/add-contact.webp", height: 60),
+              child: const Icon(Icons.person_add_alt_1),
             )
-          : FloatingActionButton(
-              backgroundColor: Color(0xFFFB9580),
-              onPressed: () async {
-                if (alerted) {
-                  int pin = (prefs?.getInt('pin') ?? -1111);
-                  if (pin == -1111) {
-                    sendAlertSMS(false);
-                  } else {
-                    showPinModelBottomSheet(pin);
-                  }
-                } else {
-                  sendAlertSMS(true);
-                }
-              },
-              child: alerted
-                  ? Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Image.asset("assets/alarm.webp", height: 24),
-                        Text(context.l10n.stop),
-                      ],
-                    )
-                  : Image.asset("assets/icons/alert.webp", height: 36),
-            ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
-        notchMargin: 12,
-        child: SizedBox(
-          height: 60,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              InkWell(
-                onTap: () {
-                  if (currentPage != 0) setState(() => currentPage = 0);
-                },
-                child: Image.asset("assets/home.webp", height: 40),
-              ),
-              InkWell(
-                onTap: () {
-                  if (currentPage != 1) setState(() => currentPage = 1);
-                },
-                child: Image.asset("assets/phone_red.webp", height: 40),
-              ),
-            ],
-          ),
-        ),
+          : null,
+      bottomNavigationBar: GlassDock(
+        currentPage: currentPage,
+        onSelect: (page) {
+          if (page != currentPage) setState(() => currentPage = page);
+        },
+        center: SosButton(alerted: alerted, onPressed: _onSosPressed),
       ),
-      body: SafeArea(child: currentPage == 0 ? Home() : MyContactsScreen()),
+      body: SafeArea(
+        bottom: false,
+        child: currentPage == 0 ? Home() : MyContactsScreen(),
+      ),
     );
   }
 }

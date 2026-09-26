@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:metjou/features/resources/presentation/all_articles.dart';
 import 'package:metjou/features/resources/presentation/widgets/safe_carousel.dart';
 import 'package:metjou/features/home/presentation/widgets/dash_appbar.dart';
+import 'package:metjou/features/home/presentation/widgets/glass_dock.dart';
 import 'package:metjou/features/emergency/presentation/emergency.dart';
 import 'package:metjou/features/safe_places/presentation/live_safe.dart';
 import 'package:metjou/features/get_home_safe/presentation/safe_home.dart';
@@ -61,7 +62,7 @@ class _HomeState extends State<Home> {
               _header(l10n.safePlaces),
               LiveSafe(),
               SafeHome(),
-              SizedBox(height: 50),
+              SizedBox(height: glassDockClearance),
             ],
           ),
         ),

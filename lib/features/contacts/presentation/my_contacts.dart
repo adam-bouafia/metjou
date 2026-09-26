@@ -4,6 +4,7 @@ import 'package:flutter_native_contact_picker/flutter_native_contact_picker.dart
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:metjou/features/contacts/data/sos_contacts.dart';
+import 'package:metjou/features/home/presentation/widgets/glass_dock.dart';
 
 /// Opens the system contact picker and saves the chosen number as an SOS
 /// contact. Needs no contacts permission. Returns true if one was added.
@@ -114,7 +115,7 @@ class _MyContactsScreenState extends State<MyContactsScreen> {
                   },
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: glassDockClearance),
             ],
           );
         },
