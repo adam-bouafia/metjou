@@ -2,5 +2,10 @@
     // Flutter builds android/ itself; the Java extension's Gradle import only
     // starts extra daemons (on the system Java 25 JRE, which has no javac).
     "java.import.gradle.enabled": false,
-    "java.configuration.updateBuildConfiguration": "disabled"
+    "java.configuration.updateBuildConfiguration": "disabled",
+    // The writing assistant runs on code comments too; its style checks show
+    // up as errors in Dart and Kotlin files. Keep the language checks only.
+    "writing-assistant.analyses.readability": false,
+    "writing-assistant.analyses.passive": false,
+    "writing-assistant.analyses.simplify": false
 }
