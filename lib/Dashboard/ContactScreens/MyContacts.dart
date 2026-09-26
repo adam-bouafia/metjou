@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:metjou/Utility/app_locale.dart';
 import 'package:flutter_native_contact_picker/flutter_native_contact_picker.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
 import 'package:metjou/Utility/sos_contacts.dart';
 
 /// Opens the system contact picker and saves the chosen number as an SOS
 /// contact. Needs no contacts permission. Returns true if one was added.
-Future<bool> pickSosContact() async {
+Future<bool> pickSosContact(BuildContext context) async {
+  final l10n = context.l10n;
   final picked = await FlutterNativeContactPicker().selectPhoneNumber();
   final number = picked?.selectedPhoneNumber ?? picked?.phoneNumbers?.firstOrNull;
   if (picked == null || number == null || number.isEmpty) return false;
 
   final added = await addSosContact(SosContact(
-    name: picked.fullName ?? "aucunn".tr,
+    name: picked.fullName ?? l10n.noName,
     phone: normalizePhoneNumber(number),
   ));
   Fluttertoast.showToast(
-      msg: added ? "save".tr : "Max $maxSosContacts / duplicate");
+      msg: added ? l10n.contactSaved : l10n.contactNotAdded(maxSosContacts));
   return added;
 }
 
@@ -30,9 +31,10 @@ class MyContactsScreen extends StatefulWidget {
 
 class _MyContactsScreenState extends State<MyContactsScreen> {
   Future<void> _remove(List<SosContact> contacts, int index) async {
+    final l10n = context.l10n;
     final removed = contacts.removeAt(index);
     await saveSosContacts(contacts);
-    Fluttertoast.showToast(msg: "${removed.name} ✕");
+    Fluttertoast.showToast(msg: l10n.contactRemoved(removed.name));
     setState(() {});
   }
 
@@ -44,7 +46,7 @@ class _MyContactsScreenState extends State<MyContactsScreen> {
           centerTitle: true,
           elevation: 0,
           title: Text(
-            "SOS Contacts",
+            context.l10n.sosContacts,
             style: TextStyle(fontSize: 26, fontWeight: FontWeight.w900, color: Colors.black),
           ),
           backgroundColor: Colors.transparent,
@@ -57,7 +59,7 @@ class _MyContactsScreenState extends State<MyContactsScreen> {
           builder: (context, AsyncSnapshot<List<SosContact>> snap) {
             final contacts = snap.data ?? [];
             if (contacts.isEmpty) {
-              return Center(child: Text("aucunct".tr));
+              return Center(child: Text(context.l10n.noContacts));
             }
             return Column(
               children: [
@@ -66,12 +68,12 @@ class _MyContactsScreenState extends State<MyContactsScreen> {
                   child: Row(
                     children: [
                       Expanded(child: Divider(indent: 20, endIndent: 20)),
-                      Text('balayer'.tr),
+                      Text(context.l10n.swipeToDelete),
                       Expanded(child: Divider(indent: 20, endIndent: 20)),
                     ],
                   ),
                 ),
-                Text("${contacts.length} / $maxSosContacts"),
+                Text(context.l10n.contactCount(contacts.length, maxSosContacts)),
                 Expanded(
                   child: ListView.builder(
                     itemCount: contacts.length,

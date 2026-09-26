@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:metjou/Utility/app_locale.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lottie/lottie.dart';
@@ -7,7 +8,6 @@ import 'package:metjou/Dashboard/ContactScreens/MyContacts.dart';
 import 'package:metjou/Utility/background_services.dart';
 import 'package:metjou/Utility/sos_contacts.dart';
 import 'package:workmanager/workmanager.dart';
-import 'package:get/get.dart';
 
 class SafeHome extends StatefulWidget {
   const SafeHome({super.key});
@@ -36,11 +36,8 @@ class _SafeHomeState extends State<SafeHome> {
   }
 
   changeStateOfHomeSafe(value) async {
-    if (value) {
-      Fluttertoast.showToast(msg: "Service activé en arrière-plan!");
-    } else {
-      Fluttertoast.showToast(msg: "Service désactivé!");
-    }
+    Fluttertoast.showToast(
+        msg: value ? context.l10n.getHomeSafeOn : context.l10n.getHomeSafeOff);
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     setState(() {
@@ -80,7 +77,7 @@ class _SafeHomeState extends State<SafeHome> {
                             indent: 20,
                             endIndent: 20,
                           )),
-                          Text("ren"),
+                          Text(context.l10n.getHomeSafe),
                           Expanded(
                               child: Divider(
                             indent: 20,
@@ -100,7 +97,7 @@ class _SafeHomeState extends State<SafeHome> {
                         onChanged: (val) async {
                           if (val && selectedContact == -1) {
                             Fluttertoast.showToast(
-                                msg: "Veuillez sélectionner un contact!");
+                                msg: context.l10n.selectContactFirst);
                             return;
                           }
                           setModalState(() {
@@ -123,7 +120,7 @@ class _SafeHomeState extends State<SafeHome> {
                           }
                         },
                         subtitle: Text(
-                            "15m".tr),
+                            context.l10n.getHomeSafeInterval),
                       ),
                     ),
                     Expanded(
@@ -168,12 +165,12 @@ class _SafeHomeState extends State<SafeHome> {
                               } else {
                                 return ListTile(
                                   onTap: () async {
-                                    await pickSosContact();
+                                    await pickSosContact(context);
                                     setModalState(() {});
                                   },
-                                  title: Text("aucunctt".tr),
+                                  title: Text(context.l10n.noContacts),
                                   subtitle:
-                                      Text("ajoutert".tr),
+                                      Text(context.l10n.addContactHint),
                                   trailing: Icon(
                                       Icons.arrow_forward_ios_rounded,
                                       color: Colors.grey),
@@ -220,8 +217,8 @@ class _SafeHomeState extends State<SafeHome> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       ListTile(
-                        title: Text("ren".tr),
-                        subtitle: Text("partaper".tr),
+                        title: Text(context.l10n.getHomeSafe),
+                        subtitle: Text(context.l10n.getHomeSafeSubtitle),
                       ),
                       Visibility(
                         visible: getHomeSafeActivated,
@@ -234,7 +231,7 @@ class _SafeHomeState extends State<SafeHome> {
                                   size: 15,
                                 ),
                                 SizedBox(width: 15),
-                                Text("actenc",
+                                Text(context.l10n.getHomeSafeActive,
                                     style: TextStyle(color: Colors.red, fontSize: 10)),
                               ],
                             )),

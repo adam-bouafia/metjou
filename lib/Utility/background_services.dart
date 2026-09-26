@@ -6,6 +6,7 @@ import 'package:audio_background_record/audio_background_record.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:metjou/Utility/app_locale.dart';
 import 'package:metjou/Utility/sos_contacts.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -67,6 +68,7 @@ class BackgroundServices {
   // Location
 
   static Position? _lastPosition;
+  static String _foregroundNotificationText = "MetJou";
   static StreamSubscription<Position>? _positionSubscription;
 
   /// Keeps a foreground service with a location stream running while Safe
@@ -78,10 +80,10 @@ class BackgroundServices {
           ? AndroidSettings(
               accuracy: LocationAccuracy.high,
               distanceFilter: 20,
-              foregroundNotificationConfig: const ForegroundNotificationConfig(
+              foregroundNotificationConfig: ForegroundNotificationConfig(
                 notificationTitle: "Safe Shake",
-                notificationText: "MetJou",
-                notificationIcon: AndroidResource(name: _notificationIcon),
+                notificationText: _foregroundNotificationText,
+                notificationIcon: const AndroidResource(name: _notificationIcon),
                 setOngoing: true,
               ),
             )
@@ -137,11 +139,16 @@ class BackgroundServices {
 
   /// Sends [message] plus a location link to every SOS contact.
   /// Returns the number of messages handed to the SMS service.
-  static Future<int> sendSosAlert(String message) async {
+  static Future<int> sendSosAlert(String message, {bool withLocation = true}) async {
     final contacts = await loadSosContacts();
     if (contacts.isEmpty) return 0;
-    final link = await currentLocationLink();
-    final text = link.isEmpty ? message : "$message\n$link";
+    var text = message;
+    if (withLocation) {
+      final link = await currentLocationLink();
+      text = link.isEmpty
+          ? "$message ${(await backgroundLocalizations()).smsNoLocation}"
+          : "$message\n$link";
+    }
     var sent = 0;
     for (final contact in contacts) {
       if (await _sendSms(contact.phone, text)) sent++;
@@ -151,30 +158,29 @@ class BackgroundServices {
 
   /// Shake handler: alerts all SOS contacts and posts a notification.
   static Future<void> sendSms() async {
-    final sent = await sendSosAlert("Help Me! Shake mode activated. Track me here.");
+    final l10n = await backgroundLocalizations();
+    final sent = await sendSosAlert(l10n.smsShake);
     if (sent > 0) {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setBool("alerted", true);
     }
     await showSmsNotification(
-      title: "Safe Shake activated!",
-      content: sent > 0
-          ? "SOS alert Sent! Shake mode activated."
-          : "No contact found, Please call Police ASAP.",
+      title: l10n.notifShakeTitle,
+      content: sent > 0 ? l10n.notifShakeSent : l10n.notifShakeNoContacts,
     );
   }
 
   // Audio recording
 
-  static void audioRecordCallBack(int status, String? errorMsg) {
+  static Future<void> audioRecordCallBack(int status, String? errorMsg) async {
+    final l10n = await backgroundLocalizations();
     switch (status) {
       case 1: // recording started
         showAudioRecordNotification(
-            title: "Audio Recording", content: "Audio Recording Started");
+            title: l10n.notifRecording, content: l10n.notifRecordingStarted);
       case 2: // recording stopped
         showAudioRecordNotification(
-            title: "Audio Recording",
-            content: "Audio Recording Stopped, Ready to record again");
+            title: l10n.notifRecording, content: l10n.notifRecordingStopped);
       case 0: // recording error
         debugPrint("audio record error: $errorMsg");
     }
@@ -189,8 +195,9 @@ class BackgroundServices {
       await recorder.configure(savetoDirectory: dir.path);
       await recorder.startRecordingService();
       recorder.setOnRecordStatusChangedCallback(audioRecordCallBack);
+      final l10n = await backgroundLocalizations();
       await showAudioRecordNotification(
-          title: "Audio Recording", content: "Audio Recording service is ready");
+          title: l10n.notifRecording, content: l10n.notifRecordingReady);
     } else {
       await recorder.stopRecordingService();
       await cancelAudioRecordNotification();
@@ -199,8 +206,9 @@ class BackgroundServices {
 
   static Future<void> setSafeShake(bool enabled) async {
     if (enabled) {
-      await showSmsNotification(
-          title: "Safe Shake activated!", content: "Be strong, We are with you!");
+      final l10n = await backgroundLocalizations();
+      await showSmsNotification(title: l10n.notifShakeTitle, content: l10n.notifShakeBody);
+      _foregroundNotificationText = l10n.notifShakeBody;
       startLocationUpdates();
     } else {
       await cancelSmsNotification();
@@ -223,9 +231,10 @@ void callbackDispatcher() {
   Workmanager().executeTask((task, inputData) async {
     final contact = inputData?['contact'] as String?;
     if (contact == null) return true;
+    final l10n = await backgroundLocalizations();
     final link = await BackgroundServices.currentLocationLink();
-    await BackgroundServices._sendSms(
-        contact, "I am on my way! Track me here.\n$link");
+    await BackgroundServices._sendSms(contact,
+        "${l10n.smsGetHomeSafe}\n${link.isEmpty ? l10n.smsNoLocation : link}");
     return true;
   });
 }

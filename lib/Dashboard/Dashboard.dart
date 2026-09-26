@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:metjou/Utility/app_locale.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:metjou/Dashboard/Home.dart';
@@ -64,27 +64,28 @@ class _DashboardState extends State<Dashboard> {
   }
 
   Future<void> sendAlertSMS(bool isAlert) async {
+    final l10n = context.l10n;
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool("alerted", isAlert);
     setState(() => alerted = isAlert);
 
     if (!isAlert) {
-      Fluttertoast.showToast(msg: "Contacts are being notified about false SOS.");
+      Fluttertoast.showToast(msg: l10n.notifyingSafe);
     }
-    final sent = await BackgroundServices.sendSosAlert(isAlert
-        ? "SOSPin activated, Help me"
-        : "I am safe now, please ignore my SOS alert.");
+    final sent = isAlert
+        ? await BackgroundServices.sendSosAlert(l10n.smsSos)
+        : await BackgroundServices.sendSosAlert(l10n.smsSafe, withLocation: false);
 
     if (sent == 0) {
       await prefs.setBool("alerted", false);
       if (mounted) setState(() => alerted = false);
       Fluttertoast.showToast(
-        msg: 'No Contacts Found!',
+        msg: l10n.noContactsFound,
         backgroundColor: Colors.red,
       );
     } else if (isAlert) {
       Fluttertoast.showToast(
-        msg: 'Alert Sent Successfully!',
+        msg: l10n.alertSent,
         backgroundColor: Colors.green,
       );
     }
@@ -119,7 +120,7 @@ class _DashboardState extends State<Dashboard> {
                       ),
                     ),
                     Text(
-                      "plspin".tr,
+                      context.l10n.enterPin,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                     ),
@@ -150,7 +151,7 @@ class _DashboardState extends State<Dashboard> {
   void _showSnackBar(String pin, BuildContext context, int userPin) {
     if (userPin == int.parse(pin)) {
       Fluttertoast.showToast(
-        msg: 'We are glad that you are safe',
+        msg: context.l10n.gladYouAreSafe,
       );
       sendAlertSMS(false);
       _pinPutController.clear();
@@ -159,7 +160,7 @@ class _DashboardState extends State<Dashboard> {
     } else {
       _pinPutController.clear();
       Fluttertoast.showToast(
-        msg: 'Wrong Pin! Please try again',
+        msg: context.l10n.wrongPin,
       );
     }
   }
@@ -173,7 +174,7 @@ class _DashboardState extends State<Dashboard> {
           ? FloatingActionButton(
               backgroundColor: Colors.white,
               onPressed: () async {
-                if (await pickSosContact()) setState(() {});
+                if (await pickSosContact(context)) setState(() {});
               },
               child: Image.asset(
                 "assets/add-contact.webp",
@@ -202,7 +203,7 @@ class _DashboardState extends State<Dashboard> {
                           "assets/alarm.webp",
                           height: 24,
                         ),
-                        Text("stop".tr)
+                        Text(context.l10n.stop)
                       ],
                     )
                   : Image.asset(
