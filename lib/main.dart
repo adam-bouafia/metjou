@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:metjou/app.dart';
 import 'package:metjou/core/localization/app_locale.dart';
+import 'package:metjou/core/theme/app_theme.dart';
 import 'package:metjou/core/services/background_services.dart';
 import 'package:metjou/features/get_home_safe/data/get_home_safe_service.dart';
 import 'package:shake/shake.dart';
@@ -54,6 +55,7 @@ Future<void> main() async {
     DeviceOrientation.portraitDown,
   ]);
   await loadSavedLocale();
+  await loadThemeMode();
   final prefs = await SharedPreferences.getInstance();
   runApp(MyApp(onboardingDone: prefs.getBool("appOpenedBefore") ?? false));
 }

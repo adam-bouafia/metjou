@@ -12,15 +12,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<Locale?>(
-      valueListenable: appLocale,
-      builder: (context, locale, _) => MaterialApp(
-        locale: locale ?? defaultAppLocale,
+    return ListenableBuilder(
+      listenable: Listenable.merge([appLocale, appThemeMode]),
+      builder: (context, _) => MaterialApp(
+        locale: appLocale.value ?? defaultAppLocale,
         supportedLocales: supportedAppLocales,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         debugShowCheckedModeBanner: false,
         onGenerateTitle: (context) => 'MetJou',
         theme: appTheme,
+        darkTheme: appDarkTheme,
+        themeMode: appThemeMode.value,
         home: onboardingDone ? Dashboard() : OnboardingScreen(),
       ),
     );
