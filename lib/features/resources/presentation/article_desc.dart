@@ -20,7 +20,10 @@ class ArticleDesc extends StatelessWidget {
         children: [
           Hero(
             tag: resource.url,
-            child: ResourceBadge(resource: resource, size: 72),
+            child: Align(
+              alignment: AlignmentDirectional.centerStart,
+              child: ResourceBadge(resource: resource, size: 72),
+            ),
           ),
           const SizedBox(height: 24),
           Text(
@@ -76,21 +79,18 @@ class ResourceBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: AlignmentDirectional.centerStart,
-      child: Container(
-        width: size,
-        height: size,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(size / 4),
-          gradient: LinearGradient(
-            colors: resource.colors,
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(size / 4),
+        gradient: LinearGradient(
+          colors: resource.colors,
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
-        child: Icon(resource.icon, color: Colors.white, size: size / 2),
       ),
+      child: Icon(resource.icon, color: Colors.white, size: size / 2),
     );
   }
 }
