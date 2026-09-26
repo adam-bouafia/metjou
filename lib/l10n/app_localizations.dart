@@ -710,6 +710,30 @@ abstract class AppLocalizations {
   /// **'Maximum length of one recording'**
   String get audioRecordLengthSubtitle;
 
+  /// No description provided for @audioRecordFolder.
+  ///
+  /// In en, this message translates to:
+  /// **'Recording folder'**
+  String get audioRecordFolder;
+
+  /// No description provided for @audioRecordFolderPrivate.
+  ///
+  /// In en, this message translates to:
+  /// **'Private app storage (removed with the app)'**
+  String get audioRecordFolderPrivate;
+
+  /// No description provided for @audioRecordFolderChoose.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a folder'**
+  String get audioRecordFolderChoose;
+
+  /// No description provided for @audioRecordFolderReset.
+  ///
+  /// In en, this message translates to:
+  /// **'Use private app storage'**
+  String get audioRecordFolderReset;
+
   /// No description provided for @minutes.
   ///
   /// In en, this message translates to:

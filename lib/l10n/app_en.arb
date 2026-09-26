@@ -132,6 +132,10 @@
   "audioRecordSubtitle": "Record audio as evidence when you shake",
   "audioRecordLength": "Recording length",
   "audioRecordLengthSubtitle": "Maximum length of one recording",
+  "audioRecordFolder": "Recording folder",
+  "audioRecordFolderPrivate": "Private app storage (removed with the app)",
+  "audioRecordFolderChoose": "Choose a folder",
+  "audioRecordFolderReset": "Use private app storage",
   "minutes": "{count} min",
   "@minutes": {
     "placeholders": {

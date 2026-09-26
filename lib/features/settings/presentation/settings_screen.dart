@@ -19,6 +19,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool switchValue = false;
   bool switchAudioRecord = false;
 
+  /// Picked recordings folder, or null for the app's private folder.
+  String? recordFolder;
+
   @override
   void initState() {
     super.initState();
@@ -59,12 +62,50 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return pin;
   }
 
+  /// Lets the user pick any folder through Android's folder picker, or go
+  /// back to the app's private folder.
+  Future<void> _selectRecordFolder(BuildContext context) async {
+    final recorder = AudioBackgroundRecord.getInstance();
+    final choice = await showModalBottomSheet<bool>(
+      context: context,
+      builder: (context) => SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: const Icon(Icons.create_new_folder_outlined),
+              title: Text(context.l10n.audioRecordFolderChoose),
+              onTap: () => Navigator.pop(context, true),
+            ),
+            ListTile(
+              leading: const Icon(Icons.lock_outline),
+              title: Text(context.l10n.audioRecordFolderReset),
+              onTap: () => Navigator.pop(context, false),
+            ),
+          ],
+        ),
+      ),
+    );
+    if (choice == null) return;
+    if (choice) {
+      final folder = await recorder.pickDirectory();
+      if (folder == null || !mounted) return;
+      setState(() => recordFolder = folder);
+    } else {
+      await recorder.resetDirectory();
+      if (mounted) setState(() => recordFolder = null);
+    }
+  }
+
   Future<void> checkService() async {
+    final folder = await AudioBackgroundRecord.getInstance()
+        .getRecordingDestination();
     final prefs = await SharedPreferences.getInstance();
     if (!mounted) return;
     setState(() {
       switchAudioRecord = prefs.getBool("bgRecord") ?? false;
       switchValue = prefs.getBool("smsSend") ?? false;
+      recordFolder = folder;
     });
   }
 
@@ -208,15 +249,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             ),
             title: Text(context.l10n.audioRecord),
-            //TODO Translation
             subtitle: Text(context.l10n.audioRecordSubtitle),
           ),
           Divider(indent: 40, endIndent: 40),
           ListTile(
-            trailing: IconButton(
-              icon: Icon(Icons.keyboard_arrow_right),
-              onPressed: () => _selectRecordDuration(context),
-            ),
+            onTap: () => _selectRecordDuration(context),
+            trailing: Icon(Icons.keyboard_arrow_right),
             leading: CircleAvatar(
               backgroundColor: Colors.grey[200],
               child: Center(
@@ -225,6 +263,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             title: Text(context.l10n.audioRecordLength),
             subtitle: Text(context.l10n.audioRecordLengthSubtitle),
+          ),
+          Divider(indent: 40, endIndent: 40),
+          ListTile(
+            onTap: () => _selectRecordFolder(context),
+            trailing: Icon(Icons.keyboard_arrow_right),
+            leading: CircleAvatar(
+              backgroundColor: Colors.grey[200],
+              child: Icon(
+                Icons.folder_outlined,
+                color: Colors.black54,
+                size: 22,
+              ),
+            ),
+            title: Text(context.l10n.audioRecordFolder),
+            subtitle: Text(
+              recordFolder ?? context.l10n.audioRecordFolderPrivate,
+            ),
           ),
           Divider(indent: 40, endIndent: 40),
           Padding(

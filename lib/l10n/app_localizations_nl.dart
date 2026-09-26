@@ -336,6 +336,19 @@ class AppLocalizationsNl extends AppLocalizations {
   String get audioRecordLengthSubtitle => 'Maximale duur van één opname';
 
   @override
+  String get audioRecordFolder => 'Map voor opnames';
+
+  @override
+  String get audioRecordFolderPrivate =>
+      'Privéopslag van de app (verdwijnt met de app)';
+
+  @override
+  String get audioRecordFolderChoose => 'Kies een map';
+
+  @override
+  String get audioRecordFolderReset => 'Privéopslag van de app gebruiken';
+
+  @override
   String minutes(int count) {
     return '$count min';
   }

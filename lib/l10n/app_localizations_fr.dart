@@ -342,6 +342,19 @@ class AppLocalizationsFr extends AppLocalizations {
   String get audioRecordLengthSubtitle => 'Durée maximale d\'un enregistrement';
 
   @override
+  String get audioRecordFolder => 'Dossier des enregistrements';
+
+  @override
+  String get audioRecordFolderPrivate =>
+      'Stockage privé de l\'app (supprimé avec l\'app)';
+
+  @override
+  String get audioRecordFolderChoose => 'Choisir un dossier';
+
+  @override
+  String get audioRecordFolderReset => 'Utiliser le stockage privé de l\'app';
+
+  @override
   String minutes(int count) {
     return '$count min';
   }

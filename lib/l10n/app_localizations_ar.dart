@@ -332,6 +332,19 @@ class AppLocalizationsAr extends AppLocalizations {
   String get audioRecordLengthSubtitle => 'أقصى مدة للتسجيل الواحد';
 
   @override
+  String get audioRecordFolder => 'مجلد التسجيلات';
+
+  @override
+  String get audioRecordFolderPrivate =>
+      'التخزين الخاص بالتطبيق (يُحذف مع التطبيق)';
+
+  @override
+  String get audioRecordFolderChoose => 'اختر مجلدًا';
+
+  @override
+  String get audioRecordFolderReset => 'استخدام التخزين الخاص بالتطبيق';
+
+  @override
   String minutes(int count) {
     return '$count دقيقة';
   }
