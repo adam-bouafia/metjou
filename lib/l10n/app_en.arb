@@ -183,7 +183,7 @@
   "changePin": "Change PIN",
   "currentPin": "Current PIN",
   "newPin": "New PIN",
-  "pinRequired": "A PIN is needed to stop an SOS alert",
+  "pinRequired": "The PIN stops an SOS alert and protects Settings and your contacts",
   "pinChanged": "PIN changed",
   "currentPinWrong": "The current PIN does not match. Try again.",
   "enterCurrentPinFirst": "Enter your current PIN first",

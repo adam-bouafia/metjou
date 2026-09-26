@@ -117,7 +117,7 @@
   "changePin": "تغيير رمز PIN",
   "currentPin": "رمز PIN الحالي",
   "newPin": "رمز PIN الجديد",
-  "pinRequired": "رمز PIN مطلوب لإيقاف تنبيه الاستغاثة",
+  "pinRequired": "رمز PIN يوقف تنبيه الاستغاثة ويحمي الإعدادات وجهات اتصالك",
   "pinChanged": "تم تغيير رمز PIN",
   "currentPinWrong": "رمز PIN الحالي غير صحيح. حاول مرة أخرى.",
   "enterCurrentPinFirst": "أدخل رمز PIN الحالي أولًا",

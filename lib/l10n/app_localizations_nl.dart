@@ -394,7 +394,8 @@ class AppLocalizationsNl extends AppLocalizations {
   String get newPin => 'Nieuwe pincode';
 
   @override
-  String get pinRequired => 'Met een pincode stop je een SOS-alarm';
+  String get pinRequired =>
+      'De pincode stopt een SOS-alarm en beschermt je instellingen en contacten';
 
   @override
   String get pinChanged => 'Pincode gewijzigd';

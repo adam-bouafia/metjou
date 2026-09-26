@@ -3,6 +3,7 @@ import 'package:metjou/core/localization/app_locale.dart';
 import 'package:flutter_native_contact_picker/flutter_native_contact_picker.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:metjou/core/widgets/pin_guard.dart';
 import 'package:metjou/features/contacts/data/sos_contacts.dart';
 import 'package:metjou/features/home/presentation/widgets/glass_dock.dart';
 
@@ -36,6 +37,7 @@ class MyContactsScreen extends StatefulWidget {
 
 class _MyContactsScreenState extends State<MyContactsScreen> {
   Future<void> _remove(List<SosContact> contacts, int index) async {
+    if (!await confirmPin(context) || !mounted) return;
     final l10n = context.l10n;
     final removed = contacts.removeAt(index);
     await saveSosContacts(contacts);

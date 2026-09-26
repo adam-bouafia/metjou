@@ -394,7 +394,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get newPin => 'New PIN';
 
   @override
-  String get pinRequired => 'A PIN is needed to stop an SOS alert';
+  String get pinRequired =>
+      'The PIN stops an SOS alert and protects Settings and your contacts';
 
   @override
   String get pinChanged => 'PIN changed';

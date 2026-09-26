@@ -117,7 +117,7 @@
   "changePin": "Pincode wijzigen",
   "currentPin": "Huidige pincode",
   "newPin": "Nieuwe pincode",
-  "pinRequired": "Met een pincode stop je een SOS-alarm",
+  "pinRequired": "De pincode stopt een SOS-alarm en beschermt je instellingen en contacten",
   "pinChanged": "Pincode gewijzigd",
   "currentPinWrong": "De huidige pincode klopt niet. Probeer opnieuw.",
   "enterCurrentPinFirst": "Voer eerst je huidige pincode in",

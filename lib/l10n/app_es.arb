@@ -117,7 +117,7 @@
   "changePin": "Cambiar PIN",
   "currentPin": "PIN actual",
   "newPin": "Nuevo PIN",
-  "pinRequired": "Se necesita un PIN para detener una alerta SOS",
+  "pinRequired": "El PIN detiene una alerta SOS y protege los ajustes y tus contactos",
   "pinChanged": "PIN cambiado",
   "currentPinWrong": "El PIN actual no coincide. Inténtalo de nuevo.",
   "enterCurrentPinFirst": "Introduce primero tu PIN actual",

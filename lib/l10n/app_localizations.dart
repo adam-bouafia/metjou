@@ -809,7 +809,7 @@ abstract class AppLocalizations {
   /// No description provided for @pinRequired.
   ///
   /// In en, this message translates to:
-  /// **'A PIN is needed to stop an SOS alert'**
+  /// **'The PIN stops an SOS alert and protects Settings and your contacts'**
   String get pinRequired;
 
   /// No description provided for @pinChanged.

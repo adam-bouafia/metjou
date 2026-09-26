@@ -400,7 +400,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get pinRequired =>
-      'Un code PIN est nécessaire pour arrêter une alerte SOS';
+      'Le code PIN arrête une alerte SOS et protège les paramètres et vos contacts';
 
   @override
   String get pinChanged => 'Code PIN modifié';

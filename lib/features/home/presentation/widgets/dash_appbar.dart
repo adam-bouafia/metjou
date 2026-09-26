@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:metjou/core/widgets/pin_guard.dart';
 import 'package:metjou/core/widgets/quick_exit_button.dart';
 import 'package:metjou/features/settings/presentation/settings_screen.dart';
 import 'package:metjou/core/localization/app_locale.dart';
@@ -38,7 +39,8 @@ class DashAppbar extends StatelessWidget {
             elevation: 4,
             shape: CircleBorder(),
             child: InkWell(
-              onTap: () {
+              onTap: () async {
+                if (!await confirmPin(context) || !context.mounted) return;
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => SettingsScreen()),

@@ -391,7 +391,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get newPin => 'رمز PIN الجديد';
 
   @override
-  String get pinRequired => 'رمز PIN مطلوب لإيقاف تنبيه الاستغاثة';
+  String get pinRequired =>
+      'رمز PIN يوقف تنبيه الاستغاثة ويحمي الإعدادات وجهات اتصالك';
 
   @override
   String get pinChanged => 'تم تغيير رمز PIN';
