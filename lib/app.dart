@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:metjou/core/localization/app_locale.dart';
+import 'package:metjou/core/navigation/app_navigator.dart';
 import 'package:metjou/core/services/alert_countdown.dart';
 import 'package:metjou/core/widgets/countdown_overlay.dart';
 import 'package:metjou/core/theme/app_theme.dart';
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
     return ListenableBuilder(
       listenable: Listenable.merge([appLocale, appThemeMode]),
       builder: (context, _) => MaterialApp(
+        navigatorKey: appNavigatorKey,
         locale: appLocale.value ?? defaultAppLocale,
         supportedLocales: supportedAppLocales,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
