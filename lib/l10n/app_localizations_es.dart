@@ -185,6 +185,12 @@ class AppLocalizationsEs extends AppLocalizations {
   String get openWebsite => 'Abrir sitio web';
 
   @override
+  String get quickExit => 'Salida rápida';
+
+  @override
+  String get quickExitHint => 'Abre el tiempo y cierra MetJou';
+
+  @override
   String get getHomeSafe => 'Llegar seguro a casa';
 
   @override

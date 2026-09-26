@@ -54,6 +54,8 @@
   "resSwitchboardDesc": "La línea de ayuda LGBTQ+ de COC Nederland. Habla de forma anónima y confidencial sobre tus preguntas, dudas o tu historia, por teléfono o chat, gratis.",
   "callNumber": "Llamar al {number}",
   "openWebsite": "Abrir sitio web",
+  "quickExit": "Salida rápida",
+  "quickExitHint": "Abre el tiempo y cierra MetJou",
   "getHomeSafe": "Llegar seguro a casa",
   "getHomeSafeSubtitle": "Comparte tu ubicación en el camino",
   "getHomeSafeInterval": "Tu ubicación se envía a un contacto cada 15 minutos",

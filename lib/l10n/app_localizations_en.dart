@@ -184,6 +184,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get openWebsite => 'Open website';
 
   @override
+  String get quickExit => 'Quick exit';
+
+  @override
+  String get quickExitHint => 'Opens the weather and closes MetJou';
+
+  @override
   String get getHomeSafe => 'Get home safe';
 
   @override

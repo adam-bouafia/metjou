@@ -183,6 +183,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get openWebsite => 'فتح الموقع';
 
   @override
+  String get quickExit => 'خروج سريع';
+
+  @override
+  String get quickExitHint => 'يفتح الطقس ويغلق MetJou';
+
+  @override
   String get getHomeSafe => 'العودة إلى المنزل بأمان';
 
   @override

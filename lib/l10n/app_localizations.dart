@@ -428,6 +428,18 @@ abstract class AppLocalizations {
   /// **'Open website'**
   String get openWebsite;
 
+  /// No description provided for @quickExit.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick exit'**
+  String get quickExit;
+
+  /// No description provided for @quickExitHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Opens the weather and closes MetJou'**
+  String get quickExitHint;
+
   /// No description provided for @getHomeSafe.
   ///
   /// In en, this message translates to:

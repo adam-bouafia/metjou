@@ -54,6 +54,8 @@
   "resSwitchboardDesc": "De LHBTIQ+ hulplijn van COC Nederland. Praat anoniem en vertrouwelijk over je vragen, twijfels of je verhaal, via telefoon of chat, gratis.",
   "callNumber": "Bel {number}",
   "openWebsite": "Open website",
+  "quickExit": "Snel weg",
+  "quickExitHint": "Opent het weer en sluit MetJou",
   "getHomeSafe": "Veilig thuiskomen",
   "getHomeSafeSubtitle": "Deel je locatie onderweg",
   "getHomeSafeInterval": "Elke 15 minuten wordt je locatie naar één contact gestuurd",

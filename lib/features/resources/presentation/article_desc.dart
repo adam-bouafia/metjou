@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:metjou/core/widgets/quick_exit_button.dart';
 import 'package:metjou/features/resources/data/resources.dart';
 import 'package:metjou/core/localization/app_locale.dart';
 import 'package:metjou/core/services/phone_call.dart';
@@ -14,7 +15,7 @@ class ArticleDesc extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(actions: const [QuickExitButton()]),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(24, 8, 24, 32),
         children: [

@@ -54,6 +54,8 @@
   "resSwitchboardDesc": "La ligne d'écoute LGBTQ+ de COC Nederland. Parlez de manière anonyme et confidentielle de vos questions, de vos doutes ou de votre histoire, par téléphone ou par chat, gratuitement.",
   "callNumber": "Appeler le {number}",
   "openWebsite": "Ouvrir le site",
+  "quickExit": "Sortie rapide",
+  "quickExitHint": "Ouvre la météo et ferme MetJou",
   "getHomeSafe": "Rentrer en sécurité",
   "getHomeSafeSubtitle": "Partagez votre position en chemin",
   "getHomeSafeInterval": "Votre position est envoyée à un contact toutes les 15 minutes",

@@ -61,6 +61,8 @@
     }
   },
   "openWebsite": "Open website",
+  "quickExit": "Quick exit",
+  "quickExitHint": "Opens the weather and closes MetJou",
   "getHomeSafe": "Get home safe",
   "getHomeSafeSubtitle": "Share your location on the way",
   "getHomeSafeInterval": "Your location is sent to one contact every 15 minutes",

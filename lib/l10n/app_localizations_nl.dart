@@ -183,6 +183,12 @@ class AppLocalizationsNl extends AppLocalizations {
   String get openWebsite => 'Open website';
 
   @override
+  String get quickExit => 'Snel weg';
+
+  @override
+  String get quickExitHint => 'Opent het weer en sluit MetJou';
+
+  @override
   String get getHomeSafe => 'Veilig thuiskomen';
 
   @override

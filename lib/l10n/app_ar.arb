@@ -54,6 +54,8 @@
   "resSwitchboardDesc": "خط المساعدة لمجتمع الميم التابع لمنظمة COC Nederland. تحدث بسرية ودون الكشف عن هويتك عن أسئلتك أو شكوكك أو قصتك، عبر الهاتف أو الدردشة، مجانًا.",
   "callNumber": "اتصل بـ {number}",
   "openWebsite": "فتح الموقع",
+  "quickExit": "خروج سريع",
+  "quickExitHint": "يفتح الطقس ويغلق MetJou",
   "getHomeSafe": "العودة إلى المنزل بأمان",
   "getHomeSafeSubtitle": "شارك موقعك أثناء الطريق",
   "getHomeSafeInterval": "يُرسل موقعك إلى جهة اتصال واحدة كل 15 دقيقة",
