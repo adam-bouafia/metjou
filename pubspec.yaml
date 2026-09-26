@@ -49,6 +49,7 @@ flutter:
     - assets/icons/
     - assets/legal/
     - assets/onboarding/
+    - assets/resources/
 
   fonts:
     # Readex Pro (SIL OFL 1.1, see assets/fonts/OFL.txt), subset to Latin

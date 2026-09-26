@@ -30,40 +30,50 @@ class SafeCarousel extends StatelessWidget {
                 context,
                 MaterialPageRoute(builder: (_) => ArticleDesc(resource: r)),
               ),
-              child: Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(16),
+              child: Ink(
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: r.colors,
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
+                  image: DecorationImage(
+                    image: AssetImage(r.image),
+                    fit: BoxFit.cover,
                   ),
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Icon(r.icon, color: Colors.white, size: 36),
-                    const Spacer(),
-                    Text(
-                      r.title,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
+                child: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.black.withValues(alpha: 0.75),
+                        Colors.black.withValues(alpha: 0.05),
+                      ],
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.center,
                     ),
-                    if (r.phone != null)
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
                       Text(
-                        r.phone!,
+                        r.title,
                         style: const TextStyle(
                           color: Colors.white,
-                          fontSize: 14,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
                         ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                  ],
+                      if (r.phone != null)
+                        Text(
+                          r.phone!,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                          ),
+                        ),
+                    ],
+                  ),
                 ),
               ),
             ),

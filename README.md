@@ -40,6 +40,12 @@ Feature-first layout:
     plugins/audio_background_record/   local plugin: foreground-service audio recorder
     test/                  mirrors lib/
 
+## Credits
+
+The help and information carousel shows previews of the organisations' own websites (Veilig Thuis, Centrum Seksueel Geweld, Slachtofferhulp Nederland, 113 Zelfmoordpreventie, Switchboard, Politie, Rijksoverheid), taken from their Open Graph images or homepage headers. They remain the property of those organisations.
+
+Font: Readex Pro, SIL Open Font License 1.1 (assets/fonts/OFL.txt).
+
 ## Origin
 
 Based on the [M3ak prototype](https://github.com/adam-bouafia/M3ak-Mobile-Application-Prototype), originally developed in Tunisia in 2022.
