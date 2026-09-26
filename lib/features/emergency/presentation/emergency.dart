@@ -72,7 +72,7 @@ class Emergency extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 170,
+      height: 180,
       child: ListView(
         physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
@@ -166,7 +166,7 @@ class EmergencyCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                const Spacer(),
+                const SizedBox(height: 12),
                 Text(
                   entry.title,
                   style: const TextStyle(
@@ -186,7 +186,7 @@ class EmergencyCard extends StatelessWidget {
                       fontSize: 13,
                       height: 1.3,
                     ),
-                    maxLines: 2,
+                    maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
