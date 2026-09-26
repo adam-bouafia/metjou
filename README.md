@@ -46,6 +46,8 @@ The help and information carousel shows previews of the organisations' own websi
 
 Font: Readex Pro, SIL Open Font License 1.1 (assets/fonts/OFL.txt).
 
+Colours: Catppuccin (Latte for light, Mocha for dark), MIT licence, catppuccin.com.
+
 ## Origin
 
 Based on the [M3ak prototype](https://github.com/adam-bouafia/M3ak-Mobile-Application-Prototype), originally developed in Tunisia in 2022.
