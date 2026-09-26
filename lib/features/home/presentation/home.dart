@@ -8,6 +8,7 @@ import 'package:metjou/features/emergency/presentation/emergency.dart';
 import 'package:metjou/features/safe_places/presentation/live_safe.dart';
 import 'package:metjou/features/get_home_safe/presentation/safe_home.dart';
 import 'package:metjou/core/localization/app_locale.dart';
+import 'package:metjou/core/widgets/entrance.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -46,22 +47,25 @@ class _HomeState extends State<Home> {
         Expanded(
           child: ListView(
             children: [
-              _header(
-                l10n.resourcesTitle,
-                trailing: TextButton(
-                  onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => AllArticles()),
+              for (final (i, section) in [
+                _header(
+                  l10n.resourcesTitle,
+                  trailing: TextButton(
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => AllArticles()),
+                    ),
+                    child: Text(l10n.seeMore),
                   ),
-                  child: Text(l10n.seeMore),
                 ),
-              ),
-              SafeCarousel(),
-              _header(l10n.emergency),
-              Emergency(),
-              _header(l10n.safePlaces),
-              LiveSafe(),
-              SafeHome(),
+                SafeCarousel(),
+                _header(l10n.emergency),
+                Emergency(),
+                _header(l10n.safePlaces),
+                LiveSafe(),
+                SafeHome(),
+              ].indexed)
+                Entrance(index: i, child: section),
               SizedBox(height: glassDockClearance),
             ],
           ),
