@@ -17,7 +17,8 @@ MetJou is een app voor persoonlijke veiligheid, gemaakt door Adam Bouafia in Ned
 | --- | --- | --- |
 | Maximaal drie SOS-contacten (naam en telefoonnummer) | Om hun je alarmen te sturen | Opslag van de app op je telefoon |
 | Je pincode | Om een SOS-alarm te stoppen | Opslag van de app op je telefoon |
-| Instellingen (Safe Shake, geluidsopname, taal) | Om je keuzes te onthouden | Opslag van de app op je telefoon |
+| Instellingen (Safe Shake, geluidsopname, taal, weergave, discrete modus) | Om je keuzes te onthouden | Opslag van de app op je telefoon |
+| De naam van de nep-beller en een lopende incheck-deadline | Voor de nep-oproep en de inchecktimer | Opslag van de app op je telefoon |
 | Geluidsopnames, alleen als je dit aanzet | Bewijs dat je zelf kunt gebruiken | Privémap van de app op je telefoon |
 
 Deze gegevens worden verwijderd als je de app verwijdert of de appgegevens wist in de instellingen van je telefoon.
@@ -26,9 +27,13 @@ Deze gegevens worden verwijderd als je de app verwijdert of de appgegevens wist 
 
 MetJou leest je locatie om een kaartlink aan SOS-berichten toe te voegen en voor Veilig thuiskomen. Als Safe Shake of Veilig thuiskomen aan staat, leest de app je locatie ook op de achtergrond; Android toont dan een melding.
 
-Je locatie wordt alleen verstuurd als je een alarm stuurt (knop of schudden) of zolang Veilig thuiskomen aan staat. Dat gebeurt per sms naar je gekozen contacten. Niemand anders ontvangt je locatie, ook de ontwikkelaar niet.
+Je locatie wordt alleen verstuurd als je een alarm stuurt (knop, schudden, snelle-instellingentegel, widget of snelkoppeling), zolang Veilig thuiskomen aan staat, als je niet op tijd incheckt, of één keer bij een bijna lege batterij als je dat bericht hebt aangezet. Dat gebeurt per sms naar je gekozen contacten. Niemand anders ontvangt je locatie, ook de ontwikkelaar niet.
 
 De kaartlink in de sms verwijst naar Google Maps. Als je contact de link opent, verwerkt Google dat verzoek volgens zijn eigen privacybeleid.
+
+## Batterij
+
+Als je het bericht bij lege batterij aanzet, leest MetJou elke 15 minuten het batterijniveau. Dat niveau wordt alleen gebruikt om te bepalen of het bericht verstuurd moet worden en wordt niet bewaard.
 
 ## Sms en bellen
 

@@ -18,6 +18,8 @@ Een alarm hangt af van dingen waar MetJou geen invloed op heeft, bijvoorbeeld:
 - een telefoon die uit staat, kwijt is of kapot is;
 - de nauwkeurigheid van de locatie van je telefoon.
 
+Hetzelfde geldt voor de inchecktimer en het bericht bij lege batterij: Android kan achtergrondtaken een paar minuten uitstellen.
+
 Test je alarmen samen met je contacten, laat de toestemmingen van de app aan staan en sluit MetJou uit van batterijoptimalisatie voor het beste resultaat.
 
 ## Jouw verantwoordelijkheden

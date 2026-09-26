@@ -18,6 +18,8 @@ An alert depends on things MetJou cannot control, for example:
 - your phone being switched off, lost or broken;
 - the accuracy of your phone's location.
 
+The same applies to the check-in timer and the low battery message: Android can delay background work by a few minutes.
+
 Test your alerts with your contacts, keep the app's permissions switched on, and exclude MetJou from battery optimisation for the best result.
 
 ## Your responsibilities

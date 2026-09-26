@@ -17,7 +17,8 @@ MetJou is a personal safety app made by Adam Bouafia in the Netherlands. This po
 | --- | --- | --- |
 | Up to three SOS contacts (name and phone number) | To send them your alerts | App storage on your phone |
 | Your PIN | To stop an SOS alert | App storage on your phone |
-| Settings (Safe Shake, audio recording, language) | To remember your choices | App storage on your phone |
+| Settings (Safe Shake, audio recording, language, theme, discreet mode) | To remember your choices | App storage on your phone |
+| The fake caller's name and a running check-in deadline | For the fake call and the check-in timer | App storage on your phone |
 | Audio recordings, only if you turn this on | Evidence you can use yourself | Private app folder on your phone |
 
 This data is removed when you delete the app or clear its data in your phone settings.
@@ -26,9 +27,13 @@ This data is removed when you delete the app or clear its data in your phone set
 
 MetJou reads your location to add a map link to SOS messages and for Get home safe. When Safe Shake or Get home safe is on, it also reads your location in the background; Android shows a notification while this happens.
 
-Your location is only sent when you send an alert (button or shake) or while Get home safe is on. It goes by SMS to your chosen contacts. Nobody else receives it, including the developer.
+Your location is only sent when you send an alert (button, shake, Quick Settings tile, widget or shortcut), while Get home safe is on, when you miss a check-in, or once when your battery is nearly empty if you turned on the low battery message. It goes by SMS to your chosen contacts. Nobody else receives it, including the developer.
 
 The map link in the SMS points to Google Maps. When your contact opens it, Google processes that request under its own privacy policy.
+
+## Battery
+
+If you turn on the low battery message, MetJou reads your battery level every 15 minutes. The level is only used to decide whether to send that message and is not stored.
 
 ## SMS and phone calls
 
