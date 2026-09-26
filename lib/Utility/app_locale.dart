@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 import 'package:metjou/l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -53,4 +53,8 @@ Future<AppLocalizations> backgroundLocalizations() async {
       ? Locale(code)
       : resolveAppLocale(PlatformDispatcher.instance.locale);
   return lookupAppLocalizations(locale);
+}
+
+extension L10nContext on BuildContext {
+  AppLocalizations get l10n => AppLocalizations.of(this);
 }

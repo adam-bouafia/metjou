@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:metjou/Utility/app_locale.dart';
+import 'package:metjou/Utility/language_picker.dart';
 import 'package:metjou/Onboarding/views/onboarding_page.dart';
 
 class Letsbegin extends StatefulWidget {
@@ -13,53 +14,6 @@ class Letsbegin extends StatefulWidget {
 }
 
 class _LetsbeginState extends State<Letsbegin> {
-  final List locale =[
-    {'name':'Arabic','locale': Locale('ar','AR')},
-    {'name':'Français','locale': Locale('fr','FR')},
-    {'name':'English','locale': Locale('en','US')},
-    {'name':'Russian','locale': Locale('ru','RU')},
-    {'name':'Italien','locale': Locale('it','IT')},
-    {'name':'Deutsch','locale': Locale('de','DE')},
-  ];
-  updateLanguage(Locale locale){
-    Get.back();
-    Get.updateLocale(locale);
-  }
-
-  buildLanguageDialog(BuildContext context){
-    showDialog(context: context,
-        builder: (builder){
-          return AlertDialog(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(32.0))),
-            title: Text('choislang'.tr,
-                style: TextStyle(fontSize: 22,)),
-            backgroundColor: Color(0xfff5ebe2),
-            contentPadding: EdgeInsets.only(top: 16.0, bottom: 16.0,left: 16.0,right: 16.0),
-            content: Container(
-              width: double.maxFinite,
-              child: ListView.separated(
-                  shrinkWrap: true,
-                  itemBuilder: (context,index){
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: GestureDetector(child: Text(locale[index]['name']),
-                        onTap: (){
-                        updateLanguage(locale[index]['locale']);
-                      },),
-                    );
-                  }, separatorBuilder: (context,index){
-                return Divider(
-                  color: Color(0xff000000),
-                );
-              }, itemCount: locale.length
-              ),
-            ),
-          );
-        }
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final _introductionanimation =
@@ -92,7 +46,7 @@ class _LetsbeginState extends State<Letsbegin> {
               ),
               const SizedBox(height: 12),
               Text(
-                'onbletbegdesc'.tr,
+                context.l10n.onbIntro,
                 style: TextStyle(fontSize: 16, height: 1.4),
                 textAlign: TextAlign.center,
               ),
@@ -106,7 +60,7 @@ class _LetsbeginState extends State<Letsbegin> {
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
                   ),
                   onPressed: () => widget.animationController.animateTo(0.2),
-                  child: Text('onbletbegwelc'.tr, style: TextStyle(fontSize: 18)),
+                  child: Text(context.l10n.onbBegin, style: TextStyle(fontSize: 18)),
                 ),
               ),
               const SizedBox(height: 12),
@@ -119,9 +73,9 @@ class _LetsbeginState extends State<Letsbegin> {
                     padding: const EdgeInsets.symmetric(vertical: 14),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
                   ),
-                  onPressed: () => buildLanguageDialog(context),
+                  onPressed: () => showLanguagePicker(context),
                   icon: const Icon(Icons.language),
-                  label: Text('changelang'.tr, style: TextStyle(fontSize: 16)),
+                  label: Text(context.l10n.chooseLanguage, style: TextStyle(fontSize: 16)),
                 ),
               ),
             ],
