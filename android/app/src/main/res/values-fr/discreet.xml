@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Launcher name in discreet mode -->
+    <string name="discreet_label">Calculatrice</string>
+</resources>
