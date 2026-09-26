@@ -1,4 +1,4 @@
-import 'dart:async' ;
+import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
@@ -12,12 +12,12 @@ class MethodChannelAudioBackgroundRecord extends AudioBackgroundRecordPlatform {
 
   @override
   Future<bool?> startRecording() {
-    return methodChannel.invokeMethod("startRecording") ;
+    return methodChannel.invokeMethod("startRecording");
   }
 
   @override
   Future<bool?> stopRecording() {
-    return methodChannel.invokeMethod("stopRecording") ;
+    return methodChannel.invokeMethod("stopRecording");
   }
 
   @override
@@ -26,22 +26,32 @@ class MethodChannelAudioBackgroundRecord extends AudioBackgroundRecordPlatform {
   }
 
   @override
-  Future<void> startService(){
-     var result  = methodChannel.invokeMethod("startService");
+  Future<void> startService() {
+    var result = methodChannel.invokeMethod("startService");
     methodChannel.setMethodCallHandler((call) async {
-      if(call.method == "recordStoppedCallBack"){
-        if(onRecordStatusChangedCallback!=null){
-          onRecordStatusChangedCallback!(call.arguments["status"],call.arguments["error"]) ;
+      if (call.method == "recordStoppedCallBack") {
+        if (onRecordStatusChangedCallback != null) {
+          onRecordStatusChangedCallback!(
+            call.arguments["status"],
+            call.arguments["error"],
+          );
         }
       }
     });
-    return result ;
+    return result;
   }
 
   @override
-  Future<void> setConfiguration(String? savetoDirectory,int? maxDurationinMillis, Map<String,String>? texts) {
-    return methodChannel.invokeMethod("setConfiguration",
-        {"directory": savetoDirectory,"duration":maxDurationinMillis , "notificationText":texts});
+  Future<void> setConfiguration(
+    String? savetoDirectory,
+    int? maxDurationinMillis,
+    Map<String, String>? texts,
+  ) {
+    return methodChannel.invokeMethod("setConfiguration", {
+      "directory": savetoDirectory,
+      "duration": maxDurationinMillis,
+      "notificationText": texts,
+    });
   }
 
   @override
@@ -52,16 +62,16 @@ class MethodChannelAudioBackgroundRecord extends AudioBackgroundRecordPlatform {
 
   @override
   Future<bool?> isServiceRunning() {
-
-    return methodChannel.invokeMethod("isServiceRunning") ;
+    return methodChannel.invokeMethod("isServiceRunning");
   }
 
   @override
   Future<String?> getRecordingDirFromConfig() {
-     return methodChannel.invokeMethod("getRecordingDirectory");
+    return methodChannel.invokeMethod("getRecordingDirectory");
   }
+
   @override
   Future<int?> getMaxRecordDurationFromConfig() {
-     return methodChannel.invokeMethod("getMaxRecordDuration");
+    return methodChannel.invokeMethod("getMaxRecordDuration");
   }
 }

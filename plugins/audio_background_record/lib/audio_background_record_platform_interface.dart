@@ -1,4 +1,3 @@
-
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'audio_background_record_method_channel.dart';
@@ -25,18 +24,14 @@ abstract class AudioBackgroundRecordPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-   void Function(int status , String? errorMsg)? _onRecordStatusChangedCallback ;
-   set onRecordStatusChangedCallback (void Function(int status , String? errorMsg)? cb ){
-     _onRecordStatusChangedCallback = cb ;
-   }
-  void Function(int status , String? errorMsg)?  get  onRecordStatusChangedCallback => _onRecordStatusChangedCallback ;
-
+  /// Called with 1 (started), 2 (stopped) or 0 (error) and an error message.
+  void Function(int status, String? errorMsg)? onRecordStatusChangedCallback;
 
   Future<bool?> startRecording() {
     throw UnimplementedError('startRecording() has not been implemented.');
   }
 
-  Future<bool?>  stopRecording() {
+  Future<bool?> stopRecording() {
     throw UnimplementedError('stopRecording() has not been implemented.');
   }
 
@@ -44,11 +39,15 @@ abstract class AudioBackgroundRecordPlatform extends PlatformInterface {
     throw UnimplementedError('isRecording() has not been implemented.');
   }
 
-  Future<void> startService(){
+  Future<void> startService() {
     throw UnimplementedError('startService() has not been implemented.');
   }
 
-  Future<void> setConfiguration(String? savetoDirectory, int? maxDurationinMillis, Map<String,String>? texts) {
+  Future<void> setConfiguration(
+    String? savetoDirectory,
+    int? maxDurationinMillis,
+    Map<String, String>? texts,
+  ) {
     throw UnimplementedError('setConfiguration has not been implemented.');
   }
 
@@ -61,10 +60,14 @@ abstract class AudioBackgroundRecordPlatform extends PlatformInterface {
   }
 
   Future<String?> getRecordingDirFromConfig() {
-    throw UnimplementedError('getRecordingDirFromConfig() has not been implemented.');
-  }
-  Future<int?> getMaxRecordDurationFromConfig() {
-    throw UnimplementedError('getMaxRecordDuration() has not been implemented.');
+    throw UnimplementedError(
+      'getRecordingDirFromConfig() has not been implemented.',
+    );
   }
 
+  Future<int?> getMaxRecordDurationFromConfig() {
+    throw UnimplementedError(
+      'getMaxRecordDuration() has not been implemented.',
+    );
+  }
 }
