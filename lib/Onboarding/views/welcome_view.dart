@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:metjou/Utility/app_locale.dart';
 import 'package:metjou/Onboarding/views/onboarding_page.dart';
 
 class WelcomeView extends StatelessWidget {
@@ -13,8 +13,8 @@ class WelcomeView extends StatelessWidget {
       animationController: animationController,
       start: 0.6,
       image: 'assets/onboarding/welcome.webp',
-      title: 'onbwelcome'.tr,
-      text: 'onbletbegdesc'.tr,
+      title: context.l10n.onbWelcome,
+      text: context.l10n.onbIntro,
     );
   }
 }

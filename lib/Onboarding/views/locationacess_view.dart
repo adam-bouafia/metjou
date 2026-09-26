@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:metjou/Utility/app_locale.dart';
 import 'package:metjou/Onboarding/views/onboarding_page.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -22,8 +22,8 @@ class Locationaccess extends StatelessWidget {
       start: 0.0,
       enterFromBottom: true,
       image: 'assets/onboarding/Clip.webp',
-      text: 'onblocadesc'.tr,
-      buttonLabel: 'onblocauto'.tr,
+      text: context.l10n.onbLocationText,
+      buttonLabel: context.l10n.onbLocationButton,
       onPressed: _requestLocation,
     );
   }

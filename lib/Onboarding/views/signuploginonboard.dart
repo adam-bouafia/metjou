@@ -1,6 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:metjou/Utility/app_locale.dart';
 import 'package:metjou/Legal/terms_of_use.dart';
 
 class CenterNextButton extends StatelessWidget {
@@ -104,7 +104,7 @@ class CenterNextButton extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    'onbsignup'.tr,
+                                    context.l10n.onbGetStarted,
                                     style: TextStyle(color: Colors.white,
                                       fontSize: 18,
                                       fontWeight: FontWeight.w500,

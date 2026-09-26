@@ -2,7 +2,7 @@ import 'package:animations/animations.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:metjou/Legal/policy_dialog.dart';
-import 'package:get/get.dart';
+import 'package:metjou/Utility/app_locale.dart';
 
 class TermsOfUse extends StatelessWidget {
   const TermsOfUse({super.key,
@@ -15,12 +15,12 @@ class TermsOfUse extends StatelessWidget {
       child: RichText(
         textAlign: TextAlign.center,
         text: TextSpan(
-          text: "crecp".tr,
+          text: "${context.l10n.termsPrefix}\n",
           style: Theme.of(context).textTheme.bodyMedium,
           children: [
             TextSpan(
-              text: "\nTermes Conditions",
-              style: TextStyle(fontWeight: FontWeight.bold),
+              text: context.l10n.termsLink,
+              style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xffB271AA)),
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
                   showModal(
@@ -34,10 +34,10 @@ class TermsOfUse extends StatelessWidget {
                   );
                 },
             ),
-            TextSpan(text: " et "),
+            TextSpan(text: " ${context.l10n.termsAnd} "),
             TextSpan(
-              text: "Politique de confidentialité! ",
-              style: TextStyle(fontWeight: FontWeight.bold),
+              text: context.l10n.privacyLink,
+              style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xffB271AA)),
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
                   showDialog(

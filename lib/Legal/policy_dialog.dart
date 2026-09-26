@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
-import 'package:get/get.dart';
+import 'package:metjou/Utility/app_locale.dart';
 
 class PolicyDialog extends StatelessWidget {
   PolicyDialog({
@@ -49,7 +49,7 @@ class PolicyDialog extends StatelessWidget {
               height: 50,
               width: double.infinity,
               child: Text(
-                "ferm".tr,
+                context.l10n.close,
                 style: TextStyle(fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: Theme.of(context).textTheme.labelLarge?.color,

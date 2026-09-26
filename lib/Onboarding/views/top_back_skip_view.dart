@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:metjou/Utility/app_locale.dart';
 
 class TopBackSkipView extends StatelessWidget {
   final AnimationController animationController;
@@ -57,7 +57,7 @@ class TopBackSkipView extends StatelessWidget {
                   position: _skipAnimation,
                   child: IconButton(
                     onPressed: onSkipClick,
-                    icon: Text('onbpass'.tr,style: TextStyle(fontSize: 12)),
+                    icon: Text(context.l10n.onbSkip,style: TextStyle(fontSize: 12)),
                   ),
                 ),
               ],

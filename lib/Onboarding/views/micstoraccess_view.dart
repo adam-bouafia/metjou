@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:metjou/Utility/app_locale.dart';
 import 'package:metjou/Onboarding/views/onboarding_page.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -14,8 +14,8 @@ class ContactAccess extends StatelessWidget {
       animationController: animationController,
       start: 0.2,
       image: 'assets/onboarding/care_image.webp',
-      text: 'onbmicdesc'.tr,
-      buttonLabel: 'onbmicautor'.tr,
+      text: context.l10n.onbMicText,
+      buttonLabel: context.l10n.onbMicButton,
       onPressed: () => [Permission.microphone, Permission.notification].request(),
     );
   }
