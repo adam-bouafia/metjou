@@ -100,13 +100,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get policeStations => 'Police';
 
   @override
-  String get hospitals => 'Hôpitaux';
+  String get hospitals => 'Hôpital';
 
   @override
-  String get pharmacies => 'Pharmacies';
+  String get pharmacies => 'Pharmacie';
 
   @override
-  String get busStations => 'Transports publics';
+  String get busStations => 'Transports';
 
   @override
   String get mapsQueryPolice => 'commissariat de police';

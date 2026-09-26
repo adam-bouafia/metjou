@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:metjou/core/localization/app_locale.dart';
 import 'package:metjou/features/emergency/presentation/emergency.dart';
 import 'package:metjou/features/resources/presentation/widgets/safe_carousel.dart';
+import 'package:metjou/features/safe_places/presentation/live_safe.dart';
 import 'package:metjou/l10n/app_localizations.dart';
 
 Widget _app(Widget child, {double textScale = 1.0, String lang = 'nl'}) =>
@@ -57,4 +58,29 @@ void main() {
     expect(card.width, greaterThan(250));
     expect(card.height, greaterThan(100));
   });
+
+  for (final lang in ['nl', 'en', 'fr', 'es', 'ar']) {
+    testWidgets('safe place labels are no wider than their tile ($lang)', (
+      tester,
+    ) async {
+      tester.view.physicalSize = const Size(720, 1560);
+      tester.view.devicePixelRatio = 2.0;
+      addTearDown(tester.view.reset);
+      await tester.pumpWidget(
+        _app(const LiveSafe(), textScale: 1.3, lang: lang),
+      );
+      expect(tester.takeException(), isNull);
+      final labels = find.descendant(
+        of: find.byType(LiveSafe),
+        matching: find.byType(Text),
+      );
+      expect(labels, findsNWidgets(4));
+      for (final label in labels.evaluate()) {
+        expect(
+          tester.getSize(find.byWidget(label.widget)).width,
+          lessThanOrEqualTo(72),
+        );
+      }
+    });
+  }
 }

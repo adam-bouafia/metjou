@@ -281,19 +281,19 @@ abstract class AppLocalizations {
   /// No description provided for @hospitals.
   ///
   /// In en, this message translates to:
-  /// **'Hospitals'**
+  /// **'Hospital'**
   String get hospitals;
 
   /// No description provided for @pharmacies.
   ///
   /// In en, this message translates to:
-  /// **'Pharmacies'**
+  /// **'Pharmacy'**
   String get pharmacies;
 
   /// No description provided for @busStations.
   ///
   /// In en, this message translates to:
-  /// **'Public transport'**
+  /// **'Transit'**
   String get busStations;
 
   /// No description provided for @mapsQueryPolice.

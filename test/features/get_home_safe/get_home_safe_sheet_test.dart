@@ -7,11 +7,11 @@ import 'package:metjou/l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Widget _sheet({GetHomeSafeState? current}) => MaterialApp(
-      locale: const Locale('en'),
-      supportedLocales: supportedAppLocales,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      home: Scaffold(body: GetHomeSafeSheet(current: current)),
-    );
+  locale: const Locale('en'),
+  supportedLocales: supportedAppLocales,
+  localizationsDelegates: AppLocalizations.localizationsDelegates,
+  home: Scaffold(body: GetHomeSafeSheet(current: current)),
+);
 
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));
@@ -36,9 +36,14 @@ void main() {
   });
 
   testWidgets('a running schedule offers Stop', (tester) async {
-    await tester.pumpWidget(_sheet(
-      current: const GetHomeSafeState('0612345678', RepeatEvery(Duration(minutes: 7))),
-    ));
+    await tester.pumpWidget(
+      _sheet(
+        current: const GetHomeSafeState(
+          '0612345678',
+          RepeatEvery(Duration(minutes: 7)),
+        ),
+      ),
+    );
     await tester.pumpAndSettle();
     expect(find.text('Stop'), findsOneWidget);
     expect(find.text('Every 7 min'), findsOneWidget);

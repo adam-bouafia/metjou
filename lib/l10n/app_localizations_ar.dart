@@ -99,13 +99,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get policeStations => 'الشرطة';
 
   @override
-  String get hospitals => 'المستشفيات';
+  String get hospitals => 'مستشفى';
 
   @override
-  String get pharmacies => 'الصيدليات';
+  String get pharmacies => 'صيدلية';
 
   @override
-  String get busStations => 'النقل العام';
+  String get busStations => 'المواصلات';
 
   @override
   String get mapsQueryPolice => 'مركز شرطة';

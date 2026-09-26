@@ -3,6 +3,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:metjou/core/localization/app_locale.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+/// Width of each place tile; its label is kept to the same width.
+const _tileSize = 72.0;
+
 /// Shortcuts that search Google Maps for safe places near the user.
 class LiveSafe extends StatelessWidget {
   const LiveSafe({super.key});
@@ -28,7 +31,7 @@ class LiveSafe extends StatelessWidget {
       ("assets/bus-stop.webp", l10n.busStations, l10n.mapsQueryTransport),
     ];
     return SizedBox(
-      height: 96,
+      height: _tileSize + 48,
       child: ListView(
         scrollDirection: Axis.horizontal,
         physics: const BouncingScrollPhysics(),
@@ -36,26 +39,36 @@ class LiveSafe extends StatelessWidget {
         children: [
           for (final (icon, label, query) in spots)
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Column(
-                children: [
-                  Card(
-                    elevation: 3,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(12),
-                      onTap: () => _openMap(context, query),
-                      child: SizedBox(
-                        height: 54,
-                        width: 54,
-                        child: Center(child: Image.asset(icon, height: 32)),
+              padding: const EdgeInsets.symmetric(horizontal: 6),
+              child: SizedBox(
+                width: _tileSize,
+                child: Column(
+                  children: [
+                    Card(
+                      margin: EdgeInsets.zero,
+                      elevation: 2,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(16),
+                        onTap: () => _openMap(context, query),
+                        child: SizedBox.square(
+                          dimension: _tileSize,
+                          child: Center(child: Image.asset(icon, height: 36)),
+                        ),
                       ),
                     ),
-                  ),
-                  Text(label, style: const TextStyle(fontSize: 12)),
-                ],
+                    const SizedBox(height: 6),
+                    Text(
+                      label,
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(fontSize: 12, height: 1.2),
+                    ),
+                  ],
+                ),
               ),
             ),
         ],

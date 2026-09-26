@@ -99,13 +99,13 @@ class AppLocalizationsNl extends AppLocalizations {
   String get policeStations => 'Politie';
 
   @override
-  String get hospitals => 'Ziekenhuizen';
+  String get hospitals => 'Ziekenhuis';
 
   @override
-  String get pharmacies => 'Apotheken';
+  String get pharmacies => 'Apotheek';
 
   @override
-  String get busStations => 'Openbaar vervoer';
+  String get busStations => 'OV';
 
   @override
   String get mapsQueryPolice => 'politiebureau';
