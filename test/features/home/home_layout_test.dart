@@ -102,7 +102,7 @@ void main() {
         ),
         matching: find.byType(RichText),
       );
-      expect(labels, findsNWidgets(3));
+      expect(labels, findsNWidgets(4));
       for (final element in labels.evaluate()) {
         final paragraph = element.renderObject! as RenderParagraph;
         expect(
