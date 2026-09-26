@@ -110,29 +110,39 @@ class EmergencyCard extends StatelessWidget {
                       child: Image.asset(entry.icon, height: 28),
                     ),
                     const Spacer(),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 14,
-                        vertical: 6,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(300),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(Icons.call, size: 16, color: entry.colors.last),
-                          const SizedBox(width: 6),
-                          Text(
-                            entry.number,
-                            style: TextStyle(
-                              color: entry.colors.last,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
+                    Flexible(
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        alignment: AlignmentDirectional.centerEnd,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 14,
+                            vertical: 6,
                           ),
-                        ],
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(300),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                Icons.call,
+                                size: 16,
+                                color: entry.colors.last,
+                              ),
+                              const SizedBox(width: 6),
+                              Text(
+                                entry.number,
+                                style: TextStyle(
+                                  color: entry.colors.last,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ),
                   ],
