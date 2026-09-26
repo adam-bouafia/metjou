@@ -45,8 +45,6 @@ class _HomeState extends State<Home> {
         Expanded(
           child: ListView(
             children: [
-              _header(l10n.emergency),
-              Emergency(),
               _header(
                 l10n.resourcesTitle,
                 trailing: TextButton(
@@ -58,6 +56,8 @@ class _HomeState extends State<Home> {
                 ),
               ),
               SafeCarousel(),
+              _header(l10n.emergency),
+              Emergency(),
               _header(l10n.safePlaces),
               LiveSafe(),
               SafeHome(),
