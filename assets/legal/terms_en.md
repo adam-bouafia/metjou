@@ -1,0 +1,54 @@
+# Terms of Use
+
+Last updated: 26 September 2026
+
+These terms apply to the MetJou app, made by Adam Bouafia in the Netherlands. By using MetJou you accept these terms.
+
+## MetJou is not an emergency service
+
+**In danger, always call 112.** MetJou helps you alert people you trust, but it does not replace the emergency services and nobody at MetJou monitors your alerts.
+
+## Alerts can fail
+
+An alert depends on things MetJou cannot control, for example:
+
+- mobile coverage, SMS credit and your provider's network;
+- the permissions you granted (location, SMS, notifications);
+- battery saving or other settings that stop apps in the background;
+- your phone being switched off, lost or broken;
+- the accuracy of your phone's location.
+
+Test your alerts with your contacts, keep the app's permissions switched on, and exclude MetJou from battery optimisation for the best result.
+
+## Your responsibilities
+
+- Only add people as SOS contacts who agree to receive your alerts.
+- Do not send false alerts on purpose or use MetJou to harass anyone.
+- If you turn on audio recording, make sure you use recordings lawfully. Recording laws differ between countries.
+- Keep your PIN to yourself.
+- SMS messages and calls are charged by your mobile provider at your normal rates.
+
+## Information in the app
+
+The help and information pages and the helpline numbers are provided as general guidance and were checked against the organisations' own websites. They can change; the organisation's website is always leading.
+
+## Liability
+
+MetJou is provided free of charge and "as is". To the extent permitted by Dutch law, the developer is not liable for damage caused by an alert that was not sent, sent late or sent with an inaccurate location, or by the use of information in the app. Nothing in these terms limits liability that cannot be limited by law.
+
+## Privacy
+
+How MetJou handles data is described in the Privacy Policy.
+
+## Changes
+
+These terms can change. The new version is included in an app update with a new date at the top.
+
+## Applicable law
+
+Dutch law applies to these terms. Disputes are submitted to the competent court in the Netherlands, unless the law gives you the right to go to a court elsewhere.
+
+## Contact
+
+Adam Bouafia, the Netherlands
+E-mail: [CONTACT_EMAIL]
