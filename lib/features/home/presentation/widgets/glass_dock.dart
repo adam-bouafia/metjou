@@ -23,6 +23,7 @@ class GlassDock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    final dark = scheme.brightness == Brightness.dark;
     return SafeArea(
       top: false,
       child: Padding(
@@ -35,10 +36,15 @@ class GlassDock extends StatelessWidget {
               height: 80,
               padding: const EdgeInsets.symmetric(horizontal: 12),
               decoration: BoxDecoration(
-                color: scheme.surface.withValues(alpha: 0.6),
+                color: dark
+                    ? scheme.surface.withValues(alpha: 0.6)
+                    : Colors.white.withValues(alpha: 0.38),
                 borderRadius: BorderRadius.circular(36),
                 border: Border.all(
-                  color: scheme.outlineVariant.withValues(alpha: 0.5),
+                  color: dark
+                      ? scheme.outlineVariant.withValues(alpha: 0.5)
+                      : Colors.white.withValues(alpha: 0.75),
+                  width: dark ? 1 : 1.2,
                 ),
               ),
               child: Row(
