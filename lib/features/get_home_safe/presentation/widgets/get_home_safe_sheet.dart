@@ -176,7 +176,7 @@ class _GetHomeSafeSheetState extends State<GetHomeSafeSheet> {
                 subtitle: Text(l10n.addContactHint),
                 trailing: const Icon(Icons.person_add_alt),
                 onTap: () async {
-                  await pickSosContact(context);
+                  await addSosContactFlow(context);
                   _loadContacts();
                 },
               )

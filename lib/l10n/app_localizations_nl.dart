@@ -376,6 +376,24 @@ class AppLocalizationsNl extends AppLocalizations {
   }
 
   @override
+  String get addContact => 'Contact toevoegen';
+
+  @override
+  String get addFromContacts => 'Kies uit contacten';
+
+  @override
+  String get addByNumber => 'Nummer invoeren';
+
+  @override
+  String get contactName => 'Naam';
+
+  @override
+  String get contactPhone => 'Telefoonnummer';
+
+  @override
+  String get invalidPhone => 'Voer een geldig telefoonnummer in';
+
+  @override
   String get enterPin => 'Voer je pincode in';
 
   @override

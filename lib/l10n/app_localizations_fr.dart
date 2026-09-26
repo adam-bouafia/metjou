@@ -379,6 +379,24 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
+  String get addContact => 'Ajouter un contact';
+
+  @override
+  String get addFromContacts => 'Choisir dans les contacts';
+
+  @override
+  String get addByNumber => 'Saisir un numéro';
+
+  @override
+  String get contactName => 'Nom';
+
+  @override
+  String get contactPhone => 'Numéro de téléphone';
+
+  @override
+  String get invalidPhone => 'Saisissez un numéro valide';
+
+  @override
   String get enterPin => 'Saisissez votre code PIN';
 
   @override

@@ -167,6 +167,12 @@
     }
   },
   "contactCount": "{count} of {max}",
+  "addContact": "Add contact",
+  "addFromContacts": "Choose from contacts",
+  "addByNumber": "Type a number",
+  "contactName": "Name",
+  "contactPhone": "Phone number",
+  "invalidPhone": "Enter a valid phone number",
   "@contactCount": {
     "placeholders": {
       "count": {

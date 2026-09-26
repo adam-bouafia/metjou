@@ -374,6 +374,24 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
+  String get addContact => 'إضافة جهة اتصال';
+
+  @override
+  String get addFromContacts => 'اختيار من جهات الاتصال';
+
+  @override
+  String get addByNumber => 'كتابة رقم';
+
+  @override
+  String get contactName => 'الاسم';
+
+  @override
+  String get contactPhone => 'رقم الهاتف';
+
+  @override
+  String get invalidPhone => 'أدخل رقم هاتف صالحًا';
+
+  @override
   String get enterPin => 'أدخل رمز PIN';
 
   @override

@@ -770,6 +770,42 @@ abstract class AppLocalizations {
   /// **'{count} of {max}'**
   String contactCount(int count, int max);
 
+  /// No description provided for @addContact.
+  ///
+  /// In en, this message translates to:
+  /// **'Add contact'**
+  String get addContact;
+
+  /// No description provided for @addFromContacts.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose from contacts'**
+  String get addFromContacts;
+
+  /// No description provided for @addByNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Type a number'**
+  String get addByNumber;
+
+  /// No description provided for @contactName.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get contactName;
+
+  /// No description provided for @contactPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number'**
+  String get contactPhone;
+
+  /// No description provided for @invalidPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid phone number'**
+  String get invalidPhone;
+
   /// No description provided for @enterPin.
   ///
   /// In en, this message translates to:

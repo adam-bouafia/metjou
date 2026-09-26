@@ -29,6 +29,11 @@ String normalizePhoneNumber(String raw) {
   return phone;
 }
 
+/// A typed number is valid when, after [normalizePhoneNumber], it has
+/// 6 to 15 digits, optionally after a leading +.
+bool isValidPhoneNumber(String raw) =>
+    RegExp(r"^\+?\d{6,15}$").hasMatch(normalizePhoneNumber(raw));
+
 Future<List<SosContact>> loadSosContacts() async {
   final prefs = await SharedPreferences.getInstance();
   await prefs.reload();

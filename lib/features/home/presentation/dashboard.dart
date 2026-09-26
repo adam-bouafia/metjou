@@ -201,7 +201,7 @@ class _DashboardState extends State<Dashboard> with WidgetsBindingObserver {
       floatingActionButton: currentPage == 1
           ? FloatingActionButton(
               onPressed: () async {
-                if (await pickSosContact(context)) {
+                if (await addSosContactFlow(context)) {
                   setState(() {});
                 }
               },

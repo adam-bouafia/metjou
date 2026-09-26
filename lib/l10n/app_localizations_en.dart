@@ -375,6 +375,24 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get addContact => 'Add contact';
+
+  @override
+  String get addFromContacts => 'Choose from contacts';
+
+  @override
+  String get addByNumber => 'Type a number';
+
+  @override
+  String get contactName => 'Name';
+
+  @override
+  String get contactPhone => 'Phone number';
+
+  @override
+  String get invalidPhone => 'Enter a valid phone number';
+
+  @override
   String get enterPin => 'Enter your PIN';
 
   @override
