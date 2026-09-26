@@ -1,10 +1,10 @@
 import 'package:audio_background_record/audio_background_record.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:metjou/Dashboard/Dashboard.dart';
-import 'package:metjou/Onboarding/onboarding_screen.dart';
-import 'package:metjou/Utility/app_locale.dart';
-import 'package:metjou/Utility/background_services.dart';
+import 'package:metjou/dashboard/dashboard.dart';
+import 'package:metjou/onboarding/onboarding_screen.dart';
+import 'package:metjou/utility/app_locale.dart';
+import 'package:metjou/utility/background_services.dart';
 import 'package:metjou/l10n/app_localizations.dart';
 import 'package:shake/shake.dart';
 import 'package:shared_preferences/shared_preferences.dart';
