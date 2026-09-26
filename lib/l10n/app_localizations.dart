@@ -230,6 +230,18 @@ abstract class AppLocalizations {
   /// **'Talk to someone, free and 24/7'**
   String get suicidePreventionDesc;
 
+  /// No description provided for @switchboardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Switchboard (LGBTQ+)'**
+  String get switchboardTitle;
+
+  /// No description provided for @switchboardDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Talk anonymously about LGBTQ+ questions, free'**
+  String get switchboardDesc;
+
   /// No description provided for @safePlaces.
   ///
   /// In en, this message translates to:
@@ -367,6 +379,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Call 112 only when life is in danger or a crime is happening now. For everything else, call the police on 0900-8844.'**
   String get res112Desc;
+
+  /// No description provided for @resSwitchboardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Switchboard'**
+  String get resSwitchboardTitle;
+
+  /// No description provided for @resSwitchboardDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'The LGBTQ+ helpline of COC Nederland. Talk anonymously and confidentially about questions, doubts or your story, by phone or chat, free of charge.'**
+  String get resSwitchboardDesc;
 
   /// No description provided for @callNumber.
   ///

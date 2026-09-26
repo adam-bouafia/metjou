@@ -58,6 +58,14 @@ List<SafetyResource> safetyResources(BuildContext context) {
       url: "https://www.113.nl/",
     ),
     SafetyResource(
+      icon: Icons.diversity_3,
+      colors: const [Color(0xffF0A35E), Color(0xffD9667A)],
+      title: l10n.resSwitchboardTitle,
+      description: l10n.resSwitchboardDesc,
+      phone: "020-6236565",
+      url: "https://switchboard.nl/",
+    ),
+    SafetyResource(
       icon: Icons.local_police_outlined,
       colors: const [Color(0xff738AE6), Color(0xff5C5EDD)],
       title: l10n.resAangifteTitle,

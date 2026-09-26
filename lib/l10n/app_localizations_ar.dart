@@ -74,6 +74,13 @@ class AppLocalizationsAr extends AppLocalizations {
       'تحدث إلى شخص ما، مجانًا وعلى مدار الساعة';
 
   @override
+  String get switchboardTitle => 'Switchboard (مجتمع الميم)';
+
+  @override
+  String get switchboardDesc =>
+      'تحدث دون الكشف عن هويتك عن أسئلة مجتمع الميم، مجانًا';
+
+  @override
   String get safePlaces => 'أماكن آمنة قريبة';
 
   @override
@@ -147,6 +154,13 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get res112Desc =>
       'اتصل بـ 112 فقط عند وجود خطر على الحياة أو جريمة تحدث الآن. لغير ذلك، اتصل بالشرطة على 0900-8844.';
+
+  @override
+  String get resSwitchboardTitle => 'Switchboard';
+
+  @override
+  String get resSwitchboardDesc =>
+      'خط المساعدة لمجتمع الميم التابع لمنظمة COC Nederland. تحدث بسرية ودون الكشف عن هويتك عن أسئلتك أو شكوكك أو قصتك، عبر الهاتف أو الدردشة، مجانًا.';
 
   @override
   String callNumber(String number) {

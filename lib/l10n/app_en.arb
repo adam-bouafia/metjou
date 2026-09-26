@@ -21,6 +21,8 @@
   "veiligThuisDesc": "Domestic violence or child abuse, free and 24/7",
   "suicidePreventionTitle": "113 Suicide Prevention",
   "suicidePreventionDesc": "Talk to someone, free and 24/7",
+  "switchboardTitle": "Switchboard (LGBTQ+)",
+  "switchboardDesc": "Talk anonymously about LGBTQ+ questions, free",
   "safePlaces": "Nearby safe places",
   "policeStations": "Police",
   "hospitals": "Hospitals",
@@ -44,6 +46,8 @@
   "resAangifteDesc": "How to file a report online, by phone or at a police station, and what happens next.",
   "res112Title": "When to call 112",
   "res112Desc": "Call 112 only when life is in danger or a crime is happening now. For everything else, call the police on 0900-8844.",
+  "resSwitchboardTitle": "Switchboard",
+  "resSwitchboardDesc": "The LGBTQ+ helpline of COC Nederland. Talk anonymously and confidentially about questions, doubts or your story, by phone or chat, free of charge.",
   "callNumber": "Call {number}",
   "@callNumber": {
     "placeholders": {

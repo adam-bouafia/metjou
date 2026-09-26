@@ -13,14 +13,18 @@ class EmergencyNumber {
   );
 
   final String number;
-  final String icon;
+
+  /// An asset path (String) or a Material icon (IconData).
+  final Object icon;
   final List<Color> colors;
   final String title;
   final String description;
 }
 
 /// Dutch emergency and helpline numbers, checked against the official
-/// sites (rijksoverheid.nl, politie.nl, veiligthuis.nl, 113.nl).
+/// sites (rijksoverheid.nl, 113.nl, politie.nl, veiligthuis.nl,
+/// switchboard.nl). Suicide prevention comes right after 112 so it is
+/// visible without scrolling.
 List<EmergencyNumber> emergencyNumbers(BuildContext context) {
   final l10n = context.l10n;
   return [
@@ -30,6 +34,13 @@ List<EmergencyNumber> emergencyNumbers(BuildContext context) {
       const [Color(0xffFD8080), Color(0xffE53935)],
       l10n.emergency112Title,
       l10n.emergency112Desc,
+    ),
+    EmergencyNumber(
+      "113",
+      "assets/card.webp",
+      const [Color(0xff5BC0A6), Color(0xff2E9E83)],
+      l10n.suicidePreventionTitle,
+      l10n.suicidePreventionDesc,
     ),
     EmergencyNumber(
       "0900-8844",
@@ -46,11 +57,11 @@ List<EmergencyNumber> emergencyNumbers(BuildContext context) {
       l10n.veiligThuisDesc,
     ),
     EmergencyNumber(
-      "113",
-      "assets/card.webp",
-      const [Color(0xff5BC0A6), Color(0xff2E9E83)],
-      l10n.suicidePreventionTitle,
-      l10n.suicidePreventionDesc,
+      "020-6236565",
+      Icons.diversity_3,
+      const [Color(0xffF0A35E), Color(0xffD9667A)],
+      l10n.switchboardTitle,
+      l10n.switchboardDesc,
     ),
   ];
 }
@@ -107,7 +118,15 @@ class EmergencyCard extends StatelessWidget {
                     CircleAvatar(
                       backgroundColor: Colors.white.withValues(alpha: 0.5),
                       radius: 22,
-                      child: Image.asset(entry.icon, height: 28),
+                      child: switch (entry.icon) {
+                        final IconData icon => Icon(
+                          icon,
+                          color: Colors.white,
+                          size: 26,
+                        ),
+                        final String asset => Image.asset(asset, height: 28),
+                        _ => null,
+                      },
                     ),
                     const Spacer(),
                     Flexible(

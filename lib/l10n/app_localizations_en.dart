@@ -75,6 +75,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get suicidePreventionDesc => 'Talk to someone, free and 24/7';
 
   @override
+  String get switchboardTitle => 'Switchboard (LGBTQ+)';
+
+  @override
+  String get switchboardDesc => 'Talk anonymously about LGBTQ+ questions, free';
+
+  @override
   String get safePlaces => 'Nearby safe places';
 
   @override
@@ -149,6 +155,13 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get res112Desc =>
       'Call 112 only when life is in danger or a crime is happening now. For everything else, call the police on 0900-8844.';
+
+  @override
+  String get resSwitchboardTitle => 'Switchboard';
+
+  @override
+  String get resSwitchboardDesc =>
+      'The LGBTQ+ helpline of COC Nederland. Talk anonymously and confidentially about questions, doubts or your story, by phone or chat, free of charge.';
 
   @override
   String callNumber(String number) {
