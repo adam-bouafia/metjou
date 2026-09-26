@@ -31,7 +31,7 @@ List<SafetyResource> safetyResources(BuildContext context) {
   return [
     SafetyResource(
       icon: Icons.home_outlined,
-      colors: const [AppColors.primaryLight, AppColors.primary],
+      colors: const [Latte.pink, Latte.mauve],
       title: l10n.resVeiligThuisTitle,
       description: l10n.resVeiligThuisDesc,
       phone: "0800-2000",
@@ -40,7 +40,7 @@ List<SafetyResource> safetyResources(BuildContext context) {
     ),
     SafetyResource(
       icon: Icons.health_and_safety_outlined,
-      colors: const [Color(0xffF4A38C), Color(0xffE0705A)],
+      colors: const [Latte.peach, Latte.maroon],
       title: l10n.resCsgTitle,
       description: l10n.resCsgDesc,
       phone: "0800-0188",
@@ -49,7 +49,7 @@ List<SafetyResource> safetyResources(BuildContext context) {
     ),
     SafetyResource(
       icon: Icons.volunteer_activism_outlined,
-      colors: const [Color(0xff7FB8E6), Color(0xff4A8FCC)],
+      colors: const [Latte.lavender, Latte.blue],
       title: l10n.resSlachtofferhulpTitle,
       description: l10n.resSlachtofferhulpDesc,
       phone: "0900-0101",
@@ -58,7 +58,7 @@ List<SafetyResource> safetyResources(BuildContext context) {
     ),
     SafetyResource(
       icon: Icons.favorite_border,
-      colors: const [Color(0xff5BC0A6), Color(0xff2E9E83)],
+      colors: const [Latte.green, Latte.teal],
       title: l10n.res113Title,
       description: l10n.res113Desc,
       phone: "113",
@@ -67,7 +67,7 @@ List<SafetyResource> safetyResources(BuildContext context) {
     ),
     SafetyResource(
       icon: Icons.diversity_3,
-      colors: const [Color(0xffF0A35E), Color(0xffD9667A)],
+      colors: const [Latte.peach, Latte.pink],
       title: l10n.resSwitchboardTitle,
       description: l10n.resSwitchboardDesc,
       phone: "020-6236565",
@@ -76,7 +76,7 @@ List<SafetyResource> safetyResources(BuildContext context) {
     ),
     SafetyResource(
       icon: Icons.local_police_outlined,
-      colors: const [Color(0xff738AE6), Color(0xff5C5EDD)],
+      colors: const [Latte.lavender, Latte.blue],
       title: l10n.resAangifteTitle,
       description: l10n.resAangifteDesc,
       phone: "0900-8844",
@@ -85,7 +85,7 @@ List<SafetyResource> safetyResources(BuildContext context) {
     ),
     SafetyResource(
       icon: Icons.emergency_outlined,
-      colors: const [Color(0xffFD8080), Color(0xffE53935)],
+      colors: const [Latte.maroon, Latte.red],
       title: l10n.res112Title,
       description: l10n.res112Desc,
       url: "https://www.rijksoverheid.nl/onderwerpen/alarmnummer-112",
