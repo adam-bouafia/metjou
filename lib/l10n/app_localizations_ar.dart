@@ -325,6 +325,18 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
+  String get siren => 'صفارة إنذار';
+
+  @override
+  String get sirenSound => 'الصوت';
+
+  @override
+  String get sirenFlash => 'المصباح';
+
+  @override
+  String get sirenStop => 'إيقاف';
+
+  @override
   String get smsCheckInMissed =>
       'لم أؤكد سلامتي في الوقت المحدد في MetJou. قد أحتاج إلى مساعدة. موقعي:';
 

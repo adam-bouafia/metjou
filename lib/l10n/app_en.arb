@@ -132,6 +132,10 @@
   "fakeCallEnd": "End",
   "fakeCallStart": "Start",
   "fakeCallFrom": "Incoming call: {name}",
+  "siren": "Siren",
+  "sirenSound": "Sound",
+  "sirenFlash": "Flashlight",
+  "sirenStop": "STOP",
   "@fakeCallFrom": {
     "placeholders": {
       "name": {

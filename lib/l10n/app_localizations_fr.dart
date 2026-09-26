@@ -329,6 +329,18 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
+  String get siren => 'Sirène';
+
+  @override
+  String get sirenSound => 'Son';
+
+  @override
+  String get sirenFlash => 'Lampe torche';
+
+  @override
+  String get sirenStop => 'STOP';
+
+  @override
   String get smsCheckInMissed =>
       'Je n\'ai pas confirmé à temps dans MetJou. J\'ai peut-être besoin d\'aide. Ma position :';
 

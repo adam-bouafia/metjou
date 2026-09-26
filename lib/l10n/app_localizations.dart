@@ -686,6 +686,30 @@ abstract class AppLocalizations {
   /// **'Incoming call: {name}'**
   String fakeCallFrom(String name);
 
+  /// No description provided for @siren.
+  ///
+  /// In en, this message translates to:
+  /// **'Siren'**
+  String get siren;
+
+  /// No description provided for @sirenSound.
+  ///
+  /// In en, this message translates to:
+  /// **'Sound'**
+  String get sirenSound;
+
+  /// No description provided for @sirenFlash.
+  ///
+  /// In en, this message translates to:
+  /// **'Flashlight'**
+  String get sirenFlash;
+
+  /// No description provided for @sirenStop.
+  ///
+  /// In en, this message translates to:
+  /// **'STOP'**
+  String get sirenStop;
+
   /// No description provided for @smsCheckInMissed.
   ///
   /// In en, this message translates to:

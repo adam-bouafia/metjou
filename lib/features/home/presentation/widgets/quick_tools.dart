@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:metjou/core/localization/app_locale.dart';
 import 'package:metjou/core/theme/app_theme.dart';
 import 'package:metjou/features/fake_call/presentation/fake_call_sheet.dart';
+import 'package:metjou/features/siren/presentation/siren_screen.dart';
 
 /// Row of one-tap tools on the home screen.
 class QuickTools extends StatelessWidget {
@@ -16,6 +17,15 @@ class QuickTools extends StatelessWidget {
         l10n.fakeCall,
         const [Latte.green, Latte.teal],
         () => showFakeCallSheet(context),
+      ),
+      (
+        Icons.campaign_rounded,
+        l10n.siren,
+        const [Latte.maroon, Latte.red],
+        () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => const SirenScreen()),
+        ),
       ),
     ];
     return Padding(

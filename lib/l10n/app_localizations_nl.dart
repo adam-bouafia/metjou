@@ -327,6 +327,18 @@ class AppLocalizationsNl extends AppLocalizations {
   }
 
   @override
+  String get siren => 'Sirene';
+
+  @override
+  String get sirenSound => 'Geluid';
+
+  @override
+  String get sirenFlash => 'Zaklamp';
+
+  @override
+  String get sirenStop => 'STOP';
+
+  @override
   String get smsCheckInMissed =>
       'Ik heb niet op tijd ingecheckt in MetJou. Misschien heb ik hulp nodig. Mijn locatie:';
 
