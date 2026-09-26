@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:metjou/core/localization/app_locale.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -21,6 +22,7 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   bool alerted = false;
+
   late int currentPage = widget.pageIndex;
   SharedPreferences? prefs;
 
@@ -176,7 +178,9 @@ class _DashboardState extends State<Dashboard> {
       floatingActionButton: currentPage == 1
           ? FloatingActionButton(
               onPressed: () async {
-                if (await pickSosContact(context)) setState(() {});
+                if (await pickSosContact(context)) {
+                  setState(() {});
+                }
               },
               child: const Icon(Icons.person_add_alt_1),
             )
@@ -190,7 +194,19 @@ class _DashboardState extends State<Dashboard> {
       ),
       body: SafeArea(
         bottom: false,
-        child: currentPage == 0 ? Home() : MyContactsScreen(),
+        child: PageTransitionSwitcher(
+          duration: const Duration(milliseconds: 350),
+          transitionBuilder: (child, primary, secondary) =>
+              FadeThroughTransition(
+                animation: primary,
+                secondaryAnimation: secondary,
+                fillColor: Colors.transparent,
+                child: child,
+              ),
+          child: currentPage == 0
+              ? const Home(key: ValueKey('home'))
+              : MyContactsScreen(key: const ValueKey('contacts')),
+        ),
       ),
     );
   }
