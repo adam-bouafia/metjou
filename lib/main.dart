@@ -8,6 +8,7 @@ import 'package:metjou/core/theme/app_theme.dart';
 import 'package:metjou/core/services/background_services.dart';
 import 'package:metjou/core/services/discreet_mode.dart';
 import 'package:metjou/features/check_in/data/check_in_service.dart';
+import 'package:metjou/features/fake_call/data/fake_call_service.dart';
 import 'package:metjou/features/get_home_safe/data/get_home_safe_service.dart';
 import 'package:shake/shake.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -52,6 +53,9 @@ Future<void> main() async {
       }
       if (response.actionId == BackgroundServices.checkInAction) {
         CheckInService.checkIn();
+      }
+      if (response.payload == BackgroundServices.fakeCallPayload) {
+        FakeCallService.ring();
       }
     },
   );

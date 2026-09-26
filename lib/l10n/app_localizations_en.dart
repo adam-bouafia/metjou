@@ -285,6 +285,47 @@ class AppLocalizationsEn extends AppLocalizations {
   String get checkInDone => 'Checked in. Glad you\'re safe.';
 
   @override
+  String get quickTools => 'Quick help';
+
+  @override
+  String get fakeCall => 'Fake call';
+
+  @override
+  String get fakeCallSubtitle => 'A realistic incoming call, to get away';
+
+  @override
+  String get fakeCallCaller => 'Caller name';
+
+  @override
+  String get fakeCallDefaultName => 'Mom';
+
+  @override
+  String get fakeCallMobile => 'Mobile';
+
+  @override
+  String get fakeCallWhen => 'Ring in';
+
+  @override
+  String get fakeCallNow => 'Now';
+
+  @override
+  String get fakeCallDecline => 'Decline';
+
+  @override
+  String get fakeCallAccept => 'Accept';
+
+  @override
+  String get fakeCallEnd => 'End';
+
+  @override
+  String get fakeCallStart => 'Start';
+
+  @override
+  String fakeCallFrom(String name) {
+    return 'Incoming call: $name';
+  }
+
+  @override
   String get smsCheckInMissed =>
       'I did not check in on time with MetJou. I may need help. My location:';
 

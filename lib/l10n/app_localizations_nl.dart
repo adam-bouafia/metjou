@@ -285,6 +285,48 @@ class AppLocalizationsNl extends AppLocalizations {
   String get checkInDone => 'Ingecheckt. Fijn dat je veilig bent.';
 
   @override
+  String get quickTools => 'Snelle hulp';
+
+  @override
+  String get fakeCall => 'Nep-oproep';
+
+  @override
+  String get fakeCallSubtitle =>
+      'Een echt lijkende inkomende oproep, om weg te kunnen';
+
+  @override
+  String get fakeCallCaller => 'Naam van de beller';
+
+  @override
+  String get fakeCallDefaultName => 'Mama';
+
+  @override
+  String get fakeCallMobile => 'Mobiel';
+
+  @override
+  String get fakeCallWhen => 'Bellen over';
+
+  @override
+  String get fakeCallNow => 'Nu';
+
+  @override
+  String get fakeCallDecline => 'Weigeren';
+
+  @override
+  String get fakeCallAccept => 'Opnemen';
+
+  @override
+  String get fakeCallEnd => 'Ophangen';
+
+  @override
+  String get fakeCallStart => 'Starten';
+
+  @override
+  String fakeCallFrom(String name) {
+    return 'Inkomende oproep: $name';
+  }
+
+  @override
   String get smsCheckInMissed =>
       'Ik heb niet op tijd ingecheckt in MetJou. Misschien heb ik hulp nodig. Mijn locatie:';
 

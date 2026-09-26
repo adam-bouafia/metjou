@@ -286,6 +286,48 @@ class AppLocalizationsEs extends AppLocalizations {
   String get checkInDone => 'Confirmado. Nos alegra que estés bien.';
 
   @override
+  String get quickTools => 'Ayuda rápida';
+
+  @override
+  String get fakeCall => 'Llamada falsa';
+
+  @override
+  String get fakeCallSubtitle =>
+      'Una llamada entrante realista, para poder irte';
+
+  @override
+  String get fakeCallCaller => 'Nombre de quien llama';
+
+  @override
+  String get fakeCallDefaultName => 'Mamá';
+
+  @override
+  String get fakeCallMobile => 'Móvil';
+
+  @override
+  String get fakeCallWhen => 'Sonar en';
+
+  @override
+  String get fakeCallNow => 'Ahora';
+
+  @override
+  String get fakeCallDecline => 'Rechazar';
+
+  @override
+  String get fakeCallAccept => 'Contestar';
+
+  @override
+  String get fakeCallEnd => 'Colgar';
+
+  @override
+  String get fakeCallStart => 'Iniciar';
+
+  @override
+  String fakeCallFrom(String name) {
+    return 'Llamada entrante: $name';
+  }
+
+  @override
   String get smsCheckInMissed =>
       'No confirmé a tiempo en MetJou. Puede que necesite ayuda. Mi ubicación:';
 

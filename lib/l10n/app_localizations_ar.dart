@@ -284,6 +284,47 @@ class AppLocalizationsAr extends AppLocalizations {
   String get checkInDone => 'تم التأكيد. يسعدنا أنك بخير.';
 
   @override
+  String get quickTools => 'مساعدة سريعة';
+
+  @override
+  String get fakeCall => 'مكالمة وهمية';
+
+  @override
+  String get fakeCallSubtitle => 'مكالمة واردة واقعية لتتمكن من المغادرة';
+
+  @override
+  String get fakeCallCaller => 'اسم المتصل';
+
+  @override
+  String get fakeCallDefaultName => 'ماما';
+
+  @override
+  String get fakeCallMobile => 'جوال';
+
+  @override
+  String get fakeCallWhen => 'الرنين بعد';
+
+  @override
+  String get fakeCallNow => 'الآن';
+
+  @override
+  String get fakeCallDecline => 'رفض';
+
+  @override
+  String get fakeCallAccept => 'رد';
+
+  @override
+  String get fakeCallEnd => 'إنهاء';
+
+  @override
+  String get fakeCallStart => 'ابدأ';
+
+  @override
+  String fakeCallFrom(String name) {
+    return 'مكالمة واردة: $name';
+  }
+
+  @override
   String get smsCheckInMissed =>
       'لم أؤكد سلامتي في الوقت المحدد في MetJou. قد أحتاج إلى مساعدة. موقعي:';
 

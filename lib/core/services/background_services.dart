@@ -130,6 +130,33 @@ class BackgroundServices {
   static Future<void> cancelCheckInNotification() =>
       _notifications.cancel(id: _checkInNotificationID);
 
+  // Fake call that rings while the app is in the background.
+
+  static const fakeCallPayload = "fake_call";
+  static const int _fakeCallNotificationID = 779;
+
+  static Future<void> showFakeCallNotification({
+    required String title,
+    required String body,
+  }) => _notifications.show(
+    id: _fakeCallNotificationID,
+    title: title,
+    body: body,
+    payload: fakeCallPayload,
+    notificationDetails: const NotificationDetails(
+      android: AndroidNotificationDetails(
+        "FAKE_CALL",
+        "Fake call",
+        channelDescription: 'Incoming fake call',
+        icon: _notificationIcon,
+        importance: Importance.max,
+        priority: Priority.max,
+        category: AndroidNotificationCategory.call,
+        autoCancel: true,
+      ),
+    ),
+  );
+
   static Future<void> cancelCountdownNotification() =>
       _notifications.cancel(id: _countdownNotificationID);
 

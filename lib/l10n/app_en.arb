@@ -119,6 +119,26 @@
   "checkInNotifBody": "Tap I'm safe when you are OK",
   "checkInAlerted": "Your contacts were alerted",
   "checkInDone": "Checked in. Glad you're safe.",
+  "quickTools": "Quick help",
+  "fakeCall": "Fake call",
+  "fakeCallSubtitle": "A realistic incoming call, to get away",
+  "fakeCallCaller": "Caller name",
+  "fakeCallDefaultName": "Mom",
+  "fakeCallMobile": "Mobile",
+  "fakeCallWhen": "Ring in",
+  "fakeCallNow": "Now",
+  "fakeCallDecline": "Decline",
+  "fakeCallAccept": "Accept",
+  "fakeCallEnd": "End",
+  "fakeCallStart": "Start",
+  "fakeCallFrom": "Incoming call: {name}",
+  "@fakeCallFrom": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "smsCheckInMissed": "I did not check in on time with MetJou. I may need help. My location:",
   "sosContacts": "SOS contacts",
   "noContacts": "No contacts yet",

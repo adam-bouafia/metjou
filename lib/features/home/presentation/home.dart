@@ -4,6 +4,7 @@ import 'package:metjou/features/resources/presentation/all_articles.dart';
 import 'package:metjou/features/resources/presentation/widgets/safe_carousel.dart';
 import 'package:metjou/features/home/presentation/widgets/dash_appbar.dart';
 import 'package:metjou/features/home/presentation/widgets/glass_dock.dart';
+import 'package:metjou/features/home/presentation/widgets/quick_tools.dart';
 import 'package:metjou/features/emergency/presentation/emergency.dart';
 import 'package:metjou/features/safe_places/presentation/live_safe.dart';
 import 'package:metjou/features/check_in/presentation/check_in_card.dart';
@@ -62,6 +63,8 @@ class _HomeState extends State<Home> {
                 SafeCarousel(),
                 _header(l10n.emergency),
                 Emergency(),
+                _header(l10n.quickTools),
+                QuickTools(),
                 _header(l10n.safePlaces),
                 LiveSafe(),
                 SafeHome(),

@@ -608,6 +608,84 @@ abstract class AppLocalizations {
   /// **'Checked in. Glad you\'re safe.'**
   String get checkInDone;
 
+  /// No description provided for @quickTools.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick help'**
+  String get quickTools;
+
+  /// No description provided for @fakeCall.
+  ///
+  /// In en, this message translates to:
+  /// **'Fake call'**
+  String get fakeCall;
+
+  /// No description provided for @fakeCallSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'A realistic incoming call, to get away'**
+  String get fakeCallSubtitle;
+
+  /// No description provided for @fakeCallCaller.
+  ///
+  /// In en, this message translates to:
+  /// **'Caller name'**
+  String get fakeCallCaller;
+
+  /// No description provided for @fakeCallDefaultName.
+  ///
+  /// In en, this message translates to:
+  /// **'Mom'**
+  String get fakeCallDefaultName;
+
+  /// No description provided for @fakeCallMobile.
+  ///
+  /// In en, this message translates to:
+  /// **'Mobile'**
+  String get fakeCallMobile;
+
+  /// No description provided for @fakeCallWhen.
+  ///
+  /// In en, this message translates to:
+  /// **'Ring in'**
+  String get fakeCallWhen;
+
+  /// No description provided for @fakeCallNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Now'**
+  String get fakeCallNow;
+
+  /// No description provided for @fakeCallDecline.
+  ///
+  /// In en, this message translates to:
+  /// **'Decline'**
+  String get fakeCallDecline;
+
+  /// No description provided for @fakeCallAccept.
+  ///
+  /// In en, this message translates to:
+  /// **'Accept'**
+  String get fakeCallAccept;
+
+  /// No description provided for @fakeCallEnd.
+  ///
+  /// In en, this message translates to:
+  /// **'End'**
+  String get fakeCallEnd;
+
+  /// No description provided for @fakeCallStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Start'**
+  String get fakeCallStart;
+
+  /// No description provided for @fakeCallFrom.
+  ///
+  /// In en, this message translates to:
+  /// **'Incoming call: {name}'**
+  String fakeCallFrom(String name);
+
   /// No description provided for @smsCheckInMissed.
   ///
   /// In en, this message translates to:
