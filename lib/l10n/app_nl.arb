@@ -1,6 +1,5 @@
 {
   "@@locale": "nl",
-
   "save": "Opslaan",
   "done": "Klaar",
   "close": "Sluiten",
@@ -10,11 +9,9 @@
   "chooseLanguage": "Kies je taal",
   "stop": "STOP",
   "seeMore": "Meer",
-
   "slogan1": "Je staat er niet alleen voor",
   "slogan2": "Samen veilig",
   "slogan3": "Met jou, altijd",
-
   "emergency": "Noodnummers",
   "emergency112Title": "Alarmnummer",
   "emergency112Desc": "Levensgevaar: politie, ambulance of brandweer",
@@ -24,7 +21,6 @@
   "veiligThuisDesc": "Huiselijk geweld of kindermishandeling, gratis en 24/7",
   "suicidePreventionTitle": "113 Zelfmoordpreventie",
   "suicidePreventionDesc": "Praat met iemand, gratis en 24/7",
-
   "safePlaces": "Veilige plekken in de buurt",
   "policeStations": "Politie",
   "hospitals": "Ziekenhuizen",
@@ -35,7 +31,6 @@
   "mapsQueryPharmacy": "apotheek",
   "mapsQueryTransport": "treinstation",
   "mapsOpenFailed": "Er ging iets mis. Bel een noodnummer.",
-
   "resourcesTitle": "Hulp en informatie",
   "resVeiligThuisTitle": "Veilig Thuis",
   "resVeiligThuisDesc": "Advies en hulp bij huiselijk geweld en kindermishandeling, voor slachtoffers, omstanders en professionals. Bel of chat, anoniem als je wilt.",
@@ -51,7 +46,6 @@
   "res112Desc": "Bel 112 alleen bij levensgevaar of als er nu een misdrijf gebeurt. Voor al het andere bel je de politie op 0900-8844.",
   "callNumber": "Bel {number}",
   "openWebsite": "Open website",
-
   "getHomeSafe": "Veilig thuiskomen",
   "getHomeSafeSubtitle": "Deel je locatie onderweg",
   "getHomeSafeInterval": "Elke 15 minuten wordt je locatie naar één contact gestuurd",
@@ -59,7 +53,6 @@
   "getHomeSafeOn": "Veilig thuiskomen staat aan",
   "getHomeSafeOff": "Veilig thuiskomen staat uit",
   "selectContactFirst": "Kies eerst een contact",
-
   "sosContacts": "SOS-contacten",
   "noContacts": "Nog geen contacten",
   "addContactHint": "Voeg minstens één contact toe",
@@ -69,20 +62,17 @@
   "contactNotAdded": "Al opgeslagen, of je hebt al {max} contacten",
   "contactRemoved": "{name} verwijderd",
   "contactCount": "{count} van {max}",
-
   "enterPin": "Voer je pincode in",
   "wrongPin": "Verkeerde pincode, probeer opnieuw",
   "gladYouAreSafe": "Fijn dat je veilig bent",
   "notifyingSafe": "Je contacten krijgen bericht dat je veilig bent",
   "alertSent": "Alarm verstuurd",
   "noContactsFound": "Geen SOS-contacten gevonden",
-
   "smsShake": "Help! Ik heb mijn telefoon geschud om dit alarm te sturen. Mijn locatie:",
   "smsSos": "Help! Dit is een SOS van MetJou. Mijn locatie:",
   "smsSafe": "Ik ben nu veilig. Negeer mijn SOS-alarm.",
   "smsGetHomeSafe": "Ik ben onderweg naar huis. Mijn locatie:",
   "smsNoLocation": "(locatie niet beschikbaar)",
-
   "notifShakeTitle": "Safe Shake staat aan",
   "notifShakeBody": "Schud je telefoon om je contacten te waarschuwen",
   "notifShakeSent": "SOS verstuurd naar je contacten",
@@ -91,7 +81,6 @@
   "notifRecordingReady": "Klaar om op te nemen",
   "notifRecordingStarted": "Opname gestart",
   "notifRecordingStopped": "Opname gestopt",
-
   "createPin": "Pincode instellen",
   "changePin": "Pincode wijzigen",
   "currentPin": "Huidige pincode",
@@ -116,7 +105,6 @@
   "tagline": "Jij verdient het om veilig te zijn!",
   "aboutDescription": "MetJou houdt je verbonden met de mensen die om je geven. Deel je live locatie via SOS-alarmen, bereik snel de hulpdiensten en krijg hulp als er iets gebeurt. Je persoonlijke steun.",
   "aboutLegalese": "MetJou helpt je in contact te blijven met de mensen die op je letten.",
-
   "onbIntro": "Dit is de eerste stap naar een veiligere wereld.",
   "onbBegin": "Laten we beginnen",
   "onbLocationText": "MetJou gebruikt je locatie voor SOS-berichten en voor Veilig thuiskomen, ook als de app gesloten is.",
@@ -127,6 +115,7 @@
   "onbSmsButton": "Sms en telefoon toestaan",
   "onbWelcome": "Welkom",
   "onbGetStarted": "Aan de slag",
+  "onbNext": "Volgende",
   "onbSkip": "Overslaan",
   "termsPrefix": "Door verder te gaan accepteer je onze",
   "termsLink": "Algemene voorwaarden",

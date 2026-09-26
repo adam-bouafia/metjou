@@ -1,6 +1,5 @@
 {
   "@@locale": "fr",
-
   "save": "Enregistrer",
   "done": "Terminé",
   "close": "Fermer",
@@ -10,11 +9,9 @@
   "chooseLanguage": "Choisissez votre langue",
   "stop": "STOP",
   "seeMore": "Voir plus",
-
   "slogan1": "Vous n'êtes pas seul·e",
   "slogan2": "En sécurité, ensemble",
   "slogan3": "Avec vous, toujours",
-
   "emergency": "Urgences",
   "emergency112Title": "Numéro d'urgence",
   "emergency112Desc": "Danger de mort : police, ambulance ou pompiers",
@@ -24,7 +21,6 @@
   "veiligThuisDesc": "Violences conjugales ou maltraitance d'enfants, gratuit et 24h/24",
   "suicidePreventionTitle": "113 Prévention du suicide",
   "suicidePreventionDesc": "Parlez à quelqu'un, gratuit et 24h/24",
-
   "safePlaces": "Lieux sûrs à proximité",
   "policeStations": "Police",
   "hospitals": "Hôpitaux",
@@ -35,7 +31,6 @@
   "mapsQueryPharmacy": "pharmacie",
   "mapsQueryTransport": "gare",
   "mapsOpenFailed": "Un problème est survenu. Appelez un numéro d'urgence.",
-
   "resourcesTitle": "Aide et informations",
   "resVeiligThuisTitle": "Veilig Thuis",
   "resVeiligThuisDesc": "Conseils et aide en cas de violences conjugales et de maltraitance d'enfants, pour les victimes, les témoins et les professionnels. Appel ou chat, anonyme si vous le souhaitez.",
@@ -51,7 +46,6 @@
   "res112Desc": "Appelez le 112 uniquement en cas de danger de mort ou de crime en cours. Pour le reste, appelez la police au 0900-8844.",
   "callNumber": "Appeler le {number}",
   "openWebsite": "Ouvrir le site",
-
   "getHomeSafe": "Rentrer en sécurité",
   "getHomeSafeSubtitle": "Partagez votre position en chemin",
   "getHomeSafeInterval": "Votre position est envoyée à un contact toutes les 15 minutes",
@@ -59,7 +53,6 @@
   "getHomeSafeOn": "Rentrer en sécurité est activé",
   "getHomeSafeOff": "Rentrer en sécurité est désactivé",
   "selectContactFirst": "Choisissez d'abord un contact",
-
   "sosContacts": "Contacts SOS",
   "noContacts": "Aucun contact pour l'instant",
   "addContactHint": "Ajoutez au moins un contact",
@@ -69,20 +62,17 @@
   "contactNotAdded": "Déjà enregistré, ou vous avez déjà {max} contacts",
   "contactRemoved": "{name} supprimé",
   "contactCount": "{count} sur {max}",
-
   "enterPin": "Saisissez votre code PIN",
   "wrongPin": "Code PIN incorrect, réessayez",
   "gladYouAreSafe": "Heureux que vous soyez en sécurité",
   "notifyingSafe": "Vos contacts sont prévenus que vous êtes en sécurité",
   "alertSent": "Alerte envoyée",
   "noContactsFound": "Aucun contact SOS trouvé",
-
   "smsShake": "À l'aide ! J'ai secoué mon téléphone pour envoyer cette alerte. Ma position :",
   "smsSos": "À l'aide ! Ceci est un SOS de MetJou. Ma position :",
   "smsSafe": "Je suis en sécurité maintenant. Ignorez mon alerte SOS.",
   "smsGetHomeSafe": "Je rentre à la maison. Ma position :",
   "smsNoLocation": "(position indisponible)",
-
   "notifShakeTitle": "Safe Shake est activé",
   "notifShakeBody": "Secouez votre téléphone pour alerter vos contacts",
   "notifShakeSent": "SOS envoyé à vos contacts",
@@ -91,7 +81,6 @@
   "notifRecordingReady": "Prêt à enregistrer",
   "notifRecordingStarted": "Enregistrement démarré",
   "notifRecordingStopped": "Enregistrement arrêté",
-
   "createPin": "Créer un code PIN",
   "changePin": "Changer le code PIN",
   "currentPin": "Code PIN actuel",
@@ -116,7 +105,6 @@
   "tagline": "Vous méritez d'être en sécurité !",
   "aboutDescription": "MetJou vous garde en lien avec les personnes qui tiennent à vous. Partagez votre position en direct via des alertes SOS, joignez rapidement les secours et obtenez de l'aide quand quelque chose arrive. Votre compagnon personnel.",
   "aboutLegalese": "MetJou vous aide à rester en contact avec les personnes qui veillent sur vous.",
-
   "onbIntro": "C'est le premier pas vers un monde plus sûr.",
   "onbBegin": "Commençons",
   "onbLocationText": "MetJou utilise votre position pour les messages SOS et pour Rentrer en sécurité, même quand l'application est fermée.",
@@ -127,6 +115,7 @@
   "onbSmsButton": "Autoriser SMS et téléphone",
   "onbWelcome": "Bienvenue",
   "onbGetStarted": "Commencer",
+  "onbNext": "Suivant",
   "onbSkip": "Passer",
   "termsPrefix": "En continuant, vous acceptez nos",
   "termsLink": "Conditions générales",

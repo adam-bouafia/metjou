@@ -1,6 +1,5 @@
 {
   "@@locale": "es",
-
   "save": "Guardar",
   "done": "Listo",
   "close": "Cerrar",
@@ -10,11 +9,9 @@
   "chooseLanguage": "Elige tu idioma",
   "stop": "STOP",
   "seeMore": "Ver más",
-
   "slogan1": "No estás solo",
   "slogan2": "Seguros juntos",
   "slogan3": "Contigo, siempre",
-
   "emergency": "Emergencias",
   "emergency112Title": "Número de emergencia",
   "emergency112Desc": "Peligro de muerte: policía, ambulancia o bomberos",
@@ -24,7 +21,6 @@
   "veiligThuisDesc": "Violencia doméstica o maltrato infantil, gratis y 24/7",
   "suicidePreventionTitle": "113 Prevención del suicidio",
   "suicidePreventionDesc": "Habla con alguien, gratis y 24/7",
-
   "safePlaces": "Lugares seguros cercanos",
   "policeStations": "Policía",
   "hospitals": "Hospitales",
@@ -35,7 +31,6 @@
   "mapsQueryPharmacy": "farmacia",
   "mapsQueryTransport": "estación de tren",
   "mapsOpenFailed": "Algo salió mal. Llama a un número de emergencia.",
-
   "resourcesTitle": "Ayuda e información",
   "resVeiligThuisTitle": "Veilig Thuis",
   "resVeiligThuisDesc": "Consejo y ayuda ante violencia doméstica y maltrato infantil, para víctimas, testigos y profesionales. Llama o chatea, de forma anónima si quieres.",
@@ -51,7 +46,6 @@
   "res112Desc": "Llama al 112 solo si hay peligro de muerte o un delito está ocurriendo ahora. Para todo lo demás, llama a la policía al 0900-8844.",
   "callNumber": "Llamar al {number}",
   "openWebsite": "Abrir sitio web",
-
   "getHomeSafe": "Llegar seguro a casa",
   "getHomeSafeSubtitle": "Comparte tu ubicación en el camino",
   "getHomeSafeInterval": "Tu ubicación se envía a un contacto cada 15 minutos",
@@ -59,7 +53,6 @@
   "getHomeSafeOn": "Llegar seguro a casa está activado",
   "getHomeSafeOff": "Llegar seguro a casa está desactivado",
   "selectContactFirst": "Elige primero un contacto",
-
   "sosContacts": "Contactos SOS",
   "noContacts": "Aún no hay contactos",
   "addContactHint": "Añade al menos un contacto",
@@ -69,20 +62,17 @@
   "contactNotAdded": "Ya guardado, o ya tienes {max} contactos",
   "contactRemoved": "{name} eliminado",
   "contactCount": "{count} de {max}",
-
   "enterPin": "Introduce tu PIN",
   "wrongPin": "PIN incorrecto, inténtalo de nuevo",
   "gladYouAreSafe": "Nos alegra que estés a salvo",
   "notifyingSafe": "Avisando a tus contactos de que estás a salvo",
   "alertSent": "Alerta enviada",
   "noContactsFound": "No se encontraron contactos SOS",
-
   "smsShake": "¡Ayuda! He agitado mi teléfono para enviar esta alerta. Mi ubicación:",
   "smsSos": "¡Ayuda! Esto es un SOS de MetJou. Mi ubicación:",
   "smsSafe": "Ahora estoy a salvo. Ignora mi alerta SOS.",
   "smsGetHomeSafe": "Voy de camino a casa. Mi ubicación:",
   "smsNoLocation": "(ubicación no disponible)",
-
   "notifShakeTitle": "Safe Shake está activado",
   "notifShakeBody": "Agita tu teléfono para avisar a tus contactos",
   "notifShakeSent": "SOS enviado a tus contactos",
@@ -91,7 +81,6 @@
   "notifRecordingReady": "Listo para grabar",
   "notifRecordingStarted": "Grabación iniciada",
   "notifRecordingStopped": "Grabación detenida",
-
   "createPin": "Crear PIN",
   "changePin": "Cambiar PIN",
   "currentPin": "PIN actual",
@@ -116,7 +105,6 @@
   "tagline": "¡Mereces estar a salvo!",
   "aboutDescription": "MetJou te mantiene en contacto con las personas que se preocupan por ti. Comparte tu ubicación en directo mediante alertas SOS, contacta rápido con los servicios de emergencia y recibe ayuda cuando algo ocurre. Tu compañero personal.",
   "aboutLegalese": "MetJou te ayuda a mantenerte en contacto con las personas que cuidan de ti.",
-
   "onbIntro": "Este es el primer paso hacia un mundo más seguro.",
   "onbBegin": "Empecemos",
   "onbLocationText": "MetJou usa tu ubicación para los mensajes SOS y para Llegar seguro a casa, también cuando la aplicación está cerrada.",
@@ -127,6 +115,7 @@
   "onbSmsButton": "Permitir SMS y teléfono",
   "onbWelcome": "Bienvenido",
   "onbGetStarted": "Empezar",
+  "onbNext": "Siguiente",
   "onbSkip": "Omitir",
   "termsPrefix": "Al continuar aceptas nuestros",
   "termsLink": "Términos y condiciones",

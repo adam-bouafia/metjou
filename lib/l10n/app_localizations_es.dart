@@ -385,6 +385,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get onbGetStarted => 'Empezar';
 
   @override
+  String get onbNext => 'Siguiente';
+
+  @override
   String get onbSkip => 'Omitir';
 
   @override

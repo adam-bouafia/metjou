@@ -1,103 +1,116 @@
 import 'package:flutter/material.dart';
 
 const onboardingPrimary = Color(0xffB271AA);
+
+/// Matches the background baked into the onboarding illustrations.
+const onboardingBackground = Color(0xffF4EAE2);
 const _textColor = Color(0xff132137);
 
-/// Space kept free at the bottom for the page dots, next button and the
-/// terms line drawn by [CenterNextButton].
-const onboardingBottomInset = 170.0;
+/// Aspect ratio of the onboarding illustrations (852x480).
+const _illustrationRatio = 852 / 480;
 
-/// One onboarding step: illustration, explanation and an optional
-/// permission button, with the same spacing on every page.
-///
-/// The page slides in during [start]..[start]+0.2 of [animationController]
-/// and slides out to the left during the following 0.2.
+/// One onboarding step: illustration, explanation and an optional action.
+/// Sizes follow the available space, so it fits small and large phones and
+/// scrolls when the text is scaled up.
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({
     super.key,
-    required this.animationController,
-    required this.start,
     required this.image,
     required this.text,
     this.title,
-    this.buttonLabel,
-    this.onPressed,
-    this.enterFromBottom = false,
+    this.action,
   });
 
-  final AnimationController animationController;
-  final double start;
   final String image;
   final String text;
   final String? title;
-  final String? buttonLabel;
-  final VoidCallback? onPressed;
-  final bool enterFromBottom;
 
-  Animation<Offset> _slide(Offset begin, Offset end, double from) =>
-      Tween<Offset>(begin: begin, end: end).animate(CurvedAnimation(
-        parent: animationController,
-        curve: Interval(from, from + 0.2, curve: Curves.fastOutSlowIn),
-      ));
+  /// Extra control under the text, such as a permission button.
+  final Widget? action;
 
   @override
   Widget build(BuildContext context) {
-    final enter = _slide(
-        enterFromBottom ? const Offset(0, 1) : const Offset(1, 0), Offset.zero, start);
-    final exit = _slide(Offset.zero, const Offset(-1, 0), start + 0.2);
-
-    return SlideTransition(
-      position: enter,
-      child: SlideTransition(
-        position: exit,
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(32, 64, 32, onboardingBottomInset),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Flexible(
-                  child: ConstrainedBox(
-                    constraints: const BoxConstraints(maxHeight: 300),
-                    child: Image.asset(image, fit: BoxFit.contain),
-                  ),
+    return LayoutBuilder(builder: (context, constraints) {
+      final width = constraints.maxWidth - 48;
+      final illustrationWidth =
+          (constraints.maxHeight * 0.42 * _illustrationRatio).clamp(0.0, width);
+      return SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(minHeight: constraints.maxHeight),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(28),
+                child: Image.asset(
+                  image,
+                  width: illustrationWidth,
+                  height: illustrationWidth / _illustrationRatio,
+                  fit: BoxFit.cover,
+                  filterQuality: FilterQuality.medium,
+                  gaplessPlayback: true,
                 ),
-                const SizedBox(height: 32),
-                if (title != null) ...[
-                  Text(
+              ),
+              const SizedBox(height: 32),
+              if (title != null) ...[
+                SizedBox(
+                  width: double.infinity,
+                  child: Text(
                     title!,
                     style: const TextStyle(
-                        fontSize: 26, fontWeight: FontWeight.bold, color: _textColor),
+                        fontSize: 28, fontWeight: FontWeight.bold, color: _textColor),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 12),
-                ],
-                Text(
+                ),
+                const SizedBox(height: 12),
+              ],
+              SizedBox(
+                width: double.infinity,
+                child: Text(
                   text,
-                  style: const TextStyle(fontSize: 16, height: 1.4, color: _textColor),
+                  style: const TextStyle(fontSize: 17, height: 1.45, color: _textColor),
                   textAlign: TextAlign.center,
                 ),
-                if (buttonLabel != null) ...[
-                  const SizedBox(height: 32),
-                  FilledButton(
-                    onPressed: onPressed,
-                    style: FilledButton.styleFrom(
-                      backgroundColor: onboardingPrimary,
-                      padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 14),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
-                    ),
-                    child: Text(
-                      buttonLabel!,
-                      style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ],
+              ),
+              if (action != null) ...[
+                const SizedBox(height: 28),
+                action!,
               ],
-            ),
+            ],
           ),
         ),
+      );
+    });
+  }
+}
+
+/// Secondary action on a page, e.g. granting a permission. The main
+/// "Next" button lives in the bottom bar.
+class OnboardingActionButton extends StatelessWidget {
+  const OnboardingActionButton({
+    super.key,
+    required this.label,
+    required this.icon,
+    required this.onPressed,
+  });
+
+  final String label;
+  final IconData icon;
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton.icon(
+      style: OutlinedButton.styleFrom(
+        foregroundColor: onboardingPrimary,
+        side: const BorderSide(color: onboardingPrimary, width: 1.5),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
       ),
+      onPressed: onPressed,
+      icon: Icon(icon),
+      label: Text(label, style: const TextStyle(fontSize: 16)),
     );
   }
 }

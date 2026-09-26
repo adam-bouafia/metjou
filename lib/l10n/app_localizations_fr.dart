@@ -389,6 +389,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get onbGetStarted => 'Commencer';
 
   @override
+  String get onbNext => 'Suivant';
+
+  @override
   String get onbSkip => 'Passer';
 
   @override

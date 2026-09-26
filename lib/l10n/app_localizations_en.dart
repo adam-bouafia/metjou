@@ -382,6 +382,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get onbGetStarted => 'Get started';
 
   @override
+  String get onbNext => 'Next';
+
+  @override
   String get onbSkip => 'Skip';
 
   @override

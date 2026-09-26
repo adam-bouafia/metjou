@@ -1,6 +1,5 @@
 {
   "@@locale": "ar",
-
   "save": "حفظ",
   "done": "تم",
   "close": "إغلاق",
@@ -10,11 +9,9 @@
   "chooseLanguage": "اختر لغتك",
   "stop": "إيقاف",
   "seeMore": "المزيد",
-
   "slogan1": "لست وحدك",
   "slogan2": "آمنون معًا",
   "slogan3": "معك دائمًا",
-
   "emergency": "الطوارئ",
   "emergency112Title": "رقم الطوارئ",
   "emergency112Desc": "خطر على الحياة: الشرطة أو الإسعاف أو الإطفاء",
@@ -24,7 +21,6 @@
   "veiligThuisDesc": "العنف المنزلي أو إساءة معاملة الأطفال، مجانًا وعلى مدار الساعة",
   "suicidePreventionTitle": "113 للوقاية من الانتحار",
   "suicidePreventionDesc": "تحدث إلى شخص ما، مجانًا وعلى مدار الساعة",
-
   "safePlaces": "أماكن آمنة قريبة",
   "policeStations": "الشرطة",
   "hospitals": "المستشفيات",
@@ -35,7 +31,6 @@
   "mapsQueryPharmacy": "صيدلية",
   "mapsQueryTransport": "محطة قطار",
   "mapsOpenFailed": "حدث خطأ ما. اتصل برقم طوارئ.",
-
   "resourcesTitle": "المساعدة والمعلومات",
   "resVeiligThuisTitle": "Veilig Thuis",
   "resVeiligThuisDesc": "نصائح ومساعدة في حالات العنف المنزلي وإساءة معاملة الأطفال، للضحايا والشهود والمهنيين. اتصل أو تحدث عبر الدردشة، دون الكشف عن هويتك إن أردت.",
@@ -51,7 +46,6 @@
   "res112Desc": "اتصل بـ 112 فقط عند وجود خطر على الحياة أو جريمة تحدث الآن. لغير ذلك، اتصل بالشرطة على 0900-8844.",
   "callNumber": "اتصل بـ {number}",
   "openWebsite": "فتح الموقع",
-
   "getHomeSafe": "العودة إلى المنزل بأمان",
   "getHomeSafeSubtitle": "شارك موقعك أثناء الطريق",
   "getHomeSafeInterval": "يُرسل موقعك إلى جهة اتصال واحدة كل 15 دقيقة",
@@ -59,7 +53,6 @@
   "getHomeSafeOn": "العودة بأمان مفعّلة",
   "getHomeSafeOff": "العودة بأمان متوقفة",
   "selectContactFirst": "اختر جهة اتصال أولًا",
-
   "sosContacts": "جهات اتصال الطوارئ",
   "noContacts": "لا توجد جهات اتصال بعد",
   "addContactHint": "أضف جهة اتصال واحدة على الأقل",
@@ -69,20 +62,17 @@
   "contactNotAdded": "محفوظة مسبقًا، أو لديك {max} جهات اتصال بالفعل",
   "contactRemoved": "تم حذف {name}",
   "contactCount": "{count} من {max}",
-
   "enterPin": "أدخل رمز PIN",
   "wrongPin": "رمز PIN خاطئ، حاول مرة أخرى",
   "gladYouAreSafe": "يسعدنا أنك بأمان",
   "notifyingSafe": "نُعلم جهات اتصالك بأنك بأمان",
   "alertSent": "تم إرسال التنبيه",
   "noContactsFound": "لم يتم العثور على جهات اتصال طوارئ",
-
   "smsShake": "النجدة! هززت هاتفي لإرسال هذا التنبيه. موقعي:",
   "smsSos": "النجدة! هذه رسالة استغاثة من MetJou. موقعي:",
   "smsSafe": "أنا بأمان الآن. تجاهل رسالة الاستغاثة.",
   "smsGetHomeSafe": "أنا في طريقي إلى المنزل. موقعي:",
   "smsNoLocation": "(الموقع غير متاح)",
-
   "notifShakeTitle": "Safe Shake مفعّل",
   "notifShakeBody": "هز هاتفك لتنبيه جهات اتصالك",
   "notifShakeSent": "تم إرسال الاستغاثة إلى جهات اتصالك",
@@ -91,7 +81,6 @@
   "notifRecordingReady": "جاهز للتسجيل",
   "notifRecordingStarted": "بدأ التسجيل",
   "notifRecordingStopped": "توقف التسجيل",
-
   "createPin": "إنشاء رمز PIN",
   "changePin": "تغيير رمز PIN",
   "currentPin": "رمز PIN الحالي",
@@ -116,7 +105,6 @@
   "tagline": "أنت تستحق الأمان!",
   "aboutDescription": "يبقيك MetJou على تواصل مع الأشخاص الذين يهتمون بك. شارك موقعك المباشر عبر تنبيهات الاستغاثة، واتصل بخدمات الطوارئ بسرعة، واحصل على المساعدة عندما يحدث شيء ما. رفيقك الشخصي.",
   "aboutLegalese": "يساعدك MetJou على البقاء على تواصل مع من يعتنون بك.",
-
   "onbIntro": "هذه هي الخطوة الأولى نحو عالم أكثر أمانًا.",
   "onbBegin": "لنبدأ",
   "onbLocationText": "يستخدم MetJou موقعك في رسائل الاستغاثة وفي ميزة العودة بأمان، حتى عندما يكون التطبيق مغلقًا.",
@@ -127,6 +115,7 @@
   "onbSmsButton": "السماح بالرسائل والهاتف",
   "onbWelcome": "مرحبًا",
   "onbGetStarted": "ابدأ",
+  "onbNext": "التالي",
   "onbSkip": "تخطي",
   "termsPrefix": "بالمتابعة فإنك توافق على",
   "termsLink": "الشروط والأحكام",

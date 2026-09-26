@@ -1,6 +1,5 @@
 {
   "@@locale": "en",
-
   "save": "Save",
   "done": "Done",
   "close": "Close",
@@ -10,11 +9,9 @@
   "chooseLanguage": "Choose your language",
   "stop": "STOP",
   "seeMore": "See more",
-
   "slogan1": "You are not alone",
   "slogan2": "Safe together",
   "slogan3": "With you, always",
-
   "emergency": "Emergency",
   "emergency112Title": "Emergency number",
   "emergency112Desc": "Life in danger: police, ambulance or fire brigade",
@@ -24,7 +21,6 @@
   "veiligThuisDesc": "Domestic violence or child abuse, free and 24/7",
   "suicidePreventionTitle": "113 Suicide Prevention",
   "suicidePreventionDesc": "Talk to someone, free and 24/7",
-
   "safePlaces": "Nearby safe places",
   "policeStations": "Police",
   "hospitals": "Hospitals",
@@ -35,7 +31,6 @@
   "mapsQueryPharmacy": "pharmacy",
   "mapsQueryTransport": "train station",
   "mapsOpenFailed": "Something went wrong. Call an emergency number.",
-
   "resourcesTitle": "Help and information",
   "resVeiligThuisTitle": "Veilig Thuis",
   "resVeiligThuisDesc": "Advice and help with domestic violence and child abuse, for victims, witnesses and professionals. Call or chat, anonymously if you want.",
@@ -50,9 +45,14 @@
   "res112Title": "When to call 112",
   "res112Desc": "Call 112 only when life is in danger or a crime is happening now. For everything else, call the police on 0900-8844.",
   "callNumber": "Call {number}",
-  "@callNumber": {"placeholders": {"number": {"type": "String"}}},
+  "@callNumber": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
   "openWebsite": "Open website",
-
   "getHomeSafe": "Get home safe",
   "getHomeSafeSubtitle": "Share your location on the way",
   "getHomeSafeInterval": "Your location is sent to one contact every 15 minutes",
@@ -60,7 +60,6 @@
   "getHomeSafeOn": "Get home safe is on",
   "getHomeSafeOff": "Get home safe is off",
   "selectContactFirst": "Select a contact first",
-
   "sosContacts": "SOS contacts",
   "noContacts": "No contacts yet",
   "addContactHint": "Add at least one contact",
@@ -68,25 +67,43 @@
   "noName": "No name",
   "contactSaved": "Contact saved",
   "contactNotAdded": "Already saved, or you already have {max} contacts",
-  "@contactNotAdded": {"placeholders": {"max": {"type": "int"}}},
+  "@contactNotAdded": {
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  },
   "contactRemoved": "{name} removed",
-  "@contactRemoved": {"placeholders": {"name": {"type": "String"}}},
+  "@contactRemoved": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "contactCount": "{count} of {max}",
-  "@contactCount": {"placeholders": {"count": {"type": "int"}, "max": {"type": "int"}}},
-
+  "@contactCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
   "enterPin": "Enter your PIN",
   "wrongPin": "Wrong PIN, try again",
   "gladYouAreSafe": "Glad you are safe",
   "notifyingSafe": "Letting your contacts know you are safe",
   "alertSent": "Alert sent",
   "noContactsFound": "No SOS contacts found",
-
   "smsShake": "Help! I shook my phone to send this alert. My location:",
   "smsSos": "Help! This is an SOS from MetJou. My location:",
   "smsSafe": "I am safe now. Please ignore my SOS alert.",
   "smsGetHomeSafe": "I am on my way home. My location:",
   "smsNoLocation": "(location not available)",
-
   "notifShakeTitle": "Safe Shake is on",
   "notifShakeBody": "Shake your phone to alert your contacts",
   "notifShakeSent": "SOS sent to your contacts",
@@ -95,7 +112,6 @@
   "notifRecordingReady": "Ready to record",
   "notifRecordingStarted": "Recording started",
   "notifRecordingStopped": "Recording stopped",
-
   "createPin": "Create PIN",
   "changePin": "Change PIN",
   "currentPin": "Current PIN",
@@ -113,7 +129,13 @@
   "audioRecordLength": "Recording length",
   "audioRecordLengthSubtitle": "Maximum length of one recording",
   "minutes": "{count} min",
-  "@minutes": {"placeholders": {"count": {"type": "int"}}},
+  "@minutes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "appSection": "App",
   "about": "About",
   "licenses": "Licenses",
@@ -121,7 +143,6 @@
   "tagline": "You deserve to be safe!",
   "aboutDescription": "MetJou keeps you connected with the people who care about you. Share your live location through SOS alerts, reach emergency services quickly, and get help when something happens. Your personal companion.",
   "aboutLegalese": "MetJou helps you stay in touch with the people who look out for you.",
-
   "onbIntro": "This is the first step towards a safer world.",
   "onbBegin": "Let's begin",
   "onbLocationText": "MetJou uses your location for SOS messages and for Get home safe, also when the app is closed.",
@@ -132,6 +153,7 @@
   "onbSmsButton": "Allow SMS and phone",
   "onbWelcome": "Welcome",
   "onbGetStarted": "Get started",
+  "onbNext": "Next",
   "onbSkip": "Skip",
   "termsPrefix": "By continuing you accept our",
   "termsLink": "Terms and Conditions",

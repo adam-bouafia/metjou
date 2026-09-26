@@ -384,6 +384,9 @@ class AppLocalizationsNl extends AppLocalizations {
   String get onbGetStarted => 'Aan de slag';
 
   @override
+  String get onbNext => 'Volgende';
+
+  @override
   String get onbSkip => 'Overslaan';
 
   @override

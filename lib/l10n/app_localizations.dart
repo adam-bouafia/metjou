@@ -794,6 +794,12 @@ abstract class AppLocalizations {
   /// **'Get started'**
   String get onbGetStarted;
 
+  /// No description provided for @onbNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get onbNext;
+
   /// No description provided for @onbSkip.
   ///
   /// In en, this message translates to:

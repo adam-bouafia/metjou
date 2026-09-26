@@ -379,6 +379,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get onbGetStarted => 'ابدأ';
 
   @override
+  String get onbNext => 'التالي';
+
+  @override
   String get onbSkip => 'تخطي';
 
   @override
