@@ -1,13 +1,11 @@
 import 'package:audio_background_record/audio_background_record.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 import 'package:metjou/Dashboard/Dashboard.dart';
 import 'package:metjou/Onboarding/onboarding_screen.dart';
 import 'package:metjou/Utility/app_locale.dart';
 import 'package:metjou/Utility/background_services.dart';
 import 'package:metjou/l10n/app_localizations.dart';
-import 'package:metjou/Utility/localeString.dart';
 import 'package:shake/shake.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vibration/vibration.dart';
@@ -63,8 +61,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Locale?>(
       valueListenable: appLocale,
-      builder: (context, locale, _) => GetMaterialApp(
-        translations: LocaleString(),
+      builder: (context, locale, _) => MaterialApp(
         locale: locale,
         supportedLocales: supportedAppLocales,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
