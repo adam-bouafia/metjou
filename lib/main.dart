@@ -1,11 +1,9 @@
 import 'package:audio_background_record/audio_background_record.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:metjou/features/home/presentation/dashboard.dart';
-import 'package:metjou/features/onboarding/presentation/onboarding_screen.dart';
+import 'package:metjou/app.dart';
 import 'package:metjou/core/localization/app_locale.dart';
 import 'package:metjou/core/services/background_services.dart';
-import 'package:metjou/l10n/app_localizations.dart';
 import 'package:shake/shake.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vibration/vibration.dart';
@@ -28,7 +26,8 @@ Future<void> _onShake() async {
   }
 
   final recorder = AudioBackgroundRecord.getInstance();
-  if (audioRecordOption && (await recorder.isRecordingServiceRunning() ?? false)) {
+  if (audioRecordOption &&
+      (await recorder.isRecordingServiceRunning() ?? false)) {
     if (await recorder.isRecording() ?? false) {
       recorder.stopRecording();
     } else {
@@ -42,38 +41,17 @@ Future<void> main() async {
   await BackgroundServices.init();
   await BackgroundServices.checkService();
 
-  ShakeDetector.autoStart(shakeThresholdGravity: 5, onPhoneShake: (_) => _onShake());
+  ShakeDetector.autoStart(
+    shakeThresholdGravity: 5,
+    onPhoneShake: (_) => _onShake(),
+  );
   await Workmanager().initialize(callbackDispatcher);
 
-  await SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   await loadSavedLocale();
   final prefs = await SharedPreferences.getInstance();
   runApp(MyApp(onboardingDone: prefs.getBool("appOpenedBefore") ?? false));
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key, required this.onboardingDone});
-
-  final bool onboardingDone;
-
-  @override
-  Widget build(BuildContext context) {
-    return ValueListenableBuilder<Locale?>(
-      valueListenable: appLocale,
-      builder: (context, locale, _) => MaterialApp(
-        locale: locale,
-        supportedLocales: supportedAppLocales,
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        localeResolutionCallback: (system, _) => locale ?? resolveAppLocale(system),
-        debugShowCheckedModeBanner: false,
-        onGenerateTitle: (context) => 'MetJou',
-        theme: ThemeData(
-          fontFamily: 'ReadexPro',
-          colorSchemeSeed: const Color(0xffB271AA),
-        ),
-        home: onboardingDone ? Dashboard() : OnboardingScreen(),
-      ),
-    );
-  }
 }

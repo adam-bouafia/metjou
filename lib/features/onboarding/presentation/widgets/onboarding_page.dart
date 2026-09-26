@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:metjou/core/theme/app_theme.dart';
 
-const onboardingPrimary = Color(0xffB271AA);
+const onboardingPrimary = AppColors.primary;
 
 /// Matches the background baked into the onboarding illustrations.
 const onboardingBackground = Color(0xffF4EAE2);

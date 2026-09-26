@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:metjou/core/theme/app_theme.dart';
 import 'package:metjou/core/localization/app_locale.dart';
 
 class SafetyResource {
@@ -26,7 +27,7 @@ List<SafetyResource> safetyResources(BuildContext context) {
   return [
     SafetyResource(
       icon: Icons.home_outlined,
-      colors: const [Color(0xffC98BC1), Color(0xffB271AA)],
+      colors: const [AppColors.primaryLight, AppColors.primary],
       title: l10n.resVeiligThuisTitle,
       description: l10n.resVeiligThuisDesc,
       phone: "0800-2000",

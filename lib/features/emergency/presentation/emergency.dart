@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:metjou/core/theme/app_theme.dart';
 import 'package:metjou/core/localization/app_locale.dart';
 import 'package:metjou/core/services/phone_call.dart';
 
@@ -40,7 +41,7 @@ List<EmergencyNumber> emergencyNumbers(BuildContext context) {
     EmergencyNumber(
       "0800-2000",
       "assets/home.webp",
-      const [Color(0xffC98BC1), Color(0xffB271AA)],
+      const [AppColors.primaryLight, AppColors.primary],
       l10n.veiligThuisTitle,
       l10n.veiligThuisDesc,
     ),

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:metjou/core/theme/app_theme.dart';
 import 'package:metjou/core/localization/app_locale.dart';
 import 'package:lottie/lottie.dart';
 import 'package:metjou/features/home/presentation/dashboard.dart';
@@ -64,7 +65,7 @@ class _SplashState extends State<Splash> {
               padding: const EdgeInsets.only(bottom: 140.0),
               child: Text(
                 context.l10n.tagline,
-                style: TextStyle(color: Color(0xffB271AA), fontSize: 18),
+                style: TextStyle(color: AppColors.primary, fontSize: 18),
               ),
             ),
           ),
