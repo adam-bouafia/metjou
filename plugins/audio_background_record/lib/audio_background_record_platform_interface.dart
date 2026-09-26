@@ -24,8 +24,9 @@ abstract class AudioBackgroundRecordPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  /// Called with 1 (started), 2 (stopped) or 0 (error) and an error message.
-  void Function(int status, String? errorMsg)? onRecordStatusChangedCallback;
+  /// Called with 1 (started), 2 (stopped: message is the saved file) or
+  /// 0 (error: message is the error).
+  void Function(int status, String? message)? onRecordStatusChangedCallback;
 
   Future<bool?> startRecording() {
     throw UnimplementedError('startRecording() has not been implemented.');
@@ -69,5 +70,16 @@ abstract class AudioBackgroundRecordPlatform extends PlatformInterface {
     throw UnimplementedError(
       'getMaxRecordDuration() has not been implemented.',
     );
+  }
+
+  /// Opens the system folder picker. Returns the folder name, or null when
+  /// the user cancelled.
+  Future<String?> pickDirectory() {
+    throw UnimplementedError('pickDirectory() has not been implemented.');
+  }
+
+  /// Goes back to the app's private folder.
+  Future<void> resetDirectory() {
+    throw UnimplementedError('resetDirectory() has not been implemented.');
   }
 }

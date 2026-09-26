@@ -12,7 +12,11 @@ void main() {
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .setMockMethodCallHandler(channel, (call) async {
           calls.add(call);
-          return call.method == 'isRecording' ? true : null;
+          return switch (call.method) {
+            'isRecording' => true,
+            'pickDirectory' => 'Recordings',
+            _ => null,
+          };
         });
   });
 
@@ -35,5 +39,13 @@ void main() {
 
   test('isRecording returns the native result', () async {
     expect(await AudioBackgroundRecord.getInstance().isRecording(), isTrue);
+  });
+
+  test('pickDirectory returns the chosen folder name', () async {
+    expect(
+      await AudioBackgroundRecord.getInstance().pickDirectory(),
+      'Recordings',
+    );
+    expect(calls.single.method, 'pickDirectory');
   });
 }

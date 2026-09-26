@@ -74,4 +74,11 @@ class MethodChannelAudioBackgroundRecord extends AudioBackgroundRecordPlatform {
   Future<int?> getMaxRecordDurationFromConfig() {
     return methodChannel.invokeMethod("getMaxRecordDuration");
   }
+
+  @override
+  Future<String?> pickDirectory() =>
+      methodChannel.invokeMethod<String>('pickDirectory');
+
+  @override
+  Future<void> resetDirectory() => methodChannel.invokeMethod('resetDirectory');
 }

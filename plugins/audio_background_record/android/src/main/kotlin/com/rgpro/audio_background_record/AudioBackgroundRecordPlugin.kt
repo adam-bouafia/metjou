@@ -1,203 +1,227 @@
 package com.rgpro.audio_background_record
 
-import android.content.*
-import android.content.Context.MODE_PRIVATE
-import androidx.annotation.NonNull
-import androidx.core.content.ContextCompat
+import android.app.Activity
+import android.content.ComponentName
+import android.content.Context
+import android.content.Intent
+import android.content.ServiceConnection
+import android.content.SharedPreferences
+import android.net.Uri
 import android.os.IBinder
 import android.util.Log
+import androidx.core.content.ContextCompat
+import androidx.documentfile.provider.DocumentFile
 import com.rgpro.audio_background_record.audiorecordservice.AudioRecordService
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
+import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
-import java.io.File
+import io.flutter.plugin.common.PluginRegistry
 
-/** AudioBackgroundRecordPlugin */
-class AudioBackgroundRecordPlugin: FlutterPlugin, MethodCallHandler,ServiceConnection,AudioRecordService.OnRecordStatusChangedListener {
-  companion object{
-    val TAG : String = AudioBackgroundRecordPlugin.javaClass.name
-  }
-  private lateinit var channel : MethodChannel
-  private lateinit var context: Context
-  private lateinit var audioRecordServiceIntent : Intent
-  private lateinit var prefs : SharedPreferences
-  private var service:AudioRecordService? =null //retrieve the service reference if possible
+class AudioBackgroundRecordPlugin :
+    FlutterPlugin,
+    MethodCallHandler,
+    ActivityAware,
+    PluginRegistry.ActivityResultListener,
+    ServiceConnection,
+    AudioRecordService.OnRecordStatusChangedListener {
 
-
-
-
-  override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-    channel = MethodChannel(flutterPluginBinding.binaryMessenger, "audio_background_record")
-    channel.setMethodCallHandler(this)
-
-    context = flutterPluginBinding.applicationContext
-    audioRecordServiceIntent = Intent(context , AudioRecordService::class.java)
-    //if the service exist and ready we will be bound to it (this.service will be initialized)
-    context.bindService(audioRecordServiceIntent, this, 0);
-    prefs = context.getSharedPreferences("AudioBackgroundRecordConfig",MODE_PRIVATE);
-
-
-  }
-
-  override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
-    channel.setMethodCallHandler(null)
-  }
-
-  override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
-
-    if(call.method == "startRecording"){
-
-      if(this.service == null){
-         result.success(false);
-      }else{
-        if(service!!.isRecording()){
-          result.success(false);
-        }else {
-          service!!.startRecording() ;
-          result.success(true);
-        }
-      }
-
+    companion object {
+        val TAG: String = AudioBackgroundRecordPlugin::class.java.name
+        private const val PICK_DIRECTORY_REQUEST = 7331
+        private const val KEY_TREE_URI = "treeUri"
+        private const val KEY_DURATION = "duration"
+        private const val KEY_DIRECTORY = "directory"
     }
-    else if(call.method =="stopRecording") {
-      if (this.service == null) {
-        result.success(false);
-      } else {
-        if (!service!!.isRecording()) {
-          result.success(false);
-        } else {
-          service!!.stopRecording();
-          result.success(true);
-        }
-      }
-    }
-    else if(call.method == "isRecording"){
 
-      if(this.service == null){
-        result.success(false);
-     }else{
-       result.success(service!!.isRecording())
-     }
-    }
-    else if(call.method == "startService"){
-      if(this.service!=null){
-        Log.d(TAG,"service already started " )
+    private lateinit var channel: MethodChannel
+    private lateinit var context: Context
+    private lateinit var serviceIntent: Intent
+    private lateinit var prefs: SharedPreferences
+    private var service: AudioRecordService? = null
+    private var activityBinding: ActivityPluginBinding? = null
+    private var pendingPick: Result? = null
 
-        result.success(true)
-      }else{
-        try {
-          ContextCompat.startForegroundService(context, audioRecordServiceIntent)
-          context.bindService(audioRecordServiceIntent, this, 0)
-          result.success(true)
-        } catch (e: Exception) {
-          // Android 12+ refuses to start a foreground service from background.
-          Log.e(TAG, "service starting failed", e)
-          result.success(false)
+    override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
+        channel = MethodChannel(binding.binaryMessenger, "audio_background_record")
+        channel.setMethodCallHandler(this)
+        context = binding.applicationContext
+        serviceIntent = Intent(context, AudioRecordService::class.java)
+        prefs = context.getSharedPreferences("AudioBackgroundRecordConfig", Context.MODE_PRIVATE)
+        // Binds to the service if it is already running; flag 0 does not start it.
+        context.bindService(serviceIntent, this, 0)
+    }
+
+    override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
+        channel.setMethodCallHandler(null)
+    }
+
+    // Activity, needed for the system folder picker.
+
+    override fun onAttachedToActivity(binding: ActivityPluginBinding) {
+        activityBinding = binding
+        binding.addActivityResultListener(this)
+    }
+
+    override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) =
+        onAttachedToActivity(binding)
+
+    override fun onDetachedFromActivityForConfigChanges() = onDetachedFromActivity()
+
+    override fun onDetachedFromActivity() {
+        activityBinding?.removeActivityResultListener(this)
+        activityBinding = null
+    }
+
+    override fun onMethodCall(call: MethodCall, result: Result) {
+        val service = this.service
+        when (call.method) {
+            "startRecording" ->
+                result.success(service != null && !service.isRecording() && run { service.startRecording(); true })
+            "stopRecording" ->
+                result.success(service != null && service.isRecording() && run { service.stopRecording(); true })
+            "isRecording" -> result.success(service?.isRecording() ?: false)
+            "isServiceRunning" -> result.success(service != null)
+            "startService" -> startService(result)
+            "stopService" -> stopService(result)
+            "getRecordingDirectory" -> result.success(treeUri()?.let { folderName(it) })
+            "getMaxRecordDuration" ->
+                result.success(prefs.getInt(KEY_DURATION, AudioRecordService.default_MaxDuration))
+            "setConfiguration" -> setConfiguration(call, result)
+            "pickDirectory" -> pickDirectory(result)
+            "resetDirectory" -> {
+                treeUri()?.let { releasePermission(it) }
+                prefs.edit().remove(KEY_TREE_URI).apply()
+                service?.setOutputTree(null)
+                result.success(null)
+            }
+            else -> result.notImplemented()
         }
-      }
-    }else if(call.method == "stopService"){
-      if(this.service==null){
-        Log.d(TAG,"service already stopped " )
-        result.success(true)
-      }else{
-          //this.service!!.unbindService(this);
-          if(this.context.stopService(audioRecordServiceIntent)){
-            this.service!!.onStatusChangedListener = null
-            this.service = null
+    }
+
+    private fun startService(result: Result) {
+        if (service != null) {
             result.success(true)
-          }else{
-            result.success(false);
-          }
-
-          Log.d(TAG,"service stopped " )
-      }
-    }else if(call.method == "isServiceRunning"){
-
-      if(this.service!=null){
-        result.success(true)
-      }else{
-        result.success(false)
-      }
-    }
-    else if(call.method == "getRecordingDirectory"){
-
-      val dir = prefs.getString("directory","")
-      if(dir!= ""){
-        result.success(dir);
-      }else{
-        result.success(AudioRecordService.DEFAULT_OUT_DIRECTORY)
-      }
-
-    } else if(call.method == "getMaxRecordDuration"){
-
-      val duration = prefs.getInt("duration",AudioRecordService.default_MaxDuration);
-      result.success(duration)
-
-    }else if(call.method == "setConfiguration"){
-
-        val argumentsMap = call.arguments as Map<String, Any?>?
-        if (argumentsMap == null) {
-          Log.e(TAG, "Could not convert channel arguments to Map<String,Any> ")
-        } else {
-          Log.d(TAG, "Arguments retrieved successfully $argumentsMap")
-          (argumentsMap["directory"] as String?)?.let { directory ->
-
-            prefs.edit()
-              .putString("directory", directory)
-              .apply();
-            this.service?.setOutputDirectory(directory)
-
-          }
-
-
-          (argumentsMap["duration"] as Int?)?.let { duration ->
-            prefs.edit()
-              .putInt("duration",duration)
-              .apply()
-
-            this.service?.setMaxDuration(duration)
-          }
-
-          //TODO apply new notification text
-          (argumentsMap["notificationText"] as Map<String, String>?)?.let{ notificationTextMap ->
-              AudioRecordService.updateNotificationKeyValue(notificationTextMap) ;
-          }
-
+            return
         }
-       result.success(null);
-
-    }else {
-      result.notImplemented()
-    }
-  }
-
-  override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
-     val bridge = service as AudioRecordService.AudioRecordServiceBridge?
-    bridge?.let{
-      this.service = it.service ;
-      this.service!!.onStatusChangedListener = this
-      //applying any saved configuration :
-      //outputDirectory
-      prefs.getString("directory",null)?.let {
-        this.service?.setOutputDirectory(it)
-      }
-
-      this.service?.setMaxDuration(
-        prefs.getInt("duration",AudioRecordService.default_MaxDuration)
-      )
+        try {
+            ContextCompat.startForegroundService(context, serviceIntent)
+            context.bindService(serviceIntent, this, 0)
+            result.success(true)
+        } catch (e: Exception) {
+            // Android 12+ refuses to start a foreground service from background.
+            Log.e(TAG, "service starting failed", e)
+            result.success(false)
+        }
     }
 
-  }
+    private fun stopService(result: Result) {
+        val running = service ?: run {
+            result.success(true)
+            return
+        }
+        running.onStatusChangedListener = null
+        service = null
+        result.success(context.stopService(serviceIntent))
+    }
 
-  override fun onServiceDisconnected(name: ComponentName?) {
-    this.service = null ;
-  }
+    private fun setConfiguration(call: MethodCall, result: Result) {
+        // App-private fallback folder, used when no folder was picked.
+        (call.argument<String>("directory"))?.let {
+            prefs.edit().putString(KEY_DIRECTORY, it).apply()
+            service?.setOutputDirectory(it)
+        }
+        (call.argument<Int>("duration"))?.let {
+            prefs.edit().putInt(KEY_DURATION, it).apply()
+            service?.setMaxDuration(it)
+        }
+        (call.argument<Map<String, String>>("notificationText"))?.let {
+            AudioRecordService.updateNotificationKeyValue(it)
+        }
+        result.success(null)
+    }
 
-  override fun onStatusChanged(status:Int , errorMsg : String?) {
-    channel.invokeMethod("recordStoppedCallBack", hashMapOf( "status" to status,"error" to errorMsg ));
-  }
+    // Folder chosen with the Storage Access Framework, so recordings can go
+    // to any folder the user picks (Downloads, Music, an SD card, ...).
 
+    private fun pickDirectory(result: Result) {
+        val activity: Activity = activityBinding?.activity ?: run {
+            result.error("NO_ACTIVITY", "The folder picker needs a visible app", null)
+            return
+        }
+        pendingPick?.success(null)
+        pendingPick = result
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE).addFlags(
+            Intent.FLAG_GRANT_READ_URI_PERMISSION or
+                Intent.FLAG_GRANT_WRITE_URI_PERMISSION or
+                Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION
+        )
+        activity.startActivityForResult(intent, PICK_DIRECTORY_REQUEST)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {
+        if (requestCode != PICK_DIRECTORY_REQUEST) return false
+        val result = pendingPick ?: return true
+        pendingPick = null
+        val uri = data?.data
+        if (resultCode != Activity.RESULT_OK || uri == null) {
+            result.success(null)
+            return true
+        }
+        try {
+            context.contentResolver.takePersistableUriPermission(
+                uri,
+                Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+            )
+            treeUri()?.takeIf { it != uri }?.let { releasePermission(it) }
+            prefs.edit().putString(KEY_TREE_URI, uri.toString()).apply()
+            service?.setOutputTree(uri)
+            result.success(folderName(uri))
+        } catch (e: SecurityException) {
+            Log.e(TAG, "could not keep access to $uri", e)
+            result.error("NO_PERMISSION", e.message, null)
+        }
+        return true
+    }
+
+    private fun treeUri(): Uri? = prefs.getString(KEY_TREE_URI, null)?.let(Uri::parse)
+
+    private fun folderName(uri: Uri): String =
+        DocumentFile.fromTreeUri(context, uri)?.name ?: uri.lastPathSegment ?: uri.toString()
+
+    private fun releasePermission(uri: Uri) {
+        try {
+            context.contentResolver.releasePersistableUriPermission(
+                uri,
+                Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+            )
+        } catch (_: SecurityException) {
+        }
+    }
+
+    // Service connection
+
+    override fun onServiceConnected(name: ComponentName?, binder: IBinder?) {
+        val bridge = binder as? AudioRecordService.AudioRecordServiceBridge ?: return
+        service = bridge.service.also {
+            it.onStatusChangedListener = this
+            prefs.getString(KEY_DIRECTORY, null)?.let(it::setOutputDirectory)
+            it.setOutputTree(treeUri())
+            it.setMaxDuration(prefs.getInt(KEY_DURATION, AudioRecordService.default_MaxDuration))
+        }
+    }
+
+    override fun onServiceDisconnected(name: ComponentName?) {
+        service = null
+    }
+
+    override fun onStatusChanged(state: Int, errorMsg: String?) {
+        channel.invokeMethod(
+            "recordStoppedCallBack",
+            hashMapOf("status" to state, "error" to errorMsg)
+        )
+    }
 }

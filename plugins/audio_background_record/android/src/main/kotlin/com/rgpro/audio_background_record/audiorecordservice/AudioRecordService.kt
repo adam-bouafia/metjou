@@ -6,6 +6,8 @@ import android.app.Service
 import android.content.Intent
 import android.content.pm.ServiceInfo
 import android.media.MediaRecorder
+import android.net.Uri
+import android.os.ParcelFileDescriptor
 import android.media.MediaRecorder.MEDIA_RECORDER_INFO_MAX_DURATION_REACHED
 import android.media.MediaRecorder.MEDIA_RECORDER_INFO_MAX_FILESIZE_REACHED
 import android.os.Binder
@@ -14,9 +16,12 @@ import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.ServiceCompat
+import androidx.documentfile.provider.DocumentFile
 import com.rgpro.audio_background_record.R
 import java.io.IOException
-import java.util.UUID
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 /**
  * Foreground service of type "microphone". It has to be started while the
@@ -54,6 +59,9 @@ class AudioRecordService : Service(), MediaRecorder.OnInfoListener {
     private val binder = AudioRecordServiceBridge(this)
     private var isRecording = false
     private var outDirectory: String? = null
+    private var outTree: Uri? = null
+    private var outDescriptor: ParcelFileDescriptor? = null
+    private var savedLocation: String? = null
     private var maxDuration: Int = default_MaxDuration
 
     var onStatusChangedListener: OnRecordStatusChangedListener? = null
@@ -118,11 +126,38 @@ class AudioRecordService : Service(), MediaRecorder.OnInfoListener {
         }
     }
 
+    private fun newFileName(): String =
+        "MetJou_" + SimpleDateFormat("yyyy-MM-dd_HH-mm-ss", Locale.ROOT).format(Date()) + ".aac"
+
+    /**
+     * Points the recorder at a file in the folder the user picked. Returns
+     * false when that folder is gone or access was revoked, so the caller
+     * falls back to the app's private folder.
+     */
+    private fun useTreeOutput(recorder: MediaRecorder, tree: Uri): Boolean {
+        return try {
+            val folder = DocumentFile.fromTreeUri(this, tree) ?: return false
+            val file = folder.createFile("audio/aac", newFileName()) ?: return false
+            val descriptor = contentResolver.openFileDescriptor(file.uri, "w") ?: return false
+            outDescriptor = descriptor
+            recorder.setOutputFile(descriptor.fileDescriptor)
+            savedLocation = "${folder.name}/${file.name}"
+            true
+        } catch (e: Exception) {
+            Log.e(TAG, "cannot write to picked folder", e)
+            false
+        }
+    }
+
     fun startRecording() {
         val newRecorder = prepareNewRecorderInstance() ?: return
-        val outputDir = outDirectory ?: DEFAULT_OUT_DIRECTORY
         try {
-            newRecorder.setOutputFile("$outputDir/${UUID.randomUUID()}.aac")
+            val tree = outTree
+            if (tree == null || !useTreeOutput(newRecorder, tree)) {
+                val name = newFileName()
+                newRecorder.setOutputFile("${outDirectory ?: DEFAULT_OUT_DIRECTORY}/$name")
+                savedLocation = name
+            }
             newRecorder.setMaxDuration(maxDuration)
             newRecorder.prepare()
             newRecorder.start()
@@ -140,6 +175,7 @@ class AudioRecordService : Service(), MediaRecorder.OnInfoListener {
     private fun recordingFailed(failed: MediaRecorder, e: Exception) {
         Log.e(TAG, "startRecording failed", e)
         failed.release()
+        closeDescriptor()
         isRecording = false
         onStatusChangedListener?.onStatusChanged(0, e.message)
     }
@@ -149,7 +185,8 @@ class AudioRecordService : Service(), MediaRecorder.OnInfoListener {
             if (isRecording) {
                 try {
                     it.stop()
-                    onStatusChangedListener?.onStatusChanged(2, null)
+                    // For status 2 the message is where the file was saved.
+                    onStatusChangedListener?.onStatusChanged(2, savedLocation)
                 } catch (e: Exception) {
                     onStatusChangedListener?.onStatusChanged(0, e.message)
                 }
@@ -157,6 +194,7 @@ class AudioRecordService : Service(), MediaRecorder.OnInfoListener {
             it.release()
         }
         recorder = null
+        closeDescriptor()
         if (isRecording) {
             isRecording = false
             updateNotification()
@@ -167,6 +205,18 @@ class AudioRecordService : Service(), MediaRecorder.OnInfoListener {
 
     fun setOutputDirectory(directory: String) {
         outDirectory = directory
+    }
+
+    fun setOutputTree(tree: Uri?) {
+        outTree = tree
+    }
+
+    private fun closeDescriptor() {
+        try {
+            outDescriptor?.close()
+        } catch (_: Exception) {
+        }
+        outDescriptor = null
     }
 
     fun setMaxDuration(duration: Int) {

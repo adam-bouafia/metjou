@@ -32,6 +32,8 @@ class AudioBackgroundRecord {
     return AudioBackgroundRecordPlatform.instance.isServiceRunning();
   }
 
+  /// Name of the picked folder, or null when recordings go to the app's
+  /// private folder.
   Future<String?> getRecordingDestination() {
     return AudioBackgroundRecordPlatform.instance.getRecordingDirFromConfig();
   }
@@ -54,8 +56,18 @@ class AudioBackgroundRecord {
   }
 
   void setOnRecordStatusChangedCallback(
-    void Function(int status, String? errorMsg)? cb,
+    void Function(int status, String? message)? cb,
   ) {
     AudioBackgroundRecordPlatform.instance.onRecordStatusChangedCallback = cb;
   }
+
+  /// Lets the user pick the folder for recordings (Android's folder picker).
+  /// Returns the folder name, or null when cancelled.
+  Future<String?> pickDirectory() =>
+      AudioBackgroundRecordPlatform.instance.pickDirectory();
+
+  /// Stores recordings in the app's private folder again.
+  Future<void> resetDirectory() =>
+      AudioBackgroundRecordPlatform.instance.resetDirectory();
+
 }
