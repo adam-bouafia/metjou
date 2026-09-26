@@ -665,6 +665,12 @@ class AppLocalizationsEs extends AppLocalizations {
   String get pinChanged => 'PIN cambiado';
 
   @override
+  String get pinTurnOff => 'Desactivar el PIN';
+
+  @override
+  String get pinTurnedOff => 'PIN desactivado';
+
+  @override
   String get currentPinWrong =>
       'El PIN actual no coincide. Inténtalo de nuevo.';
 

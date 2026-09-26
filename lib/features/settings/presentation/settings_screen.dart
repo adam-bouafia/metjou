@@ -11,6 +11,7 @@ import 'package:metjou/core/services/background_services.dart';
 import 'package:metjou/core/services/discreet_mode.dart';
 import 'package:metjou/core/services/fall_detection.dart';
 import 'package:metjou/core/services/low_battery.dart';
+import 'package:metjou/core/widgets/pin_guard.dart';
 import 'package:metjou/features/legal/presentation/policy_dialog.dart';
 import 'package:metjou/features/medical_id/presentation/medical_id_screen.dart';
 import 'package:metjou/core/localization/language_picker.dart';
@@ -163,6 +164,51 @@ class _SettingsScreenState extends State<SettingsScreen> {
     if (mounted) setState(() {});
   }
 
+  /// Without a PIN: create one. With a PIN: change it or turn it off; turning
+  /// it off asks for the current PIN first.
+  Future<void> _onPinTap(BuildContext context, int pin) async {
+    Future<void> change() => Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => ChangePinScreen(pin: pin)),
+    );
+    if (pin == noPin) {
+      await change();
+    } else {
+      final l10n = context.l10n;
+      final turnOff = await showModalBottomSheet<bool>(
+        context: context,
+        builder: (context) => SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                leading: const Icon(Icons.password),
+                title: Text(l10n.changePin),
+                onTap: () => Navigator.pop(context, false),
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.lock_open,
+                  color: Theme.of(context).colorScheme.error,
+                ),
+                title: Text(l10n.pinTurnOff),
+                onTap: () => Navigator.pop(context, true),
+              ),
+            ],
+          ),
+        ),
+      );
+      if (turnOff == null || !context.mounted) return;
+      if (!turnOff) {
+        await change();
+      } else if (await confirmPin(context)) {
+        await (await SharedPreferences.getInstance()).setInt('pin', noPin);
+        Fluttertoast.showToast(msg: l10n.pinTurnedOff);
+      }
+    }
+    if (mounted) setState(() {});
+  }
+
   Future<void> _sendTestAlert(BuildContext context) async {
     final l10n = context.l10n;
     final ok = await showDialog<bool>(
@@ -272,15 +318,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return ListTile(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            ChangePinScreen(pin: snapshot.data!),
-                      ),
-                    );
-                  },
+                  onTap: () => _onPinTap(context, snapshot.data!),
                   leading: CircleAvatar(
                     backgroundColor: Theme.of(
                       context,

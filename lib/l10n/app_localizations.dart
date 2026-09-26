@@ -1286,6 +1286,18 @@ abstract class AppLocalizations {
   /// **'PIN changed'**
   String get pinChanged;
 
+  /// No description provided for @pinTurnOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn off PIN'**
+  String get pinTurnOff;
+
+  /// No description provided for @pinTurnedOff.
+  ///
+  /// In en, this message translates to:
+  /// **'PIN turned off'**
+  String get pinTurnedOff;
+
   /// No description provided for @currentPinWrong.
   ///
   /// In en, this message translates to:

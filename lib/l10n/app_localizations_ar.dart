@@ -657,6 +657,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get pinChanged => 'تم تغيير رمز PIN';
 
   @override
+  String get pinTurnOff => 'إيقاف رمز PIN';
+
+  @override
+  String get pinTurnedOff => 'تم إيقاف رمز PIN';
+
+  @override
   String get currentPinWrong => 'رمز PIN الحالي غير صحيح. حاول مرة أخرى.';
 
   @override

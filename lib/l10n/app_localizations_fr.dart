@@ -668,6 +668,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get pinChanged => 'Code PIN modifié';
 
   @override
+  String get pinTurnOff => 'Désactiver le code PIN';
+
+  @override
+  String get pinTurnedOff => 'Code PIN désactivé';
+
+  @override
   String get currentPinWrong =>
       'Le code PIN actuel ne correspond pas. Réessayez.';
 

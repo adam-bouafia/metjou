@@ -663,6 +663,12 @@ class AppLocalizationsNl extends AppLocalizations {
   String get pinChanged => 'Pincode gewijzigd';
 
   @override
+  String get pinTurnOff => 'Pincode uitzetten';
+
+  @override
+  String get pinTurnedOff => 'Pincode uitgezet';
+
+  @override
   String get currentPinWrong =>
       'De huidige pincode klopt niet. Probeer opnieuw.';
 

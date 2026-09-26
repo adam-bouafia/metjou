@@ -197,6 +197,8 @@
   "discreetNotification": "Dienst actief",
   "turnOn": "Aanzetten",
   "pinChanged": "Pincode gewijzigd",
+  "pinTurnOff": "Pincode uitzetten",
+  "pinTurnedOff": "Pincode uitgezet",
   "currentPinWrong": "De huidige pincode klopt niet. Probeer opnieuw.",
   "enterCurrentPinFirst": "Voer eerst je huidige pincode in",
   "alertsSection": "Alarmen",

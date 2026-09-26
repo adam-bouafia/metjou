@@ -661,6 +661,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pinChanged => 'PIN changed';
 
   @override
+  String get pinTurnOff => 'Turn off PIN';
+
+  @override
+  String get pinTurnedOff => 'PIN turned off';
+
+  @override
   String get currentPinWrong => 'The current PIN does not match. Try again.';
 
   @override

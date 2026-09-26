@@ -197,6 +197,8 @@
   "discreetNotification": "الخدمة نشطة",
   "turnOn": "تفعيل",
   "pinChanged": "تم تغيير رمز PIN",
+  "pinTurnOff": "إيقاف رمز PIN",
+  "pinTurnedOff": "تم إيقاف رمز PIN",
   "currentPinWrong": "رمز PIN الحالي غير صحيح. حاول مرة أخرى.",
   "enterCurrentPinFirst": "أدخل رمز PIN الحالي أولًا",
   "alertsSection": "التنبيهات",

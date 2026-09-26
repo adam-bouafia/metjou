@@ -197,6 +197,8 @@
   "discreetNotification": "Servicio activo",
   "turnOn": "Activar",
   "pinChanged": "PIN cambiado",
+  "pinTurnOff": "Desactivar el PIN",
+  "pinTurnedOff": "PIN desactivado",
   "currentPinWrong": "El PIN actual no coincide. Inténtalo de nuevo.",
   "enterCurrentPinFirst": "Introduce primero tu PIN actual",
   "alertsSection": "Alertas",

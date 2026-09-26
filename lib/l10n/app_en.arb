@@ -305,6 +305,8 @@
   "discreetNotification": "Service active",
   "turnOn": "Turn on",
   "pinChanged": "PIN changed",
+  "pinTurnOff": "Turn off PIN",
+  "pinTurnedOff": "PIN turned off",
   "currentPinWrong": "The current PIN does not match. Try again.",
   "enterCurrentPinFirst": "Enter your current PIN first",
   "alertsSection": "Alerts",
