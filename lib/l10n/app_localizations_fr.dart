@@ -324,6 +324,18 @@ class AppLocalizationsFr extends AppLocalizations {
   String get smsNoLocation => '(position indisponible)';
 
   @override
+  String smsLowBattery(int level) {
+    return 'La batterie de mon téléphone est presque vide ($level %). Ma dernière position :';
+  }
+
+  @override
+  String get lowBattery => 'Message batterie faible';
+
+  @override
+  String get lowBatterySubtitle =>
+      'Envoie une fois votre position à vos contacts quand la batterie atteint 10 %';
+
+  @override
   String get notifShakeTitle => 'Safe Shake est activé';
 
   @override

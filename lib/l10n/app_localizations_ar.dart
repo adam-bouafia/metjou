@@ -318,6 +318,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get smsNoLocation => '(الموقع غير متاح)';
 
   @override
+  String smsLowBattery(int level) {
+    return 'بطارية هاتفي على وشك النفاد ($level٪). آخر موقع لي:';
+  }
+
+  @override
+  String get lowBattery => 'رسالة البطارية المنخفضة';
+
+  @override
+  String get lowBatterySubtitle =>
+      'يرسل موقعك مرة واحدة إلى جهات اتصالك عندما تصل البطارية إلى 10٪';
+
+  @override
   String get notifShakeTitle => 'Safe Shake مفعّل';
 
   @override

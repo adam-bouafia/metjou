@@ -674,6 +674,24 @@ abstract class AppLocalizations {
   /// **'(location not available)'**
   String get smsNoLocation;
 
+  /// No description provided for @smsLowBattery.
+  ///
+  /// In en, this message translates to:
+  /// **'My phone battery is almost empty ({level}%). My last location:'**
+  String smsLowBattery(int level);
+
+  /// No description provided for @lowBattery.
+  ///
+  /// In en, this message translates to:
+  /// **'Low battery message'**
+  String get lowBattery;
+
+  /// No description provided for @lowBatterySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sends your location to your contacts once when the battery drops to 10%'**
+  String get lowBatterySubtitle;
+
   /// No description provided for @notifShakeTitle.
   ///
   /// In en, this message translates to:

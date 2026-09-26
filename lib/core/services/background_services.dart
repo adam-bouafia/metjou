@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:metjou/core/localization/app_locale.dart';
+import 'package:metjou/core/services/low_battery.dart';
 import 'package:metjou/features/contacts/data/sos_contacts.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -360,10 +361,14 @@ class BackgroundServices {
 const getHomeSafeOnceTask = "get-home-safe-once";
 
 /// Runs Workmanager tasks in a background isolate: the one-off Get home
-/// safe message at the time the user chose.
+/// safe message at the time the user chose and the low battery check.
 @pragma('vm:entry-point')
 void callbackDispatcher() {
   Workmanager().executeTask((task, inputData) async {
+    if (task == lowBatteryTask) {
+      await LowBatteryAlert.check();
+      return true;
+    }
     final contact = inputData?['contact'] as String?;
     if (contact == null) return true;
     final l10n = await backgroundLocalizations();

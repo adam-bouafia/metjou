@@ -8,6 +8,7 @@ import 'package:metjou/features/settings/presentation/change_pin.dart';
 import 'package:metjou/core/services/alert_countdown.dart';
 import 'package:metjou/core/services/background_services.dart';
 import 'package:metjou/core/services/discreet_mode.dart';
+import 'package:metjou/core/services/low_battery.dart';
 import 'package:metjou/features/legal/presentation/policy_dialog.dart';
 import 'package:metjou/core/localization/language_picker.dart';
 
@@ -368,6 +369,28 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             title: Text(context.l10n.safeShake),
             subtitle: Text(context.l10n.safeShakeSubtitle),
+          ),
+          FutureBuilder<bool>(
+            future: LowBatteryAlert.isEnabled(),
+            builder: (context, snap) => SwitchListTile(
+              value: snap.data ?? false,
+              onChanged: (on) async {
+                await LowBatteryAlert.setEnabled(on);
+                if (mounted) setState(() {});
+              },
+              secondary: CircleAvatar(
+                backgroundColor: Theme.of(
+                  context,
+                ).colorScheme.surfaceContainerHighest,
+                child: Icon(
+                  Icons.battery_alert_outlined,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  size: 22,
+                ),
+              ),
+              title: Text(context.l10n.lowBattery),
+              subtitle: Text(context.l10n.lowBatterySubtitle),
+            ),
           ),
           FutureBuilder<SharedPreferences>(
             future: SharedPreferences.getInstance(),

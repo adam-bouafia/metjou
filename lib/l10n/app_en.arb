@@ -140,6 +140,16 @@
   "smsSafe": "I am safe now. Please ignore my SOS alert.",
   "smsGetHomeSafe": "I am on my way home. My location:",
   "smsNoLocation": "(location not available)",
+  "smsLowBattery": "My phone battery is almost empty ({level}%). My last location:",
+  "@smsLowBattery": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "lowBattery": "Low battery message",
+  "lowBatterySubtitle": "Sends your location to your contacts once when the battery drops to 10%",
   "notifShakeTitle": "Safe Shake is on",
   "notifShakeBody": "Shake your phone to alert your contacts",
   "notifShakeSent": "SOS sent to your contacts",
