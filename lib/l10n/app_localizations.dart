@@ -842,6 +842,24 @@ abstract class AppLocalizations {
   /// **'This is a TEST from MetJou, no need to act. If I really need help, you will get a message like this. My location:'**
   String get smsTest;
 
+  /// No description provided for @smsHome.
+  ///
+  /// In en, this message translates to:
+  /// **'I\'m home safe. (MetJou)'**
+  String get smsHome;
+
+  /// No description provided for @imHome.
+  ///
+  /// In en, this message translates to:
+  /// **'I\'m home'**
+  String get imHome;
+
+  /// No description provided for @imHomeSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Your contacts know you are home'**
+  String get imHomeSent;
+
   /// No description provided for @testAlert.
   ///
   /// In en, this message translates to:

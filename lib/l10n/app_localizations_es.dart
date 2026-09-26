@@ -416,6 +416,15 @@ class AppLocalizationsEs extends AppLocalizations {
       'Esto es una PRUEBA de MetJou, no hace falta hacer nada. Si de verdad necesito ayuda, recibirás un mensaje como este. Mi ubicación:';
 
   @override
+  String get smsHome => 'Ya estoy en casa, a salvo. (MetJou)';
+
+  @override
+  String get imHome => 'Estoy en casa';
+
+  @override
+  String get imHomeSent => 'Tus contactos saben que estás en casa';
+
+  @override
   String get testAlert => 'Enviar una alerta de prueba';
 
   @override

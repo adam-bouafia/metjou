@@ -413,6 +413,15 @@ class AppLocalizationsEn extends AppLocalizations {
       'This is a TEST from MetJou, no need to act. If I really need help, you will get a message like this. My location:';
 
   @override
+  String get smsHome => 'I\'m home safe. (MetJou)';
+
+  @override
+  String get imHome => 'I\'m home';
+
+  @override
+  String get imHomeSent => 'Your contacts know you are home';
+
+  @override
   String get testAlert => 'Send a test alert';
 
   @override

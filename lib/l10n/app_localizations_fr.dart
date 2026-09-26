@@ -419,6 +419,15 @@ class AppLocalizationsFr extends AppLocalizations {
       'Ceci est un TEST de MetJou, rien à faire. Si j\'ai vraiment besoin d\'aide, vous recevrez un message comme celui-ci. Ma position :';
 
   @override
+  String get smsHome => 'Je suis bien rentré·e. (MetJou)';
+
+  @override
+  String get imHome => 'Je suis rentré·e';
+
+  @override
+  String get imHomeSent => 'Vos contacts savent que vous êtes rentré·e';
+
+  @override
   String get testAlert => 'Envoyer une alerte test';
 
   @override

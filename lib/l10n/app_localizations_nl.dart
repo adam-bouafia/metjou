@@ -414,6 +414,15 @@ class AppLocalizationsNl extends AppLocalizations {
       'Dit is een TEST van MetJou, je hoeft niets te doen. Als ik echt hulp nodig heb, krijg je een bericht zoals dit. Mijn locatie:';
 
   @override
+  String get smsHome => 'Ik ben veilig thuis. (MetJou)';
+
+  @override
+  String get imHome => 'Ik ben thuis';
+
+  @override
+  String get imHomeSent => 'Je contacten weten dat je thuis bent';
+
+  @override
   String get testAlert => 'Stuur een testalarm';
 
   @override

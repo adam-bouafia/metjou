@@ -411,6 +411,15 @@ class AppLocalizationsAr extends AppLocalizations {
       'هذا اختبار من MetJou، لا داعي لفعل شيء. إذا احتجت إلى مساعدة فعلًا، ستصلك رسالة مثل هذه. موقعي:';
 
   @override
+  String get smsHome => 'وصلت إلى المنزل بأمان. (MetJou)';
+
+  @override
+  String get imHome => 'وصلت إلى المنزل';
+
+  @override
+  String get imHomeSent => 'جهات اتصالك تعلم أنك في المنزل';
+
+  @override
   String get testAlert => 'إرسال تنبيه تجريبي';
 
   @override
