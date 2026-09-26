@@ -43,7 +43,11 @@ class DashAppbar extends StatelessWidget {
           },
           child: Padding(
             padding: const EdgeInsets.all(4.0),
-            child: Image.asset("assets/settings.webp", height: 24),
+            child: Icon(
+              Icons.settings_rounded,
+              size: 24,
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
           ),
         ),
       ),

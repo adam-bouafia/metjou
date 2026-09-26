@@ -110,7 +110,13 @@ class _ChangePinScreenState extends State<ChangePinScreen> {
               style: TextStyle(fontSize: 35, fontWeight: FontWeight.w900),
             ),
           ),
-          Center(child: Image.asset("assets/pin.webp", height: 70)),
+          Center(
+            child: Icon(
+              Icons.password,
+              size: 64,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          ),
           Visibility(
             visible: widget.pin != -1111,
             child: Column(

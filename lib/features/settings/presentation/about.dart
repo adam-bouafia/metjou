@@ -25,7 +25,11 @@ class AboutUs extends StatelessWidget {
             SizedBox(width: 10),
             GestureDetector(
               onTap: () => showLicences(context),
-              child: Image.asset("assets/information.webp", height: 26),
+              child: Icon(
+                Icons.info_outline,
+                size: 26,
+                color: Theme.of(context).colorScheme.primary,
+              ),
             ),
           ],
         ),

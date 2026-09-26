@@ -146,7 +146,11 @@ class _DashboardState extends State<Dashboard> with WidgetsBindingObserver {
                   Expanded(child: Divider(indent: 20, endIndent: 20)),
                 ],
               ),
-              Image.asset("assets/pin.webp"),
+              Icon(
+                Icons.password,
+                size: 56,
+                color: Theme.of(context).colorScheme.primary,
+              ),
               Container(
                 margin: const EdgeInsets.all(20.0),
                 padding: const EdgeInsets.all(20.0),

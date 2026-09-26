@@ -323,7 +323,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     backgroundColor: Theme.of(
                       context,
                     ).colorScheme.surfaceContainerHighest,
-                    child: Center(child: Image.asset("assets/pin.webp")),
+                    child: Icon(
+                      Icons.password,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      size: 22,
+                    ),
                   ),
                   title: Text(
                     snapshot.data == -1111
@@ -372,8 +376,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
               backgroundColor: Theme.of(
                 context,
               ).colorScheme.surfaceContainerHighest,
-              child: Center(
-                child: Image.asset("assets/language.webp", height: 24),
+              child: Icon(
+                Icons.translate,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+                size: 22,
               ),
             ),
             title: Text(context.l10n.language),
@@ -429,8 +435,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
               backgroundColor: Theme.of(
                 context,
               ).colorScheme.surfaceContainerHighest,
-              child: Center(
-                child: Image.asset("assets/shake.webp", height: 24),
+              child: Icon(
+                Icons.vibration,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+                size: 22,
               ),
             ),
             title: Text(context.l10n.safeShake),
@@ -553,8 +561,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
               backgroundColor: Theme.of(
                 context,
               ).colorScheme.surfaceContainerHighest,
-              child: Center(
-                child: Image.asset("assets/record.webp", height: 24),
+              child: Icon(
+                Icons.mic_none,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+                size: 22,
               ),
             ),
             title: Text(context.l10n.audioRecord),
@@ -568,8 +578,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
               backgroundColor: Theme.of(
                 context,
               ).colorScheme.surfaceContainerHighest,
-              child: Center(
-                child: Image.asset("assets/timer.webp", height: 24),
+              child: Icon(
+                Icons.hourglass_bottom,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+                size: 22,
               ),
             ),
             title: Text(context.l10n.audioRecordLength),
@@ -628,7 +640,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
               backgroundColor: Theme.of(
                 context,
               ).colorScheme.surfaceContainerHighest,
-              child: Center(child: Image.asset("assets/info.webp", height: 24)),
+              child: Icon(
+                Icons.info_outline,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+                size: 22,
+              ),
             ),
           ),
           for (final (document, label, icon) in [
