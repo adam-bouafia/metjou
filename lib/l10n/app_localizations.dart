@@ -848,6 +848,24 @@ abstract class AppLocalizations {
   /// **'I\'m home safe. (MetJou)'**
   String get smsHome;
 
+  /// No description provided for @smsFall.
+  ///
+  /// In en, this message translates to:
+  /// **'MetJou detected a hard fall and I did not respond. I may need help. My location:'**
+  String get smsFall;
+
+  /// No description provided for @fallDetection.
+  ///
+  /// In en, this message translates to:
+  /// **'Fall detection'**
+  String get fallDetection;
+
+  /// No description provided for @fallDetectionSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'After a hard fall without movement, starts the SOS countdown (at least 15 s to cancel)'**
+  String get fallDetectionSubtitle;
+
   /// No description provided for @imHome.
   ///
   /// In en, this message translates to:

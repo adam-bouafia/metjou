@@ -414,6 +414,17 @@ class AppLocalizationsAr extends AppLocalizations {
   String get smsHome => 'وصلت إلى المنزل بأمان. (MetJou)';
 
   @override
+  String get smsFall =>
+      'رصد MetJou سقوطًا قويًا ولم أستجب. قد أحتاج إلى مساعدة. موقعي:';
+
+  @override
+  String get fallDetection => 'رصد السقوط';
+
+  @override
+  String get fallDetectionSubtitle =>
+      'بعد سقوط قوي دون حركة، يبدأ العد التنازلي للاستغاثة (15 ثانية على الأقل للإلغاء)';
+
+  @override
   String get imHome => 'وصلت إلى المنزل';
 
   @override

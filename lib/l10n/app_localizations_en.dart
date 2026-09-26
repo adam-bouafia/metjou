@@ -416,6 +416,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String get smsHome => 'I\'m home safe. (MetJou)';
 
   @override
+  String get smsFall =>
+      'MetJou detected a hard fall and I did not respond. I may need help. My location:';
+
+  @override
+  String get fallDetection => 'Fall detection';
+
+  @override
+  String get fallDetectionSubtitle =>
+      'After a hard fall without movement, starts the SOS countdown (at least 15 s to cancel)';
+
+  @override
   String get imHome => 'I\'m home';
 
   @override

@@ -7,6 +7,7 @@ import 'package:metjou/core/services/alert_countdown.dart';
 import 'package:metjou/core/theme/app_theme.dart';
 import 'package:metjou/core/services/background_services.dart';
 import 'package:metjou/core/services/discreet_mode.dart';
+import 'package:metjou/core/services/fall_detection.dart';
 import 'package:metjou/core/services/launch_actions.dart';
 import 'package:metjou/features/check_in/data/check_in_service.dart';
 import 'package:metjou/features/fake_call/data/fake_call_service.dart';
@@ -71,6 +72,7 @@ Future<void> main() async {
   await GetHomeSafeService.resume();
   await CheckInService.resume();
   await (await MedicalId.load()).updateLockScreen();
+  await FallDetection.apply();
 
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,

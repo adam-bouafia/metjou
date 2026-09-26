@@ -9,6 +9,7 @@ import 'package:metjou/features/settings/presentation/change_pin.dart';
 import 'package:metjou/core/services/alert_countdown.dart';
 import 'package:metjou/core/services/background_services.dart';
 import 'package:metjou/core/services/discreet_mode.dart';
+import 'package:metjou/core/services/fall_detection.dart';
 import 'package:metjou/core/services/low_battery.dart';
 import 'package:metjou/features/legal/presentation/policy_dialog.dart';
 import 'package:metjou/features/medical_id/presentation/medical_id_screen.dart';
@@ -430,6 +431,28 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             title: Text(context.l10n.testAlert),
             subtitle: Text(context.l10n.testAlertSubtitle),
+          ),
+          FutureBuilder<bool>(
+            future: FallDetection.isEnabled(),
+            builder: (context, snap) => SwitchListTile(
+              value: snap.data ?? false,
+              onChanged: (on) async {
+                await FallDetection.setEnabled(on);
+                if (mounted) setState(() {});
+              },
+              secondary: CircleAvatar(
+                backgroundColor: Theme.of(
+                  context,
+                ).colorScheme.surfaceContainerHighest,
+                child: Icon(
+                  Icons.personal_injury_outlined,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  size: 22,
+                ),
+              ),
+              title: Text(context.l10n.fallDetection),
+              subtitle: Text(context.l10n.fallDetectionSubtitle),
+            ),
           ),
           FutureBuilder<bool>(
             future: LowBatteryAlert.isEnabled(),

@@ -422,6 +422,17 @@ class AppLocalizationsFr extends AppLocalizations {
   String get smsHome => 'Je suis bien rentré·e. (MetJou)';
 
   @override
+  String get smsFall =>
+      'MetJou a détecté une chute violente et je n\'ai pas réagi. J\'ai peut-être besoin d\'aide. Ma position :';
+
+  @override
+  String get fallDetection => 'Détection de chute';
+
+  @override
+  String get fallDetectionSubtitle =>
+      'Après une chute violente sans mouvement, lance le compte à rebours SOS (au moins 15 s pour annuler)';
+
+  @override
   String get imHome => 'Je suis rentré·e';
 
   @override

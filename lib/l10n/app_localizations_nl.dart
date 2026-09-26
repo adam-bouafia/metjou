@@ -417,6 +417,17 @@ class AppLocalizationsNl extends AppLocalizations {
   String get smsHome => 'Ik ben veilig thuis. (MetJou)';
 
   @override
+  String get smsFall =>
+      'MetJou heeft een harde val gedetecteerd en ik reageerde niet. Misschien heb ik hulp nodig. Mijn locatie:';
+
+  @override
+  String get fallDetection => 'Valdetectie';
+
+  @override
+  String get fallDetectionSubtitle =>
+      'Start na een harde val zonder beweging het SOS-aftellen (minstens 15 s om te annuleren)';
+
+  @override
   String get imHome => 'Ik ben thuis';
 
   @override

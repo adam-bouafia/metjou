@@ -24,12 +24,18 @@ abstract final class AlertCountdown {
   static Timer? _timer;
   static Future<void> Function()? _onFire;
 
-  static Future<void> start(Future<void> Function() onFire) async {
+  /// [minimumSeconds] overrides a shorter (or disabled) countdown setting,
+  /// for triggers with many false alarms such as fall detection.
+  static Future<void> start(
+    Future<void> Function() onFire, {
+    int minimumSeconds = 0,
+  }) async {
     if (_timer != null) return;
     final prefs = await SharedPreferences.getInstance();
     await prefs.reload();
-    final seconds =
+    final setting =
         prefs.getInt(countdownSecondsKey) ?? defaultCountdownSeconds;
+    final seconds = setting < minimumSeconds ? minimumSeconds : setting;
     if (seconds <= 0) {
       await onFire();
       return;
