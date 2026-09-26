@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:get/get.dart';
+import 'package:metjou/Utility/app_locale.dart';
 import 'package:flutter/material.dart';
 import 'package:metjou/Dashboard/Articles/AllArticles.dart';
 import 'package:metjou/Dashboard/DashWidgets/DashAppbar.dart';
@@ -56,7 +57,7 @@ class _HomeState extends State<Home> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          "urg".tr,
+                          context.l10n.emergency,
                           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                         ),
                       ),
@@ -79,7 +80,7 @@ class _HomeState extends State<Home> {
                   padding:
                       const EdgeInsets.only(left: 16.0, bottom: 10, top: 10),
                   child: Text(
-                    "dcvls".tr,
+                    context.l10n.safePlaces,
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
                 ),
