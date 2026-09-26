@@ -248,7 +248,7 @@ class _GetHomeSafeSheetState extends State<GetHomeSafeSheet> {
                 Text(
                   l10n.ghsEveryMinuteWarning,
                   style: theme.textTheme.bodySmall?.copyWith(
-                    color: Colors.deepOrange,
+                    color: Latte.peach,
                   ),
                 ),
               ],
@@ -267,7 +267,9 @@ class _GetHomeSafeSheetState extends State<GetHomeSafeSheet> {
               width: double.infinity,
               child: FilledButton(
                 style: FilledButton.styleFrom(
-                  backgroundColor: _active ? Colors.red : AppColors.primary,
+                  backgroundColor: _active
+                      ? Theme.of(context).colorScheme.error
+                      : Theme.of(context).colorScheme.primary,
                   padding: const EdgeInsets.symmetric(vertical: 14),
                 ),
                 onPressed: _startOrStop,

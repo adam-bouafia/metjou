@@ -205,12 +205,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   trailing: CircleAvatar(
                     radius: 7,
                     backgroundColor: snapshot.data == -1111
-                        ? Colors.red
+                        ? Latte.red
                         : Colors.transparent,
                     child: Center(
                       child: Card(
                         color: snapshot.data == -1111
-                            ? Colors.orange
+                            ? Latte.peach
                             : Colors.transparent,
                         shape: CircleBorder(),
                         child: SizedBox(height: 5, width: 5),

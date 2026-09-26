@@ -1,5 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:metjou/core/theme/app_theme.dart';
 import 'package:metjou/core/localization/app_locale.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -88,13 +89,10 @@ class _DashboardState extends State<Dashboard> {
       if (mounted) setState(() => alerted = false);
       Fluttertoast.showToast(
         msg: l10n.noContactsFound,
-        backgroundColor: Colors.red,
+        backgroundColor: Latte.red,
       );
     } else if (isAlert) {
-      Fluttertoast.showToast(
-        msg: l10n.alertSent,
-        backgroundColor: Colors.green,
-      );
+      Fluttertoast.showToast(msg: l10n.alertSent, backgroundColor: Latte.green);
     }
   }
 

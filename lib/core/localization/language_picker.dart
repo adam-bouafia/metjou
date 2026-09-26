@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:metjou/core/theme/app_theme.dart';
 import 'package:metjou/core/localization/app_locale.dart';
 
 /// Lists the supported languages by their own names and applies the choice.
@@ -20,7 +19,10 @@ Future<void> showLanguagePicker(BuildContext context) {
               children: [
                 Expanded(child: Text(localeNames[locale.languageCode]!)),
                 if (locale.languageCode == current)
-                  const Icon(Icons.check, color: AppColors.primary),
+                  Icon(
+                    Icons.check,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
               ],
             ),
           ),

@@ -92,7 +92,9 @@ class _MyContactsScreenState extends State<MyContactsScreen> {
                         children: [
                           SlidableAction(
                             onPressed: (_) => _remove(contacts, index),
-                            backgroundColor: Colors.red,
+                            backgroundColor: Theme.of(
+                              context,
+                            ).colorScheme.error,
                             foregroundColor: Colors.white,
                             icon: Icons.delete,
                           ),

@@ -73,12 +73,15 @@ class _SafeHomeState extends State<SafeHome> {
                           padding: const EdgeInsets.all(18.0),
                           child: Row(
                             children: [
-                              SpinKitDoubleBounce(color: Colors.red, size: 15),
+                              SpinKitDoubleBounce(
+                                color: Theme.of(context).colorScheme.error,
+                                size: 15,
+                              ),
                               SizedBox(width: 15),
                               Text(
                                 context.l10n.getHomeSafeActive,
                                 style: TextStyle(
-                                  color: Colors.red,
+                                  color: Theme.of(context).colorScheme.error,
                                   fontSize: 10,
                                 ),
                               ),

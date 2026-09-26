@@ -39,7 +39,7 @@ class _ChangePinScreenState extends State<ChangePinScreen> {
           ),
         ),
       ),
-      backgroundColor: Colors.deepPurpleAccent,
+      backgroundColor: Theme.of(context).colorScheme.primary,
     );
     changePin(int.parse(pin));
     setState(() {
@@ -72,7 +72,7 @@ class _ChangePinScreenState extends State<ChangePinScreen> {
               ),
             ),
           ),
-          backgroundColor: Colors.deepPurpleAccent,
+          backgroundColor: Theme.of(context).colorScheme.primary,
         );
 
         ScaffoldMessenger.of(context).removeCurrentSnackBar();
@@ -179,7 +179,7 @@ class _ChangePinScreenState extends State<ChangePinScreen> {
                     width: 120,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
-                      color: Colors.deepPurpleAccent,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                     child: Center(
                       child: Text(
