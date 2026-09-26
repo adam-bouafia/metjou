@@ -64,6 +64,32 @@
   "getHomeSafeOn": "Get home safe is on",
   "getHomeSafeOff": "Get home safe is off",
   "selectContactFirst": "Select a contact first",
+  "ghsRepeat": "Repeat",
+  "ghsOnce": "Once, at a set time",
+  "ghsEvery": "Every {minutes} min",
+  "@ghsEvery": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "ghsCustom": "Custom",
+  "ghsCustomTitle": "Every how many minutes?",
+  "ghsPickTime": "Choose date and time",
+  "ghsAt": "At {time}",
+  "@ghsAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "ghsEveryMinuteWarning": "Sends an SMS every minute: 60 per hour, at your normal SMS rates.",
+  "ghsTimeInPast": "Choose a time in the future",
+  "ghsStart": "Start",
+  "ghsStop": "Stop",
+  "ghsChooseContact": "Who gets your location?",
   "sosContacts": "SOS contacts",
   "noContacts": "No contacts yet",
   "addContactHint": "Add at least one contact",

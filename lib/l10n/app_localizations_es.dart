@@ -195,6 +195,47 @@ class AppLocalizationsEs extends AppLocalizations {
   String get selectContactFirst => 'Elige primero un contacto';
 
   @override
+  String get ghsRepeat => 'Repetir';
+
+  @override
+  String get ghsOnce => 'Una vez, a una hora concreta';
+
+  @override
+  String ghsEvery(int minutes) {
+    return 'Cada $minutes min';
+  }
+
+  @override
+  String get ghsCustom => 'Otro';
+
+  @override
+  String get ghsCustomTitle => '¿Cada cuántos minutos?';
+
+  @override
+  String get ghsPickTime => 'Elegir fecha y hora';
+
+  @override
+  String ghsAt(String time) {
+    return 'El $time';
+  }
+
+  @override
+  String get ghsEveryMinuteWarning =>
+      'Envía un SMS cada minuto: 60 por hora, con tu tarifa normal de SMS.';
+
+  @override
+  String get ghsTimeInPast => 'Elige una hora en el futuro';
+
+  @override
+  String get ghsStart => 'Iniciar';
+
+  @override
+  String get ghsStop => 'Detener';
+
+  @override
+  String get ghsChooseContact => '¿Quién recibe tu ubicación?';
+
+  @override
   String get sosContacts => 'Contactos SOS';
 
   @override

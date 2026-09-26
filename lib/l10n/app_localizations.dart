@@ -446,6 +446,78 @@ abstract class AppLocalizations {
   /// **'Select a contact first'**
   String get selectContactFirst;
 
+  /// No description provided for @ghsRepeat.
+  ///
+  /// In en, this message translates to:
+  /// **'Repeat'**
+  String get ghsRepeat;
+
+  /// No description provided for @ghsOnce.
+  ///
+  /// In en, this message translates to:
+  /// **'Once, at a set time'**
+  String get ghsOnce;
+
+  /// No description provided for @ghsEvery.
+  ///
+  /// In en, this message translates to:
+  /// **'Every {minutes} min'**
+  String ghsEvery(int minutes);
+
+  /// No description provided for @ghsCustom.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom'**
+  String get ghsCustom;
+
+  /// No description provided for @ghsCustomTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Every how many minutes?'**
+  String get ghsCustomTitle;
+
+  /// No description provided for @ghsPickTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose date and time'**
+  String get ghsPickTime;
+
+  /// No description provided for @ghsAt.
+  ///
+  /// In en, this message translates to:
+  /// **'At {time}'**
+  String ghsAt(String time);
+
+  /// No description provided for @ghsEveryMinuteWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Sends an SMS every minute: 60 per hour, at your normal SMS rates.'**
+  String get ghsEveryMinuteWarning;
+
+  /// No description provided for @ghsTimeInPast.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a time in the future'**
+  String get ghsTimeInPast;
+
+  /// No description provided for @ghsStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Start'**
+  String get ghsStart;
+
+  /// No description provided for @ghsStop.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop'**
+  String get ghsStop;
+
+  /// No description provided for @ghsChooseContact.
+  ///
+  /// In en, this message translates to:
+  /// **'Who gets your location?'**
+  String get ghsChooseContact;
+
   /// No description provided for @sosContacts.
   ///
   /// In en, this message translates to:

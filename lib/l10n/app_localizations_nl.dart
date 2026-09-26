@@ -193,6 +193,47 @@ class AppLocalizationsNl extends AppLocalizations {
   String get selectContactFirst => 'Kies eerst een contact';
 
   @override
+  String get ghsRepeat => 'Herhalen';
+
+  @override
+  String get ghsOnce => 'Eén keer, op een tijdstip';
+
+  @override
+  String ghsEvery(int minutes) {
+    return 'Elke $minutes min';
+  }
+
+  @override
+  String get ghsCustom => 'Anders';
+
+  @override
+  String get ghsCustomTitle => 'Om de hoeveel minuten?';
+
+  @override
+  String get ghsPickTime => 'Kies datum en tijd';
+
+  @override
+  String ghsAt(String time) {
+    return 'Op $time';
+  }
+
+  @override
+  String get ghsEveryMinuteWarning =>
+      'Stuurt elke minuut een sms: 60 per uur, tegen je normale sms-tarief.';
+
+  @override
+  String get ghsTimeInPast => 'Kies een tijdstip in de toekomst';
+
+  @override
+  String get ghsStart => 'Starten';
+
+  @override
+  String get ghsStop => 'Stoppen';
+
+  @override
+  String get ghsChooseContact => 'Wie krijgt je locatie?';
+
+  @override
   String get sosContacts => 'SOS-contacten';
 
   @override

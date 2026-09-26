@@ -193,6 +193,47 @@ class AppLocalizationsAr extends AppLocalizations {
   String get selectContactFirst => 'اختر جهة اتصال أولًا';
 
   @override
+  String get ghsRepeat => 'تكرار';
+
+  @override
+  String get ghsOnce => 'مرة واحدة في وقت محدد';
+
+  @override
+  String ghsEvery(int minutes) {
+    return 'كل $minutes دقيقة';
+  }
+
+  @override
+  String get ghsCustom => 'مخصص';
+
+  @override
+  String get ghsCustomTitle => 'كل كم دقيقة؟';
+
+  @override
+  String get ghsPickTime => 'اختر التاريخ والوقت';
+
+  @override
+  String ghsAt(String time) {
+    return 'في $time';
+  }
+
+  @override
+  String get ghsEveryMinuteWarning =>
+      'يرسل رسالة كل دقيقة: 60 رسالة في الساعة بتعرفتك المعتادة.';
+
+  @override
+  String get ghsTimeInPast => 'اختر وقتًا في المستقبل';
+
+  @override
+  String get ghsStart => 'ابدأ';
+
+  @override
+  String get ghsStop => 'إيقاف';
+
+  @override
+  String get ghsChooseContact => 'من يستلم موقعك؟';
+
+  @override
   String get sosContacts => 'جهات اتصال الطوارئ';
 
   @override
