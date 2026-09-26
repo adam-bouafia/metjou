@@ -30,9 +30,7 @@ class TermsOfUse extends StatelessWidget {
                     context: context,
                     configuration: FadeScaleTransitionConfiguration(),
                     builder: (context) {
-                      return PolicyDialog(
-                        mdFileName: 'terms_and_conditions.md',
-                      );
+                      return PolicyDialog(document: 'terms');
                     },
                   );
                 },
@@ -49,7 +47,7 @@ class TermsOfUse extends StatelessWidget {
                   showDialog(
                     context: context,
                     builder: (context) {
-                      return PolicyDialog(mdFileName: 'privacy_policy.md');
+                      return PolicyDialog(document: 'privacy_policy');
                     },
                   );
                 },

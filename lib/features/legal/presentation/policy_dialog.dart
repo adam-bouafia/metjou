@@ -4,14 +4,23 @@ import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 import 'package:metjou/core/localization/app_locale.dart';
 
 class PolicyDialog extends StatelessWidget {
-  PolicyDialog({super.key, this.radius = 8, required this.mdFileName})
-    : assert(
-        mdFileName.contains('.md'),
-        'The file must contain the .md extension',
-      );
+  const PolicyDialog({super.key, this.radius = 8, required this.document});
 
   final double radius;
-  final String mdFileName;
+
+  /// Base name in assets/legal, e.g. 'privacy_policy' or 'terms'.
+  final String document;
+
+  /// The document in the app language, English when there is no translation.
+  Future<String> _load(String languageCode) async {
+    try {
+      return await rootBundle.loadString(
+        'assets/legal/${document}_$languageCode.md',
+      );
+    } catch (_) {
+      return rootBundle.loadString('assets/legal/${document}_en.md');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +32,7 @@ class PolicyDialog extends StatelessWidget {
         children: [
           Expanded(
             child: FutureBuilder(
-              future: Future.delayed(Duration(milliseconds: 150)).then((value) {
-                return rootBundle.loadString('assets/$mdFileName');
-              }),
+              future: _load(Localizations.localeOf(context).languageCode),
               builder: (context, AsyncSnapshot<String> snapshot) {
                 if (snapshot.hasData) {
                   return Markdown(data: snapshot.data!);
