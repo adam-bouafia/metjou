@@ -15,11 +15,9 @@ class MyApp extends StatelessWidget {
     return ValueListenableBuilder<Locale?>(
       valueListenable: appLocale,
       builder: (context, locale, _) => MaterialApp(
-        locale: locale,
+        locale: locale ?? defaultAppLocale,
         supportedLocales: supportedAppLocales,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
-        localeResolutionCallback: (system, _) =>
-            locale ?? resolveAppLocale(system),
         debugShowCheckedModeBanner: false,
         onGenerateTitle: (context) => 'MetJou',
         theme: appTheme,

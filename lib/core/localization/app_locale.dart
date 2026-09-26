@@ -1,12 +1,12 @@
-import 'dart:ui';
-
 import 'package:flutter/widgets.dart';
 import 'package:metjou/l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const _prefsKey = "locale";
 
-/// Dutch first: it is the default when the phone language is not supported.
+/// Dutch is the default language; the others can be picked in the app.
+const defaultAppLocale = Locale('nl');
+
 const supportedAppLocales = [
   Locale('nl'),
   Locale('en'),
@@ -24,7 +24,7 @@ const localeNames = {
   'es': 'Español',
 };
 
-/// The language picked in the app, or null to follow the phone.
+/// The language picked in the app, or null for the default (Dutch).
 final ValueNotifier<Locale?> appLocale = ValueNotifier(null);
 
 Future<void> loadSavedLocale() async {
@@ -40,11 +40,6 @@ Future<void> setAppLocale(Locale locale) async {
   appLocale.value = locale;
 }
 
-/// Phone language if the app supports it, otherwise Dutch.
-Locale resolveAppLocale(Locale? system) => supportedAppLocales.firstWhere(
-  (l) => l.languageCode == system?.languageCode,
-  orElse: () => supportedAppLocales.first,
-);
 
 /// Strings for code that runs without a BuildContext, such as the shake
 /// handler and background tasks.
@@ -52,10 +47,7 @@ Future<AppLocalizations> backgroundLocalizations() async {
   final prefs = await SharedPreferences.getInstance();
   await prefs.reload();
   final code = prefs.getString(_prefsKey);
-  final locale = code != null
-      ? Locale(code)
-      : resolveAppLocale(PlatformDispatcher.instance.locale);
-  return lookupAppLocalizations(locale);
+  return lookupAppLocalizations(code != null ? Locale(code) : defaultAppLocale);
 }
 
 extension L10nContext on BuildContext {
