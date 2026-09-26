@@ -9,6 +9,7 @@ import 'package:metjou/features/home/presentation/home.dart';
 import 'package:metjou/features/home/presentation/widgets/glass_dock.dart';
 import 'package:metjou/features/home/presentation/widgets/sos_button.dart';
 import 'package:metjou/features/contacts/presentation/my_contacts.dart';
+import 'package:metjou/core/services/alert_countdown.dart';
 import 'package:metjou/core/services/background_services.dart';
 import 'package:metjou/core/widgets/pin_input.dart';
 
@@ -21,7 +22,7 @@ class Dashboard extends StatefulWidget {
   State<Dashboard> createState() => _DashboardState();
 }
 
-class _DashboardState extends State<Dashboard> {
+class _DashboardState extends State<Dashboard> with WidgetsBindingObserver {
   bool alerted = false;
 
   late int currentPage = widget.pageIndex;
@@ -34,18 +35,37 @@ class _DashboardState extends State<Dashboard> {
   void initState() {
     super.initState();
     checkAlertSharedPreferences();
+    WidgetsBinding.instance.addObserver(this);
+    AlertCountdown.remaining.addListener(_onCountdown);
     checkPermission();
   }
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    AlertCountdown.remaining.removeListener(_onCountdown);
     _pinPutController.dispose();
     _pinPutFocusNode.dispose();
     super.dispose();
   }
 
+  /// An alert can also be sent by shaking, the Quick Settings tile, the
+  /// widget or a shortcut; re-read the state when the app comes back and
+  /// when a countdown ends, so the SOS button shows STOP.
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) checkAlertSharedPreferences();
+  }
+
+  void _onCountdown() {
+    if (AlertCountdown.remaining.value == null) {
+      Future.delayed(const Duration(seconds: 3), checkAlertSharedPreferences);
+    }
+  }
+
   Future<void> checkAlertSharedPreferences() async {
     prefs = await SharedPreferences.getInstance();
+    await prefs!.reload();
     if (mounted) {
       setState(() {
         alerted = prefs!.getBool("alerted") ?? false;
