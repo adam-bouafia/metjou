@@ -4,7 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:metjou/Dashboard/Dashboard.dart';
 import 'package:metjou/Onboarding/onboarding_screen.dart';
+import 'package:metjou/Utility/app_locale.dart';
 import 'package:metjou/Utility/background_services.dart';
+import 'package:metjou/l10n/app_localizations.dart';
 import 'package:metjou/Utility/localeString.dart';
 import 'package:shake/shake.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -47,44 +49,34 @@ Future<void> main() async {
 
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-  runApp(MyApp());
+  await loadSavedLocale();
+  final prefs = await SharedPreferences.getInstance();
+  runApp(MyApp(onboardingDone: prefs.getBool("appOpenedBefore") ?? false));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({super.key, required this.onboardingDone});
 
-  Future<bool> isAppOpeningForFirstTime() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool result = prefs.getBool("appOpenedBefore") ?? false;
-    return result;
-  }
+  final bool onboardingDone;
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      translations: LocaleString(),
-      locale: Locale('fr', 'FR'),
-      debugShowCheckedModeBanner: false,
-      title: 'MetJou',
-      theme: ThemeData(
-        fontFamily: 'ReadexPro',
-        colorSchemeSeed: const Color(0xffB271AA),
+    return ValueListenableBuilder<Locale?>(
+      valueListenable: appLocale,
+      builder: (context, locale, _) => GetMaterialApp(
+        translations: LocaleString(),
+        locale: locale,
+        supportedLocales: supportedAppLocales,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        localeResolutionCallback: (system, _) => locale ?? resolveAppLocale(system),
+        debugShowCheckedModeBanner: false,
+        onGenerateTitle: (context) => 'MetJou',
+        theme: ThemeData(
+          fontFamily: 'ReadexPro',
+          colorSchemeSeed: const Color(0xffB271AA),
+        ),
+        home: onboardingDone ? Dashboard() : OnboardingScreen(),
       ),
-      home: FutureBuilder(
-          future: isAppOpeningForFirstTime(),
-          builder: (context, AsyncSnapshot<bool> snap) {
-            if (snap.hasData) {
-              if (snap.data!) {
-                return Dashboard(); //Dashboard
-              } else {
-                return OnboardingScreen();
-              }
-            } else {
-              return Container(
-                color: Colors.transparent,
-              );
-            }
-          }),
     );
   }
 }

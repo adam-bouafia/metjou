@@ -1,0 +1,866 @@
+import 'dart:async';
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:intl/intl.dart' as intl;
+
+import 'app_localizations_ar.dart';
+import 'app_localizations_en.dart';
+import 'app_localizations_es.dart';
+import 'app_localizations_fr.dart';
+import 'app_localizations_nl.dart';
+
+// ignore_for_file: type=lint
+
+/// Callers can lookup localized strings with an instance of AppLocalizations
+/// returned by `AppLocalizations.of(context)`.
+///
+/// Applications need to include `AppLocalizations.delegate()` in their app's
+/// `localizationDelegates` list, and the locales they support in the app's
+/// `supportedLocales` list. For example:
+///
+/// ```dart
+/// import 'l10n/app_localizations.dart';
+///
+/// return MaterialApp(
+///   localizationsDelegates: AppLocalizations.localizationsDelegates,
+///   supportedLocales: AppLocalizations.supportedLocales,
+///   home: MyApplicationHome(),
+/// );
+/// ```
+///
+/// ## Update pubspec.yaml
+///
+/// Please make sure to update your pubspec.yaml to include the following
+/// packages:
+///
+/// ```yaml
+/// dependencies:
+///   # Internationalization support.
+///   flutter_localizations:
+///     sdk: flutter
+///   intl: any # Use the pinned version from flutter_localizations
+///
+///   # Rest of dependencies
+/// ```
+///
+/// ## iOS Applications
+///
+/// iOS applications define key application metadata, including supported
+/// locales, in an Info.plist file that is built into the application bundle.
+/// To configure the locales supported by your app, you’ll need to edit this
+/// file.
+///
+/// First, open your project’s ios/Runner.xcworkspace Xcode workspace file.
+/// Then, in the Project Navigator, open the Info.plist file under the Runner
+/// project’s Runner folder.
+///
+/// Next, select the Information Property List item, select Add Item from the
+/// Editor menu, then select Localizations from the pop-up menu.
+///
+/// Select and expand the newly-created Localizations item then, for each
+/// locale your application supports, add a new item and select the locale
+/// you wish to add from the pop-up menu in the Value field. This list should
+/// be consistent with the languages listed in the AppLocalizations.supportedLocales
+/// property.
+abstract class AppLocalizations {
+  AppLocalizations(String locale)
+    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+
+  final String localeName;
+
+  static AppLocalizations of(BuildContext context) {
+    return Localizations.of<AppLocalizations>(context, AppLocalizations)!;
+  }
+
+  static const LocalizationsDelegate<AppLocalizations> delegate =
+      _AppLocalizationsDelegate();
+
+  /// A list of this localizations delegate along with the default localizations
+  /// delegates.
+  ///
+  /// Returns a list of localizations delegates containing this delegate along with
+  /// GlobalMaterialLocalizations.delegate, GlobalCupertinoLocalizations.delegate,
+  /// and GlobalWidgetsLocalizations.delegate.
+  ///
+  /// Additional delegates can be added by appending to this list in
+  /// MaterialApp. This list does not have to be used at all if a custom list
+  /// of delegates is preferred or required.
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      <LocalizationsDelegate<dynamic>>[
+        delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ];
+
+  /// A list of this localizations delegate's supported locales.
+  static const List<Locale> supportedLocales = <Locale>[
+    Locale('ar'),
+    Locale('en'),
+    Locale('es'),
+    Locale('fr'),
+    Locale('nl'),
+  ];
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
+  /// No description provided for @done.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get done;
+
+  /// No description provided for @close.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get close;
+
+  /// No description provided for @settings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settings;
+
+  /// No description provided for @language.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get language;
+
+  /// No description provided for @changeLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Change the app language'**
+  String get changeLanguage;
+
+  /// No description provided for @chooseLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your language'**
+  String get chooseLanguage;
+
+  /// No description provided for @stop.
+  ///
+  /// In en, this message translates to:
+  /// **'STOP'**
+  String get stop;
+
+  /// No description provided for @seeMore.
+  ///
+  /// In en, this message translates to:
+  /// **'See more'**
+  String get seeMore;
+
+  /// No description provided for @slogan1.
+  ///
+  /// In en, this message translates to:
+  /// **'You are not alone'**
+  String get slogan1;
+
+  /// No description provided for @slogan2.
+  ///
+  /// In en, this message translates to:
+  /// **'Safe together'**
+  String get slogan2;
+
+  /// No description provided for @slogan3.
+  ///
+  /// In en, this message translates to:
+  /// **'With you, always'**
+  String get slogan3;
+
+  /// No description provided for @emergency.
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency'**
+  String get emergency;
+
+  /// No description provided for @emergency112Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency number'**
+  String get emergency112Title;
+
+  /// No description provided for @emergency112Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Life in danger: police, ambulance or fire brigade'**
+  String get emergency112Desc;
+
+  /// No description provided for @policeNonUrgentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Police, not urgent'**
+  String get policeNonUrgentTitle;
+
+  /// No description provided for @policeNonUrgentDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Report something or ask a question when there is no danger now'**
+  String get policeNonUrgentDesc;
+
+  /// No description provided for @veiligThuisTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Veilig Thuis'**
+  String get veiligThuisTitle;
+
+  /// No description provided for @veiligThuisDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Domestic violence or child abuse, free and 24/7'**
+  String get veiligThuisDesc;
+
+  /// No description provided for @suicidePreventionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'113 Suicide Prevention'**
+  String get suicidePreventionTitle;
+
+  /// No description provided for @suicidePreventionDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Talk to someone, free and 24/7'**
+  String get suicidePreventionDesc;
+
+  /// No description provided for @safePlaces.
+  ///
+  /// In en, this message translates to:
+  /// **'Nearby safe places'**
+  String get safePlaces;
+
+  /// No description provided for @policeStations.
+  ///
+  /// In en, this message translates to:
+  /// **'Police'**
+  String get policeStations;
+
+  /// No description provided for @hospitals.
+  ///
+  /// In en, this message translates to:
+  /// **'Hospitals'**
+  String get hospitals;
+
+  /// No description provided for @pharmacies.
+  ///
+  /// In en, this message translates to:
+  /// **'Pharmacies'**
+  String get pharmacies;
+
+  /// No description provided for @busStations.
+  ///
+  /// In en, this message translates to:
+  /// **'Public transport'**
+  String get busStations;
+
+  /// No description provided for @mapsQueryPolice.
+  ///
+  /// In en, this message translates to:
+  /// **'police station'**
+  String get mapsQueryPolice;
+
+  /// No description provided for @mapsQueryHospital.
+  ///
+  /// In en, this message translates to:
+  /// **'hospital'**
+  String get mapsQueryHospital;
+
+  /// No description provided for @mapsQueryPharmacy.
+  ///
+  /// In en, this message translates to:
+  /// **'pharmacy'**
+  String get mapsQueryPharmacy;
+
+  /// No description provided for @mapsQueryTransport.
+  ///
+  /// In en, this message translates to:
+  /// **'train station'**
+  String get mapsQueryTransport;
+
+  /// No description provided for @mapsOpenFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Call an emergency number.'**
+  String get mapsOpenFailed;
+
+  /// No description provided for @resourcesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Help and information'**
+  String get resourcesTitle;
+
+  /// No description provided for @resVeiligThuisTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Veilig Thuis'**
+  String get resVeiligThuisTitle;
+
+  /// No description provided for @resVeiligThuisDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Advice and help with domestic violence and child abuse, for victims, witnesses and professionals. Call or chat, anonymously if you want.'**
+  String get resVeiligThuisDesc;
+
+  /// No description provided for @resCsgTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Centrum Seksueel Geweld'**
+  String get resCsgTitle;
+
+  /// No description provided for @resCsgDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Medical, forensic and psychological help after sexual violence. Get in touch as soon as possible, ideally within 7 days. Free, 24/7.'**
+  String get resCsgDesc;
+
+  /// No description provided for @resSlachtofferhulpTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Slachtofferhulp Nederland'**
+  String get resSlachtofferhulpTitle;
+
+  /// No description provided for @resSlachtofferhulpDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Free practical, legal and emotional support after a crime, traffic accident or disaster.'**
+  String get resSlachtofferhulpDesc;
+
+  /// No description provided for @res113Title.
+  ///
+  /// In en, this message translates to:
+  /// **'113 Suicide Prevention'**
+  String get res113Title;
+
+  /// No description provided for @res113Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you thinking about suicide, or worried about someone? Talk anonymously with a trained counsellor.'**
+  String get res113Desc;
+
+  /// No description provided for @resAangifteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Report to the police'**
+  String get resAangifteTitle;
+
+  /// No description provided for @resAangifteDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'How to file a report online, by phone or at a police station, and what happens next.'**
+  String get resAangifteDesc;
+
+  /// No description provided for @res112Title.
+  ///
+  /// In en, this message translates to:
+  /// **'When to call 112'**
+  String get res112Title;
+
+  /// No description provided for @res112Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Call 112 only when life is in danger or a crime is happening now. For everything else, call the police on 0900-8844.'**
+  String get res112Desc;
+
+  /// No description provided for @callNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Call {number}'**
+  String callNumber(String number);
+
+  /// No description provided for @openWebsite.
+  ///
+  /// In en, this message translates to:
+  /// **'Open website'**
+  String get openWebsite;
+
+  /// No description provided for @getHomeSafe.
+  ///
+  /// In en, this message translates to:
+  /// **'Get home safe'**
+  String get getHomeSafe;
+
+  /// No description provided for @getHomeSafeSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Share your location on the way'**
+  String get getHomeSafeSubtitle;
+
+  /// No description provided for @getHomeSafeInterval.
+  ///
+  /// In en, this message translates to:
+  /// **'Your location is sent to one contact every 15 minutes'**
+  String get getHomeSafeInterval;
+
+  /// No description provided for @getHomeSafeActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active now'**
+  String get getHomeSafeActive;
+
+  /// No description provided for @getHomeSafeOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Get home safe is on'**
+  String get getHomeSafeOn;
+
+  /// No description provided for @getHomeSafeOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Get home safe is off'**
+  String get getHomeSafeOff;
+
+  /// No description provided for @selectContactFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a contact first'**
+  String get selectContactFirst;
+
+  /// No description provided for @sosContacts.
+  ///
+  /// In en, this message translates to:
+  /// **'SOS contacts'**
+  String get sosContacts;
+
+  /// No description provided for @noContacts.
+  ///
+  /// In en, this message translates to:
+  /// **'No contacts yet'**
+  String get noContacts;
+
+  /// No description provided for @addContactHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Add at least one contact'**
+  String get addContactHint;
+
+  /// No description provided for @swipeToDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Swipe left to delete a contact'**
+  String get swipeToDelete;
+
+  /// No description provided for @noName.
+  ///
+  /// In en, this message translates to:
+  /// **'No name'**
+  String get noName;
+
+  /// No description provided for @contactSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact saved'**
+  String get contactSaved;
+
+  /// No description provided for @contactNotAdded.
+  ///
+  /// In en, this message translates to:
+  /// **'Already saved, or you already have {max} contacts'**
+  String contactNotAdded(int max);
+
+  /// No description provided for @contactRemoved.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} removed'**
+  String contactRemoved(String name);
+
+  /// No description provided for @contactCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} of {max}'**
+  String contactCount(int count, int max);
+
+  /// No description provided for @enterPin.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your PIN'**
+  String get enterPin;
+
+  /// No description provided for @wrongPin.
+  ///
+  /// In en, this message translates to:
+  /// **'Wrong PIN, try again'**
+  String get wrongPin;
+
+  /// No description provided for @gladYouAreSafe.
+  ///
+  /// In en, this message translates to:
+  /// **'Glad you are safe'**
+  String get gladYouAreSafe;
+
+  /// No description provided for @notifyingSafe.
+  ///
+  /// In en, this message translates to:
+  /// **'Letting your contacts know you are safe'**
+  String get notifyingSafe;
+
+  /// No description provided for @alertSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Alert sent'**
+  String get alertSent;
+
+  /// No description provided for @noContactsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No SOS contacts found'**
+  String get noContactsFound;
+
+  /// No description provided for @smsShake.
+  ///
+  /// In en, this message translates to:
+  /// **'Help! I shook my phone to send this alert. My location:'**
+  String get smsShake;
+
+  /// No description provided for @smsSos.
+  ///
+  /// In en, this message translates to:
+  /// **'Help! This is an SOS from MetJou. My location:'**
+  String get smsSos;
+
+  /// No description provided for @smsSafe.
+  ///
+  /// In en, this message translates to:
+  /// **'I am safe now. Please ignore my SOS alert.'**
+  String get smsSafe;
+
+  /// No description provided for @smsGetHomeSafe.
+  ///
+  /// In en, this message translates to:
+  /// **'I am on my way home. My location:'**
+  String get smsGetHomeSafe;
+
+  /// No description provided for @smsNoLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'(location not available)'**
+  String get smsNoLocation;
+
+  /// No description provided for @notifShakeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Safe Shake is on'**
+  String get notifShakeTitle;
+
+  /// No description provided for @notifShakeBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Shake your phone to alert your contacts'**
+  String get notifShakeBody;
+
+  /// No description provided for @notifShakeSent.
+  ///
+  /// In en, this message translates to:
+  /// **'SOS sent to your contacts'**
+  String get notifShakeSent;
+
+  /// No description provided for @notifShakeNoContacts.
+  ///
+  /// In en, this message translates to:
+  /// **'No contacts found. Call 112.'**
+  String get notifShakeNoContacts;
+
+  /// No description provided for @notifRecording.
+  ///
+  /// In en, this message translates to:
+  /// **'Audio recording'**
+  String get notifRecording;
+
+  /// No description provided for @notifRecordingReady.
+  ///
+  /// In en, this message translates to:
+  /// **'Ready to record'**
+  String get notifRecordingReady;
+
+  /// No description provided for @notifRecordingStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'Recording started'**
+  String get notifRecordingStarted;
+
+  /// No description provided for @notifRecordingStopped.
+  ///
+  /// In en, this message translates to:
+  /// **'Recording stopped'**
+  String get notifRecordingStopped;
+
+  /// No description provided for @createPin.
+  ///
+  /// In en, this message translates to:
+  /// **'Create PIN'**
+  String get createPin;
+
+  /// No description provided for @changePin.
+  ///
+  /// In en, this message translates to:
+  /// **'Change PIN'**
+  String get changePin;
+
+  /// No description provided for @currentPin.
+  ///
+  /// In en, this message translates to:
+  /// **'Current PIN'**
+  String get currentPin;
+
+  /// No description provided for @newPin.
+  ///
+  /// In en, this message translates to:
+  /// **'New PIN'**
+  String get newPin;
+
+  /// No description provided for @pinRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'A PIN is needed to stop an SOS alert'**
+  String get pinRequired;
+
+  /// No description provided for @pinChanged.
+  ///
+  /// In en, this message translates to:
+  /// **'PIN changed'**
+  String get pinChanged;
+
+  /// No description provided for @currentPinWrong.
+  ///
+  /// In en, this message translates to:
+  /// **'The current PIN does not match. Try again.'**
+  String get currentPinWrong;
+
+  /// No description provided for @enterCurrentPinFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your current PIN first'**
+  String get enterCurrentPinFirst;
+
+  /// No description provided for @alertsSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Alerts'**
+  String get alertsSection;
+
+  /// No description provided for @safeShake.
+  ///
+  /// In en, this message translates to:
+  /// **'Safe Shake'**
+  String get safeShake;
+
+  /// No description provided for @safeShakeSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Listen for a shake in the background'**
+  String get safeShakeSubtitle;
+
+  /// No description provided for @safeShakeExplain.
+  ///
+  /// In en, this message translates to:
+  /// **'Safe Shake is the key feature of MetJou. When it is on, the app listens for a shake in the background. If you feel unsafe, shake your phone firmly to send an SOS to your contacts without opening the app.'**
+  String get safeShakeExplain;
+
+  /// No description provided for @audioRecord.
+  ///
+  /// In en, this message translates to:
+  /// **'Audio recording'**
+  String get audioRecord;
+
+  /// No description provided for @audioRecordSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Record audio as evidence when you shake'**
+  String get audioRecordSubtitle;
+
+  /// No description provided for @audioRecordLength.
+  ///
+  /// In en, this message translates to:
+  /// **'Recording length'**
+  String get audioRecordLength;
+
+  /// No description provided for @audioRecordLengthSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Maximum length of one recording'**
+  String get audioRecordLengthSubtitle;
+
+  /// No description provided for @minutes.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} min'**
+  String minutes(int count);
+
+  /// No description provided for @appSection.
+  ///
+  /// In en, this message translates to:
+  /// **'App'**
+  String get appSection;
+
+  /// No description provided for @about.
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get about;
+
+  /// No description provided for @licenses.
+  ///
+  /// In en, this message translates to:
+  /// **'Licenses'**
+  String get licenses;
+
+  /// No description provided for @copyright.
+  ///
+  /// In en, this message translates to:
+  /// **'© 2026 MetJou'**
+  String get copyright;
+
+  /// No description provided for @tagline.
+  ///
+  /// In en, this message translates to:
+  /// **'You deserve to be safe!'**
+  String get tagline;
+
+  /// No description provided for @aboutDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'MetJou keeps you connected with the people who care about you. Share your live location through SOS alerts, reach emergency services quickly, and get help when something happens. Your personal companion.'**
+  String get aboutDescription;
+
+  /// No description provided for @aboutLegalese.
+  ///
+  /// In en, this message translates to:
+  /// **'MetJou helps you stay in touch with the people who look out for you.'**
+  String get aboutLegalese;
+
+  /// No description provided for @onbIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'This is the first step towards a safer world.'**
+  String get onbIntro;
+
+  /// No description provided for @onbBegin.
+  ///
+  /// In en, this message translates to:
+  /// **'Let\'s begin'**
+  String get onbBegin;
+
+  /// No description provided for @onbLocationText.
+  ///
+  /// In en, this message translates to:
+  /// **'MetJou uses your location for SOS messages and for Get home safe, also when the app is closed.'**
+  String get onbLocationText;
+
+  /// No description provided for @onbLocationButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow location'**
+  String get onbLocationButton;
+
+  /// No description provided for @onbMicText.
+  ///
+  /// In en, this message translates to:
+  /// **'When you shake your phone, MetJou can record audio as evidence. Allow the microphone and notifications to use this.'**
+  String get onbMicText;
+
+  /// No description provided for @onbMicButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow microphone'**
+  String get onbMicButton;
+
+  /// No description provided for @onbSmsText.
+  ///
+  /// In en, this message translates to:
+  /// **'MetJou needs SMS and phone access to alert your contacts and to call emergency numbers.'**
+  String get onbSmsText;
+
+  /// No description provided for @onbSmsButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow SMS and phone'**
+  String get onbSmsButton;
+
+  /// No description provided for @onbWelcome.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome'**
+  String get onbWelcome;
+
+  /// No description provided for @onbGetStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'Get started'**
+  String get onbGetStarted;
+
+  /// No description provided for @onbSkip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get onbSkip;
+
+  /// No description provided for @termsPrefix.
+  ///
+  /// In en, this message translates to:
+  /// **'By continuing you accept our'**
+  String get termsPrefix;
+
+  /// No description provided for @termsLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms and Conditions'**
+  String get termsLink;
+
+  /// No description provided for @termsAnd.
+  ///
+  /// In en, this message translates to:
+  /// **'and'**
+  String get termsAnd;
+
+  /// No description provided for @privacyLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get privacyLink;
+}
+
+class _AppLocalizationsDelegate
+    extends LocalizationsDelegate<AppLocalizations> {
+  const _AppLocalizationsDelegate();
+
+  @override
+  Future<AppLocalizations> load(Locale locale) {
+    return SynchronousFuture<AppLocalizations>(lookupAppLocalizations(locale));
+  }
+
+  @override
+  bool isSupported(Locale locale) =>
+      <String>['ar', 'en', 'es', 'fr', 'nl'].contains(locale.languageCode);
+
+  @override
+  bool shouldReload(_AppLocalizationsDelegate old) => false;
+}
+
+AppLocalizations lookupAppLocalizations(Locale locale) {
+  // Lookup logic when only language code is specified.
+  switch (locale.languageCode) {
+    case 'ar':
+      return AppLocalizationsAr();
+    case 'en':
+      return AppLocalizationsEn();
+    case 'es':
+      return AppLocalizationsEs();
+    case 'fr':
+      return AppLocalizationsFr();
+    case 'nl':
+      return AppLocalizationsNl();
+  }
+
+  throw FlutterError(
+    'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+    'an issue with the localizations generation tool. Please file an issue '
+    'on GitHub with a reproducible sample app and the gen-l10n configuration '
+    'that was used.',
+  );
+}

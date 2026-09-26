@@ -1,0 +1,395 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
+import 'app_localizations.dart';
+
+// ignore_for_file: type=lint
+
+/// The translations for Arabic (`ar`).
+class AppLocalizationsAr extends AppLocalizations {
+  AppLocalizationsAr([String locale = 'ar']) : super(locale);
+
+  @override
+  String get save => 'حفظ';
+
+  @override
+  String get done => 'تم';
+
+  @override
+  String get close => 'إغلاق';
+
+  @override
+  String get settings => 'الإعدادات';
+
+  @override
+  String get language => 'اللغة';
+
+  @override
+  String get changeLanguage => 'تغيير لغة التطبيق';
+
+  @override
+  String get chooseLanguage => 'اختر لغتك';
+
+  @override
+  String get stop => 'إيقاف';
+
+  @override
+  String get seeMore => 'المزيد';
+
+  @override
+  String get slogan1 => 'لست وحدك';
+
+  @override
+  String get slogan2 => 'آمنون معًا';
+
+  @override
+  String get slogan3 => 'معك دائمًا';
+
+  @override
+  String get emergency => 'الطوارئ';
+
+  @override
+  String get emergency112Title => 'رقم الطوارئ';
+
+  @override
+  String get emergency112Desc => 'خطر على الحياة: الشرطة أو الإسعاف أو الإطفاء';
+
+  @override
+  String get policeNonUrgentTitle => 'الشرطة، غير عاجل';
+
+  @override
+  String get policeNonUrgentDesc => 'للإبلاغ أو السؤال عندما لا يوجد خطر الآن';
+
+  @override
+  String get veiligThuisTitle => 'Veilig Thuis';
+
+  @override
+  String get veiligThuisDesc =>
+      'العنف المنزلي أو إساءة معاملة الأطفال، مجانًا وعلى مدار الساعة';
+
+  @override
+  String get suicidePreventionTitle => '113 للوقاية من الانتحار';
+
+  @override
+  String get suicidePreventionDesc =>
+      'تحدث إلى شخص ما، مجانًا وعلى مدار الساعة';
+
+  @override
+  String get safePlaces => 'أماكن آمنة قريبة';
+
+  @override
+  String get policeStations => 'الشرطة';
+
+  @override
+  String get hospitals => 'المستشفيات';
+
+  @override
+  String get pharmacies => 'الصيدليات';
+
+  @override
+  String get busStations => 'النقل العام';
+
+  @override
+  String get mapsQueryPolice => 'مركز شرطة';
+
+  @override
+  String get mapsQueryHospital => 'مستشفى';
+
+  @override
+  String get mapsQueryPharmacy => 'صيدلية';
+
+  @override
+  String get mapsQueryTransport => 'محطة قطار';
+
+  @override
+  String get mapsOpenFailed => 'حدث خطأ ما. اتصل برقم طوارئ.';
+
+  @override
+  String get resourcesTitle => 'المساعدة والمعلومات';
+
+  @override
+  String get resVeiligThuisTitle => 'Veilig Thuis';
+
+  @override
+  String get resVeiligThuisDesc =>
+      'نصائح ومساعدة في حالات العنف المنزلي وإساءة معاملة الأطفال، للضحايا والشهود والمهنيين. اتصل أو تحدث عبر الدردشة، دون الكشف عن هويتك إن أردت.';
+
+  @override
+  String get resCsgTitle => 'Centrum Seksueel Geweld';
+
+  @override
+  String get resCsgDesc =>
+      'مساعدة طبية وجنائية ونفسية بعد العنف الجنسي. تواصل معهم في أسرع وقت ممكن، ويفضل خلال 7 أيام. مجانًا وعلى مدار الساعة.';
+
+  @override
+  String get resSlachtofferhulpTitle => 'Slachtofferhulp Nederland';
+
+  @override
+  String get resSlachtofferhulpDesc =>
+      'دعم عملي وقانوني ونفسي مجاني بعد جريمة أو حادث مرور أو كارثة.';
+
+  @override
+  String get res113Title => '113 للوقاية من الانتحار';
+
+  @override
+  String get res113Desc =>
+      'هل تفكر في الانتحار أو تقلق على شخص ما؟ تحدث دون الكشف عن هويتك مع مستشار مدرب.';
+
+  @override
+  String get resAangifteTitle => 'تقديم بلاغ للشرطة';
+
+  @override
+  String get resAangifteDesc =>
+      'كيفية تقديم بلاغ عبر الإنترنت أو بالهاتف أو في مركز الشرطة، وما يحدث بعد ذلك.';
+
+  @override
+  String get res112Title => 'متى تتصل بـ 112؟';
+
+  @override
+  String get res112Desc =>
+      'اتصل بـ 112 فقط عند وجود خطر على الحياة أو جريمة تحدث الآن. لغير ذلك، اتصل بالشرطة على 0900-8844.';
+
+  @override
+  String callNumber(String number) {
+    return 'اتصل بـ $number';
+  }
+
+  @override
+  String get openWebsite => 'فتح الموقع';
+
+  @override
+  String get getHomeSafe => 'العودة إلى المنزل بأمان';
+
+  @override
+  String get getHomeSafeSubtitle => 'شارك موقعك أثناء الطريق';
+
+  @override
+  String get getHomeSafeInterval =>
+      'يُرسل موقعك إلى جهة اتصال واحدة كل 15 دقيقة';
+
+  @override
+  String get getHomeSafeActive => 'نشط الآن';
+
+  @override
+  String get getHomeSafeOn => 'العودة بأمان مفعّلة';
+
+  @override
+  String get getHomeSafeOff => 'العودة بأمان متوقفة';
+
+  @override
+  String get selectContactFirst => 'اختر جهة اتصال أولًا';
+
+  @override
+  String get sosContacts => 'جهات اتصال الطوارئ';
+
+  @override
+  String get noContacts => 'لا توجد جهات اتصال بعد';
+
+  @override
+  String get addContactHint => 'أضف جهة اتصال واحدة على الأقل';
+
+  @override
+  String get swipeToDelete => 'اسحب لحذف جهة اتصال';
+
+  @override
+  String get noName => 'بدون اسم';
+
+  @override
+  String get contactSaved => 'تم حفظ جهة الاتصال';
+
+  @override
+  String contactNotAdded(int max) {
+    return 'محفوظة مسبقًا، أو لديك $max جهات اتصال بالفعل';
+  }
+
+  @override
+  String contactRemoved(String name) {
+    return 'تم حذف $name';
+  }
+
+  @override
+  String contactCount(int count, int max) {
+    return '$count من $max';
+  }
+
+  @override
+  String get enterPin => 'أدخل رمز PIN';
+
+  @override
+  String get wrongPin => 'رمز PIN خاطئ، حاول مرة أخرى';
+
+  @override
+  String get gladYouAreSafe => 'يسعدنا أنك بأمان';
+
+  @override
+  String get notifyingSafe => 'نُعلم جهات اتصالك بأنك بأمان';
+
+  @override
+  String get alertSent => 'تم إرسال التنبيه';
+
+  @override
+  String get noContactsFound => 'لم يتم العثور على جهات اتصال طوارئ';
+
+  @override
+  String get smsShake => 'النجدة! هززت هاتفي لإرسال هذا التنبيه. موقعي:';
+
+  @override
+  String get smsSos => 'النجدة! هذه رسالة استغاثة من MetJou. موقعي:';
+
+  @override
+  String get smsSafe => 'أنا بأمان الآن. تجاهل رسالة الاستغاثة.';
+
+  @override
+  String get smsGetHomeSafe => 'أنا في طريقي إلى المنزل. موقعي:';
+
+  @override
+  String get smsNoLocation => '(الموقع غير متاح)';
+
+  @override
+  String get notifShakeTitle => 'Safe Shake مفعّل';
+
+  @override
+  String get notifShakeBody => 'هز هاتفك لتنبيه جهات اتصالك';
+
+  @override
+  String get notifShakeSent => 'تم إرسال الاستغاثة إلى جهات اتصالك';
+
+  @override
+  String get notifShakeNoContacts => 'لا توجد جهات اتصال. اتصل بـ 112.';
+
+  @override
+  String get notifRecording => 'تسجيل صوتي';
+
+  @override
+  String get notifRecordingReady => 'جاهز للتسجيل';
+
+  @override
+  String get notifRecordingStarted => 'بدأ التسجيل';
+
+  @override
+  String get notifRecordingStopped => 'توقف التسجيل';
+
+  @override
+  String get createPin => 'إنشاء رمز PIN';
+
+  @override
+  String get changePin => 'تغيير رمز PIN';
+
+  @override
+  String get currentPin => 'رمز PIN الحالي';
+
+  @override
+  String get newPin => 'رمز PIN الجديد';
+
+  @override
+  String get pinRequired => 'رمز PIN مطلوب لإيقاف تنبيه الاستغاثة';
+
+  @override
+  String get pinChanged => 'تم تغيير رمز PIN';
+
+  @override
+  String get currentPinWrong => 'رمز PIN الحالي غير صحيح. حاول مرة أخرى.';
+
+  @override
+  String get enterCurrentPinFirst => 'أدخل رمز PIN الحالي أولًا';
+
+  @override
+  String get alertsSection => 'التنبيهات';
+
+  @override
+  String get safeShake => 'Safe Shake';
+
+  @override
+  String get safeShakeSubtitle => 'الاستماع إلى هز الهاتف في الخلفية';
+
+  @override
+  String get safeShakeExplain =>
+      'Safe Shake هي الميزة الأساسية في MetJou. عند تفعيلها، يراقب التطبيق في الخلفية ما إذا هززت هاتفك. إذا شعرت بعدم الأمان، هز هاتفك بقوة لإرسال استغاثة إلى جهات اتصالك دون فتح التطبيق.';
+
+  @override
+  String get audioRecord => 'تسجيل صوتي';
+
+  @override
+  String get audioRecordSubtitle => 'تسجيل الصوت كدليل عند هز الهاتف';
+
+  @override
+  String get audioRecordLength => 'مدة التسجيل';
+
+  @override
+  String get audioRecordLengthSubtitle => 'أقصى مدة للتسجيل الواحد';
+
+  @override
+  String minutes(int count) {
+    return '$count دقيقة';
+  }
+
+  @override
+  String get appSection => 'التطبيق';
+
+  @override
+  String get about => 'حول التطبيق';
+
+  @override
+  String get licenses => 'التراخيص';
+
+  @override
+  String get copyright => '© 2026 MetJou';
+
+  @override
+  String get tagline => 'أنت تستحق الأمان!';
+
+  @override
+  String get aboutDescription =>
+      'يبقيك MetJou على تواصل مع الأشخاص الذين يهتمون بك. شارك موقعك المباشر عبر تنبيهات الاستغاثة، واتصل بخدمات الطوارئ بسرعة، واحصل على المساعدة عندما يحدث شيء ما. رفيقك الشخصي.';
+
+  @override
+  String get aboutLegalese =>
+      'يساعدك MetJou على البقاء على تواصل مع من يعتنون بك.';
+
+  @override
+  String get onbIntro => 'هذه هي الخطوة الأولى نحو عالم أكثر أمانًا.';
+
+  @override
+  String get onbBegin => 'لنبدأ';
+
+  @override
+  String get onbLocationText =>
+      'يستخدم MetJou موقعك في رسائل الاستغاثة وفي ميزة العودة بأمان، حتى عندما يكون التطبيق مغلقًا.';
+
+  @override
+  String get onbLocationButton => 'السماح بالموقع';
+
+  @override
+  String get onbMicText =>
+      'عند هز هاتفك، يمكن لـ MetJou تسجيل الصوت كدليل. اسمح بالميكروفون والإشعارات لاستخدام هذه الميزة.';
+
+  @override
+  String get onbMicButton => 'السماح بالميكروفون';
+
+  @override
+  String get onbSmsText =>
+      'يحتاج MetJou إلى الرسائل القصيرة والهاتف لتنبيه جهات اتصالك والاتصال بأرقام الطوارئ.';
+
+  @override
+  String get onbSmsButton => 'السماح بالرسائل والهاتف';
+
+  @override
+  String get onbWelcome => 'مرحبًا';
+
+  @override
+  String get onbGetStarted => 'ابدأ';
+
+  @override
+  String get onbSkip => 'تخطي';
+
+  @override
+  String get termsPrefix => 'بالمتابعة فإنك توافق على';
+
+  @override
+  String get termsLink => 'الشروط والأحكام';
+
+  @override
+  String get termsAnd => 'و';
+
+  @override
+  String get privacyLink => 'سياسة الخصوصية';
+}
