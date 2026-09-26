@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:metjou/core/localization/app_locale.dart';
+import 'package:metjou/core/widgets/glass.dart';
 import 'package:metjou/core/services/background_services.dart';
 import 'package:metjou/features/check_in/data/check_in_service.dart';
 import 'package:metjou/features/get_home_safe/data/get_home_safe_service.dart';
@@ -59,88 +60,79 @@ class _SafeHomeState extends State<SafeHome> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
-      child: InkWell(
+      padding: const EdgeInsets.fromLTRB(12, 6, 12, 10),
+      child: GlassPanel(
         onTap: _openSheet,
-        child: Card(
-          elevation: 5,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Container(
-            width: MediaQuery.of(context).size.width * 0.7,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 150,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            ListTile(
-                              title: Text(context.l10n.getHomeSafe),
-                              subtitle: Text(
-                                current == null
-                                    ? context.l10n.getHomeSafeSubtitle
-                                    : describeSchedule(
-                                        context,
-                                        current!.schedule,
-                                      ),
-                              ),
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width * 0.7,
+          child: Column(
+            children: [
+              SizedBox(
+                height: 150,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          ListTile(
+                            title: Text(context.l10n.getHomeSafe),
+                            subtitle: Text(
+                              current == null
+                                  ? context.l10n.getHomeSafeSubtitle
+                                  : describeSchedule(
+                                      context,
+                                      current!.schedule,
+                                    ),
                             ),
-                            Visibility(
-                              visible: current != null,
-                              child: Padding(
-                                padding: const EdgeInsets.all(18.0),
-                                child: Row(
-                                  children: [
-                                    SpinKitDoubleBounce(
+                          ),
+                          Visibility(
+                            visible: current != null,
+                            child: Padding(
+                              padding: const EdgeInsets.all(18.0),
+                              child: Row(
+                                children: [
+                                  SpinKitDoubleBounce(
+                                    color: Theme.of(context).colorScheme.error,
+                                    size: 15,
+                                  ),
+                                  SizedBox(width: 15),
+                                  Text(
+                                    context.l10n.getHomeSafeActive,
+                                    style: TextStyle(
                                       color: Theme.of(
                                         context,
                                       ).colorScheme.error,
-                                      size: 15,
+                                      fontSize: 10,
                                     ),
-                                    SizedBox(width: 15),
-                                    Text(
-                                      context.l10n.getHomeSafeActive,
-                                      style: TextStyle(
-                                        color: Theme.of(
-                                          context,
-                                        ).colorScheme.error,
-                                        fontSize: 10,
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: Image.asset("assets/route.webp", height: 140),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 14),
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: FilledButton.tonalIcon(
-                      onPressed: _imHome,
-                      icon: const Icon(Icons.home_rounded),
-                      label: Text(context.l10n.imHome),
                     ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Image.asset("assets/route.webp", height: 140),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 14),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: FilledButton.tonalIcon(
+                    onPressed: _imHome,
+                    icon: const Icon(Icons.home_rounded),
+                    label: Text(context.l10n.imHome),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

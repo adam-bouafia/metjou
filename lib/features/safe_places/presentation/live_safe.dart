@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:metjou/core/localization/app_locale.dart';
+import 'package:metjou/core/widgets/glass.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// Width of each place tile; its label is kept to the same width.
@@ -44,19 +45,12 @@ class LiveSafe extends StatelessWidget {
                 width: _tileSize,
                 child: Column(
                   children: [
-                    Card(
-                      margin: EdgeInsets.zero,
-                      elevation: 2,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      child: InkWell(
-                        borderRadius: BorderRadius.circular(16),
-                        onTap: () => _openMap(context, query),
-                        child: SizedBox.square(
-                          dimension: _tileSize,
-                          child: Center(child: Image.asset(icon, height: 36)),
-                        ),
+                    GlassPanel(
+                      radius: 16,
+                      onTap: () => _openMap(context, query),
+                      child: SizedBox.square(
+                        dimension: _tileSize,
+                        child: Center(child: Image.asset(icon, height: 36)),
                       ),
                     ),
                     const SizedBox(height: 6),

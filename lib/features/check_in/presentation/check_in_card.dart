@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:metjou/core/localization/app_locale.dart';
+import 'package:metjou/core/widgets/glass.dart';
 import 'package:metjou/features/check_in/data/check_in_service.dart';
 
 const _choices = [15, 30, 60, 120];
@@ -107,68 +108,64 @@ class _CheckInCardState extends State<CheckInCard> {
     final scheme = Theme.of(context).colorScheme;
     final deadline = CheckInService.deadline.value;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-      child: Card(
-        elevation: 3,
-        clipBehavior: Clip.antiAlias,
-        child: InkWell(
-          onTap: deadline == null ? _start : null,
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Icon(Icons.timer_outlined, color: scheme.primary),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Text(
-                        l10n.checkIn,
-                        style: Theme.of(context).textTheme.titleMedium,
+      padding: const EdgeInsets.fromLTRB(12, 6, 12, 10),
+      child: GlassPanel(
+        onTap: deadline == null ? _start : null,
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Icon(Icons.timer_outlined, color: scheme.primary),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      l10n.checkIn,
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                  ),
+                  if (deadline != null)
+                    Text(
+                      _left(deadline),
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        color: scheme.primary,
+                        fontFeatures: const [FontFeature.tabularFigures()],
                       ),
                     ),
-                    if (deadline != null)
-                      Text(
-                        _left(deadline),
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          color: scheme.primary,
-                          fontFeatures: const [FontFeature.tabularFigures()],
-                        ),
+                ],
+              ),
+              const SizedBox(height: 6),
+              Text(
+                deadline == null
+                    ? l10n.checkInSubtitle
+                    : l10n.checkInBefore(_clock(deadline)),
+                style: TextStyle(color: scheme.onSurfaceVariant),
+              ),
+              if (deadline != null) ...[
+                const SizedBox(height: 12),
+                Row(
+                  children: [
+                    Expanded(
+                      child: FilledButton.icon(
+                        onPressed: _checkIn,
+                        icon: const Icon(Icons.check),
+                        label: Text(l10n.checkInSafe),
                       ),
+                    ),
+                    const SizedBox(width: 8),
+                    OutlinedButton(
+                      onPressed: () => CheckInService.extend(
+                        const Duration(minutes: _extendBy),
+                        _clock,
+                      ),
+                      child: Text(l10n.checkInExtend(_extendBy)),
+                    ),
                   ],
                 ),
-                const SizedBox(height: 6),
-                Text(
-                  deadline == null
-                      ? l10n.checkInSubtitle
-                      : l10n.checkInBefore(_clock(deadline)),
-                  style: TextStyle(color: scheme.onSurfaceVariant),
-                ),
-                if (deadline != null) ...[
-                  const SizedBox(height: 12),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: FilledButton.icon(
-                          onPressed: _checkIn,
-                          icon: const Icon(Icons.check),
-                          label: Text(l10n.checkInSafe),
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      OutlinedButton(
-                        onPressed: () => CheckInService.extend(
-                          const Duration(minutes: _extendBy),
-                          _clock,
-                        ),
-                        child: Text(l10n.checkInExtend(_extendBy)),
-                      ),
-                    ],
-                  ),
-                ],
               ],
-            ),
+            ],
           ),
         ),
       ),

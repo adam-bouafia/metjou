@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:metjou/core/localization/app_locale.dart';
 import 'package:metjou/core/theme/app_theme.dart';
+import 'package:metjou/core/widgets/glass.dart';
 import 'package:metjou/core/widgets/quick_exit_button.dart';
 import 'package:metjou/features/diary/presentation/diary_screen.dart';
 import 'package:metjou/features/fake_call/presentation/fake_call_sheet.dart';
@@ -79,41 +80,30 @@ class _ToolTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.zero,
-      clipBehavior: Clip.antiAlias,
-      elevation: 3,
-      child: InkWell(
-        onTap: onTap,
-        child: Ink(
-          height: 100,
-          padding: const EdgeInsets.symmetric(horizontal: 6),
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: colors,
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(icon, color: Colors.white, size: 30),
-              const SizedBox(height: 6),
-              Text(
-                label,
-                maxLines: 2,
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 13,
-                  height: 1.15,
-                ),
+    return GlassPanel(
+      colors: colors,
+      onTap: onTap,
+      child: Container(
+        height: 100,
+        padding: const EdgeInsets.symmetric(horizontal: 6),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon, color: Colors.white, size: 30),
+            const SizedBox(height: 6),
+            Text(
+              label,
+              maxLines: 2,
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w500,
+                fontSize: 13,
+                height: 1.15,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
