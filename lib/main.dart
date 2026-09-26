@@ -7,6 +7,7 @@ import 'package:metjou/core/services/alert_countdown.dart';
 import 'package:metjou/core/theme/app_theme.dart';
 import 'package:metjou/core/services/background_services.dart';
 import 'package:metjou/core/services/discreet_mode.dart';
+import 'package:metjou/core/services/launch_actions.dart';
 import 'package:metjou/features/check_in/data/check_in_service.dart';
 import 'package:metjou/features/fake_call/data/fake_call_service.dart';
 import 'package:metjou/features/get_home_safe/data/get_home_safe_service.dart';
@@ -77,4 +78,6 @@ Future<void> main() async {
   await loadThemeMode();
   final prefs = await SharedPreferences.getInstance();
   runApp(MyApp(onboardingDone: prefs.getBool("appOpenedBefore") ?? false));
+  // After the first frame, so the navigator exists for opened screens.
+  WidgetsBinding.instance.addPostFrameCallback((_) => LaunchActions.init());
 }
