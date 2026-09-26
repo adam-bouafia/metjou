@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sos">استغاثة</string>
+    <string name="hint">اضغط لتنبيه جهات اتصالك عبر هاتفك</string>
+    <string name="sending">جارٍ الإرسال إلى هاتفك…</string>
+    <string name="sent">تم الإرسال. يبدأ هاتفك العد التنازلي.</string>
+    <string name="no_phone">الهاتف غير متصل. اتصل بـ 112.</string>
+    <string name="failed">تعذر الوصول إلى هاتفك. اتصل بـ 112.</string>
+</resources>

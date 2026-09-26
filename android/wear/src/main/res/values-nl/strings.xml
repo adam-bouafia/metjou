@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sos">SOS</string>
+    <string name="hint">Tik om je contacten via je telefoon te waarschuwen</string>
+    <string name="sending">Versturen naar je telefoon…</string>
+    <string name="sent">Verstuurd. Je telefoon start het aftellen.</string>
+    <string name="no_phone">Telefoon niet verbonden. Bel 112.</string>
+    <string name="failed">Je telefoon is niet bereikbaar. Bel 112.</string>
+</resources>

@@ -24,3 +24,5 @@ plugins {
 }
 
 include(":app")
+// Wear OS SOS app; built with ./gradlew :wear:assembleDebug
+include(":wear")

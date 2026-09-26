@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sos">SOS</string>
+    <string name="hint">Tap to alert your contacts through your phone</string>
+    <string name="sending">Sending to your phone…</string>
+    <string name="sent">Sent. Your phone starts the countdown.</string>
+    <string name="no_phone">Phone not connected. Call 112.</string>
+    <string name="failed">Could not reach your phone. Call 112.</string>
+</resources>

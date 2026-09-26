@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sos">SOS</string>
+    <string name="hint">Touchez pour alerter vos contacts via votre téléphone</string>
+    <string name="sending">Envoi au téléphone…</string>
+    <string name="sent">Envoyé. Votre téléphone lance le compte à rebours.</string>
+    <string name="no_phone">Téléphone non connecté. Appelez le 112.</string>
+    <string name="failed">Téléphone injoignable. Appelez le 112.</string>
+</resources>

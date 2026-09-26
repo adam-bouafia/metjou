@@ -20,6 +20,12 @@ Work in progress. The codebase is being modernised from the 2022 prototype:
 
 No account or backend is needed; contacts and settings stay on the device.
 
+## Wear OS app
+
+`android/wear` is a small watch app with one SOS button. It sends the press to the paired phone (Wearable Data Layer), which starts the SOS countdown. It shares the phone app's application ID and must be signed with the same key.
+
+    cd android && ./gradlew :wear:assembleDebug
+
 ## Project structure
 
 Feature-first layout:
@@ -38,6 +44,7 @@ Feature-first layout:
         presentation/      screens, widgets/ for feature-only widgets
       l10n/                ARB translations and generated code
     plugins/audio_background_record/   local plugin: foreground-service audio recorder
+    android/wear/          Wear OS SOS app (native Kotlin)
     test/                  mirrors lib/
 
 ## Credits
