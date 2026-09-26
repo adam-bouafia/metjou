@@ -5,9 +5,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:metjou/features/contacts/presentation/my_contacts.dart';
-import 'package:metjou/core/services/background_services.dart';
 import 'package:metjou/features/contacts/data/sos_contacts.dart';
-import 'package:workmanager/workmanager.dart';
+import 'package:metjou/features/get_home_safe/data/get_home_safe_service.dart';
 
 class SafeHome extends StatefulWidget {
   const SafeHome({super.key});
@@ -101,18 +100,13 @@ class _SafeHomeState extends State<SafeHome> {
                         });
                         if (getHomeActivated) {
                           changeStateOfHomeSafe(true);
-                          Workmanager().registerPeriodicTask(
-                            "3",
-                            BackgroundServices.simplePeriodicTask,
-                            tag: "3",
-                            inputData: {
-                              "contact": numbers[selectedContact].phone,
-                            },
-                            frequency: Duration(minutes: 15),
+                          await GetHomeSafeService.start(
+                            numbers[selectedContact].phone,
+                            const RepeatEvery(Duration(minutes: 15)),
                           );
                         } else {
                           changeStateOfHomeSafe(false);
-                          await Workmanager().cancelByTag("3");
+                          await GetHomeSafeService.stop();
                         }
                       },
                       subtitle: Text(context.l10n.getHomeSafeInterval),
