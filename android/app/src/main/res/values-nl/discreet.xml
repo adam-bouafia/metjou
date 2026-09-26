@@ -2,4 +2,6 @@
 <resources>
     <!-- Launcher name in discreet mode -->
     <string name="discreet_label">Rekenmachine</string>
+    <string name="sos_tile_label">MetJou SOS</string>
+    <string name="sos_widget_description">Ronde SOS-knop die het aftellen voor een alarm start</string>
 </resources>

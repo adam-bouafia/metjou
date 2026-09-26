@@ -2,4 +2,6 @@
 <resources>
     <!-- Launcher name in discreet mode -->
     <string name="discreet_label">الآلة الحاسبة</string>
+    <string name="sos_tile_label">MetJou SOS</string>
+    <string name="sos_widget_description">زر استغاثة دائري يبدأ العد التنازلي للتنبيه</string>
 </resources>

@@ -2,4 +2,6 @@
 <resources>
     <!-- Launcher name in discreet mode -->
     <string name="discreet_label">Calculadora</string>
+    <string name="sos_tile_label">MetJou SOS</string>
+    <string name="sos_widget_description">Botón SOS redondo que inicia la cuenta atrás de una alerta</string>
 </resources>
