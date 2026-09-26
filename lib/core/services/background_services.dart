@@ -42,14 +42,58 @@ class BackgroundServices {
     ),
   );
 
-  static Future<void> init() async {
+  static Future<void> init({
+    void Function(NotificationResponse response)? onResponse,
+  }) async {
     await _notifications.initialize(
       settings: const InitializationSettings(
         android: AndroidInitializationSettings(_notificationIcon),
         iOS: DarwinInitializationSettings(),
       ),
+      onDidReceiveNotificationResponse: onResponse,
+      onDidReceiveBackgroundNotificationResponse:
+          onNotificationResponseInBackground,
     );
   }
+
+  // Countdown before an alert, with a Cancel action.
+
+  static const cancelAlertAction = "cancel_alert";
+  static const int _countdownNotificationID = 777;
+
+  static Future<void> showCountdownNotification({
+    required String title,
+    required String body,
+    required String cancelLabel,
+  }) => _notifications.show(
+    id: _countdownNotificationID,
+    title: title,
+    body: body,
+    notificationDetails: NotificationDetails(
+      android: AndroidNotificationDetails(
+        "SOS_COUNTDOWN",
+        "SOS countdown",
+        channelDescription: 'Time to cancel an alert',
+        icon: _notificationIcon,
+        importance: Importance.max,
+        priority: Priority.max,
+        category: AndroidNotificationCategory.alarm,
+        onlyAlertOnce: true,
+        ongoing: true,
+        actions: [
+          AndroidNotificationAction(
+            cancelAlertAction,
+            cancelLabel,
+            cancelNotification: true,
+            showsUserInterface: true,
+          ),
+        ],
+      ),
+    ),
+  );
+
+  static Future<void> cancelCountdownNotification() =>
+      _notifications.cancel(id: _countdownNotificationID);
 
   static Future<void> showSmsNotification({
     required String title,
@@ -312,4 +356,18 @@ void callbackDispatcher() {
     }
     return true;
   });
+}
+
+/// Notification actions tapped while the app's Flutter engine is not in
+/// the foreground. Marks the countdown as cancelled; the countdown checks
+/// the flag every second.
+@pragma('vm:entry-point')
+void onNotificationResponseInBackground(NotificationResponse response) async {
+  if (response.actionId == BackgroundServices.cancelAlertAction) {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt(
+      "countdownCancelledAt",
+      DateTime.now().millisecondsSinceEpoch,
+    );
+  }
 }

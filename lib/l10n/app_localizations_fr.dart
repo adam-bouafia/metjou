@@ -331,6 +331,36 @@ class AppLocalizationsFr extends AppLocalizations {
   String get notifShakeNoContacts => 'Aucun contact trouvé. Appelez le 112.';
 
   @override
+  String countdownTitle(int seconds) {
+    return 'SOS envoyé dans $seconds';
+  }
+
+  @override
+  String get countdownBody =>
+      'Secousse détectée. Touchez Annuler si c\'était une erreur.';
+
+  @override
+  String get cancel => 'Annuler';
+
+  @override
+  String get countdownSetting => 'Compte à rebours avant une alerte';
+
+  @override
+  String get countdownSettingSubtitle =>
+      'Temps pour annuler une alerte déclenchée en secouant';
+
+  @override
+  String get off => 'Désactivé';
+
+  @override
+  String seconds(int seconds) {
+    return '$seconds s';
+  }
+
+  @override
+  String get alertCancelled => 'Alerte annulée';
+
+  @override
   String get notifRecording => 'Enregistrement audio';
 
   @override

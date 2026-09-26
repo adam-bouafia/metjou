@@ -326,6 +326,36 @@ class AppLocalizationsNl extends AppLocalizations {
   String get notifShakeNoContacts => 'Geen contacten gevonden. Bel 112.';
 
   @override
+  String countdownTitle(int seconds) {
+    return 'SOS wordt verstuurd over $seconds';
+  }
+
+  @override
+  String get countdownBody =>
+      'Schudden herkend. Tik op Annuleren als dit per ongeluk was.';
+
+  @override
+  String get cancel => 'Annuleren';
+
+  @override
+  String get countdownSetting => 'Aftellen voor een schudalarm';
+
+  @override
+  String get countdownSettingSubtitle =>
+      'Tijd om een alarm door schudden te annuleren';
+
+  @override
+  String get off => 'Uit';
+
+  @override
+  String seconds(int seconds) {
+    return '$seconds s';
+  }
+
+  @override
+  String get alertCancelled => 'Alarm geannuleerd';
+
+  @override
   String get notifRecording => 'Geluidsopname';
 
   @override

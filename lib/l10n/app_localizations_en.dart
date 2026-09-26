@@ -326,6 +326,36 @@ class AppLocalizationsEn extends AppLocalizations {
   String get notifShakeNoContacts => 'No contacts found. Call 112.';
 
   @override
+  String countdownTitle(int seconds) {
+    return 'Sending SOS in $seconds';
+  }
+
+  @override
+  String get countdownBody =>
+      'Shake detected. Tap Cancel if this was a mistake.';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get countdownSetting => 'Countdown before a shake alert';
+
+  @override
+  String get countdownSettingSubtitle =>
+      'Time to cancel an alert sent by shaking';
+
+  @override
+  String get off => 'Off';
+
+  @override
+  String seconds(int seconds) {
+    return '$seconds s';
+  }
+
+  @override
+  String get alertCancelled => 'Alert cancelled';
+
+  @override
   String get notifRecording => 'Audio recording';
 
   @override

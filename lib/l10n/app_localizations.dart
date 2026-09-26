@@ -686,6 +686,54 @@ abstract class AppLocalizations {
   /// **'No contacts found. Call 112.'**
   String get notifShakeNoContacts;
 
+  /// No description provided for @countdownTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sending SOS in {seconds}'**
+  String countdownTitle(int seconds);
+
+  /// No description provided for @countdownBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Shake detected. Tap Cancel if this was a mistake.'**
+  String get countdownBody;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @countdownSetting.
+  ///
+  /// In en, this message translates to:
+  /// **'Countdown before a shake alert'**
+  String get countdownSetting;
+
+  /// No description provided for @countdownSettingSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Time to cancel an alert sent by shaking'**
+  String get countdownSettingSubtitle;
+
+  /// No description provided for @off.
+  ///
+  /// In en, this message translates to:
+  /// **'Off'**
+  String get off;
+
+  /// No description provided for @seconds.
+  ///
+  /// In en, this message translates to:
+  /// **'{seconds} s'**
+  String seconds(int seconds);
+
+  /// No description provided for @alertCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Alert cancelled'**
+  String get alertCancelled;
+
   /// No description provided for @notifRecording.
   ///
   /// In en, this message translates to:

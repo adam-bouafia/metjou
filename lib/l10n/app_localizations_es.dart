@@ -329,6 +329,36 @@ class AppLocalizationsEs extends AppLocalizations {
       'No se encontraron contactos. Llama al 112.';
 
   @override
+  String countdownTitle(int seconds) {
+    return 'Enviando SOS en $seconds';
+  }
+
+  @override
+  String get countdownBody =>
+      'Sacudida detectada. Toca Cancelar si fue un error.';
+
+  @override
+  String get cancel => 'Cancelar';
+
+  @override
+  String get countdownSetting => 'Cuenta atrás antes de una alerta';
+
+  @override
+  String get countdownSettingSubtitle =>
+      'Tiempo para cancelar una alerta enviada al agitar';
+
+  @override
+  String get off => 'Desactivado';
+
+  @override
+  String seconds(int seconds) {
+    return '$seconds s';
+  }
+
+  @override
+  String get alertCancelled => 'Alerta cancelada';
+
+  @override
   String get notifRecording => 'Grabación de audio';
 
   @override

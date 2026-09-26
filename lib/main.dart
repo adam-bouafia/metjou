@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:metjou/app.dart';
 import 'package:metjou/core/localization/app_locale.dart';
+import 'package:metjou/core/services/alert_countdown.dart';
 import 'package:metjou/core/theme/app_theme.dart';
 import 'package:metjou/core/services/background_services.dart';
 import 'package:metjou/features/get_home_safe/data/get_home_safe_service.dart';
@@ -24,7 +25,7 @@ Future<void> _onShake() async {
   }
 
   if (sendSmsOption) {
-    BackgroundServices.sendSms();
+    AlertCountdown.start(BackgroundServices.sendSms);
   }
 
   final recorder = AudioBackgroundRecord.getInstance();
@@ -40,7 +41,13 @@ Future<void> _onShake() async {
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await BackgroundServices.init();
+  await BackgroundServices.init(
+    onResponse: (response) {
+      if (response.actionId == BackgroundServices.cancelAlertAction) {
+        AlertCountdown.cancel();
+      }
+    },
+  );
   await BackgroundServices.checkService();
 
   ShakeDetector.autoStart(

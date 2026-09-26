@@ -5,6 +5,7 @@ import 'package:metjou/core/localization/app_locale.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:metjou/features/settings/presentation/about.dart';
 import 'package:metjou/features/settings/presentation/change_pin.dart';
+import 'package:metjou/core/services/alert_countdown.dart';
 import 'package:metjou/core/services/background_services.dart';
 import 'package:metjou/features/legal/presentation/policy_dialog.dart';
 import 'package:metjou/core/localization/language_picker.dart';
@@ -96,6 +97,39 @@ class _SettingsScreenState extends State<SettingsScreen> {
       await recorder.resetDirectory();
       if (mounted) setState(() => recordFolder = null);
     }
+  }
+
+  Future<void> _selectCountdown(BuildContext context, int current) async {
+    final seconds = await showDialog<int>(
+      context: context,
+      builder: (context) => SimpleDialog(
+        title: Text(context.l10n.countdownSetting),
+        children: [
+          RadioGroup<int>(
+            groupValue: current,
+            onChanged: (s) => Navigator.pop(context, s),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                for (final s in [0, 3, 5, 10])
+                  RadioListTile<int>(
+                    value: s,
+                    title: Text(
+                      s == 0 ? context.l10n.off : context.l10n.seconds(s),
+                    ),
+                  ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+    if (seconds == null) return;
+    await (await SharedPreferences.getInstance()).setInt(
+      countdownSecondsKey,
+      seconds,
+    );
+    if (mounted) setState(() {});
   }
 
   String _themeLabel(BuildContext context, ThemeMode mode) => switch (mode) {
@@ -288,6 +322,33 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             title: Text(context.l10n.safeShake),
             subtitle: Text(context.l10n.safeShakeSubtitle),
+          ),
+          FutureBuilder<SharedPreferences>(
+            future: SharedPreferences.getInstance(),
+            builder: (context, snap) {
+              final seconds =
+                  snap.data?.getInt(countdownSecondsKey) ??
+                  defaultCountdownSeconds;
+              return ListTile(
+                onTap: () => _selectCountdown(context, seconds),
+                leading: CircleAvatar(
+                  backgroundColor: Theme.of(
+                    context,
+                  ).colorScheme.surfaceContainerHighest,
+                  child: Icon(
+                    Icons.timer_outlined,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    size: 22,
+                  ),
+                ),
+                title: Text(context.l10n.countdownSetting),
+                subtitle: Text(
+                  seconds == 0
+                      ? context.l10n.off
+                      : context.l10n.seconds(seconds),
+                ),
+              );
+            },
           ),
           Divider(indent: 40, endIndent: 40),
           SwitchListTile(

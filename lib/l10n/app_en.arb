@@ -142,6 +142,28 @@
   "notifShakeBody": "Shake your phone to alert your contacts",
   "notifShakeSent": "SOS sent to your contacts",
   "notifShakeNoContacts": "No contacts found. Call 112.",
+  "countdownTitle": "Sending SOS in {seconds}",
+  "@countdownTitle": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "countdownBody": "Shake detected. Tap Cancel if this was a mistake.",
+  "cancel": "Cancel",
+  "countdownSetting": "Countdown before a shake alert",
+  "countdownSettingSubtitle": "Time to cancel an alert sent by shaking",
+  "off": "Off",
+  "seconds": "{seconds} s",
+  "@seconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "alertCancelled": "Alert cancelled",
   "notifRecording": "Audio recording",
   "notifRecordingReady": "Ready to record",
   "notifRecordingStarted": "Recording started",

@@ -324,6 +324,35 @@ class AppLocalizationsAr extends AppLocalizations {
   String get notifShakeNoContacts => 'لا توجد جهات اتصال. اتصل بـ 112.';
 
   @override
+  String countdownTitle(int seconds) {
+    return 'إرسال الاستغاثة خلال $seconds';
+  }
+
+  @override
+  String get countdownBody =>
+      'تم رصد هز الهاتف. اضغط إلغاء إذا كان ذلك عن طريق الخطأ.';
+
+  @override
+  String get cancel => 'إلغاء';
+
+  @override
+  String get countdownSetting => 'العد التنازلي قبل تنبيه الهز';
+
+  @override
+  String get countdownSettingSubtitle => 'وقت لإلغاء التنبيه المرسل بهز الهاتف';
+
+  @override
+  String get off => 'إيقاف';
+
+  @override
+  String seconds(int seconds) {
+    return '$seconds ث';
+  }
+
+  @override
+  String get alertCancelled => 'تم إلغاء التنبيه';
+
+  @override
   String get notifRecording => 'تسجيل صوتي';
 
   @override
