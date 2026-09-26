@@ -1,19 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:metjou/utility/app_locale.dart';
 import 'package:metjou/dashboard/settings/about_card.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class AboutUs extends StatelessWidget {
   const AboutUs({super.key});
-  _launchURL() async {
-    const url = 'https://www.efi-ife.org/';
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-  showLicences(context) {
+  void showLicences(BuildContext context) {
     showAboutDialog(
         context: context,
         applicationVersion: "2.0.0",
@@ -41,7 +32,7 @@ class AboutUs extends StatelessWidget {
               width: 10,
             ),
         GestureDetector(
-          onTap: _launchURL,
+          onTap: () => showLicences(context),
             child: Image.asset(
               "assets/information.webp",
               height: 26,

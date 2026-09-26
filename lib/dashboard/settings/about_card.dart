@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AboutCard extends StatelessWidget {
-  AboutCard(
+  const AboutCard(
       {super.key,
       required this.desc,
       required this.subtitle,
@@ -28,7 +28,7 @@ class AboutCard extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: Container(
+              child: SizedBox(
                 width: MediaQuery.of(context).size.width - 50,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

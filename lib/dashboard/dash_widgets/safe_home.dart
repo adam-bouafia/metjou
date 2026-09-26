@@ -13,7 +13,7 @@ class SafeHome extends StatefulWidget {
   const SafeHome({super.key});
 
   @override
-  _SafeHomeState createState() => _SafeHomeState();
+  State<SafeHome> createState() => _SafeHomeState();
 }
 
 class _SafeHomeState extends State<SafeHome> {
@@ -27,7 +27,7 @@ class _SafeHomeState extends State<SafeHome> {
     checkGetHomeActivated();
   }
 
-  checkGetHomeActivated() async {
+  Future<void> checkGetHomeActivated() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     setState(() {
@@ -35,7 +35,7 @@ class _SafeHomeState extends State<SafeHome> {
     });
   }
 
-  changeStateOfHomeSafe(value) async {
+  Future<void> changeStateOfHomeSafe(bool value) async {
     Fluttertoast.showToast(
         msg: value ? context.l10n.getHomeSafeOn : context.l10n.getHomeSafeOff);
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -45,7 +45,7 @@ class _SafeHomeState extends State<SafeHome> {
       prefs.setBool("getHomeSafe", value);
     });
   }
-  showModelSafeHome(bool processRunning) async {
+  Future<void> showModelSafeHome(bool processRunning) async {
     int selectedContact = -1;
     bool getHomeActivated = processRunning;
     showModalBottomSheet(

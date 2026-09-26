@@ -10,7 +10,7 @@ class ChangePinScreen extends StatefulWidget {
   final int pin;
 
   @override
-  _ChangePinScreenState createState() => _ChangePinScreenState();
+  State<ChangePinScreen> createState() => _ChangePinScreenState();
 }
 
 class _ChangePinScreenState extends State<ChangePinScreen> {
@@ -27,10 +27,10 @@ class _ChangePinScreenState extends State<ChangePinScreen> {
     prefs.setInt("pin", parse);
   }
 
-  void changePinSnakBar(pin) {
+  void changePinSnakBar(String pin) {
     final snackBar = SnackBar(
       duration: const Duration(seconds: 10),
-      content: Container(
+      content: SizedBox(
         height: 20.0,
         child: Center(
           child: Text(
@@ -63,7 +63,7 @@ class _ChangePinScreenState extends State<ChangePinScreen> {
       if (currentPin != widget.pin.toString()) {
         final snackBar = SnackBar(
           duration: const Duration(seconds: 10),
-          content: Container(
+          content: SizedBox(
             height: 20.0,
             child: Center(
               child: Text(

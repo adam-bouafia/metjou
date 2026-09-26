@@ -91,7 +91,7 @@ class _DashboardState extends State<Dashboard> {
     }
   }
 
-  showPinModelBottomSheet(int userPin) {
+  void showPinModelBottomSheet(int userPin) {
     showModalBottomSheet(
         isScrollControlled: true,
         isDismissible: true,
@@ -215,17 +215,14 @@ class _DashboardState extends State<Dashboard> {
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
         notchMargin: 12,
-        child: Container(
+        child: SizedBox(
           height: 60,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               InkWell(
                   onTap: () {
-                    if (currentPage != 0)
-                      setState(() {
-                        currentPage = 0;
-                      });
+                    if (currentPage != 0) setState(() => currentPage = 0);
                   },
                   child: Image.asset(
                     "assets/home.webp",
@@ -233,10 +230,7 @@ class _DashboardState extends State<Dashboard> {
                   )),
               InkWell(
                   onTap: () {
-                    if (currentPage != 1)
-                      setState(() {
-                        currentPage = 1;
-                      });
+                    if (currentPage != 1) setState(() => currentPage = 1);
                   },
                   child: Image.asset("assets/phone_red.webp", height: 40)),
             ],
