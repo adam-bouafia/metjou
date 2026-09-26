@@ -444,6 +444,53 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
+  String get medicalId => 'Fiche médicale';
+
+  @override
+  String get medicalIdSubtitle =>
+      'Informations de santé pour les secours, aussi sur l\'écran de verrouillage';
+
+  @override
+  String get medName => 'Nom';
+
+  @override
+  String get medBirth => 'Date de naissance';
+
+  @override
+  String get medBlood => 'Groupe sanguin';
+
+  @override
+  String get medAllergies => 'Allergies';
+
+  @override
+  String get medMedications => 'Médicaments';
+
+  @override
+  String get medConditions => 'Problèmes de santé';
+
+  @override
+  String get medEmergencyName => 'Contact d\'urgence';
+
+  @override
+  String get medEmergencyPhone => 'Téléphone du contact d\'urgence';
+
+  @override
+  String get medNotes => 'Autres remarques';
+
+  @override
+  String get medLockScreen => 'Afficher sur l\'écran de verrouillage';
+
+  @override
+  String get medLockScreenSubtitle =>
+      'Toute personne qui tient votre téléphone peut le lire sans le déverrouiller';
+
+  @override
+  String get medUnknown => 'Inconnu';
+
+  @override
+  String get medSaved => 'Fiche médicale enregistrée';
+
+  @override
   String get send => 'Envoyer';
 
   @override

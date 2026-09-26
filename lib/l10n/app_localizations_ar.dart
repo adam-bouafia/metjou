@@ -435,6 +435,53 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
+  String get medicalId => 'البطاقة الطبية';
+
+  @override
+  String get medicalIdSubtitle =>
+      'معلومات صحية لفرق الإسعاف، أيضًا على شاشة القفل';
+
+  @override
+  String get medName => 'الاسم';
+
+  @override
+  String get medBirth => 'تاريخ الميلاد';
+
+  @override
+  String get medBlood => 'فصيلة الدم';
+
+  @override
+  String get medAllergies => 'الحساسية';
+
+  @override
+  String get medMedications => 'الأدوية';
+
+  @override
+  String get medConditions => 'الحالات الطبية';
+
+  @override
+  String get medEmergencyName => 'جهة اتصال للطوارئ';
+
+  @override
+  String get medEmergencyPhone => 'هاتف جهة اتصال الطوارئ';
+
+  @override
+  String get medNotes => 'ملاحظات أخرى';
+
+  @override
+  String get medLockScreen => 'إظهار على شاشة القفل';
+
+  @override
+  String get medLockScreenSubtitle =>
+      'يمكن لأي شخص يحمل هاتفك قراءة هذا دون فتح القفل';
+
+  @override
+  String get medUnknown => 'غير معروف';
+
+  @override
+  String get medSaved => 'تم حفظ البطاقة الطبية';
+
+  @override
   String get send => 'إرسال';
 
   @override

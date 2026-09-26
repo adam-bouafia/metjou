@@ -11,6 +11,7 @@ import 'package:metjou/core/services/background_services.dart';
 import 'package:metjou/core/services/discreet_mode.dart';
 import 'package:metjou/core/services/low_battery.dart';
 import 'package:metjou/features/legal/presentation/policy_dialog.dart';
+import 'package:metjou/features/medical_id/presentation/medical_id_screen.dart';
 import 'package:metjou/core/localization/language_picker.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -396,6 +397,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             title: Text(context.l10n.safeShake),
             subtitle: Text(context.l10n.safeShakeSubtitle),
+          ),
+          ListTile(
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const MedicalIdScreen()),
+            ),
+            leading: CircleAvatar(
+              backgroundColor: Theme.of(
+                context,
+              ).colorScheme.surfaceContainerHighest,
+              child: Icon(
+                Icons.medical_information_outlined,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+                size: 22,
+              ),
+            ),
+            title: Text(context.l10n.medicalId),
+            subtitle: Text(context.l10n.medicalIdSubtitle),
           ),
           ListTile(
             onTap: () => _sendTestAlert(context),

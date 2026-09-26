@@ -439,6 +439,53 @@ class AppLocalizationsNl extends AppLocalizations {
   }
 
   @override
+  String get medicalId => 'Medische ID';
+
+  @override
+  String get medicalIdSubtitle =>
+      'Gezondheidsgegevens voor hulpverleners, ook op het vergrendelscherm';
+
+  @override
+  String get medName => 'Naam';
+
+  @override
+  String get medBirth => 'Geboortedatum';
+
+  @override
+  String get medBlood => 'Bloedgroep';
+
+  @override
+  String get medAllergies => 'Allergieën';
+
+  @override
+  String get medMedications => 'Medicijnen';
+
+  @override
+  String get medConditions => 'Medische aandoeningen';
+
+  @override
+  String get medEmergencyName => 'Contact bij nood';
+
+  @override
+  String get medEmergencyPhone => 'Telefoon contact bij nood';
+
+  @override
+  String get medNotes => 'Overige opmerkingen';
+
+  @override
+  String get medLockScreen => 'Tonen op vergrendelscherm';
+
+  @override
+  String get medLockScreenSubtitle =>
+      'Iedereen die je telefoon vasthoudt, kan dit lezen zonder te ontgrendelen';
+
+  @override
+  String get medUnknown => 'Onbekend';
+
+  @override
+  String get medSaved => 'Medische ID opgeslagen';
+
+  @override
   String get send => 'Versturen';
 
   @override

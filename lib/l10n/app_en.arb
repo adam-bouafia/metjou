@@ -196,6 +196,21 @@
   "testAlertSubtitle": "Check that your contacts receive your alerts",
   "testAlertConfirm": "Send a test message with your location to all SOS contacts?",
   "testAlertSent": "Test sent to {count} contacts",
+  "medicalId": "Medical ID",
+  "medicalIdSubtitle": "Health details for first responders, also on the lock screen",
+  "medName": "Name",
+  "medBirth": "Date of birth",
+  "medBlood": "Blood type",
+  "medAllergies": "Allergies",
+  "medMedications": "Medication",
+  "medConditions": "Medical conditions",
+  "medEmergencyName": "Emergency contact",
+  "medEmergencyPhone": "Emergency contact phone",
+  "medNotes": "Other notes",
+  "medLockScreen": "Show on lock screen",
+  "medLockScreenSubtitle": "Anyone holding your phone can read this without unlocking it",
+  "medUnknown": "Unknown",
+  "medSaved": "Medical ID saved",
   "@testAlertSent": {
     "placeholders": {
       "count": {

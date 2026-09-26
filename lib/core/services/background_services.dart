@@ -157,6 +157,38 @@ class BackgroundServices {
     ),
   );
 
+  // Medical ID on the lock screen: silent, persistent and public, so first
+  // responders can read it without unlocking.
+
+  static const int _medicalIdNotificationID = 780;
+
+  static Future<void> showMedicalIdNotification({
+    required String title,
+    required String body,
+  }) => _notifications.show(
+    id: _medicalIdNotificationID,
+    title: title,
+    body: body,
+    notificationDetails: NotificationDetails(
+      android: AndroidNotificationDetails(
+        "MEDICAL_ID",
+        "Medical ID",
+        channelDescription: 'Health details on the lock screen',
+        icon: _notificationIcon,
+        importance: Importance.low,
+        priority: Priority.low,
+        ongoing: true,
+        playSound: false,
+        enableVibration: false,
+        visibility: NotificationVisibility.public,
+        styleInformation: BigTextStyleInformation(body),
+      ),
+    ),
+  );
+
+  static Future<void> cancelMedicalIdNotification() =>
+      _notifications.cancel(id: _medicalIdNotificationID);
+
   static Future<void> cancelCountdownNotification() =>
       _notifications.cancel(id: _countdownNotificationID);
 

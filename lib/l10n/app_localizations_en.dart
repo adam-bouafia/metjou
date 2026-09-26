@@ -438,6 +438,53 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get medicalId => 'Medical ID';
+
+  @override
+  String get medicalIdSubtitle =>
+      'Health details for first responders, also on the lock screen';
+
+  @override
+  String get medName => 'Name';
+
+  @override
+  String get medBirth => 'Date of birth';
+
+  @override
+  String get medBlood => 'Blood type';
+
+  @override
+  String get medAllergies => 'Allergies';
+
+  @override
+  String get medMedications => 'Medication';
+
+  @override
+  String get medConditions => 'Medical conditions';
+
+  @override
+  String get medEmergencyName => 'Emergency contact';
+
+  @override
+  String get medEmergencyPhone => 'Emergency contact phone';
+
+  @override
+  String get medNotes => 'Other notes';
+
+  @override
+  String get medLockScreen => 'Show on lock screen';
+
+  @override
+  String get medLockScreenSubtitle =>
+      'Anyone holding your phone can read this without unlocking it';
+
+  @override
+  String get medUnknown => 'Unknown';
+
+  @override
+  String get medSaved => 'Medical ID saved';
+
+  @override
   String get send => 'Send';
 
   @override

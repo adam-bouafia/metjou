@@ -884,6 +884,96 @@ abstract class AppLocalizations {
   /// **'Test sent to {count} contacts'**
   String testAlertSent(int count);
 
+  /// No description provided for @medicalId.
+  ///
+  /// In en, this message translates to:
+  /// **'Medical ID'**
+  String get medicalId;
+
+  /// No description provided for @medicalIdSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Health details for first responders, also on the lock screen'**
+  String get medicalIdSubtitle;
+
+  /// No description provided for @medName.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get medName;
+
+  /// No description provided for @medBirth.
+  ///
+  /// In en, this message translates to:
+  /// **'Date of birth'**
+  String get medBirth;
+
+  /// No description provided for @medBlood.
+  ///
+  /// In en, this message translates to:
+  /// **'Blood type'**
+  String get medBlood;
+
+  /// No description provided for @medAllergies.
+  ///
+  /// In en, this message translates to:
+  /// **'Allergies'**
+  String get medAllergies;
+
+  /// No description provided for @medMedications.
+  ///
+  /// In en, this message translates to:
+  /// **'Medication'**
+  String get medMedications;
+
+  /// No description provided for @medConditions.
+  ///
+  /// In en, this message translates to:
+  /// **'Medical conditions'**
+  String get medConditions;
+
+  /// No description provided for @medEmergencyName.
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency contact'**
+  String get medEmergencyName;
+
+  /// No description provided for @medEmergencyPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency contact phone'**
+  String get medEmergencyPhone;
+
+  /// No description provided for @medNotes.
+  ///
+  /// In en, this message translates to:
+  /// **'Other notes'**
+  String get medNotes;
+
+  /// No description provided for @medLockScreen.
+  ///
+  /// In en, this message translates to:
+  /// **'Show on lock screen'**
+  String get medLockScreen;
+
+  /// No description provided for @medLockScreenSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Anyone holding your phone can read this without unlocking it'**
+  String get medLockScreenSubtitle;
+
+  /// No description provided for @medUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get medUnknown;
+
+  /// No description provided for @medSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Medical ID saved'**
+  String get medSaved;
+
   /// No description provided for @send.
   ///
   /// In en, this message translates to:

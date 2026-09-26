@@ -441,6 +441,53 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
+  String get medicalId => 'Ficha médica';
+
+  @override
+  String get medicalIdSubtitle =>
+      'Datos de salud para los servicios de emergencia, también en la pantalla de bloqueo';
+
+  @override
+  String get medName => 'Nombre';
+
+  @override
+  String get medBirth => 'Fecha de nacimiento';
+
+  @override
+  String get medBlood => 'Grupo sanguíneo';
+
+  @override
+  String get medAllergies => 'Alergias';
+
+  @override
+  String get medMedications => 'Medicación';
+
+  @override
+  String get medConditions => 'Enfermedades';
+
+  @override
+  String get medEmergencyName => 'Contacto de emergencia';
+
+  @override
+  String get medEmergencyPhone => 'Teléfono del contacto de emergencia';
+
+  @override
+  String get medNotes => 'Otras notas';
+
+  @override
+  String get medLockScreen => 'Mostrar en la pantalla de bloqueo';
+
+  @override
+  String get medLockScreenSubtitle =>
+      'Cualquiera que tenga tu teléfono puede leerlo sin desbloquearlo';
+
+  @override
+  String get medUnknown => 'Desconocido';
+
+  @override
+  String get medSaved => 'Ficha médica guardada';
+
+  @override
   String get send => 'Enviar';
 
   @override
