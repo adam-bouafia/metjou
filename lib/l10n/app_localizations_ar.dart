@@ -482,6 +482,55 @@ class AppLocalizationsAr extends AppLocalizations {
   String get medSaved => 'تم حفظ البطاقة الطبية';
 
   @override
+  String get diary => 'اليوميات';
+
+  @override
+  String get diaryTitle => 'يوميات الحوادث';
+
+  @override
+  String get diaryEmpty =>
+      'لا توجد ملاحظات بعد. اكتب ما حدث ومتى وأين، وأضف صورًا إن أردت. يمكنك تصدير كل شيء كملف PDF للشرطة أو Veilig Thuis.';
+
+  @override
+  String get diaryNoPin =>
+      'نصيحة: عيّن رمز PIN في الإعدادات حتى تكون وحدك من يفتح اليوميات.';
+
+  @override
+  String get diaryNew => 'ملاحظة جديدة';
+
+  @override
+  String get diaryWhat => 'ماذا حدث؟ أين، ومن كان حاضرًا؟';
+
+  @override
+  String get diaryWhen => 'التاريخ والوقت';
+
+  @override
+  String get diaryPhotos => 'الصور';
+
+  @override
+  String get diaryCamera => 'التقاط صورة';
+
+  @override
+  String get diaryGallery => 'اختيار من المعرض';
+
+  @override
+  String get diaryExport => 'تصدير كملف PDF';
+
+  @override
+  String get diaryDelete => 'حذف الملاحظة';
+
+  @override
+  String get diaryDeleteConfirm => 'حذف هذه الملاحظة وصورها؟';
+
+  @override
+  String get delete => 'حذف';
+
+  @override
+  String diaryPdfGenerated(String date) {
+    return 'أُنشئ باستخدام MetJou في $date';
+  }
+
+  @override
   String get send => 'إرسال';
 
   @override

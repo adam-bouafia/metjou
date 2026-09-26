@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:metjou/core/localization/app_locale.dart';
 import 'package:metjou/core/theme/app_theme.dart';
 import 'package:metjou/core/widgets/quick_exit_button.dart';
+import 'package:metjou/features/diary/presentation/diary_screen.dart';
 import 'package:metjou/features/fake_call/presentation/fake_call_sheet.dart';
 import 'package:metjou/features/siren/presentation/siren_screen.dart';
 
@@ -29,9 +30,15 @@ class QuickTools extends StatelessWidget {
         ),
       ),
       (
+        Icons.menu_book_rounded,
+        l10n.diary,
+        const [Latte.lavender, Latte.mauve],
+        () => openDiary(context),
+      ),
+      (
         Icons.exit_to_app_rounded,
         l10n.quickExit,
-        const [Latte.lavender, Latte.blue],
+        const [Latte.blue, Latte.sapphire],
         quickExit,
       ),
     ];

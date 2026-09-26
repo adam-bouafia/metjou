@@ -974,6 +974,96 @@ abstract class AppLocalizations {
   /// **'Medical ID saved'**
   String get medSaved;
 
+  /// No description provided for @diary.
+  ///
+  /// In en, this message translates to:
+  /// **'Diary'**
+  String get diary;
+
+  /// No description provided for @diaryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Incident diary'**
+  String get diaryTitle;
+
+  /// No description provided for @diaryEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No entries yet. Write down what happened, when and where, and add photos if you want. You can export everything as a PDF for the police or Veilig Thuis.'**
+  String get diaryEmpty;
+
+  /// No description provided for @diaryNoPin.
+  ///
+  /// In en, this message translates to:
+  /// **'Tip: set a PIN in Settings so only you can open the diary.'**
+  String get diaryNoPin;
+
+  /// No description provided for @diaryNew.
+  ///
+  /// In en, this message translates to:
+  /// **'New entry'**
+  String get diaryNew;
+
+  /// No description provided for @diaryWhat.
+  ///
+  /// In en, this message translates to:
+  /// **'What happened? Where, who was there?'**
+  String get diaryWhat;
+
+  /// No description provided for @diaryWhen.
+  ///
+  /// In en, this message translates to:
+  /// **'Date and time'**
+  String get diaryWhen;
+
+  /// No description provided for @diaryPhotos.
+  ///
+  /// In en, this message translates to:
+  /// **'Photos'**
+  String get diaryPhotos;
+
+  /// No description provided for @diaryCamera.
+  ///
+  /// In en, this message translates to:
+  /// **'Take a photo'**
+  String get diaryCamera;
+
+  /// No description provided for @diaryGallery.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose from gallery'**
+  String get diaryGallery;
+
+  /// No description provided for @diaryExport.
+  ///
+  /// In en, this message translates to:
+  /// **'Export as PDF'**
+  String get diaryExport;
+
+  /// No description provided for @diaryDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete entry'**
+  String get diaryDelete;
+
+  /// No description provided for @diaryDeleteConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this entry and its photos?'**
+  String get diaryDeleteConfirm;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// No description provided for @diaryPdfGenerated.
+  ///
+  /// In en, this message translates to:
+  /// **'Made with MetJou on {date}'**
+  String diaryPdfGenerated(String date);
+
   /// No description provided for @send.
   ///
   /// In en, this message translates to:

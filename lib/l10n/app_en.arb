@@ -211,6 +211,28 @@
   "medLockScreenSubtitle": "Anyone holding your phone can read this without unlocking it",
   "medUnknown": "Unknown",
   "medSaved": "Medical ID saved",
+  "diary": "Diary",
+  "diaryTitle": "Incident diary",
+  "diaryEmpty": "No entries yet. Write down what happened, when and where, and add photos if you want. You can export everything as a PDF for the police or Veilig Thuis.",
+  "diaryNoPin": "Tip: set a PIN in Settings so only you can open the diary.",
+  "diaryNew": "New entry",
+  "diaryWhat": "What happened? Where, who was there?",
+  "diaryWhen": "Date and time",
+  "diaryPhotos": "Photos",
+  "diaryCamera": "Take a photo",
+  "diaryGallery": "Choose from gallery",
+  "diaryExport": "Export as PDF",
+  "diaryDelete": "Delete entry",
+  "diaryDeleteConfirm": "Delete this entry and its photos?",
+  "delete": "Delete",
+  "diaryPdfGenerated": "Made with MetJou on {date}",
+  "@diaryPdfGenerated": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "@testAlertSent": {
     "placeholders": {
       "count": {

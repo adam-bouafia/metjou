@@ -488,6 +488,55 @@ class AppLocalizationsEs extends AppLocalizations {
   String get medSaved => 'Ficha médica guardada';
 
   @override
+  String get diary => 'Diario';
+
+  @override
+  String get diaryTitle => 'Diario de incidentes';
+
+  @override
+  String get diaryEmpty =>
+      'Aún no hay notas. Escribe qué pasó, cuándo y dónde, y añade fotos si quieres. Puedes exportarlo todo como PDF para la policía o Veilig Thuis.';
+
+  @override
+  String get diaryNoPin =>
+      'Consejo: pon un PIN en Ajustes para que solo tú puedas abrir el diario.';
+
+  @override
+  String get diaryNew => 'Nueva nota';
+
+  @override
+  String get diaryWhat => '¿Qué pasó? ¿Dónde, quién estaba?';
+
+  @override
+  String get diaryWhen => 'Fecha y hora';
+
+  @override
+  String get diaryPhotos => 'Fotos';
+
+  @override
+  String get diaryCamera => 'Hacer una foto';
+
+  @override
+  String get diaryGallery => 'Elegir de la galería';
+
+  @override
+  String get diaryExport => 'Exportar como PDF';
+
+  @override
+  String get diaryDelete => 'Eliminar nota';
+
+  @override
+  String get diaryDeleteConfirm => '¿Eliminar esta nota y sus fotos?';
+
+  @override
+  String get delete => 'Eliminar';
+
+  @override
+  String diaryPdfGenerated(String date) {
+    return 'Creado con MetJou el $date';
+  }
+
+  @override
   String get send => 'Enviar';
 
   @override

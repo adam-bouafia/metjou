@@ -37,6 +37,9 @@ dependencies:
   battery_plus: ^7.1.1
   audioplayers: ^6.8.1
   quick_actions: ^1.1.1
+  image_picker: ^1.2.3
+  pdf: ^3.13.1
+  share_plus: ^13.3.0
 
 dev_dependencies:
   flutter_test:

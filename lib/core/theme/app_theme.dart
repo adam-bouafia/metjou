@@ -25,6 +25,7 @@ abstract final class Latte {
   static const green = Color(0xff40a02b);
   static const teal = Color(0xff179299);
   static const blue = Color(0xff1e66f5);
+  static const sapphire = Color(0xff209fb5);
   static const lavender = Color(0xff7287fd);
 }
 

@@ -486,6 +486,55 @@ class AppLocalizationsNl extends AppLocalizations {
   String get medSaved => 'Medische ID opgeslagen';
 
   @override
+  String get diary => 'Dagboek';
+
+  @override
+  String get diaryTitle => 'Incidentendagboek';
+
+  @override
+  String get diaryEmpty =>
+      'Nog geen notities. Schrijf op wat er gebeurde, wanneer en waar, en voeg foto\'s toe als je wilt. Je kunt alles als pdf exporteren voor de politie of Veilig Thuis.';
+
+  @override
+  String get diaryNoPin =>
+      'Tip: stel een pincode in bij Instellingen, zodat alleen jij het dagboek kunt openen.';
+
+  @override
+  String get diaryNew => 'Nieuwe notitie';
+
+  @override
+  String get diaryWhat => 'Wat is er gebeurd? Waar, wie was erbij?';
+
+  @override
+  String get diaryWhen => 'Datum en tijd';
+
+  @override
+  String get diaryPhotos => 'Foto\'s';
+
+  @override
+  String get diaryCamera => 'Foto maken';
+
+  @override
+  String get diaryGallery => 'Kies uit galerij';
+
+  @override
+  String get diaryExport => 'Exporteren als pdf';
+
+  @override
+  String get diaryDelete => 'Notitie verwijderen';
+
+  @override
+  String get diaryDeleteConfirm => 'Deze notitie en de foto\'s verwijderen?';
+
+  @override
+  String get delete => 'Verwijderen';
+
+  @override
+  String diaryPdfGenerated(String date) {
+    return 'Gemaakt met MetJou op $date';
+  }
+
+  @override
   String get send => 'Versturen';
 
   @override
