@@ -40,7 +40,6 @@ Future<void> setAppLocale(Locale locale) async {
   appLocale.value = locale;
 }
 
-
 /// Strings for code that runs without a BuildContext, such as the shake
 /// handler and background tasks.
 Future<AppLocalizations> backgroundLocalizations() async {

@@ -116,6 +116,15 @@
   "notifRecordingReady": "Ready to record",
   "notifRecordingStarted": "Recording started",
   "notifRecordingStopped": "Recording stopped",
+  "notifRecordingSaved": "Recording saved: {location}",
+  "@notifRecordingSaved": {
+    "placeholders": {
+      "location": {
+        "type": "String"
+      }
+    }
+  },
+  "notifRecordingFailed": "Recording failed",
   "createPin": "Create PIN",
   "changePin": "Change PIN",
   "currentPin": "Current PIN",

@@ -85,6 +85,8 @@
   "notifRecordingReady": "Klaar om op te nemen",
   "notifRecordingStarted": "Opname gestart",
   "notifRecordingStopped": "Opname gestopt",
+  "notifRecordingSaved": "Opname opgeslagen: {location}",
+  "notifRecordingFailed": "Opnemen mislukt",
   "createPin": "Pincode instellen",
   "changePin": "Pincode wijzigen",
   "currentPin": "Huidige pincode",

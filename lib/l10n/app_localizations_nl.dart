@@ -285,6 +285,14 @@ class AppLocalizationsNl extends AppLocalizations {
   String get notifRecordingStopped => 'Opname gestopt';
 
   @override
+  String notifRecordingSaved(String location) {
+    return 'Opname opgeslagen: $location';
+  }
+
+  @override
+  String get notifRecordingFailed => 'Opnemen mislukt';
+
+  @override
   String get createPin => 'Pincode instellen';
 
   @override

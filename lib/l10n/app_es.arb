@@ -85,6 +85,8 @@
   "notifRecordingReady": "Listo para grabar",
   "notifRecordingStarted": "Grabación iniciada",
   "notifRecordingStopped": "Grabación detenida",
+  "notifRecordingSaved": "Grabación guardada: {location}",
+  "notifRecordingFailed": "La grabación falló",
   "createPin": "Crear PIN",
   "changePin": "Cambiar PIN",
   "currentPin": "PIN actual",

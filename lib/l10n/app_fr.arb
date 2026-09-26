@@ -85,6 +85,8 @@
   "notifRecordingReady": "Prêt à enregistrer",
   "notifRecordingStarted": "Enregistrement démarré",
   "notifRecordingStopped": "Enregistrement arrêté",
+  "notifRecordingSaved": "Enregistrement sauvegardé : {location}",
+  "notifRecordingFailed": "Échec de l'enregistrement",
   "createPin": "Créer un code PIN",
   "changePin": "Changer le code PIN",
   "currentPin": "Code PIN actuel",

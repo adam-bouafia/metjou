@@ -288,6 +288,14 @@ class AppLocalizationsEs extends AppLocalizations {
   String get notifRecordingStopped => 'Grabación detenida';
 
   @override
+  String notifRecordingSaved(String location) {
+    return 'Grabación guardada: $location';
+  }
+
+  @override
+  String get notifRecordingFailed => 'La grabación falló';
+
+  @override
   String get createPin => 'Crear PIN';
 
   @override

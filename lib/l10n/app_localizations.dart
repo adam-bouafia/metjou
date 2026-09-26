@@ -614,6 +614,18 @@ abstract class AppLocalizations {
   /// **'Recording stopped'**
   String get notifRecordingStopped;
 
+  /// No description provided for @notifRecordingSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Recording saved: {location}'**
+  String notifRecordingSaved(String location);
+
+  /// No description provided for @notifRecordingFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Recording failed'**
+  String get notifRecordingFailed;
+
   /// No description provided for @createPin.
   ///
   /// In en, this message translates to:

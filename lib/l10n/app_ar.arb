@@ -85,6 +85,8 @@
   "notifRecordingReady": "جاهز للتسجيل",
   "notifRecordingStarted": "بدأ التسجيل",
   "notifRecordingStopped": "توقف التسجيل",
+  "notifRecordingSaved": "تم حفظ التسجيل: {location}",
+  "notifRecordingFailed": "فشل التسجيل",
   "createPin": "إنشاء رمز PIN",
   "changePin": "تغيير رمز PIN",
   "currentPin": "رمز PIN الحالي",

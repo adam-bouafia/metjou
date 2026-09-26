@@ -283,6 +283,14 @@ class AppLocalizationsAr extends AppLocalizations {
   String get notifRecordingStopped => 'توقف التسجيل';
 
   @override
+  String notifRecordingSaved(String location) {
+    return 'تم حفظ التسجيل: $location';
+  }
+
+  @override
+  String get notifRecordingFailed => 'فشل التسجيل';
+
+  @override
   String get createPin => 'إنشاء رمز PIN';
 
   @override

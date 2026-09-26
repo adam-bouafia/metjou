@@ -199,21 +199,29 @@ class BackgroundServices {
 
   // Audio recording
 
-  static Future<void> audioRecordCallBack(int status, String? errorMsg) async {
+  /// Recording status from the plugin: 1 started, 2 stopped (message is
+  /// where the file was saved), 0 error (message is the error).
+  static Future<void> audioRecordCallBack(int status, String? message) async {
     final l10n = await backgroundLocalizations();
     switch (status) {
-      case 1: // recording started
-        showAudioRecordNotification(
+      case 1:
+        await showAudioRecordNotification(
           title: l10n.notifRecording,
           content: l10n.notifRecordingStarted,
         );
-      case 2: // recording stopped
-        showAudioRecordNotification(
+      case 2:
+        await showAudioRecordNotification(
           title: l10n.notifRecording,
-          content: l10n.notifRecordingStopped,
+          content: message == null
+              ? l10n.notifRecordingStopped
+              : l10n.notifRecordingSaved(message),
         );
-      case 0: // recording error
-        debugPrint("audio record error: $errorMsg");
+      case 0:
+        debugPrint("audio record error: $message");
+        await showAudioRecordNotification(
+          title: l10n.notifRecording,
+          content: l10n.notifRecordingFailed,
+        );
     }
   }
 
