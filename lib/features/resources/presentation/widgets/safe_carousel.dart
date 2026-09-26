@@ -31,6 +31,7 @@ class SafeCarousel extends StatelessWidget {
                 MaterialPageRoute(builder: (_) => ArticleDesc(resource: r)),
               ),
               child: Container(
+                width: double.infinity,
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
