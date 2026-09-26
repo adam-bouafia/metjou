@@ -3,6 +3,7 @@ import 'package:metjou/features/splash/presentation/splash.dart';
 import 'package:metjou/features/legal/presentation/terms_of_use.dart';
 import 'package:metjou/features/onboarding/presentation/widgets/onboarding_page.dart';
 import 'package:metjou/core/localization/app_locale.dart';
+import 'package:metjou/core/theme/app_theme.dart';
 import 'package:metjou/core/localization/language_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -106,78 +107,82 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     final isFirst = _page == 0;
     final isLast = _page == pages.length - 1;
 
-    return Scaffold(
-      backgroundColor: onboardingBackground,
-      body: SafeArea(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 56,
-              child: Row(
-                children: [
-                  if (!isFirst)
-                    IconButton(
-                      icon: const Icon(Icons.arrow_back),
-                      onPressed: () => _goTo(_page - 1),
-                    ),
-                  const Spacer(),
-                  if (!isLast)
-                    TextButton(
-                      onPressed: () => _goTo(pages.length - 1),
-                      child: Text(
-                        l10n.onbSkip,
-                        style: const TextStyle(color: onboardingPrimary),
+    // Always light: the illustrations have a light background baked in.
+    return Theme(
+      data: appTheme,
+      child: Scaffold(
+        backgroundColor: onboardingBackground,
+        body: SafeArea(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 56,
+                child: Row(
+                  children: [
+                    if (!isFirst)
+                      IconButton(
+                        icon: const Icon(Icons.arrow_back),
+                        onPressed: () => _goTo(_page - 1),
                       ),
-                    ),
-                  const SizedBox(width: 8),
-                ],
-              ),
-            ),
-            Expanded(
-              child: PageView(
-                controller: _controller,
-                onPageChanged: (page) => setState(() => _page = page),
-                children: pages,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(24, 8, 24, 16),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  _PageDots(count: pages.length, current: _page),
-                  const SizedBox(height: 16),
-                  SizedBox(
-                    width: double.infinity,
-                    child: FilledButton(
-                      style: FilledButton.styleFrom(
-                        backgroundColor: onboardingPrimary,
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(32),
+                    const Spacer(),
+                    if (!isLast)
+                      TextButton(
+                        onPressed: () => _goTo(pages.length - 1),
+                        child: Text(
+                          l10n.onbSkip,
+                          style: const TextStyle(color: onboardingPrimary),
                         ),
                       ),
-                      onPressed: isLast ? _finish : () => _goTo(_page + 1),
-                      child: Text(
-                        isFirst
-                            ? l10n.onbBegin
-                            : isLast
-                            ? l10n.onbGetStarted
-                            : l10n.onbNext,
-                        style: const TextStyle(fontSize: 18),
+                    const SizedBox(width: 8),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: PageView(
+                  controller: _controller,
+                  onPageChanged: (page) => setState(() => _page = page),
+                  children: pages,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(24, 8, 24, 16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _PageDots(count: pages.length, current: _page),
+                    const SizedBox(height: 16),
+                    SizedBox(
+                      width: double.infinity,
+                      child: FilledButton(
+                        style: FilledButton.styleFrom(
+                          backgroundColor: onboardingPrimary,
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(32),
+                          ),
+                        ),
+                        onPressed: isLast ? _finish : () => _goTo(_page + 1),
+                        child: Text(
+                          isFirst
+                              ? l10n.onbBegin
+                              : isLast
+                              ? l10n.onbGetStarted
+                              : l10n.onbNext,
+                          style: const TextStyle(fontSize: 18),
+                        ),
                       ),
                     ),
-                  ),
-                  AnimatedSize(
-                    duration: _pageTransition,
-                    child: isLast
-                        ? const TermsOfUse()
-                        : const SizedBox(width: double.infinity),
-                  ),
-                ],
+                    AnimatedSize(
+                      duration: _pageTransition,
+                      child: isLast
+                          ? const TermsOfUse()
+                          : const SizedBox(width: double.infinity),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

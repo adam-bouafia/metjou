@@ -88,12 +88,11 @@ class _ChangePinScreenState extends State<ChangePinScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFAFCFE),
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_rounded, color: Colors.black),
+          icon: Icon(Icons.arrow_back_ios_rounded),
           onPressed: () {
             ScaffoldMessenger.of(context).removeCurrentSnackBar();
             Navigator.pop(context);

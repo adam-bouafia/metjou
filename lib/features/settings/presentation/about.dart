@@ -17,15 +17,11 @@ class AboutUs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFAF7FA),
       appBar: AppBar(
         title: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              context.l10n.about,
-              style: TextStyle(color: Colors.black, fontSize: 26),
-            ),
+            Text(context.l10n.about, style: TextStyle(fontSize: 26)),
             SizedBox(width: 10),
             GestureDetector(
               onTap: () => showLicences(context),
@@ -39,9 +35,14 @@ class AboutUs extends StatelessWidget {
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
           child: CircleAvatar(
-            backgroundColor: Colors.grey[200],
+            backgroundColor: Theme.of(
+              context,
+            ).colorScheme.surfaceContainerHighest,
             child: IconButton(
-              icon: Icon(Icons.arrow_back_ios_rounded, color: Colors.grey),
+              icon: Icon(
+                Icons.arrow_back_ios_rounded,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
               onPressed: () {
                 Navigator.pop(context);
               },
@@ -69,7 +70,9 @@ class AboutUs extends StatelessWidget {
                   showLicences(context);
                 },
                 leading: CircleAvatar(
-                  backgroundColor: Colors.grey[100],
+                  backgroundColor: Theme.of(
+                    context,
+                  ).colorScheme.surfaceContainerHigh,
                   child: Center(
                     child: Image.asset("assets/card.webp", height: 30),
                   ),

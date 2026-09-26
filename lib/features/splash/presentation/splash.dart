@@ -28,7 +28,6 @@ class _SplashState extends State<Splash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFf5ebe2),
       body: Stack(
         children: [
           Align(
@@ -52,7 +51,7 @@ class _SplashState extends State<Splash> {
               child: Text(
                 "MetJou",
                 style: TextStyle(
-                  color: Color(0xff6A3085),
+                  color: Theme.of(context).colorScheme.primary,
                   fontWeight: FontWeight.bold,
                   fontSize: 24,
                 ),

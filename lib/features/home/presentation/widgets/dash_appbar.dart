@@ -11,7 +11,10 @@ class DashAppbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text('MetJou', style: TextStyle(color: Colors.grey[600])),
+      title: Text(
+        'MetJou',
+        style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant),
+      ),
       subtitle: GestureDetector(
         onTap: onTap,
         child: Text(
@@ -21,7 +24,6 @@ class DashAppbar extends StatelessWidget {
             context.l10n.slogan3,
           ][quoteIndex],
           style: TextStyle(
-            color: Colors.black,
             fontWeight: FontWeight.bold,
             fontSize: MediaQuery.of(context).size.width * 0.06,
           ),

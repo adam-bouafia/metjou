@@ -45,17 +45,12 @@ class _MyContactsScreenState extends State<MyContactsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFAFCFE),
       appBar: AppBar(
         centerTitle: true,
         elevation: 0,
         title: Text(
           context.l10n.sosContacts,
-          style: TextStyle(
-            fontSize: 26,
-            fontWeight: FontWeight.w900,
-            color: Colors.black,
-          ),
+          style: TextStyle(fontSize: 26, fontWeight: FontWeight.w900),
         ),
         backgroundColor: Colors.transparent,
         leading: IconButton(
@@ -103,10 +98,12 @@ class _MyContactsScreenState extends State<MyContactsScreen> {
                         ],
                       ),
                       child: Container(
-                        color: Colors.white,
+                        color: Theme.of(context).colorScheme.surface,
                         child: ListTile(
                           leading: CircleAvatar(
-                            backgroundColor: Colors.grey[200],
+                            backgroundColor: Theme.of(
+                              context,
+                            ).colorScheme.surfaceContainerHighest,
                             backgroundImage: AssetImage("assets/user.webp"),
                           ),
                           title: Text(contact.name),

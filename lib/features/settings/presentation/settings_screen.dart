@@ -124,12 +124,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFAFCFE),
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_rounded, color: Colors.black),
+          icon: Icon(Icons.arrow_back_ios_rounded),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -159,7 +158,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     );
                   },
                   leading: CircleAvatar(
-                    backgroundColor: Colors.grey[200],
+                    backgroundColor: Theme.of(
+                      context,
+                    ).colorScheme.surfaceContainerHighest,
                     child: Center(child: Image.asset("assets/pin.webp")),
                   ),
                   title: Text(
@@ -172,12 +173,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     radius: 7,
                     backgroundColor: snapshot.data == -1111
                         ? Colors.red
-                        : Colors.white,
+                        : Colors.transparent,
                     child: Center(
                       child: Card(
                         color: snapshot.data == -1111
                             ? Colors.orange
-                            : Colors.white,
+                            : Colors.transparent,
                         shape: CircleBorder(),
                         child: SizedBox(height: 5, width: 5),
                       ),
@@ -206,7 +207,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
               showLanguagePicker(context);
             },
             leading: CircleAvatar(
-              backgroundColor: Colors.grey[200],
+              backgroundColor: Theme.of(
+                context,
+              ).colorScheme.surfaceContainerHighest,
               child: Center(
                 child: Image.asset("assets/language.webp", height: 24),
               ),
@@ -225,7 +228,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
             },
             value: switchValue,
             secondary: CircleAvatar(
-              backgroundColor: Colors.grey[200],
+              backgroundColor: Theme.of(
+                context,
+              ).colorScheme.surfaceContainerHighest,
               child: Center(
                 child: Image.asset("assets/shake.webp", height: 24),
               ),
@@ -243,7 +248,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
             },
             value: switchAudioRecord,
             secondary: CircleAvatar(
-              backgroundColor: Colors.grey[200],
+              backgroundColor: Theme.of(
+                context,
+              ).colorScheme.surfaceContainerHighest,
               child: Center(
                 child: Image.asset("assets/record.webp", height: 24),
               ),
@@ -256,7 +263,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
             onTap: () => _selectRecordDuration(context),
             trailing: Icon(Icons.keyboard_arrow_right),
             leading: CircleAvatar(
-              backgroundColor: Colors.grey[200],
+              backgroundColor: Theme.of(
+                context,
+              ).colorScheme.surfaceContainerHighest,
               child: Center(
                 child: Image.asset("assets/timer.webp", height: 24),
               ),
@@ -269,10 +278,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
             onTap: () => _selectRecordFolder(context),
             trailing: Icon(Icons.keyboard_arrow_right),
             leading: CircleAvatar(
-              backgroundColor: Colors.grey[200],
+              backgroundColor: Theme.of(
+                context,
+              ).colorScheme.surfaceContainerHighest,
               child: Icon(
                 Icons.folder_outlined,
-                color: Colors.black54,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
                 size: 22,
               ),
             ),
@@ -286,7 +297,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
             padding: const EdgeInsets.all(18.0),
             child: Text(
               context.l10n.safeShakeExplain,
-              style: TextStyle(color: Colors.grey),
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
             ),
           ),
           Row(
@@ -310,7 +323,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
             },
             title: Text(context.l10n.about),
             leading: CircleAvatar(
-              backgroundColor: Colors.grey[200],
+              backgroundColor: Theme.of(
+                context,
+              ).colorScheme.surfaceContainerHighest,
               child: Center(child: Image.asset("assets/info.webp", height: 24)),
             ),
           ),
@@ -329,8 +344,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               title: Text(label),
               leading: CircleAvatar(
-                backgroundColor: Colors.grey[200],
-                child: Icon(icon, color: Colors.black54, size: 22),
+                backgroundColor: Theme.of(
+                  context,
+                ).colorScheme.surfaceContainerHighest,
+                child: Icon(
+                  icon,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  size: 22,
+                ),
               ),
             ),
         ],

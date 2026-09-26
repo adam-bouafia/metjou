@@ -59,7 +59,9 @@ class AboutCard extends StatelessWidget {
             padding: const EdgeInsets.only(left: 20.0),
             child: CircleAvatar(
               radius: 50,
-              backgroundColor: Colors.white,
+              backgroundColor: Theme.of(
+                context,
+              ).colorScheme.surfaceContainerLow,
               child: Center(
                 child: Image.asset("assets/logoss.webp", height: 85),
               ),

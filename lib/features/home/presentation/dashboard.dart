@@ -105,7 +105,7 @@ class _DashboardState extends State<Dashboard> {
         return Container(
           height: MediaQuery.of(context).size.height / 2.7,
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.surface,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(20),
               topRight: Radius.circular(20),
@@ -157,10 +157,11 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFAFCFE),
       floatingActionButton: currentPage == 1
           ? FloatingActionButton(
-              backgroundColor: Colors.white,
+              backgroundColor: Theme.of(
+                context,
+              ).colorScheme.surfaceContainerHighest,
               onPressed: () async {
                 if (await pickSosContact(context)) setState(() {});
               },
