@@ -7,8 +7,9 @@ const onboardingPrimary = AppColors.primary;
 const onboardingBackground = Color(0xffF4EAE2);
 const _textColor = Color(0xff132137);
 
-/// Aspect ratio of the onboarding illustrations (852x480).
-const _illustrationRatio = 852 / 480;
+/// The illustrations are 852x480 (1.78); allow cropping the sides down to
+/// this ratio so they can be taller on narrow phones.
+const _minRatio = 1.45;
 
 /// One onboarding step: illustration, explanation and an optional action.
 /// Sizes follow the available space, so it fits small and large phones and
@@ -33,59 +34,67 @@ class OnboardingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final width = constraints.maxWidth - 48;
-        final illustrationWidth =
-            (constraints.maxHeight * 0.42 * _illustrationRatio).clamp(
-              0.0,
-              width,
-            );
+        // Edge to edge: the illustration background matches the screen, so
+        // it blends in. On tall screens it may crop up to ~18% at the sides
+        // to grow taller, never more than half of the available height.
+        final width = constraints.maxWidth;
+        final height = (width / _minRatio).clamp(
+          0.0,
+          constraints.maxHeight * 0.5,
+        );
         return SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
           child: ConstrainedBox(
             constraints: BoxConstraints(minHeight: constraints.maxHeight),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(28),
-                  child: Image.asset(
-                    image,
-                    width: illustrationWidth,
-                    height: illustrationWidth / _illustrationRatio,
-                    fit: BoxFit.cover,
-                    filterQuality: FilterQuality.medium,
-                    gaplessPlayback: true,
-                  ),
+                Image.asset(
+                  image,
+                  width: width,
+                  height: height,
+                  fit: BoxFit.cover,
+                  filterQuality: FilterQuality.medium,
+                  gaplessPlayback: true,
                 ),
-                const SizedBox(height: 32),
-                if (title != null) ...[
-                  SizedBox(
-                    width: double.infinity,
-                    child: Text(
-                      title!,
-                      style: const TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: _textColor,
+                const SizedBox(height: 24),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Column(
+                    children: [
+                      if (title != null) ...[
+                        SizedBox(
+                          width: double.infinity,
+                          child: Text(
+                            title!,
+                            style: const TextStyle(
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                              color: _textColor,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                      ],
+                      SizedBox(
+                        width: double.infinity,
+                        child: Text(
+                          text,
+                          style: const TextStyle(
+                            fontSize: 17,
+                            height: 1.45,
+                            color: _textColor,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
                       ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                ],
-                SizedBox(
-                  width: double.infinity,
-                  child: Text(
-                    text,
-                    style: const TextStyle(
-                      fontSize: 17,
-                      height: 1.45,
-                      color: _textColor,
-                    ),
-                    textAlign: TextAlign.center,
+                      if (action != null) ...[
+                        const SizedBox(height: 28),
+                        action!,
+                      ],
+                    ],
                   ),
                 ),
-                if (action != null) ...[const SizedBox(height: 28), action!],
               ],
             ),
           ),
