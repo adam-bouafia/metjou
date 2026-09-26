@@ -27,6 +27,18 @@ class AppLocalizationsNl extends AppLocalizations {
   String get changeLanguage => 'Wijzig de taal van de app';
 
   @override
+  String get appearance => 'Weergave';
+
+  @override
+  String get themeSystem => 'Zoals de telefoon';
+
+  @override
+  String get themeLight => 'Licht';
+
+  @override
+  String get themeDark => 'Donker';
+
+  @override
   String get chooseLanguage => 'Kies je taal';
 
   @override

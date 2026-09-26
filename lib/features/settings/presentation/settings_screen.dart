@@ -1,5 +1,6 @@
 import 'package:audio_background_record/audio_background_record.dart';
 import 'package:flutter/material.dart';
+import 'package:metjou/core/theme/app_theme.dart';
 import 'package:metjou/core/localization/app_locale.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:metjou/features/settings/presentation/about.dart';
@@ -95,6 +96,38 @@ class _SettingsScreenState extends State<SettingsScreen> {
       await recorder.resetDirectory();
       if (mounted) setState(() => recordFolder = null);
     }
+  }
+
+  String _themeLabel(BuildContext context, ThemeMode mode) => switch (mode) {
+    ThemeMode.system => context.l10n.themeSystem,
+    ThemeMode.light => context.l10n.themeLight,
+    ThemeMode.dark => context.l10n.themeDark,
+  };
+
+  Future<void> _selectTheme(BuildContext context, ThemeMode current) async {
+    final mode = await showDialog<ThemeMode>(
+      context: context,
+      builder: (context) => SimpleDialog(
+        title: Text(context.l10n.appearance),
+        children: [
+          RadioGroup<ThemeMode>(
+            groupValue: current,
+            onChanged: (m) => Navigator.pop(context, m),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                for (final m in ThemeMode.values)
+                  RadioListTile<ThemeMode>(
+                    value: m,
+                    title: Text(_themeLabel(context, m)),
+                  ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+    if (mode != null) await setThemeMode(mode);
   }
 
   Future<void> checkService() async {
@@ -216,6 +249,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             title: Text(context.l10n.language),
             subtitle: Text(context.l10n.changeLanguage),
+          ),
+          ValueListenableBuilder<ThemeMode>(
+            valueListenable: appThemeMode,
+            builder: (context, mode, _) => ListTile(
+              onTap: () => _selectTheme(context, mode),
+              leading: CircleAvatar(
+                backgroundColor: Theme.of(
+                  context,
+                ).colorScheme.surfaceContainerHighest,
+                child: Icon(
+                  Icons.dark_mode_outlined,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  size: 22,
+                ),
+              ),
+              title: Text(context.l10n.appearance),
+              subtitle: Text(_themeLabel(context, mode)),
+            ),
           ),
           Divider(indent: 40, endIndent: 40),
           Divider(indent: 40, endIndent: 40),

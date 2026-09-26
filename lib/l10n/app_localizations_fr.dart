@@ -27,6 +27,18 @@ class AppLocalizationsFr extends AppLocalizations {
   String get changeLanguage => 'Changer la langue de l\'application';
 
   @override
+  String get appearance => 'Apparence';
+
+  @override
+  String get themeSystem => 'Comme le téléphone';
+
+  @override
+  String get themeLight => 'Clair';
+
+  @override
+  String get themeDark => 'Sombre';
+
+  @override
   String get chooseLanguage => 'Choisissez votre langue';
 
   @override
