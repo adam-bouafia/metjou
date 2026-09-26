@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:metjou/features/settings/presentation/about.dart';
 import 'package:metjou/features/settings/presentation/change_pin.dart';
 import 'package:metjou/core/services/background_services.dart';
+import 'package:metjou/features/legal/presentation/policy_dialog.dart';
 import 'package:metjou/core/localization/language_picker.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -258,6 +259,25 @@ class _SettingsScreenState extends State<SettingsScreen> {
               child: Center(child: Image.asset("assets/info.webp", height: 24)),
             ),
           ),
+          for (final (document, label, icon) in [
+            (
+              'privacy_policy',
+              context.l10n.privacyLink,
+              Icons.privacy_tip_outlined,
+            ),
+            ('terms', context.l10n.termsLink, Icons.description_outlined),
+          ])
+            ListTile(
+              onTap: () => showDialog(
+                context: context,
+                builder: (_) => PolicyDialog(document: document),
+              ),
+              title: Text(label),
+              leading: CircleAvatar(
+                backgroundColor: Colors.grey[200],
+                child: Icon(icon, color: Colors.black54, size: 22),
+              ),
+            ),
         ],
       ),
     );
