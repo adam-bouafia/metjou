@@ -46,4 +46,16 @@ void main() {
     expect(sent, 0);
     expect(AlertCountdown.remaining.value, isNull);
   });
+
+  testWidgets('a minimum overrides a disabled countdown', (tester) async {
+    SharedPreferences.setMockInitialValues({countdownSecondsKey: 0});
+    var sent = 0;
+    await AlertCountdown.start(() async => sent++, minimumSeconds: 15);
+    expect(AlertCountdown.remaining.value, 15);
+    await tester.pump(const Duration(seconds: 14));
+    expect(sent, 0);
+    await tester.pump(const Duration(seconds: 1));
+    await tester.pump();
+    expect(sent, 1);
+  });
 }
