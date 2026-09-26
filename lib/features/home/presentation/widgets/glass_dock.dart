@@ -91,7 +91,9 @@ class _DockItem extends StatelessWidget {
           curve: Curves.easeOutCubic,
           padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 10),
           decoration: BoxDecoration(
-            color: selected ? scheme.primaryContainer : Colors.transparent,
+            color: selected
+                ? scheme.primary.withValues(alpha: 0.14)
+                : Colors.transparent,
             borderRadius: BorderRadius.circular(24),
           ),
           child: AnimatedScale(
@@ -100,9 +102,7 @@ class _DockItem extends StatelessWidget {
             child: Icon(
               icon,
               size: 28,
-              color: selected
-                  ? scheme.onPrimaryContainer
-                  : scheme.onSurfaceVariant,
+              color: selected ? scheme.primary : scheme.onSurfaceVariant,
             ),
           ),
         ),
