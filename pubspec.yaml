@@ -31,7 +31,6 @@ dependencies:
   shared_preferences: ^2.5.5
   url_launcher: ^6.3.2
   vibration: ^3.2.1
-  webview_flutter: ^4.14.1
   workmanager: ^0.10.10
   flutter_localizations:
     sdk: flutter

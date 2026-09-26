@@ -1,27 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:metjou/Dashboard/Settings/SettingsScreen.dart';
-import 'package:metjou/Utility/constants.dart';
+import 'package:metjou/Utility/app_locale.dart';
 
 class DashAppbar extends StatelessWidget {
-  DashAppbar({super.key, required this.getRandomInt, required this.quoteIndex});
+  const DashAppbar({super.key, required this.onTap, required this.quoteIndex});
 
-  final Function getRandomInt;
+  final VoidCallback onTap;
   final int quoteIndex;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(
-        sweetSayings[quoteIndex][0],
+        'MetJou',
         style: TextStyle(color: Colors.grey[600],
         ),
       ),
       subtitle: GestureDetector(
-        onTap: () {
-          getRandomInt(true);
-        },
+        onTap: onTap,
         child: Text(
-          sweetSayings[quoteIndex][1],
+          [context.l10n.slogan1, context.l10n.slogan2, context.l10n.slogan3][quoteIndex],
           style: TextStyle(color: Colors.black,
               fontWeight: FontWeight.bold,
               fontSize: MediaQuery.of(context).size.width * 0.06),
