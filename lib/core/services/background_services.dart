@@ -95,15 +95,31 @@ class BackgroundServices {
   static Future<void> cancelCountdownNotification() =>
       _notifications.cancel(id: _countdownNotificationID);
 
+  /// Discreet mode: status notifications are not shown.
+  /// Loaded at app start and updated when the setting changes.
+  static bool discreet = false;
+
+  static Future<void> _show(
+    int id,
+    String title,
+    String body,
+    NotificationDetails details,
+  ) async {
+    // Discreet mode skips status notifications: Android shows the real
+    // app name in every notification header, which a disguise cannot hide.
+    if (discreet) return;
+    await _notifications.show(
+      id: id,
+      title: title,
+      body: body,
+      notificationDetails: details,
+    );
+  }
+
   static Future<void> showSmsNotification({
     required String title,
     required String content,
-  }) => _notifications.show(
-    id: smsNotificationID,
-    title: title,
-    body: content,
-    notificationDetails: _smsNotificationDetails,
-  );
+  }) => _show(smsNotificationID, title, content, _smsNotificationDetails);
 
   static Future<void> cancelSmsNotification() =>
       _notifications.cancel(id: smsNotificationID);
@@ -111,11 +127,11 @@ class BackgroundServices {
   static Future<void> showAudioRecordNotification({
     required String title,
     required String content,
-  }) => _notifications.show(
-    id: audioRecordNotificationID,
-    title: title,
-    body: content,
-    notificationDetails: _audioRecordNotificationDetails,
+  }) => _show(
+    audioRecordNotificationID,
+    title,
+    content,
+    _audioRecordNotificationDetails,
   );
 
   static Future<void> cancelAudioRecordNotification() =>
@@ -141,8 +157,10 @@ class BackgroundServices {
                   accuracy: LocationAccuracy.high,
                   distanceFilter: 20,
                   foregroundNotificationConfig: ForegroundNotificationConfig(
-                    notificationTitle: "Safe Shake",
-                    notificationText: _foregroundNotificationText,
+                    notificationTitle: discreet ? "" : "Safe Shake",
+                    notificationText: discreet
+                        ? ""
+                        : _foregroundNotificationText,
                     notificationIcon: const AndroidResource(
                       name: _notificationIcon,
                     ),

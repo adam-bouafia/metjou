@@ -398,6 +398,26 @@ class AppLocalizationsNl extends AppLocalizations {
       'De pincode stopt een SOS-alarm en beschermt je instellingen en contacten';
 
   @override
+  String get discreetMode => 'Discrete modus';
+
+  @override
+  String get discreetModeSubtitle =>
+      'Toont MetJou als \'Rekenmachine\' en zet statusmeldingen uit';
+
+  @override
+  String get discreetConfirmTitle => 'Discrete modus aanzetten?';
+
+  @override
+  String get discreetConfirmBody =>
+      'Het icoon en de naam van MetJou worden een rekenmachine op je startscherm, statusmeldingen gaan uit, en het overzicht van recente apps toont geen voorbeeld. Het kan even duren voordat je startscherm is bijgewerkt. Android toont de naam MetJou nog wel boven meldingen en bij Instellingen > Apps.';
+
+  @override
+  String get discreetNotification => 'Dienst actief';
+
+  @override
+  String get turnOn => 'Aanzetten';
+
+  @override
   String get pinChanged => 'Pincode gewijzigd';
 
   @override

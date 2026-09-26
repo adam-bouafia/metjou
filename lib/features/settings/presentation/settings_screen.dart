@@ -7,6 +7,7 @@ import 'package:metjou/features/settings/presentation/about.dart';
 import 'package:metjou/features/settings/presentation/change_pin.dart';
 import 'package:metjou/core/services/alert_countdown.dart';
 import 'package:metjou/core/services/background_services.dart';
+import 'package:metjou/core/services/discreet_mode.dart';
 import 'package:metjou/features/legal/presentation/policy_dialog.dart';
 import 'package:metjou/core/localization/language_picker.dart';
 
@@ -129,6 +130,32 @@ class _SettingsScreenState extends State<SettingsScreen> {
       countdownSecondsKey,
       seconds,
     );
+    if (mounted) setState(() {});
+  }
+
+  Future<void> _setDiscreet(BuildContext context, bool on) async {
+    if (on) {
+      final ok = await showDialog<bool>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(context.l10n.discreetConfirmTitle),
+          content: Text(context.l10n.discreetConfirmBody),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context, false),
+              child: Text(context.l10n.cancel),
+            ),
+            FilledButton(
+              onPressed: () => Navigator.pop(context, true),
+              child: Text(context.l10n.turnOn),
+            ),
+          ],
+        ),
+      );
+      if (ok != true) return;
+    }
+    await DiscreetMode.setEnabled(on);
+    BackgroundServices.discreet = on;
     if (mounted) setState(() {});
   }
 
@@ -283,6 +310,25 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             title: Text(context.l10n.language),
             subtitle: Text(context.l10n.changeLanguage),
+          ),
+          FutureBuilder<bool>(
+            future: DiscreetMode.isEnabled(),
+            builder: (context, snap) => SwitchListTile(
+              value: snap.data ?? false,
+              onChanged: (on) => _setDiscreet(context, on),
+              secondary: CircleAvatar(
+                backgroundColor: Theme.of(
+                  context,
+                ).colorScheme.surfaceContainerHighest,
+                child: Icon(
+                  Icons.visibility_off_outlined,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  size: 22,
+                ),
+              ),
+              title: Text(context.l10n.discreetMode),
+              subtitle: Text(context.l10n.discreetModeSubtitle),
+            ),
           ),
           ValueListenableBuilder<ThemeMode>(
             valueListenable: appThemeMode,

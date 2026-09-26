@@ -401,6 +401,26 @@ class AppLocalizationsEs extends AppLocalizations {
       'El PIN detiene una alerta SOS y protege los ajustes y tus contactos';
 
   @override
+  String get discreetMode => 'Modo discreto';
+
+  @override
+  String get discreetModeSubtitle =>
+      'Muestra MetJou como \'Calculadora\' y desactiva las notificaciones de estado';
+
+  @override
+  String get discreetConfirmTitle => '¿Activar el modo discreto?';
+
+  @override
+  String get discreetConfirmBody =>
+      'El icono y el nombre de MetJou pasan a ser una calculadora en tu pantalla de inicio, las notificaciones de estado se desactivan, y la pantalla de apps recientes no muestra vista previa. La pantalla de inicio puede tardar un momento en actualizarse. Android sigue mostrando el nombre MetJou en la cabecera de las notificaciones y en Ajustes > Aplicaciones.';
+
+  @override
+  String get discreetNotification => 'Servicio activo';
+
+  @override
+  String get turnOn => 'Activar';
+
+  @override
   String get pinChanged => 'PIN cambiado';
 
   @override

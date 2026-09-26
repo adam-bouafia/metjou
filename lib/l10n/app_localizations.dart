@@ -812,6 +812,42 @@ abstract class AppLocalizations {
   /// **'The PIN stops an SOS alert and protects Settings and your contacts'**
   String get pinRequired;
 
+  /// No description provided for @discreetMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Discreet mode'**
+  String get discreetMode;
+
+  /// No description provided for @discreetModeSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Shows MetJou as \'Calculator\' and turns off status notifications'**
+  String get discreetModeSubtitle;
+
+  /// No description provided for @discreetConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn on discreet mode?'**
+  String get discreetConfirmTitle;
+
+  /// No description provided for @discreetConfirmBody.
+  ///
+  /// In en, this message translates to:
+  /// **'MetJou\'s icon and name change to a calculator on your home screen, status notifications are turned off, and the recent apps screen shows no preview. The home screen can take a moment to update. Android still shows the name MetJou in notification headers and under Settings > Apps.'**
+  String get discreetConfirmBody;
+
+  /// No description provided for @discreetNotification.
+  ///
+  /// In en, this message translates to:
+  /// **'Service active'**
+  String get discreetNotification;
+
+  /// No description provided for @turnOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn on'**
+  String get turnOn;
+
   /// No description provided for @pinChanged.
   ///
   /// In en, this message translates to:

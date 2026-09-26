@@ -395,6 +395,26 @@ class AppLocalizationsAr extends AppLocalizations {
       'رمز PIN يوقف تنبيه الاستغاثة ويحمي الإعدادات وجهات اتصالك';
 
   @override
+  String get discreetMode => 'الوضع السري';
+
+  @override
+  String get discreetModeSubtitle =>
+      'يظهر MetJou باسم \'الآلة الحاسبة\' ويوقف إشعارات الحالة';
+
+  @override
+  String get discreetConfirmTitle => 'تفعيل الوضع السري؟';
+
+  @override
+  String get discreetConfirmBody =>
+      'يتحول رمز MetJou واسمه إلى آلة حاسبة على الشاشة الرئيسية، وتتوقف إشعارات الحالة، ولا تعرض شاشة التطبيقات الأخيرة أي معاينة. قد تستغرق الشاشة الرئيسية لحظة للتحديث. يظل Android يعرض اسم MetJou في رأس الإشعارات وفي الإعدادات > التطبيقات.';
+
+  @override
+  String get discreetNotification => 'الخدمة نشطة';
+
+  @override
+  String get turnOn => 'تفعيل';
+
+  @override
   String get pinChanged => 'تم تغيير رمز PIN';
 
   @override

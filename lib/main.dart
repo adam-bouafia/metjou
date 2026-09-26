@@ -6,6 +6,7 @@ import 'package:metjou/core/localization/app_locale.dart';
 import 'package:metjou/core/services/alert_countdown.dart';
 import 'package:metjou/core/theme/app_theme.dart';
 import 'package:metjou/core/services/background_services.dart';
+import 'package:metjou/core/services/discreet_mode.dart';
 import 'package:metjou/features/get_home_safe/data/get_home_safe_service.dart';
 import 'package:shake/shake.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -41,6 +42,8 @@ Future<void> _onShake() async {
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  BackgroundServices.discreet = await DiscreetMode.isEnabled();
+  await DiscreetMode.apply();
   await BackgroundServices.init(
     onResponse: (response) {
       if (response.actionId == BackgroundServices.cancelAlertAction) {

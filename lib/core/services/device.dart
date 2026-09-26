@@ -46,4 +46,8 @@ abstract final class Device {
   /// Shows the disguised launcher icon instead of MetJou's.
   static Future<void> setDiscreet(bool enabled) =>
       _channel.invokeMethod('setDiscreet', {'enabled': enabled});
+
+  /// Blanks the app's preview in the recent apps screen (FLAG_SECURE).
+  static Future<void> setSecure(bool enabled) =>
+      _channel.invokeMethod('setSecure', {'enabled': enabled});
 }

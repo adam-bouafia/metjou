@@ -9,6 +9,7 @@ import android.hardware.camera2.CameraManager
 import android.media.AudioManager
 import android.media.Ringtone
 import android.media.RingtoneManager
+import android.view.WindowManager
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
@@ -59,6 +60,15 @@ class MainActivity : FlutterActivity() {
                     }
                     "setDiscreet" -> {
                         setDiscreet(call.argument<Boolean>("enabled") == true)
+                        result.success(null)
+                    }
+                    "setSecure" -> {
+                        // Hides the app's content in the recent apps screen.
+                        if (call.argument<Boolean>("enabled") == true) {
+                            window.addFlags(WindowManager.LayoutParams.FLAG_SECURE)
+                        } else {
+                            window.clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
+                        }
                         result.success(null)
                     }
                     else -> result.notImplemented()
