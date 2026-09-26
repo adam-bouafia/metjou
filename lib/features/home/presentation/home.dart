@@ -11,7 +11,6 @@ import 'package:metjou/features/check_in/presentation/check_in_card.dart';
 import 'package:metjou/features/get_home_safe/presentation/safe_home.dart';
 import 'package:metjou/core/localization/app_locale.dart';
 import 'package:metjou/core/widgets/entrance.dart';
-import 'package:metjou/core/widgets/glass.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -43,42 +42,40 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return GlassBackground(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          DashAppbar(onTap: nextQuote, quoteIndex: quoteIndex),
-          Expanded(
-            child: ListView(
-              children: [
-                for (final (i, section) in [
-                  _header(
-                    l10n.resourcesTitle,
-                    trailing: TextButton(
-                      onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (_) => AllArticles()),
-                      ),
-                      child: Text(l10n.seeMore),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        DashAppbar(onTap: nextQuote, quoteIndex: quoteIndex),
+        Expanded(
+          child: ListView(
+            children: [
+              for (final (i, section) in [
+                _header(
+                  l10n.resourcesTitle,
+                  trailing: TextButton(
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => AllArticles()),
                     ),
+                    child: Text(l10n.seeMore),
                   ),
-                  SafeCarousel(),
-                  _header(l10n.emergency),
-                  Emergency(),
-                  _header(l10n.quickTools),
-                  QuickTools(),
-                  _header(l10n.safePlaces),
-                  LiveSafe(),
-                  SafeHome(),
-                  CheckInCard(),
-                ].indexed)
-                  Entrance(index: i, child: section),
-                SizedBox(height: glassDockClearance),
-              ],
-            ),
+                ),
+                SafeCarousel(),
+                _header(l10n.emergency),
+                Emergency(),
+                _header(l10n.quickTools),
+                QuickTools(),
+                _header(l10n.safePlaces),
+                LiveSafe(),
+                SafeHome(),
+                CheckInCard(),
+              ].indexed)
+                Entrance(index: i, child: section),
+              SizedBox(height: glassDockClearance),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

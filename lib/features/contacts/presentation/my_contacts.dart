@@ -3,6 +3,7 @@ import 'package:metjou/core/localization/app_locale.dart';
 import 'package:flutter_native_contact_picker/flutter_native_contact_picker.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:metjou/core/widgets/glass.dart';
 import 'package:metjou/core/widgets/pin_guard.dart';
 import 'package:metjou/features/contacts/data/sos_contacts.dart';
 import 'package:metjou/features/home/presentation/widgets/glass_dock.dart';
@@ -48,6 +49,8 @@ class _MyContactsScreenState extends State<MyContactsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // The dashboard's glass background shows through.
+      backgroundColor: Colors.transparent,
       appBar: AppBar(
         centerTitle: true,
         elevation: 0,
@@ -102,17 +105,23 @@ class _MyContactsScreenState extends State<MyContactsScreen> {
                           ),
                         ],
                       ),
-                      child: Container(
-                        color: Theme.of(context).colorScheme.surface,
-                        child: ListTile(
-                          leading: CircleAvatar(
-                            backgroundColor: Theme.of(
-                              context,
-                            ).colorScheme.surfaceContainerHighest,
-                            backgroundImage: AssetImage("assets/user.webp"),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 5,
+                        ),
+                        child: GlassPanel(
+                          radius: 16,
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              backgroundColor: Theme.of(
+                                context,
+                              ).colorScheme.surfaceContainerHighest,
+                              backgroundImage: AssetImage("assets/user.webp"),
+                            ),
+                            title: Text(contact.name),
+                            subtitle: Text(contact.phone),
                           ),
-                          title: Text(contact.name),
-                          subtitle: Text(contact.phone),
                         ),
                       ),
                     );

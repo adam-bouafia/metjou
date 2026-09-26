@@ -6,6 +6,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:metjou/features/home/presentation/home.dart';
+import 'package:metjou/core/widgets/glass.dart';
 import 'package:metjou/features/home/presentation/widgets/glass_dock.dart';
 import 'package:metjou/features/home/presentation/widgets/sos_button.dart';
 import 'package:metjou/features/contacts/presentation/my_contacts.dart';
@@ -214,20 +215,22 @@ class _DashboardState extends State<Dashboard> with WidgetsBindingObserver {
         },
         center: SosButton(alerted: alerted, onPressed: _onSosPressed),
       ),
-      body: SafeArea(
-        bottom: false,
-        child: PageTransitionSwitcher(
-          duration: const Duration(milliseconds: 350),
-          transitionBuilder: (child, primary, secondary) =>
-              FadeThroughTransition(
-                animation: primary,
-                secondaryAnimation: secondary,
-                fillColor: Colors.transparent,
-                child: child,
-              ),
-          child: currentPage == 0
-              ? const Home(key: ValueKey('home'))
-              : MyContactsScreen(key: const ValueKey('contacts')),
+      body: GlassBackground(
+        child: SafeArea(
+          bottom: false,
+          child: PageTransitionSwitcher(
+            duration: const Duration(milliseconds: 350),
+            transitionBuilder: (child, primary, secondary) =>
+                FadeThroughTransition(
+                  animation: primary,
+                  secondaryAnimation: secondary,
+                  fillColor: Colors.transparent,
+                  child: child,
+                ),
+            child: currentPage == 0
+                ? const Home(key: ValueKey('home'))
+                : MyContactsScreen(key: const ValueKey('contacts')),
+          ),
         ),
       ),
     );
