@@ -19,6 +19,8 @@ MetJou is a personal safety app made by Adam Bouafia in the Netherlands. This po
 | Your PIN | To stop an SOS alert | App storage on your phone |
 | Settings (Safe Shake, audio recording, language, theme, discreet mode) | To remember your choices | App storage on your phone |
 | The fake caller's name and a running check-in deadline | For the fake call and the check-in timer | App storage on your phone |
+| Incident diary: text and photos | Your own record of what happened | Private app folder on your phone |
+| Medical ID: health details you fill in | For first responders | App storage on your phone |
 | Audio recordings, only if you turn this on | Evidence you can use yourself | Private app folder on your phone |
 
 This data is removed when you delete the app or clear its data in your phone settings.
@@ -30,6 +32,22 @@ MetJou reads your location to add a map link to SOS messages and for Get home sa
 Your location is only sent when you send an alert (button, shake, Quick Settings tile, widget or shortcut), while Get home safe is on, when you miss a check-in, or once when your battery is nearly empty if you turned on the low battery message. It goes by SMS to your chosen contacts. Nobody else receives it, including the developer.
 
 The map link in the SMS points to Google Maps. When your contact opens it, Google processes that request under its own privacy policy.
+
+## Incident diary
+
+Diary entries and their photos stay in the app's private folder; photos are copied there so deleting them from your gallery keeps the record. They only leave your phone when you export the diary as a PDF and choose where to share it.
+
+## Medical ID
+
+If you turn on "Show on lock screen", your Medical ID is shown in a notification that anyone holding your phone can read without unlocking it. Turn it off to keep it inside the app.
+
+## Fall detection
+
+If you turn on fall detection, MetJou reads the motion sensor while the app runs to recognise a fall. The readings are only used for that moment and are not stored.
+
+## Wear OS watch
+
+The MetJou watch app sends an SOS press to your own paired phone through Google Play services. The message contains no personal data.
 
 ## Battery
 

@@ -19,6 +19,8 @@ MetJou is een app voor persoonlijke veiligheid, gemaakt door Adam Bouafia in Ned
 | Je pincode | Om een SOS-alarm te stoppen | Opslag van de app op je telefoon |
 | Instellingen (Safe Shake, geluidsopname, taal, weergave, discrete modus) | Om je keuzes te onthouden | Opslag van de app op je telefoon |
 | De naam van de nep-beller en een lopende incheck-deadline | Voor de nep-oproep en de inchecktimer | Opslag van de app op je telefoon |
+| Incidentendagboek: tekst en foto's | Je eigen verslag van wat er gebeurde | Privémap van de app op je telefoon |
+| Medische ID: gezondheidsgegevens die je invult | Voor hulpverleners | Opslag van de app op je telefoon |
 | Geluidsopnames, alleen als je dit aanzet | Bewijs dat je zelf kunt gebruiken | Privémap van de app op je telefoon |
 
 Deze gegevens worden verwijderd als je de app verwijdert of de appgegevens wist in de instellingen van je telefoon.
@@ -30,6 +32,22 @@ MetJou leest je locatie om een kaartlink aan SOS-berichten toe te voegen en voor
 Je locatie wordt alleen verstuurd als je een alarm stuurt (knop, schudden, snelle-instellingentegel, widget of snelkoppeling), zolang Veilig thuiskomen aan staat, als je niet op tijd incheckt, of één keer bij een bijna lege batterij als je dat bericht hebt aangezet. Dat gebeurt per sms naar je gekozen contacten. Niemand anders ontvangt je locatie, ook de ontwikkelaar niet.
 
 De kaartlink in de sms verwijst naar Google Maps. Als je contact de link opent, verwerkt Google dat verzoek volgens zijn eigen privacybeleid.
+
+## Incidentendagboek
+
+Notities en foto's in het dagboek blijven in de privémap van de app; foto's worden daarheen gekopieerd, zodat je verslag blijft bestaan als je ze uit je galerij verwijdert. Ze verlaten je telefoon alleen als je het dagboek als pdf exporteert en zelf kiest waar je het deelt.
+
+## Medische ID
+
+Als je "Tonen op vergrendelscherm" aanzet, staat je Medische ID in een melding die iedereen die je telefoon vasthoudt, kan lezen zonder te ontgrendelen. Zet het uit om het alleen in de app te bewaren.
+
+## Valdetectie
+
+Als je valdetectie aanzet, leest MetJou de bewegingssensor zolang de app draait om een val te herkennen. Die metingen worden alleen op dat moment gebruikt en niet bewaard.
+
+## Wear OS-horloge
+
+De MetJou-app op je horloge stuurt een druk op SOS naar je eigen gekoppelde telefoon via Google Play-services. Het bericht bevat geen persoonsgegevens.
 
 ## Batterij
 
