@@ -4,4 +4,5 @@
     <string name="discreet_label">الآلة الحاسبة</string>
     <string name="sos_tile_label">MetJou SOS</string>
     <string name="sos_widget_description">زر استغاثة دائري يبدأ العد التنازلي للتنبيه</string>
+    <string name="watch_sos_open">استغاثة من ساعتك: اضغط لفتح MetJou وبدء العد التنازلي</string>
 </resources>

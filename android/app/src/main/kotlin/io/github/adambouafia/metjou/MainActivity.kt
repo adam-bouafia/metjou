@@ -22,6 +22,11 @@ import io.flutter.plugin.common.MethodChannel
 class MainActivity : FlutterActivity() {
     companion object {
         const val EXTRA_ACTION = "metjou_action"
+
+        /** Channel of the running app, for the watch listener. */
+        @Volatile
+        var activeChannel: MethodChannel? = null
+            private set
         private const val CHANNEL = "metjou/device"
     }
 
@@ -33,7 +38,9 @@ class MainActivity : FlutterActivity() {
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
         pendingAction = intent?.getStringExtra(EXTRA_ACTION)
-        channel = MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).apply {
+        channel = MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).also {
+            activeChannel = it
+        }.apply {
             setMethodCallHandler { call, result ->
                 when (call.method) {
                     "takeLaunchAction" -> {
@@ -84,6 +91,7 @@ class MainActivity : FlutterActivity() {
     }
 
     override fun onDestroy() {
+        if (activeChannel === channel) activeChannel = null
         ringtone?.stop()
         setTorch(false)
         restoreVolume()

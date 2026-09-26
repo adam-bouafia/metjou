@@ -4,4 +4,5 @@
     <string name="discreet_label">Rekenmachine</string>
     <string name="sos_tile_label">MetJou SOS</string>
     <string name="sos_widget_description">Ronde SOS-knop die het aftellen voor een alarm start</string>
+    <string name="watch_sos_open">SOS vanaf je horloge: tik om MetJou te openen en het aftellen te starten</string>
 </resources>

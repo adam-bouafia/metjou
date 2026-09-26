@@ -71,4 +71,6 @@ flutter {
 
 dependencies {
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.5")
+    // Receives the SOS press from the Wear OS app.
+    implementation("com.google.android.gms:play-services-wearable:20.0.1")
 }

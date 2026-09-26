@@ -4,4 +4,5 @@
     <string name="discreet_label">Calculatrice</string>
     <string name="sos_tile_label">MetJou SOS</string>
     <string name="sos_widget_description">Bouton SOS rond qui lance le compte à rebours d\'une alerte</string>
+    <string name="watch_sos_open">SOS depuis votre montre : touchez pour ouvrir MetJou et lancer le compte à rebours</string>
 </resources>
