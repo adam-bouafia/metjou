@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:metjou/Utility/app_locale.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:metjou/Utility/pin_input.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:get/get.dart';
 
 class ChangePinScreen extends StatefulWidget {
   const ChangePinScreen({super.key, required this.pin});
@@ -34,7 +34,7 @@ class _ChangePinScreenState extends State<ChangePinScreen> {
         height: 20.0,
         child: Center(
           child: Text(
-            'Pin modifiée. Value: $pin',
+            context.l10n.pinChanged,
             style: const TextStyle(fontSize: 16.0),
           ),
         ),
@@ -56,7 +56,7 @@ class _ChangePinScreenState extends State<ChangePinScreen> {
   void _showSnackBar(String pin, BuildContext context) {
     if (widget.pin != -1111) {
       if (currentPin.isEmpty || currentPin.length != 4) {
-        Fluttertoast.showToast(msg: 'Please enter Current PIN');
+        Fluttertoast.showToast(msg: context.l10n.enterCurrentPinFirst);
         _pinPutFocusNode2.unfocus();
         return;
       }
@@ -67,7 +67,7 @@ class _ChangePinScreenState extends State<ChangePinScreen> {
             height: 20.0,
             child: Center(
               child: Text(
-                'pinf'.tr,
+                context.l10n.currentPinWrong,
                 style: const TextStyle(fontSize: 16.0),
               ),
             ),
@@ -107,7 +107,7 @@ class _ChangePinScreenState extends State<ChangePinScreen> {
           Padding(
             padding: const EdgeInsets.all(18.0),
             child: Text(
-              widget.pin == -1111 ? "creerpin".tr : "chpin".tr,
+              widget.pin == -1111 ? context.l10n.createPin : context.l10n.changePin,
               style: TextStyle(fontSize: 35, fontWeight: FontWeight.w900),
             ),
           ),
@@ -126,7 +126,7 @@ class _ChangePinScreenState extends State<ChangePinScreen> {
                   margin: const EdgeInsets.only(left: 35.0, right: 20),
                   child: Row(
                     children: [
-                      Text("cpna".tr),
+                      Text(context.l10n.currentPin),
                       Expanded(
                         child: Divider(
                           indent: 10,
@@ -155,7 +155,7 @@ class _ChangePinScreenState extends State<ChangePinScreen> {
             margin: const EdgeInsets.only(left: 35.0, right: 20),
             child: Row(
               children: [
-                Text("npin".tr),
+                Text(context.l10n.newPin),
                 Expanded(
                     child: Divider(
                   indent: 10,
@@ -198,7 +198,7 @@ class _ChangePinScreenState extends State<ChangePinScreen> {
                       ),
                       child: Center(
                           child: Text(
-                        "fait".tr,
+                        context.l10n.done,
                         style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
                       )),
                     ),

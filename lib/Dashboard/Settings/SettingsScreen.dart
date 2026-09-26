@@ -1,6 +1,6 @@
 import 'package:audio_background_record/audio_background_record.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:metjou/Utility/app_locale.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:metjou/Dashboard/Settings/About.dart';
 import 'package:metjou/Dashboard/Settings/ChangePin.dart';
@@ -35,12 +35,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final selected = await showDialog<Duration>(
       context: context,
       builder: (context) => SimpleDialog(
-        title: Text("Audio Record timer"),
+        title: Text(context.l10n.audioRecordLength),
         children: [
           for (final d in _recordDurations)
             SimpleDialogOption(
               onPressed: () => Navigator.pop(context, d),
-              child: Text("${d.inMinutes} min"),
+              child: Text(context.l10n.minutes(d.inMinutes)),
             ),
         ],
       ),
@@ -99,7 +99,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           Padding(
             padding: const EdgeInsets.all(18.0),
             child: Text(
-              "regl".tr,
+              context.l10n.settings,
               style: TextStyle(
                   fontSize: 35,
                   fontWeight: FontWeight.w900),
@@ -126,8 +126,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ),
                     ),
                     title: Text(
-                        snapshot.data == -1111 ? "creerpin".tr : "chpin".tr),
-                    subtitle: Text("cpreq".tr),
+                        snapshot.data == -1111 ? context.l10n.createPin : context.l10n.changePin),
+                    subtitle: Text(context.l10n.pinRequired),
                     trailing: CircleAvatar(
                       radius: 7,
                       backgroundColor:
@@ -154,7 +154,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
-                  "noti".tr,
+                  context.l10n.alertsSection,
                   style: TextStyle(fontSize: 20),
                 ),
               ),
@@ -173,8 +173,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 height: 24,
               )),
             ),
-            title: Text("langu".tr),
-            subtitle: Text("languch".tr),
+            title: Text(context.l10n.language),
+            subtitle: Text(context.l10n.changeLanguage),
           ),
           Divider(
             indent: 40,
@@ -200,8 +200,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 height: 24,
               )),
             ),
-            title: Text("sfs".tr),
-            subtitle: Text("actsf".tr),
+            title: Text(context.l10n.safeShake),
+            subtitle: Text(context.l10n.safeShakeSubtitle),
           ),
           Divider(
             indent: 40,
@@ -223,9 +223,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 height: 24,
               )),
             ),
-            title: Text("Audio Record"),
+            title: Text(context.l10n.audioRecord),
             //TODO Translation
-            subtitle: Text("actsfs".tr),
+            subtitle: Text(context.l10n.audioRecordSubtitle),
           ),
           Divider(
             indent: 40,
@@ -242,8 +242,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 child: Image.asset("assets/timer.webp", height: 24),
               ),
             ),
-            title: Text("Audio Record timer"), //TODO Translation
-            subtitle: Text("change audio record time as you wish you want:"),
+            title: Text(context.l10n.audioRecordLength),
+            subtitle: Text(context.l10n.audioRecordLengthSubtitle),
           ),
           Divider(
             indent: 40,
@@ -252,7 +252,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           Padding(
             padding: const EdgeInsets.all(18.0),
             child: Text(
-              "sfdes".tr,
+              context.l10n.safeShakeExplain,
               style:
                   TextStyle(color: Colors.grey),
             ),
@@ -262,7 +262,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
-                  "app".tr,
+                  context.l10n.appSection,
                   style: TextStyle(fontSize: 20),
                 ),
               ),
@@ -274,7 +274,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               Navigator.push(
                   context, MaterialPageRoute(builder: (context) => AboutUs()));
             },
-            title: Text("infon".tr),
+            title: Text(context.l10n.about),
             leading: CircleAvatar(
               backgroundColor: Colors.grey[200],
               child: Center(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:metjou/Utility/app_locale.dart';
 import 'package:metjou/Dashboard/Settings/AboutCard.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:get/get.dart';
 
 class AboutUs extends StatelessWidget {
   const AboutUs({super.key});
@@ -16,14 +16,13 @@ class AboutUs extends StatelessWidget {
   showLicences(context) {
     showAboutDialog(
         context: context,
-        applicationVersion: "1.0.0",
+        applicationVersion: "2.0.0",
         applicationIcon: Image.asset(
           "assets/logoss.webp",
           height: 50,
         ),
         applicationName: "MetJou",
-        applicationLegalese:
-            "MetJou fournit une solution aux problèmes de la communauté, une application entièrement conviviale et un besoin de l'heure, visant à vous connecter à ceux qui s'occupent de vous!");
+        applicationLegalese: context.l10n.aboutLegalese);
   }
 
   @override
@@ -35,7 +34,7 @@ class AboutUs extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              "propos".tr,
+              context.l10n.about,
               style: TextStyle(color: Colors.black, fontSize: 26),
             ),
             SizedBox(
@@ -71,9 +70,8 @@ class AboutUs extends StatelessWidget {
       body: ListView(
         children: [
           AboutCard(
-            desc:
-                "MetJou est une application mobile vigilante qui permet à l'utilisateur de rester connecté avec ceux qui s'en soucient ! Il donne à l'utilisateur la possibilité de partager l'emplacement en direct avec les personnes concernées via des alertes SOS et permet à l'utilisateur d'accéder aux services d'urgence. Soyez témoin de l'incident malheureux qui se produit et appelez à l'aide. C'est votre compagnon personnel.",
-            subtitle: "Vous méritez la sécurité!",
+            desc: context.l10n.aboutDescription,
+            subtitle: context.l10n.tagline,
             title: "MetJou",
             sizeFactor: 1.8,
           ),
@@ -94,7 +92,7 @@ class AboutUs extends StatelessWidget {
                     ),
                   ),
                   trailing: Icon(Icons.arrow_forward_ios_rounded),
-                  title: Text("lcs".tr)),
+                  title: Text(context.l10n.licenses)),
             ),
           ),
           SizedBox(
@@ -108,7 +106,7 @@ class AboutUs extends StatelessWidget {
                   endIndent: 10,
                 ),
               ),
-              Text("drt".tr),
+              Text(context.l10n.copyright),
               Expanded(
                 child: Divider(
                   indent: 10,
