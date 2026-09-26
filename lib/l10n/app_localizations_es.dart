@@ -254,6 +254,42 @@ class AppLocalizationsEs extends AppLocalizations {
   String get ghsChooseContact => '¿Quién recibe tu ubicación?';
 
   @override
+  String get checkIn => 'Temporizador de aviso';
+
+  @override
+  String get checkInSubtitle =>
+      'Avisa a tus contactos si no confirmas a tiempo';
+
+  @override
+  String checkInBefore(String time) {
+    return 'Confirma antes de las $time';
+  }
+
+  @override
+  String get checkInSafe => 'Estoy bien';
+
+  @override
+  String checkInExtend(int minutes) {
+    return '+$minutes min';
+  }
+
+  @override
+  String get checkInHowLong => 'Avisar a mis contactos si no confirmo en';
+
+  @override
+  String get checkInNotifBody => 'Toca Estoy bien cuando todo esté bien';
+
+  @override
+  String get checkInAlerted => 'Se avisó a tus contactos';
+
+  @override
+  String get checkInDone => 'Confirmado. Nos alegra que estés bien.';
+
+  @override
+  String get smsCheckInMissed =>
+      'No confirmé a tiempo en MetJou. Puede que necesite ayuda. Mi ubicación:';
+
+  @override
   String get sosContacts => 'Contactos SOS';
 
   @override

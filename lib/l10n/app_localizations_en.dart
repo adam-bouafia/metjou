@@ -253,6 +253,42 @@ class AppLocalizationsEn extends AppLocalizations {
   String get ghsChooseContact => 'Who gets your location?';
 
   @override
+  String get checkIn => 'Check-in timer';
+
+  @override
+  String get checkInSubtitle =>
+      'Alerts your contacts if you don\'t check in on time';
+
+  @override
+  String checkInBefore(String time) {
+    return 'Check in before $time';
+  }
+
+  @override
+  String get checkInSafe => 'I\'m safe';
+
+  @override
+  String checkInExtend(int minutes) {
+    return '+$minutes min';
+  }
+
+  @override
+  String get checkInHowLong => 'Alert my contacts if I don\'t check in within';
+
+  @override
+  String get checkInNotifBody => 'Tap I\'m safe when you are OK';
+
+  @override
+  String get checkInAlerted => 'Your contacts were alerted';
+
+  @override
+  String get checkInDone => 'Checked in. Glad you\'re safe.';
+
+  @override
+  String get smsCheckInMissed =>
+      'I did not check in on time with MetJou. I may need help. My location:';
+
+  @override
   String get sosContacts => 'SOS contacts';
 
   @override

@@ -252,6 +252,43 @@ class AppLocalizationsNl extends AppLocalizations {
   String get ghsChooseContact => 'Wie krijgt je locatie?';
 
   @override
+  String get checkIn => 'Inchecktimer';
+
+  @override
+  String get checkInSubtitle =>
+      'Waarschuwt je contacten als je niet op tijd incheckt';
+
+  @override
+  String checkInBefore(String time) {
+    return 'Inchecken voor $time';
+  }
+
+  @override
+  String get checkInSafe => 'Ik ben veilig';
+
+  @override
+  String checkInExtend(int minutes) {
+    return '+$minutes min';
+  }
+
+  @override
+  String get checkInHowLong =>
+      'Waarschuw mijn contacten als ik niet incheck binnen';
+
+  @override
+  String get checkInNotifBody => 'Tik op Ik ben veilig als alles goed is';
+
+  @override
+  String get checkInAlerted => 'Je contacten zijn gewaarschuwd';
+
+  @override
+  String get checkInDone => 'Ingecheckt. Fijn dat je veilig bent.';
+
+  @override
+  String get smsCheckInMissed =>
+      'Ik heb niet op tijd ingecheckt in MetJou. Misschien heb ik hulp nodig. Mijn locatie:';
+
+  @override
   String get sosContacts => 'SOS-contacten';
 
   @override

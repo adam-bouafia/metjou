@@ -554,6 +554,66 @@ abstract class AppLocalizations {
   /// **'Who gets your location?'**
   String get ghsChooseContact;
 
+  /// No description provided for @checkIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Check-in timer'**
+  String get checkIn;
+
+  /// No description provided for @checkInSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Alerts your contacts if you don\'t check in on time'**
+  String get checkInSubtitle;
+
+  /// No description provided for @checkInBefore.
+  ///
+  /// In en, this message translates to:
+  /// **'Check in before {time}'**
+  String checkInBefore(String time);
+
+  /// No description provided for @checkInSafe.
+  ///
+  /// In en, this message translates to:
+  /// **'I\'m safe'**
+  String get checkInSafe;
+
+  /// No description provided for @checkInExtend.
+  ///
+  /// In en, this message translates to:
+  /// **'+{minutes} min'**
+  String checkInExtend(int minutes);
+
+  /// No description provided for @checkInHowLong.
+  ///
+  /// In en, this message translates to:
+  /// **'Alert my contacts if I don\'t check in within'**
+  String get checkInHowLong;
+
+  /// No description provided for @checkInNotifBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap I\'m safe when you are OK'**
+  String get checkInNotifBody;
+
+  /// No description provided for @checkInAlerted.
+  ///
+  /// In en, this message translates to:
+  /// **'Your contacts were alerted'**
+  String get checkInAlerted;
+
+  /// No description provided for @checkInDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Checked in. Glad you\'re safe.'**
+  String get checkInDone;
+
+  /// No description provided for @smsCheckInMissed.
+  ///
+  /// In en, this message translates to:
+  /// **'I did not check in on time with MetJou. I may need help. My location:'**
+  String get smsCheckInMissed;
+
   /// No description provided for @sosContacts.
   ///
   /// In en, this message translates to:

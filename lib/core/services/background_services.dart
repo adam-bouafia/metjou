@@ -8,6 +8,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:metjou/core/localization/app_locale.dart';
 import 'package:metjou/core/services/low_battery.dart';
+import 'package:metjou/features/check_in/data/check_in_service.dart';
 import 'package:metjou/features/contacts/data/sos_contacts.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -92,6 +93,42 @@ class BackgroundServices {
       ),
     ),
   );
+
+  // Check-in timer, with an "I'm safe" action.
+
+  static const checkInAction = "check_in";
+  static const int _checkInNotificationID = 778;
+
+  static Future<void> showCheckInNotification({
+    required String title,
+    required String body,
+    required String safeLabel,
+  }) => _notifications.show(
+    id: _checkInNotificationID,
+    title: title,
+    body: body,
+    notificationDetails: NotificationDetails(
+      android: AndroidNotificationDetails(
+        "CHECK_IN",
+        "Check-in timer",
+        channelDescription: 'Deadline to check in',
+        icon: _notificationIcon,
+        ongoing: true,
+        onlyAlertOnce: true,
+        actions: [
+          AndroidNotificationAction(
+            checkInAction,
+            safeLabel,
+            cancelNotification: true,
+            showsUserInterface: true,
+          ),
+        ],
+      ),
+    ),
+  );
+
+  static Future<void> cancelCheckInNotification() =>
+      _notifications.cancel(id: _checkInNotificationID);
 
   static Future<void> cancelCountdownNotification() =>
       _notifications.cancel(id: _countdownNotificationID);
@@ -369,6 +406,10 @@ void callbackDispatcher() {
       await LowBatteryAlert.check();
       return true;
     }
+    if (task == checkInTask) {
+      await CheckInService.fireIfMissed();
+      return true;
+    }
     final contact = inputData?['contact'] as String?;
     if (contact == null) return true;
     final l10n = await backgroundLocalizations();
@@ -386,6 +427,11 @@ void callbackDispatcher() {
 /// the flag every second.
 @pragma('vm:entry-point')
 void onNotificationResponseInBackground(NotificationResponse response) async {
+  if (response.actionId == BackgroundServices.checkInAction) {
+    // Clearing the deadline stops the timer and the backup task.
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove("checkin_deadline");
+  }
   if (response.actionId == BackgroundServices.cancelAlertAction) {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt(

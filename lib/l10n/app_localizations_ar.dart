@@ -252,6 +252,42 @@ class AppLocalizationsAr extends AppLocalizations {
   String get ghsChooseContact => 'من يستلم موقعك؟';
 
   @override
+  String get checkIn => 'مؤقت التحقق';
+
+  @override
+  String get checkInSubtitle =>
+      'ينبه جهات اتصالك إذا لم تؤكد سلامتك في الوقت المحدد';
+
+  @override
+  String checkInBefore(String time) {
+    return 'أكّد قبل $time';
+  }
+
+  @override
+  String get checkInSafe => 'أنا بخير';
+
+  @override
+  String checkInExtend(int minutes) {
+    return '+$minutes دقيقة';
+  }
+
+  @override
+  String get checkInHowLong => 'نبّه جهات اتصالي إذا لم أؤكد خلال';
+
+  @override
+  String get checkInNotifBody => 'اضغط أنا بخير عندما تكون بخير';
+
+  @override
+  String get checkInAlerted => 'تم تنبيه جهات اتصالك';
+
+  @override
+  String get checkInDone => 'تم التأكيد. يسعدنا أنك بخير.';
+
+  @override
+  String get smsCheckInMissed =>
+      'لم أؤكد سلامتي في الوقت المحدد في MetJou. قد أحتاج إلى مساعدة. موقعي:';
+
+  @override
   String get sosContacts => 'جهات اتصال الطوارئ';
 
   @override
