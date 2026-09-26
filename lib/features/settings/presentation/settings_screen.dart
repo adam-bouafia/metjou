@@ -417,7 +417,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
           ),
           Divider(indent: 40, endIndent: 40),
-          Divider(indent: 40, endIndent: 40),
           SwitchListTile(
             onChanged: (val) {
               setState(() {
