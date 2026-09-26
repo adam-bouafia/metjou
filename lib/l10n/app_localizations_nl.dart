@@ -410,6 +410,29 @@ class AppLocalizationsNl extends AppLocalizations {
   String get smsNoLocation => '(locatie niet beschikbaar)';
 
   @override
+  String get smsTest =>
+      'Dit is een TEST van MetJou, je hoeft niets te doen. Als ik echt hulp nodig heb, krijg je een bericht zoals dit. Mijn locatie:';
+
+  @override
+  String get testAlert => 'Stuur een testalarm';
+
+  @override
+  String get testAlertSubtitle =>
+      'Controleer of je contacten je alarmen ontvangen';
+
+  @override
+  String get testAlertConfirm =>
+      'Een testbericht met je locatie sturen naar al je SOS-contacten?';
+
+  @override
+  String testAlertSent(int count) {
+    return 'Test verstuurd naar $count contacten';
+  }
+
+  @override
+  String get send => 'Versturen';
+
+  @override
   String smsLowBattery(int level) {
     return 'De batterij van mijn telefoon is bijna leeg ($level%). Mijn laatste locatie:';
   }

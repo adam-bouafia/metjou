@@ -407,6 +407,28 @@ class AppLocalizationsAr extends AppLocalizations {
   String get smsNoLocation => '(الموقع غير متاح)';
 
   @override
+  String get smsTest =>
+      'هذا اختبار من MetJou، لا داعي لفعل شيء. إذا احتجت إلى مساعدة فعلًا، ستصلك رسالة مثل هذه. موقعي:';
+
+  @override
+  String get testAlert => 'إرسال تنبيه تجريبي';
+
+  @override
+  String get testAlertSubtitle => 'تحقق من أن جهات اتصالك تستلم تنبيهاتك';
+
+  @override
+  String get testAlertConfirm =>
+      'إرسال رسالة تجريبية مع موقعك إلى جميع جهات اتصال الطوارئ؟';
+
+  @override
+  String testAlertSent(int count) {
+    return 'تم إرسال الاختبار إلى $count جهات اتصال';
+  }
+
+  @override
+  String get send => 'إرسال';
+
+  @override
   String smsLowBattery(int level) {
     return 'بطارية هاتفي على وشك النفاد ($level٪). آخر موقع لي:';
   }

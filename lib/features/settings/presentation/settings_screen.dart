@@ -1,5 +1,6 @@
 import 'package:audio_background_record/audio_background_record.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:metjou/core/theme/app_theme.dart';
 import 'package:metjou/core/localization/app_locale.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -158,6 +159,32 @@ class _SettingsScreenState extends State<SettingsScreen> {
     await DiscreetMode.setEnabled(on);
     BackgroundServices.discreet = on;
     if (mounted) setState(() {});
+  }
+
+  Future<void> _sendTestAlert(BuildContext context) async {
+    final l10n = context.l10n;
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(l10n.testAlert),
+        content: Text(l10n.testAlertConfirm),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: Text(l10n.cancel),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: Text(l10n.send),
+          ),
+        ],
+      ),
+    );
+    if (ok != true) return;
+    final sent = await BackgroundServices.sendSosAlert(l10n.smsTest);
+    Fluttertoast.showToast(
+      msg: sent == 0 ? l10n.noContactsFound : l10n.testAlertSent(sent),
+    );
   }
 
   String _themeLabel(BuildContext context, ThemeMode mode) => switch (mode) {
@@ -369,6 +396,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             title: Text(context.l10n.safeShake),
             subtitle: Text(context.l10n.safeShakeSubtitle),
+          ),
+          ListTile(
+            onTap: () => _sendTestAlert(context),
+            leading: CircleAvatar(
+              backgroundColor: Theme.of(
+                context,
+              ).colorScheme.surfaceContainerHighest,
+              child: Icon(
+                Icons.send_outlined,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+                size: 22,
+              ),
+            ),
+            title: Text(context.l10n.testAlert),
+            subtitle: Text(context.l10n.testAlertSubtitle),
           ),
           FutureBuilder<bool>(
             future: LowBatteryAlert.isEnabled(),

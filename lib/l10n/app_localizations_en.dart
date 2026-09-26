@@ -409,6 +409,29 @@ class AppLocalizationsEn extends AppLocalizations {
   String get smsNoLocation => '(location not available)';
 
   @override
+  String get smsTest =>
+      'This is a TEST from MetJou, no need to act. If I really need help, you will get a message like this. My location:';
+
+  @override
+  String get testAlert => 'Send a test alert';
+
+  @override
+  String get testAlertSubtitle =>
+      'Check that your contacts receive your alerts';
+
+  @override
+  String get testAlertConfirm =>
+      'Send a test message with your location to all SOS contacts?';
+
+  @override
+  String testAlertSent(int count) {
+    return 'Test sent to $count contacts';
+  }
+
+  @override
+  String get send => 'Send';
+
+  @override
   String smsLowBattery(int level) {
     return 'My phone battery is almost empty ($level%). My last location:';
   }

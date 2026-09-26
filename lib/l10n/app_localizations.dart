@@ -836,6 +836,42 @@ abstract class AppLocalizations {
   /// **'(location not available)'**
   String get smsNoLocation;
 
+  /// No description provided for @smsTest.
+  ///
+  /// In en, this message translates to:
+  /// **'This is a TEST from MetJou, no need to act. If I really need help, you will get a message like this. My location:'**
+  String get smsTest;
+
+  /// No description provided for @testAlert.
+  ///
+  /// In en, this message translates to:
+  /// **'Send a test alert'**
+  String get testAlert;
+
+  /// No description provided for @testAlertSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Check that your contacts receive your alerts'**
+  String get testAlertSubtitle;
+
+  /// No description provided for @testAlertConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Send a test message with your location to all SOS contacts?'**
+  String get testAlertConfirm;
+
+  /// No description provided for @testAlertSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Test sent to {count} contacts'**
+  String testAlertSent(int count);
+
+  /// No description provided for @send.
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get send;
+
   /// No description provided for @smsLowBattery.
   ///
   /// In en, this message translates to:

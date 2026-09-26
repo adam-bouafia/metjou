@@ -188,6 +188,19 @@
   "smsSafe": "I am safe now. Please ignore my SOS alert.",
   "smsGetHomeSafe": "I am on my way home. My location:",
   "smsNoLocation": "(location not available)",
+  "smsTest": "This is a TEST from MetJou, no need to act. If I really need help, you will get a message like this. My location:",
+  "testAlert": "Send a test alert",
+  "testAlertSubtitle": "Check that your contacts receive your alerts",
+  "testAlertConfirm": "Send a test message with your location to all SOS contacts?",
+  "testAlertSent": "Test sent to {count} contacts",
+  "@testAlertSent": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "send": "Send",
   "smsLowBattery": "My phone battery is almost empty ({level}%). My last location:",
   "@smsLowBattery": {
     "placeholders": {

@@ -412,6 +412,29 @@ class AppLocalizationsEs extends AppLocalizations {
   String get smsNoLocation => '(ubicación no disponible)';
 
   @override
+  String get smsTest =>
+      'Esto es una PRUEBA de MetJou, no hace falta hacer nada. Si de verdad necesito ayuda, recibirás un mensaje como este. Mi ubicación:';
+
+  @override
+  String get testAlert => 'Enviar una alerta de prueba';
+
+  @override
+  String get testAlertSubtitle =>
+      'Comprueba que tus contactos reciben tus alertas';
+
+  @override
+  String get testAlertConfirm =>
+      '¿Enviar un mensaje de prueba con tu ubicación a todos tus contactos SOS?';
+
+  @override
+  String testAlertSent(int count) {
+    return 'Prueba enviada a $count contactos';
+  }
+
+  @override
+  String get send => 'Enviar';
+
+  @override
   String smsLowBattery(int level) {
     return 'La batería de mi teléfono está casi agotada ($level %). Mi última ubicación:';
   }
