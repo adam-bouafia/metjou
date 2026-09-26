@@ -310,7 +310,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             padding: const EdgeInsets.all(18.0),
             child: Text(
               context.l10n.settings,
-              style: TextStyle(fontSize: 35, fontWeight: FontWeight.w900),
+              style: TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
             ),
           ),
           FutureBuilder(

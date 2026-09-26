@@ -107,7 +107,7 @@ class _ChangePinScreenState extends State<ChangePinScreen> {
               widget.pin == -1111
                   ? context.l10n.createPin
                   : context.l10n.changePin,
-              style: TextStyle(fontSize: 35, fontWeight: FontWeight.w900),
+              style: TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
             ),
           ),
           Center(

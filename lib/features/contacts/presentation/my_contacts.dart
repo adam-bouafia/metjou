@@ -175,16 +175,11 @@ class _MyContactsScreenState extends State<MyContactsScreen> {
       // The dashboard's glass background shows through.
       backgroundColor: Colors.transparent,
       appBar: AppBar(
-        centerTitle: true,
-        elevation: 0,
+        centerTitle: false,
+        automaticallyImplyLeading: false,
         title: Text(
           context.l10n.sosContacts,
-          style: TextStyle(fontSize: 26, fontWeight: FontWeight.w900),
-        ),
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-          icon: Image.asset("assets/phone_red.webp"),
-          onPressed: () {},
+          style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
         ),
       ),
       body: FutureBuilder(
