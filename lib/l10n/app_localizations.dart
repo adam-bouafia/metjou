@@ -764,6 +764,253 @@ abstract class AppLocalizations {
   /// **'Open settings'**
   String get openSettings;
 
+  /// No description provided for @trackerWatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Watch in the background'**
+  String get trackerWatch;
+
+  /// No description provided for @trackerWatchSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Checks about every 15 minutes and warns you when the same tracker stays with you at different places.'**
+  String get trackerWatchSubtitle;
+
+  /// No description provided for @trackerWatchLastCheck.
+  ///
+  /// In en, this message translates to:
+  /// **'Last check: {time}'**
+  String trackerWatchLastCheck(String time);
+
+  /// No description provided for @trackerWatchDiscreet.
+  ///
+  /// In en, this message translates to:
+  /// **'Discreet mode is on, so you get no notification. Open the app to see warnings.'**
+  String get trackerWatchDiscreet;
+
+  /// No description provided for @trackerBlockedBackground.
+  ///
+  /// In en, this message translates to:
+  /// **'Watching in the background needs location set to Allow all the time. Without it Android gives no scan results while the app is closed.'**
+  String get trackerBlockedBackground;
+
+  /// No description provided for @trackerFollowersTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Travelling with you'**
+  String get trackerFollowersTitle;
+
+  /// No description provided for @trackerFollowerSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Seen {count} times at {places} places since {time}'**
+  String trackerFollowerSummary(int count, int places, String time);
+
+  /// No description provided for @trackerIgnoredTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Ignored'**
+  String get trackerIgnoredTitle;
+
+  /// No description provided for @trackerDeleteHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete history'**
+  String get trackerDeleteHistory;
+
+  /// No description provided for @trackerDeleteHistoryConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete all tracker sightings stored on this phone?'**
+  String get trackerDeleteHistoryConfirm;
+
+  /// No description provided for @trackerAlertTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'A tracker may be travelling with you'**
+  String get trackerAlertTitle;
+
+  /// No description provided for @trackerAlertBody.
+  ///
+  /// In en, this message translates to:
+  /// **'{kind} has been near you at {places} places since {time}. Tap to see what you can do.'**
+  String trackerAlertBody(String kind, int places, String time);
+
+  /// No description provided for @trackerAlertBodyMany.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} trackers have been near you for a while. Tap to see them.'**
+  String trackerAlertBodyMany(int count);
+
+  /// No description provided for @trackerSeenNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Seen just now. Nothing is stored about it yet.'**
+  String get trackerSeenNow;
+
+  /// No description provided for @trackerFind.
+  ///
+  /// In en, this message translates to:
+  /// **'Find it'**
+  String get trackerFind;
+
+  /// No description provided for @trackerPlaySound.
+  ///
+  /// In en, this message translates to:
+  /// **'Play sound'**
+  String get trackerPlaySound;
+
+  /// No description provided for @trackerSoundPlaying.
+  ///
+  /// In en, this message translates to:
+  /// **'The tracker should now make a sound.'**
+  String get trackerSoundPlaying;
+
+  /// No description provided for @trackerSoundUnsupported.
+  ///
+  /// In en, this message translates to:
+  /// **'This tracker does not accept a sound request.'**
+  String get trackerSoundUnsupported;
+
+  /// No description provided for @trackerSoundFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not reach the tracker. Move closer and try again.'**
+  String get trackerSoundFailed;
+
+  /// No description provided for @trackerSaveDiary.
+  ///
+  /// In en, this message translates to:
+  /// **'Save to diary'**
+  String get trackerSaveDiary;
+
+  /// No description provided for @trackerSavedDiary.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved in your diary.'**
+  String get trackerSavedDiary;
+
+  /// No description provided for @trackerIgnore.
+  ///
+  /// In en, this message translates to:
+  /// **'Ignore this tracker'**
+  String get trackerIgnore;
+
+  /// No description provided for @trackerUnignore.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop ignoring'**
+  String get trackerUnignore;
+
+  /// No description provided for @trackerIgnoreHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Only ignore a tracker you know, such as a housemate\'s keys.'**
+  String get trackerIgnoreHint;
+
+  /// No description provided for @trackerHistoryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Where it was seen'**
+  String get trackerHistoryTitle;
+
+  /// No description provided for @trackerNoPlace.
+  ///
+  /// In en, this message translates to:
+  /// **'No location'**
+  String get trackerNoPlace;
+
+  /// No description provided for @trackerOpenMap.
+  ///
+  /// In en, this message translates to:
+  /// **'Map'**
+  String get trackerOpenMap;
+
+  /// No description provided for @trackerDiaryText.
+  ///
+  /// In en, this message translates to:
+  /// **'Tracker found: {kind}, code {code}. Seen {count} times at {places} places between {first} and {last}.'**
+  String trackerDiaryText(
+    String kind,
+    String code,
+    int count,
+    int places,
+    String first,
+    String last,
+  );
+
+  /// No description provided for @trackerFinderHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Walk around slowly: the bar grows as you get closer. Check your bag, coat pockets, car and bike.'**
+  String get trackerFinderHint;
+
+  /// No description provided for @trackerFinderSearching.
+  ///
+  /// In en, this message translates to:
+  /// **'Looking for its signal…'**
+  String get trackerFinderSearching;
+
+  /// No description provided for @trackerFinderLost.
+  ///
+  /// In en, this message translates to:
+  /// **'No signal right now. It may be out of range.'**
+  String get trackerFinderLost;
+
+  /// No description provided for @trackerFinderCloser.
+  ///
+  /// In en, this message translates to:
+  /// **'Getting closer'**
+  String get trackerFinderCloser;
+
+  /// No description provided for @trackerFinderFurther.
+  ///
+  /// In en, this message translates to:
+  /// **'Getting further away'**
+  String get trackerFinderFurther;
+
+  /// No description provided for @trackerHelpTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What you can do'**
+  String get trackerHelpTitle;
+
+  /// No description provided for @trackerHelpDanger.
+  ///
+  /// In en, this message translates to:
+  /// **'In danger right now? Call 112 and go to a busy place.'**
+  String get trackerHelpDanger;
+
+  /// No description provided for @trackerHelpFind.
+  ///
+  /// In en, this message translates to:
+  /// **'Find it with Find it and Play sound. Check your bag, coat, car and bike.'**
+  String get trackerHelpFind;
+
+  /// No description provided for @trackerHelpRecord.
+  ///
+  /// In en, this message translates to:
+  /// **'Record it before you remove it: save it to your diary, photograph the tracker and where it was hidden, and note its serial number. With an AirTag, hold the back of your phone against its white side to read the number.'**
+  String get trackerHelpRecord;
+
+  /// No description provided for @trackerHelpDisable.
+  ///
+  /// In en, this message translates to:
+  /// **'To stop it, take out its battery. The owner then gets no new locations, and may notice that it stopped.'**
+  String get trackerHelpDisable;
+
+  /// No description provided for @trackerHelpPolice.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep the tracker and report it to the police. With the serial number they can ask the maker who owns it.'**
+  String get trackerHelpPolice;
+
+  /// No description provided for @trackerHelpTalk.
+  ///
+  /// In en, this message translates to:
+  /// **'Want to talk first? Slachtofferhulp helps for free. If it could be someone close to you, call Veilig Thuis.'**
+  String get trackerHelpTalk;
+
   /// No description provided for @quickTools.
   ///
   /// In en, this message translates to:

@@ -376,6 +376,158 @@ class AppLocalizationsEn extends AppLocalizations {
   String get openSettings => 'Open settings';
 
   @override
+  String get trackerWatch => 'Watch in the background';
+
+  @override
+  String get trackerWatchSubtitle =>
+      'Checks about every 15 minutes and warns you when the same tracker stays with you at different places.';
+
+  @override
+  String trackerWatchLastCheck(String time) {
+    return 'Last check: $time';
+  }
+
+  @override
+  String get trackerWatchDiscreet =>
+      'Discreet mode is on, so you get no notification. Open the app to see warnings.';
+
+  @override
+  String get trackerBlockedBackground =>
+      'Watching in the background needs location set to Allow all the time. Without it Android gives no scan results while the app is closed.';
+
+  @override
+  String get trackerFollowersTitle => 'Travelling with you';
+
+  @override
+  String trackerFollowerSummary(int count, int places, String time) {
+    return 'Seen $count times at $places places since $time';
+  }
+
+  @override
+  String get trackerIgnoredTitle => 'Ignored';
+
+  @override
+  String get trackerDeleteHistory => 'Delete history';
+
+  @override
+  String get trackerDeleteHistoryConfirm =>
+      'Delete all tracker sightings stored on this phone?';
+
+  @override
+  String get trackerAlertTitle => 'A tracker may be travelling with you';
+
+  @override
+  String trackerAlertBody(String kind, int places, String time) {
+    return '$kind has been near you at $places places since $time. Tap to see what you can do.';
+  }
+
+  @override
+  String trackerAlertBodyMany(int count) {
+    return '$count trackers have been near you for a while. Tap to see them.';
+  }
+
+  @override
+  String get trackerSeenNow => 'Seen just now. Nothing is stored about it yet.';
+
+  @override
+  String get trackerFind => 'Find it';
+
+  @override
+  String get trackerPlaySound => 'Play sound';
+
+  @override
+  String get trackerSoundPlaying => 'The tracker should now make a sound.';
+
+  @override
+  String get trackerSoundUnsupported =>
+      'This tracker does not accept a sound request.';
+
+  @override
+  String get trackerSoundFailed =>
+      'Could not reach the tracker. Move closer and try again.';
+
+  @override
+  String get trackerSaveDiary => 'Save to diary';
+
+  @override
+  String get trackerSavedDiary => 'Saved in your diary.';
+
+  @override
+  String get trackerIgnore => 'Ignore this tracker';
+
+  @override
+  String get trackerUnignore => 'Stop ignoring';
+
+  @override
+  String get trackerIgnoreHint =>
+      'Only ignore a tracker you know, such as a housemate\'s keys.';
+
+  @override
+  String get trackerHistoryTitle => 'Where it was seen';
+
+  @override
+  String get trackerNoPlace => 'No location';
+
+  @override
+  String get trackerOpenMap => 'Map';
+
+  @override
+  String trackerDiaryText(
+    String kind,
+    String code,
+    int count,
+    int places,
+    String first,
+    String last,
+  ) {
+    return 'Tracker found: $kind, code $code. Seen $count times at $places places between $first and $last.';
+  }
+
+  @override
+  String get trackerFinderHint =>
+      'Walk around slowly: the bar grows as you get closer. Check your bag, coat pockets, car and bike.';
+
+  @override
+  String get trackerFinderSearching => 'Looking for its signal…';
+
+  @override
+  String get trackerFinderLost =>
+      'No signal right now. It may be out of range.';
+
+  @override
+  String get trackerFinderCloser => 'Getting closer';
+
+  @override
+  String get trackerFinderFurther => 'Getting further away';
+
+  @override
+  String get trackerHelpTitle => 'What you can do';
+
+  @override
+  String get trackerHelpDanger =>
+      'In danger right now? Call 112 and go to a busy place.';
+
+  @override
+  String get trackerHelpFind =>
+      'Find it with Find it and Play sound. Check your bag, coat, car and bike.';
+
+  @override
+  String get trackerHelpRecord =>
+      'Record it before you remove it: save it to your diary, photograph the tracker and where it was hidden, and note its serial number. With an AirTag, hold the back of your phone against its white side to read the number.';
+
+  @override
+  String get trackerHelpDisable =>
+      'To stop it, take out its battery. The owner then gets no new locations, and may notice that it stopped.';
+
+  @override
+  String get trackerHelpPolice =>
+      'Keep the tracker and report it to the police. With the serial number they can ask the maker who owns it.';
+
+  @override
+  String get trackerHelpTalk =>
+      'Want to talk first? Slachtofferhulp helps for free. If it could be someone close to you, call Veilig Thuis.';
+
+  @override
   String get quickTools => 'Quick help';
 
   @override

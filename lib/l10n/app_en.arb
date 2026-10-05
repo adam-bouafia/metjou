@@ -166,6 +166,108 @@
   "trackerBlockedLocation": "Turn on location. Android gives no Bluetooth scan results while location is off.",
   "trackerBlockedFailed": "The scan did not work. Wait a moment and try again.",
   "openSettings": "Open settings",
+  "trackerWatch": "Watch in the background",
+  "trackerWatchSubtitle": "Checks about every 15 minutes and warns you when the same tracker stays with you at different places.",
+  "trackerWatchLastCheck": "Last check: {time}",
+  "@trackerWatchLastCheck": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerWatchDiscreet": "Discreet mode is on, so you get no notification. Open the app to see warnings.",
+  "trackerBlockedBackground": "Watching in the background needs location set to Allow all the time. Without it Android gives no scan results while the app is closed.",
+  "trackerFollowersTitle": "Travelling with you",
+  "trackerFollowerSummary": "Seen {count} times at {places} places since {time}",
+  "@trackerFollowerSummary": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "places": {
+        "type": "int"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerIgnoredTitle": "Ignored",
+  "trackerDeleteHistory": "Delete history",
+  "trackerDeleteHistoryConfirm": "Delete all tracker sightings stored on this phone?",
+  "trackerAlertTitle": "A tracker may be travelling with you",
+  "trackerAlertBody": "{kind} has been near you at {places} places since {time}. Tap to see what you can do.",
+  "@trackerAlertBody": {
+    "placeholders": {
+      "kind": {
+        "type": "String"
+      },
+      "places": {
+        "type": "int"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerAlertBodyMany": "{count} trackers have been near you for a while. Tap to see them.",
+  "@trackerAlertBodyMany": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "trackerSeenNow": "Seen just now. Nothing is stored about it yet.",
+  "trackerFind": "Find it",
+  "trackerPlaySound": "Play sound",
+  "trackerSoundPlaying": "The tracker should now make a sound.",
+  "trackerSoundUnsupported": "This tracker does not accept a sound request.",
+  "trackerSoundFailed": "Could not reach the tracker. Move closer and try again.",
+  "trackerSaveDiary": "Save to diary",
+  "trackerSavedDiary": "Saved in your diary.",
+  "trackerIgnore": "Ignore this tracker",
+  "trackerUnignore": "Stop ignoring",
+  "trackerIgnoreHint": "Only ignore a tracker you know, such as a housemate's keys.",
+  "trackerHistoryTitle": "Where it was seen",
+  "trackerNoPlace": "No location",
+  "trackerOpenMap": "Map",
+  "trackerDiaryText": "Tracker found: {kind}, code {code}. Seen {count} times at {places} places between {first} and {last}.",
+  "@trackerDiaryText": {
+    "placeholders": {
+      "kind": {
+        "type": "String"
+      },
+      "code": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      },
+      "places": {
+        "type": "int"
+      },
+      "first": {
+        "type": "String"
+      },
+      "last": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerFinderHint": "Walk around slowly: the bar grows as you get closer. Check your bag, coat pockets, car and bike.",
+  "trackerFinderSearching": "Looking for its signal…",
+  "trackerFinderLost": "No signal right now. It may be out of range.",
+  "trackerFinderCloser": "Getting closer",
+  "trackerFinderFurther": "Getting further away",
+  "trackerHelpTitle": "What you can do",
+  "trackerHelpDanger": "In danger right now? Call 112 and go to a busy place.",
+  "trackerHelpFind": "Find it with Find it and Play sound. Check your bag, coat, car and bike.",
+  "trackerHelpRecord": "Record it before you remove it: save it to your diary, photograph the tracker and where it was hidden, and note its serial number. With an AirTag, hold the back of your phone against its white side to read the number.",
+  "trackerHelpDisable": "To stop it, take out its battery. The owner then gets no new locations, and may notice that it stopped.",
+  "trackerHelpPolice": "Keep the tracker and report it to the police. With the serial number they can ask the maker who owns it.",
+  "trackerHelpTalk": "Want to talk first? Slachtofferhulp helps for free. If it could be someone close to you, call Veilig Thuis.",
   "quickTools": "Quick help",
   "fakeCall": "Fake call",
   "fakeCallSubtitle": "A realistic incoming call, to get away",

@@ -379,6 +379,159 @@ class AppLocalizationsEs extends AppLocalizations {
   String get openSettings => 'Abrir ajustes';
 
   @override
+  String get trackerWatch => 'Vigilar en segundo plano';
+
+  @override
+  String get trackerWatchSubtitle =>
+      'Comprueba cada 15 minutos aproximadamente y te avisa cuando el mismo rastreador sigue contigo en distintos lugares.';
+
+  @override
+  String trackerWatchLastCheck(String time) {
+    return 'Última comprobación: $time';
+  }
+
+  @override
+  String get trackerWatchDiscreet =>
+      'El modo discreto está activado, así que no recibes notificación. Abre la aplicación para ver los avisos.';
+
+  @override
+  String get trackerBlockedBackground =>
+      'Vigilar en segundo plano necesita la ubicación en Permitir siempre. Sin eso, Android no da resultados con la aplicación cerrada.';
+
+  @override
+  String get trackerFollowersTitle => 'Viaja contigo';
+
+  @override
+  String trackerFollowerSummary(int count, int places, String time) {
+    return 'Visto $count veces en $places lugares desde $time';
+  }
+
+  @override
+  String get trackerIgnoredTitle => 'Ignorados';
+
+  @override
+  String get trackerDeleteHistory => 'Borrar historial';
+
+  @override
+  String get trackerDeleteHistoryConfirm =>
+      '¿Borrar todas las detecciones de rastreadores guardadas en este teléfono?';
+
+  @override
+  String get trackerAlertTitle => 'Puede que un rastreador viaje contigo';
+
+  @override
+  String trackerAlertBody(String kind, int places, String time) {
+    return '$kind ha estado cerca de ti en $places lugares desde $time. Toca para ver qué puedes hacer.';
+  }
+
+  @override
+  String trackerAlertBodyMany(int count) {
+    return '$count rastreadores llevan un rato cerca de ti. Toca para verlos.';
+  }
+
+  @override
+  String get trackerSeenNow =>
+      'Visto ahora mismo. Aún no hay nada guardado sobre él.';
+
+  @override
+  String get trackerFind => 'Encontrarlo';
+
+  @override
+  String get trackerPlaySound => 'Hacer sonar';
+
+  @override
+  String get trackerSoundPlaying => 'El rastreador debería sonar ahora.';
+
+  @override
+  String get trackerSoundUnsupported =>
+      'Este rastreador no acepta una petición de sonido.';
+
+  @override
+  String get trackerSoundFailed =>
+      'No se ha podido conectar con el rastreador. Acércate e inténtalo de nuevo.';
+
+  @override
+  String get trackerSaveDiary => 'Guardar en el diario';
+
+  @override
+  String get trackerSavedDiary => 'Guardado en tu diario.';
+
+  @override
+  String get trackerIgnore => 'Ignorar este rastreador';
+
+  @override
+  String get trackerUnignore => 'Dejar de ignorar';
+
+  @override
+  String get trackerIgnoreHint =>
+      'Ignora solo un rastreador que conozcas, como las llaves de alguien con quien vives.';
+
+  @override
+  String get trackerHistoryTitle => 'Dónde se ha visto';
+
+  @override
+  String get trackerNoPlace => 'Sin ubicación';
+
+  @override
+  String get trackerOpenMap => 'Mapa';
+
+  @override
+  String trackerDiaryText(
+    String kind,
+    String code,
+    int count,
+    int places,
+    String first,
+    String last,
+  ) {
+    return 'Rastreador encontrado: $kind, código $code. Visto $count veces en $places lugares entre $first y $last.';
+  }
+
+  @override
+  String get trackerFinderHint =>
+      'Camina despacio: la barra crece cuando te acercas. Mira en tu bolso, los bolsillos del abrigo, el coche y la bici.';
+
+  @override
+  String get trackerFinderSearching => 'Buscando su señal…';
+
+  @override
+  String get trackerFinderLost =>
+      'Ahora no hay señal. Puede estar fuera de alcance.';
+
+  @override
+  String get trackerFinderCloser => 'Te estás acercando';
+
+  @override
+  String get trackerFinderFurther => 'Te estás alejando';
+
+  @override
+  String get trackerHelpTitle => 'Qué puedes hacer';
+
+  @override
+  String get trackerHelpDanger =>
+      '¿Estás en peligro ahora? Llama al 112 y ve a un lugar concurrido.';
+
+  @override
+  String get trackerHelpFind =>
+      'Encuéntralo con Encontrarlo y Hacer sonar. Mira en tu bolso, abrigo, coche y bici.';
+
+  @override
+  String get trackerHelpRecord =>
+      'Regístralo antes de quitarlo: guárdalo en tu diario, fotografía el rastreador y el lugar donde estaba escondido, y apunta su número de serie. Con un AirTag, acerca la parte trasera del teléfono a su cara blanca para leer el número.';
+
+  @override
+  String get trackerHelpDisable =>
+      'Para detenerlo, quítale la pila. El dueño ya no recibe nuevas ubicaciones y puede notar que se ha detenido.';
+
+  @override
+  String get trackerHelpPolice =>
+      'Conserva el rastreador y denúncialo a la policía. Con el número de serie pueden preguntar al fabricante de quién es.';
+
+  @override
+  String get trackerHelpTalk =>
+      '¿Prefieres hablar primero? Slachtofferhulp ayuda gratis. Si puede ser alguien cercano, llama a Veilig Thuis.';
+
+  @override
   String get quickTools => 'Ayuda rápida';
 
   @override

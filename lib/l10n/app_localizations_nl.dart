@@ -377,6 +377,159 @@ class AppLocalizationsNl extends AppLocalizations {
   String get openSettings => 'Instellingen openen';
 
   @override
+  String get trackerWatch => 'Op de achtergrond opletten';
+
+  @override
+  String get trackerWatchSubtitle =>
+      'Controleert ongeveer elke 15 minuten en waarschuwt je als dezelfde tracker op verschillende plekken bij je blijft.';
+
+  @override
+  String trackerWatchLastCheck(String time) {
+    return 'Laatste controle: $time';
+  }
+
+  @override
+  String get trackerWatchDiscreet =>
+      'De discrete modus staat aan, dus je krijgt geen melding. Open de app om waarschuwingen te zien.';
+
+  @override
+  String get trackerBlockedBackground =>
+      'Opletten op de achtergrond werkt alleen als locatie op Altijd toestaan staat. Anders geeft Android geen resultaten terwijl de app gesloten is.';
+
+  @override
+  String get trackerFollowersTitle => 'Reist met je mee';
+
+  @override
+  String trackerFollowerSummary(int count, int places, String time) {
+    return '$count keer gezien op $places plekken sinds $time';
+  }
+
+  @override
+  String get trackerIgnoredTitle => 'Genegeerd';
+
+  @override
+  String get trackerDeleteHistory => 'Geschiedenis wissen';
+
+  @override
+  String get trackerDeleteHistoryConfirm =>
+      'Alle waarnemingen van trackers wissen die op deze telefoon bewaard zijn?';
+
+  @override
+  String get trackerAlertTitle => 'Er reist misschien een tracker met je mee';
+
+  @override
+  String trackerAlertBody(String kind, int places, String time) {
+    return '$kind is sinds $time op $places plekken bij je in de buurt geweest. Tik om te zien wat je kunt doen.';
+  }
+
+  @override
+  String trackerAlertBodyMany(int count) {
+    return '$count trackers zijn al een tijd bij je in de buurt. Tik om ze te bekijken.';
+  }
+
+  @override
+  String get trackerSeenNow => 'Net gezien. Er is nog niets over bewaard.';
+
+  @override
+  String get trackerFind => 'Zoek de tracker';
+
+  @override
+  String get trackerPlaySound => 'Geluid afspelen';
+
+  @override
+  String get trackerSoundPlaying =>
+      'De tracker maakt nu als het goed is geluid.';
+
+  @override
+  String get trackerSoundUnsupported =>
+      'Deze tracker reageert niet op een verzoek om geluid.';
+
+  @override
+  String get trackerSoundFailed =>
+      'De tracker is niet bereikbaar. Ga dichterbij staan en probeer het opnieuw.';
+
+  @override
+  String get trackerSaveDiary => 'In dagboek bewaren';
+
+  @override
+  String get trackerSavedDiary => 'Bewaard in je dagboek.';
+
+  @override
+  String get trackerIgnore => 'Deze tracker negeren';
+
+  @override
+  String get trackerUnignore => 'Niet meer negeren';
+
+  @override
+  String get trackerIgnoreHint =>
+      'Negeer alleen een tracker die je kent, zoals de sleutels van een huisgenoot.';
+
+  @override
+  String get trackerHistoryTitle => 'Waar hij is gezien';
+
+  @override
+  String get trackerNoPlace => 'Geen locatie';
+
+  @override
+  String get trackerOpenMap => 'Kaart';
+
+  @override
+  String trackerDiaryText(
+    String kind,
+    String code,
+    int count,
+    int places,
+    String first,
+    String last,
+  ) {
+    return 'Tracker gevonden: $kind, code $code. $count keer gezien op $places plekken tussen $first en $last.';
+  }
+
+  @override
+  String get trackerFinderHint =>
+      'Loop rustig rond: de balk wordt groter als je dichterbij komt. Kijk in je tas, jaszakken, auto en fiets.';
+
+  @override
+  String get trackerFinderSearching => 'Zoekt naar het signaal…';
+
+  @override
+  String get trackerFinderLost =>
+      'Nu geen signaal. Misschien is hij buiten bereik.';
+
+  @override
+  String get trackerFinderCloser => 'Je komt dichterbij';
+
+  @override
+  String get trackerFinderFurther => 'Je gaat verder weg';
+
+  @override
+  String get trackerHelpTitle => 'Wat je kunt doen';
+
+  @override
+  String get trackerHelpDanger =>
+      'Ben je nu in gevaar? Bel 112 en ga naar een drukke plek.';
+
+  @override
+  String get trackerHelpFind =>
+      'Zoek hem met Zoek de tracker en Geluid afspelen. Kijk in je tas, jas, auto en fiets.';
+
+  @override
+  String get trackerHelpRecord =>
+      'Leg het vast voordat je hem weghaalt: bewaar het in je dagboek, maak een foto van de tracker en van de plek waar hij verstopt zat, en noteer het serienummer. Bij een AirTag houd je de achterkant van je telefoon tegen de witte kant om het nummer te lezen.';
+
+  @override
+  String get trackerHelpDisable =>
+      'Haal de batterij eruit om hem te stoppen. De eigenaar krijgt dan geen nieuwe locaties meer en kan merken dat hij gestopt is.';
+
+  @override
+  String get trackerHelpPolice =>
+      'Bewaar de tracker en doe aangifte bij de politie. Met het serienummer kan de politie bij de fabrikant navragen van wie hij is.';
+
+  @override
+  String get trackerHelpTalk =>
+      'Eerst met iemand praten? Slachtofferhulp helpt gratis. Kan het iemand uit je omgeving zijn, bel dan Veilig Thuis.';
+
+  @override
   String get quickTools => 'Snelle hulp';
 
   @override

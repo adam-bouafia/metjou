@@ -376,6 +376,157 @@ class AppLocalizationsAr extends AppLocalizations {
   String get openSettings => 'فتح الإعدادات';
 
   @override
+  String get trackerWatch => 'المراقبة في الخلفية';
+
+  @override
+  String get trackerWatchSubtitle =>
+      'يتحقق كل 15 دقيقة تقريبًا وينبهك عندما يبقى جهاز التتبع نفسه معك في أماكن مختلفة.';
+
+  @override
+  String trackerWatchLastCheck(String time) {
+    return 'آخر تحقق: $time';
+  }
+
+  @override
+  String get trackerWatchDiscreet =>
+      'الوضع السري مفعّل، لذلك لن يصلك إشعار. افتح التطبيق لرؤية التنبيهات.';
+
+  @override
+  String get trackerBlockedBackground =>
+      'المراقبة في الخلفية تحتاج إلى ضبط الموقع على «السماح طوال الوقت». بدون ذلك لا يعطي Android نتائج والتطبيق مغلق.';
+
+  @override
+  String get trackerFollowersTitle => 'يتنقل معك';
+
+  @override
+  String trackerFollowerSummary(int count, int places, String time) {
+    return 'شوهد $count مرات في $places أماكن منذ $time';
+  }
+
+  @override
+  String get trackerIgnoredTitle => 'تم تجاهلها';
+
+  @override
+  String get trackerDeleteHistory => 'حذف السجل';
+
+  @override
+  String get trackerDeleteHistoryConfirm =>
+      'هل تريد حذف كل مشاهدات أجهزة التتبع المحفوظة على هذا الهاتف؟';
+
+  @override
+  String get trackerAlertTitle => 'قد يكون هناك جهاز تتبع يتنقل معك';
+
+  @override
+  String trackerAlertBody(String kind, int places, String time) {
+    return '$kind قريب منك منذ $time في $places أماكن. اضغط لمعرفة ما يمكنك فعله.';
+  }
+
+  @override
+  String trackerAlertBodyMany(int count) {
+    return '$count أجهزة تتبع قريبة منك منذ فترة. اضغط لعرضها.';
+  }
+
+  @override
+  String get trackerSeenNow => 'شوهد الآن. لا يوجد شيء محفوظ عنه بعد.';
+
+  @override
+  String get trackerFind => 'اعثر عليه';
+
+  @override
+  String get trackerPlaySound => 'تشغيل صوت';
+
+  @override
+  String get trackerSoundPlaying =>
+      'من المفترض أن يصدر جهاز التتبع صوتًا الآن.';
+
+  @override
+  String get trackerSoundUnsupported => 'هذا الجهاز لا يقبل طلب تشغيل الصوت.';
+
+  @override
+  String get trackerSoundFailed =>
+      'تعذر الوصول إلى جهاز التتبع. اقترب وحاول مرة أخرى.';
+
+  @override
+  String get trackerSaveDiary => 'حفظ في اليوميات';
+
+  @override
+  String get trackerSavedDiary => 'تم الحفظ في يومياتك.';
+
+  @override
+  String get trackerIgnore => 'تجاهل هذا الجهاز';
+
+  @override
+  String get trackerUnignore => 'إيقاف التجاهل';
+
+  @override
+  String get trackerIgnoreHint =>
+      'تجاهل فقط جهازًا تعرفه، مثل مفاتيح شخص يسكن معك.';
+
+  @override
+  String get trackerHistoryTitle => 'أين شوهد';
+
+  @override
+  String get trackerNoPlace => 'بدون موقع';
+
+  @override
+  String get trackerOpenMap => 'الخريطة';
+
+  @override
+  String trackerDiaryText(
+    String kind,
+    String code,
+    int count,
+    int places,
+    String first,
+    String last,
+  ) {
+    return 'تم العثور على جهاز تتبع: $kind، الرمز $code. شوهد $count مرات في $places أماكن بين $first و$last.';
+  }
+
+  @override
+  String get trackerFinderHint =>
+      'تحرك ببطء: يكبر الشريط كلما اقتربت. افحص حقيبتك وجيوب معطفك وسيارتك ودراجتك.';
+
+  @override
+  String get trackerFinderSearching => 'جارٍ البحث عن إشارته…';
+
+  @override
+  String get trackerFinderLost => 'لا توجد إشارة الآن. قد يكون خارج النطاق.';
+
+  @override
+  String get trackerFinderCloser => 'أنت تقترب';
+
+  @override
+  String get trackerFinderFurther => 'أنت تبتعد';
+
+  @override
+  String get trackerHelpTitle => 'ما الذي يمكنك فعله';
+
+  @override
+  String get trackerHelpDanger =>
+      'هل أنت في خطر الآن؟ اتصل بالرقم 112 واذهب إلى مكان مزدحم.';
+
+  @override
+  String get trackerHelpFind =>
+      'اعثر عليه باستخدام «اعثر عليه» و«تشغيل صوت». افحص حقيبتك ومعطفك وسيارتك ودراجتك.';
+
+  @override
+  String get trackerHelpRecord =>
+      'وثّقه قبل إزالته: احفظه في يومياتك، وصوّر الجهاز والمكان الذي كان مخبأ فيه، ودوّن رقمه التسلسلي. مع AirTag، ضع ظهر هاتفك على جهته البيضاء لقراءة الرقم.';
+
+  @override
+  String get trackerHelpDisable =>
+      'لإيقافه، أخرج بطاريته. عندها لا تصل صاحبه مواقع جديدة، وقد يلاحظ أنه توقف.';
+
+  @override
+  String get trackerHelpPolice =>
+      'احتفظ بالجهاز وبلّغ الشرطة عنه. بالرقم التسلسلي يمكنها أن تسأل الشركة المصنّعة عن صاحبه.';
+
+  @override
+  String get trackerHelpTalk =>
+      'تريد التحدث مع أحد أولًا؟ Slachtofferhulp تساعد مجانًا. إذا كان من المحتمل أنه شخص قريب منك، اتصل بـ Veilig Thuis.';
+
+  @override
   String get quickTools => 'مساعدة سريعة';
 
   @override
