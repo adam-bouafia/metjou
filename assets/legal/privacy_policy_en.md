@@ -28,7 +28,7 @@ This data is removed when you delete the app or clear its data in your phone set
 
 ## Location
 
-MetJou reads your location to add a map link to SOS messages and for Get home safe. When Safe Shake or Get home safe is on, it also reads your location in the background; Android shows a notification while this happens. The tracker watch, if you turn it on, reads your location in the background only at a moment when it sees a tracker that is away from its owner.
+MetJou reads your location to add a map link to SOS messages and for Get home safe. When Safe Shake or Get home safe is on, it also reads your location in the background; Android shows a notification while this happens. The tracker watch, if you turn it on, reads your location in the background only at a moment when it sees a tracker that is not known to be with its owner.
 
 Your location is only sent when you send an alert (button, shake, Quick Settings tile, widget or shortcut), while Get home safe is on, when you miss a check-in, or once when your battery is nearly empty if you turned on the low battery message. It goes by SMS to your chosen contacts. Nobody else receives it, including the developer.
 
@@ -58,7 +58,7 @@ If you turn on the low battery message, MetJou reads your battery level every 15
 
 When you tap Scan now, MetJou listens for about ten seconds for the Bluetooth signals that AirTags, SmartTags, Tile and similar tags send out. Android requires the Nearby devices and precise location permissions for any Bluetooth scan. With watching in the background off, the result is only shown on your screen: it is not stored, and MetJou does not read your location for it.
 
-If you turn on watching in the background, MetJou scans about every 15 minutes, also when the app is closed. For a tracker that is away from its owner it stores the kind of tracker, an identifier from its signal, the time, the signal strength and where your phone was at that moment. Trackers that are with their owner are not stored. A scan you start yourself is stored in the same way while the watch is on. These sightings stay in the app's private folder, are never sent anywhere, and are removed after 14 days, or at once when you tap Delete history. They are what lets MetJou warn you when the same tracker shows up at several places. In discreet mode you get no notification; the warning is shown inside the app.
+If you turn on watching in the background, MetJou scans about every 15 minutes, also when the app is closed. For a tracker that is not known to be with its owner it stores the kind of tracker, an identifier from its signal, the time, the signal strength and where your phone was at that moment. Trackers that are with their owner are not stored. A scan you start yourself is stored in the same way while the watch is on. These sightings stay in the app's private folder, are never sent anywhere, and are removed after 14 days, or at once when you tap Delete history. They are what lets MetJou warn you when the same tracker shows up at several places. In discreet mode you get no notification; the warning is shown inside the app.
 
 When you tap Find it, MetJou keeps scanning while that screen is open. When you tap Play sound, MetJou connects to the tracker over Bluetooth and sends it the command to make a sound. When you save a tracker to your diary, the times and map links of its sightings become a diary entry. Tapping Map opens Google Maps, and Google processes that request under its own privacy policy.
 
