@@ -260,7 +260,7 @@ class TrackerScanPlugin : FlutterPlugin, MethodCallHandler, EventChannel.StreamH
         val holdMs = (call.argument<Number>("holdMs") ?: 8000).toLong()
         val timeoutMs = (call.argument<Number>("timeoutMs") ?: 15000).toLong()
         val device = try {
-            devices[address] ?: adapter.getRemoteDevice(address)
+            devices[address] ?: remoteDevice(adapter, address)
         } catch (e: IllegalArgumentException) {
             result.error("connect_failed", e.message, null)
             return
@@ -359,6 +359,16 @@ class TrackerScanPlugin : FlutterPlugin, MethodCallHandler, EventChannel.StreamH
             }
         }, timeoutMs)
     }
+
+    // A device this engine has not scanned itself, such as one stored by the
+    // background task. Trackers use random addresses, and Android has to be
+    // told so to connect; before Android 13 it can only guess.
+    private fun remoteDevice(adapter: BluetoothAdapter, address: String): BluetoothDevice =
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            adapter.getRemoteLeDevice(address, BluetoothDevice.ADDRESS_TYPE_RANDOM)
+        } else {
+            adapter.getRemoteDevice(address)
+        }
 
     @SuppressLint("MissingPermission")
     private fun close(connection: BluetoothGatt) {
