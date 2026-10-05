@@ -1,6 +1,6 @@
 # Privacy Policy
 
-Last updated: 26 September 2026
+Last updated: 5 October 2026
 
 MetJou is a personal safety app made by Adam Bouafia in the Netherlands. This policy explains which data the app uses, where that data goes, and what your rights are under the General Data Protection Regulation (GDPR).
 
@@ -53,6 +53,10 @@ The MetJou watch app sends an SOS press to your own paired phone through Google 
 
 If you turn on the low battery message, MetJou reads your battery level every 15 minutes. The level is only used to decide whether to send that message and is not stored.
 
+## Tracker scan
+
+When you tap Scan now, MetJou listens for about ten seconds for the Bluetooth signals that AirTags, SmartTags, Tile and similar tags send out. The result is only shown on your screen; it is not stored and not sent anywhere. Android requires the Nearby devices and precise location permissions for any Bluetooth scan. MetJou does not read your location for this scan.
+
 ## SMS and phone calls
 
 Alerts are sent as normal SMS messages through your own mobile provider, at your provider's normal rates. Emergency and helpline numbers are called through your phone's own dialer.
@@ -77,6 +81,7 @@ The help and information pages link to the websites of organisations such as Vei
 | SMS | Sending alerts to your contacts |
 | Phone | Calling emergency and helpline numbers |
 | Microphone | Audio recording, only if you turn it on |
+| Nearby devices (Bluetooth) | Tracker scan, only when you tap Scan now |
 | Notifications | Showing that Safe Shake or recording is active |
 
 You can withdraw any permission at any time in your phone settings. Some features will then stop working.

@@ -1,6 +1,6 @@
 # Privacyverklaring
 
-Laatst bijgewerkt: 26 september 2026
+Laatst bijgewerkt: 5 oktober 2026
 
 MetJou is een app voor persoonlijke veiligheid, gemaakt door Adam Bouafia in Nederland. In deze verklaring lees je welke gegevens de app gebruikt, waar die gegevens naartoe gaan en welke rechten je hebt onder de Algemene verordening gegevensbescherming (AVG).
 
@@ -53,6 +53,10 @@ De MetJou-app op je horloge stuurt een druk op SOS naar je eigen gekoppelde tele
 
 Als je het bericht bij lege batterij aanzet, leest MetJou elke 15 minuten het batterijniveau. Dat niveau wordt alleen gebruikt om te bepalen of het bericht verstuurd moet worden en wordt niet bewaard.
 
+## Trackers zoeken
+
+Als je op Nu zoeken tikt, luistert MetJou ongeveer tien seconden naar de bluetooth-signalen die AirTags, SmartTags, Tile en vergelijkbare tags uitzenden. Het resultaat staat alleen op je scherm; het wordt niet bewaard en nergens naartoe gestuurd. Android vraagt voor elke bluetooth-scan de toestemmingen Apparaten in de buurt en Exacte locatie. MetJou leest je locatie niet voor deze scan.
+
 ## Sms en bellen
 
 Alarmen gaan als gewone sms via je eigen provider, tegen de normale tarieven van je provider. Nood- en hulplijnnummers worden gebeld via de telefoon-app van je toestel.
@@ -77,6 +81,7 @@ De pagina's met hulp en informatie verwijzen naar websites van organisaties zoal
 | Sms | Alarmen naar je contacten sturen |
 | Telefoon | Nood- en hulplijnnummers bellen |
 | Microfoon | Geluidsopname, alleen als je die aanzet |
+| Apparaten in de buurt (bluetooth) | Trackers zoeken, alleen als je op Nu zoeken tikt |
 | Meldingen | Laten zien dat Safe Shake of een opname actief is |
 
 Je kunt elke toestemming altijd intrekken in de instellingen van je telefoon. Sommige functies werken dan niet meer.
