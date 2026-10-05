@@ -3,29 +3,18 @@ import 'package:metjou/features/tracker_watch/data/signal_meter.dart';
 import 'package:metjou/features/tracker_watch/data/tracker_signature.dart';
 
 void main() {
-  final start = DateTime(2026, 10, 5, 18);
-  DateTime at(int seconds) => start.add(Duration(seconds: seconds));
-
   SignalMeter fed(List<int> readings) {
     final meter = SignalMeter();
-    for (final (i, rssi) in readings.indexed) {
-      meter.add(rssi, at(i));
-    }
+    readings.forEach(meter.add);
     return meter;
   }
 
-  test('is lost before the first reading', () {
+  test('has no level before the first reading', () {
     final meter = SignalMeter();
-    expect(meter.isLost(start), isTrue);
     expect(meter.level, isNull);
     expect(meter.strength, 0);
+    expect(meter.proximity, Proximity.far);
     expect(meter.trend, SignalTrend.steady);
-  });
-
-  test('is lost again after six seconds of silence', () {
-    final meter = fed([-60]);
-    expect(meter.isLost(at(6)), isFalse);
-    expect(meter.isLost(at(7)), isTrue);
   });
 
   test('one reading sets the level', () {

@@ -150,6 +150,8 @@
   "trackerHelpDisable": "Haal de batterij eruit om hem te stoppen. De eigenaar krijgt dan geen nieuwe locaties meer en kan merken dat hij gestopt is.",
   "trackerHelpPolice": "Bewaar de tracker en doe aangifte bij de politie. Met het serienummer kan de politie bij de fabrikant navragen van wie hij is.",
   "trackerHelpTalk": "Eerst met iemand praten? Slachtofferhulp helpt gratis. Kan het iemand uit je omgeving zijn, bel dan Veilig Thuis.",
+  "trackerDiaryTextOnce": "Tracker gevonden: {kind}, code {code}, gezien op {time}.",
+  "trackerSoundPermission": "MetJou heeft de toestemming Apparaten in de buurt nodig om verbinding te maken met de tracker.",
   "quickTools": "Snelle hulp",
   "fakeCall": "Nep-oproep",
   "fakeCallSubtitle": "Een echt lijkende inkomende oproep, om weg te kunnen",

@@ -527,6 +527,15 @@ class AppLocalizationsAr extends AppLocalizations {
       'تريد التحدث مع أحد أولًا؟ Slachtofferhulp تساعد مجانًا. إذا كان من المحتمل أنه شخص قريب منك، اتصل بـ Veilig Thuis.';
 
   @override
+  String trackerDiaryTextOnce(String kind, String code, String time) {
+    return 'تم العثور على جهاز تتبع: $kind، الرمز $code، شوهد في $time.';
+  }
+
+  @override
+  String get trackerSoundPermission =>
+      'يحتاج MetJou إلى إذن «الأجهزة المجاورة» للاتصال بجهاز التتبع.';
+
+  @override
   String get quickTools => 'مساعدة سريعة';
 
   @override

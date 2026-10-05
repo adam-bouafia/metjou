@@ -268,6 +268,21 @@
   "trackerHelpDisable": "To stop it, take out its battery. The owner then gets no new locations, and may notice that it stopped.",
   "trackerHelpPolice": "Keep the tracker and report it to the police. With the serial number they can ask the maker who owns it.",
   "trackerHelpTalk": "Want to talk first? Slachtofferhulp helps for free. If it could be someone close to you, call Veilig Thuis.",
+  "trackerDiaryTextOnce": "Tracker found: {kind}, code {code}, seen on {time}.",
+  "@trackerDiaryTextOnce": {
+    "placeholders": {
+      "kind": {
+        "type": "String"
+      },
+      "code": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "trackerSoundPermission": "MetJou needs the Nearby devices permission to connect to the tracker.",
   "quickTools": "Quick help",
   "fakeCall": "Fake call",
   "fakeCallSubtitle": "A realistic incoming call, to get away",

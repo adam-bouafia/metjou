@@ -150,6 +150,8 @@
   "trackerHelpDisable": "Pour l'arrêter, retirez sa pile. Le propriétaire ne reçoit alors plus de nouvelles positions et peut remarquer qu'il s'est arrêté.",
   "trackerHelpPolice": "Conservez le traceur et signalez-le à la police. Avec le numéro de série, elle peut demander au fabricant à qui il appartient.",
   "trackerHelpTalk": "Envie d'en parler d'abord ? Slachtofferhulp aide gratuitement. S'il peut s'agir d'un proche, appelez Veilig Thuis.",
+  "trackerDiaryTextOnce": "Traceur trouvé : {kind}, code {code}, vu le {time}.",
+  "trackerSoundPermission": "MetJou a besoin de l'autorisation Appareils à proximité pour se connecter au traceur.",
   "quickTools": "Aide rapide",
   "fakeCall": "Faux appel",
   "fakeCallSubtitle": "Un appel entrant réaliste, pour pouvoir partir",

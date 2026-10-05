@@ -1011,6 +1011,18 @@ abstract class AppLocalizations {
   /// **'Want to talk first? Slachtofferhulp helps for free. If it could be someone close to you, call Veilig Thuis.'**
   String get trackerHelpTalk;
 
+  /// No description provided for @trackerDiaryTextOnce.
+  ///
+  /// In en, this message translates to:
+  /// **'Tracker found: {kind}, code {code}, seen on {time}.'**
+  String trackerDiaryTextOnce(String kind, String code, String time);
+
+  /// No description provided for @trackerSoundPermission.
+  ///
+  /// In en, this message translates to:
+  /// **'MetJou needs the Nearby devices permission to connect to the tracker.'**
+  String get trackerSoundPermission;
+
   /// No description provided for @quickTools.
   ///
   /// In en, this message translates to:

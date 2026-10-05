@@ -150,6 +150,8 @@
   "trackerHelpDisable": "Para detenerlo, quítale la pila. El dueño ya no recibe nuevas ubicaciones y puede notar que se ha detenido.",
   "trackerHelpPolice": "Conserva el rastreador y denúncialo a la policía. Con el número de serie pueden preguntar al fabricante de quién es.",
   "trackerHelpTalk": "¿Prefieres hablar primero? Slachtofferhulp ayuda gratis. Si puede ser alguien cercano, llama a Veilig Thuis.",
+  "trackerDiaryTextOnce": "Rastreador encontrado: {kind}, código {code}, visto el {time}.",
+  "trackerSoundPermission": "MetJou necesita el permiso Dispositivos cercanos para conectarse al rastreador.",
   "quickTools": "Ayuda rápida",
   "fakeCall": "Llamada falsa",
   "fakeCallSubtitle": "Una llamada entrante realista, para poder irte",

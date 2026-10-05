@@ -530,6 +530,15 @@ class AppLocalizationsNl extends AppLocalizations {
       'Eerst met iemand praten? Slachtofferhulp helpt gratis. Kan het iemand uit je omgeving zijn, bel dan Veilig Thuis.';
 
   @override
+  String trackerDiaryTextOnce(String kind, String code, String time) {
+    return 'Tracker gevonden: $kind, code $code, gezien op $time.';
+  }
+
+  @override
+  String get trackerSoundPermission =>
+      'MetJou heeft de toestemming Apparaten in de buurt nodig om verbinding te maken met de tracker.';
+
+  @override
   String get quickTools => 'Snelle hulp';
 
   @override
