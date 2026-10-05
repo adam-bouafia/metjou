@@ -39,15 +39,23 @@ Feature-first layout:
         theme/             brand colours and theme
         widgets/           shared widgets
       features/<feature>/  onboarding, splash, home, emergency, safe_places,
-                           get_home_safe, contacts, resources, settings, legal
+                           get_home_safe, contacts, resources, settings, legal,
+                           tracker_watch
         data/              models and storage
         presentation/      screens, widgets/ for feature-only widgets
       l10n/                ARB translations and generated code
     plugins/audio_background_record/   local plugin: foreground-service audio recorder
+    plugins/tracker_scan/              local plugin: filtered Bluetooth LE scan
     android/wear/          Wear OS SOS app (native Kotlin)
     test/                  mirrors lib/
 
+## Tracker scan
+
+The tracker scan lists AirTags, Samsung SmartTags, Tile, Chipolo, Pebblebee and Google Find Hub tags that are near the phone, and whether each one is away from its owner. It needs a real phone (no emulator) with Bluetooth and location on. In a debug build every match is printed with its raw bytes (`tracker_scan ...` in the log), to check the recognition against a real tag.
+
 ## Credits
+
+Tracker recognition: the advert patterns and their decoding follow [AirGuard](https://github.com/seemoo-lab/AirGuard) (TU Darmstadt, Apache-2.0).
 
 The help and information carousel shows previews of the organisations' own websites (Veilig Thuis, Centrum Seksueel Geweld, Slachtofferhulp Nederland, 113 Zelfmoordpreventie, Switchboard, Politie, Rijksoverheid), taken from their Open Graph images or homepage headers. They remain the property of those organisations.
 
