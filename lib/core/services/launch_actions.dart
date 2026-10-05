@@ -5,6 +5,7 @@ import 'package:metjou/core/services/background_services.dart';
 import 'package:metjou/core/services/device.dart';
 import 'package:metjou/features/fake_call/data/fake_call_service.dart';
 import 'package:metjou/features/siren/presentation/siren_screen.dart';
+import 'package:metjou/features/tracker_watch/presentation/tracker_scan_screen.dart';
 import 'package:quick_actions/quick_actions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,6 +15,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 abstract final class LaunchActions {
   static Future<void> init() async {
     await Device.listenForLaunchActions(handle);
+    // The app was started by a tap on a tracker warning.
+    if (await BackgroundServices.launchPayload() ==
+        BackgroundServices.trackerPayload) {
+      await openTrackers();
+    }
     final l10n = await backgroundLocalizations();
     const quickActions = QuickActions();
     await quickActions.initialize(handle);
@@ -45,6 +51,12 @@ abstract final class LaunchActions {
       case LaunchAction.siren:
         await pushScreen(const SirenScreen());
     }
+  }
+
+  /// Opens the tracker screen (after the PIN) from a notification tap.
+  static Future<void> openTrackers() async {
+    final context = appNavigatorKey.currentContext;
+    if (context != null && context.mounted) await openTrackerScan(context);
   }
 
   static Future<void> _sendSos() async {

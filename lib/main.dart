@@ -60,6 +60,9 @@ Future<void> main() async {
       if (response.payload == BackgroundServices.fakeCallPayload) {
         FakeCallService.ring();
       }
+      if (response.payload == BackgroundServices.trackerPayload) {
+        LaunchActions.openTrackers();
+      }
     },
   );
   await BackgroundServices.checkService();
