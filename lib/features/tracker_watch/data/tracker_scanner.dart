@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:metjou/features/tracker_watch/data/tracker_signature.dart';
@@ -26,6 +27,23 @@ class ScanOutcome {
 /// How long one manual scan listens: long enough to hear tags that only
 /// advertise every few seconds more than once.
 const manualScanDuration = Duration(seconds: 10);
+
+String _hex(List<int> bytes) =>
+    bytes.map((b) => b.toRadixString(16).padLeft(2, '0')).join();
+
+/// Prints the raw bytes of a match, to check recognition against real tags.
+void _log(BleAdvert advert) {
+  final data = {
+    for (final e in advert.manufacturerData.entries)
+      'company ${e.key.toRadixString(16)}': _hex(e.value),
+    for (final e in advert.serviceData.entries)
+      'service ${e.key.substring(4, 8)}': _hex(e.value),
+  };
+  debugPrint(
+    'tracker_scan ${advert.address} ${advert.rssi} dBm '
+    '${identifyTracker(advert)?.kind.name ?? 'not a tracker'} $data',
+  );
+}
 
 /// Scans for trackers nearby.
 abstract final class TrackerScanner {
@@ -67,6 +85,7 @@ abstract final class TrackerScanner {
         filters: trackerFilters,
         duration: duration,
       );
+      if (kDebugMode) adverts.forEach(_log);
       return ScanOutcome.found(trackersIn(adverts));
     } on PlatformException catch (e) {
       return ScanOutcome.blocked(switch (e.code) {
