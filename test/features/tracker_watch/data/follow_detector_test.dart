@@ -147,6 +147,27 @@ void main() {
     expect(findFollowers(sightings, now: later, rule: sensitive), hasLength(1));
   });
 
+  for (final kind in [TrackerKind.tile, TrackerKind.pebblebee]) {
+    test('a ${kind.name} needs one place more, as it never says where its '
+        'owner is', () {
+      final three = [
+        seen('1', 0, place: 0, kind: kind),
+        seen('1', 30, place: 1, kind: kind),
+        seen('1', 65, place: 2, kind: kind),
+      ];
+      expect(findFollowers(three, now: later), isEmpty);
+      final four = [...three, seen('1', 80, place: 3, kind: kind)];
+      expect(findFollowers(four, now: later).single.places, 4);
+    });
+  }
+
+  test('placesNeeded follows the rule', () {
+    const rule = FollowRule(minPlaces: 2);
+    expect(rule.placesNeeded(TrackerKind.airTag), 2);
+    expect(rule.placesNeeded(TrackerKind.smartTag), 2);
+    expect(rule.placesNeeded(TrackerKind.tile), 3);
+  });
+
   group('resolveDevice', () {
     final airTag = Tracker(
       kind: TrackerKind.airTag,

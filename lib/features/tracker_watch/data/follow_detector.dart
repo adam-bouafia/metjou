@@ -26,6 +26,15 @@ class FollowRule {
 
   /// Sightings closer together than this, in metres, are one place.
   final double placeRadius;
+
+  /// Places needed for a tracker of [kind]. Tile and Pebblebee tags never
+  /// say whether their owner is near, so the tag of someone who happens to
+  /// travel the same way counts too; they need one place more (AirGuard
+  /// does the same for Tile).
+  int placesNeeded(TrackerKind kind) =>
+      kind == TrackerKind.tile || kind == TrackerKind.pebblebee
+      ? minPlaces + 1
+      : minPlaces;
 }
 
 /// A tracker that has been travelling with the user.
@@ -96,7 +105,7 @@ List<Follower> findFollowers(
     seen.sort((a, b) => a.at.compareTo(b.at));
     if (seen.last.at.difference(seen.first.at) < rule.minDuration) continue;
     final places = distinctPlaces(seen, rule.placeRadius).length;
-    if (places < rule.minPlaces) continue;
+    if (places < rule.placesNeeded(seen.last.kind)) continue;
     followers.add(Follower(device: device, sightings: seen, places: places));
   }
   return followers..sort((a, b) => b.lastSeen.compareTo(a.lastSeen));
