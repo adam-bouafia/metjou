@@ -230,6 +230,8 @@ abstract final class TrackerWatch {
       // Discreet mode: no notification; the app shows the warning instead.
       if (due.isNotEmpty && !await DiscreetMode.isEnabled()) {
         final text = trackerAlertText(await backgroundLocalizations(), due);
+        // This isolate has not set the notification plugin up yet.
+        await BackgroundServices.init();
         await BackgroundServices.showTrackerNotification(
           title: text.title,
           body: text.body,
