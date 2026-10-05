@@ -86,6 +86,77 @@ void main() {
     expect(await TrackerScan.scan(filters: const []), isEmpty);
   });
 
+  test('live streams adverts and sends the filters', () async {
+    const liveChannel = EventChannel('metjou/tracker_scan/live');
+    Object? listenArguments;
+    var cancelled = false;
+    messenger.setMockStreamHandler(
+      liveChannel,
+      MockStreamHandler.inline(
+        onListen: (arguments, events) {
+          listenArguments = arguments;
+          events.success({'address': 'AA', 'rssi': -70});
+          events.success({'address': 'AA', 'rssi': -55});
+        },
+        onCancel: (_) => cancelled = true,
+      ),
+    );
+    addTearDown(() => messenger.setMockStreamHandler(liveChannel, null));
+
+    final rssi = <int>[];
+    final subscription = TrackerScan.live(
+      filters: [BleFilter.serviceUuid(uuid16(0xFE33))],
+    ).listen((advert) => rssi.add(advert.rssi));
+    await pumpEventQueue();
+    expect(rssi, [-70, -55]);
+    final filters = ((listenArguments! as Map)['filters'] as List).cast<Map>();
+    expect(filters.single['serviceUuid'], uuid16(0xFE33));
+
+    await subscription.cancel();
+    await pumpEventQueue();
+    expect(cancelled, isTrue);
+  });
+
+  test(
+    'writeGatt sends the writes as bytes and returns the one used',
+    () async {
+      answer((_) => 1);
+      final used = await TrackerScan.writeGatt(
+        address: 'AA:BB:CC:DD:EE:FF',
+        writes: [
+          GattWrite(
+            service: uuid16(0xFD44),
+            characteristic: uuid16(0x2C02),
+            value: const [0x01, 0x00, 0x03],
+            subscribe: true,
+          ),
+          GattWrite(
+            service: uuid16(0xFA25),
+            characteristic: uuid16(0x2C02),
+            value: const [0x01],
+            noResponse: true,
+          ),
+        ],
+        hold: const Duration(seconds: 2),
+        timeout: const Duration(seconds: 5),
+      );
+      expect(used, 1);
+      final call = calls.single;
+      expect(call.method, 'writeGatt');
+      final args = call.arguments as Map;
+      expect(args['address'], 'AA:BB:CC:DD:EE:FF');
+      expect(args['holdMs'], 2000);
+      expect(args['timeoutMs'], 5000);
+      final writes = (args['writes'] as List).cast<Map>();
+      expect(writes[0]['service'], uuid16(0xFD44));
+      expect(writes[0]['value'], isA<Uint8List>());
+      expect(writes[0]['value'], [0x01, 0x00, 0x03]);
+      expect(writes[0]['subscribe'], isTrue);
+      expect(writes[0]['noResponse'], isFalse);
+      expect(writes[1]['noResponse'], isTrue);
+    },
+  );
+
   test('scan passes platform errors on', () async {
     answer((_) => throw PlatformException(code: 'bluetooth_off'));
     expect(

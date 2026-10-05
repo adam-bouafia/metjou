@@ -88,9 +88,41 @@ class BleAdvert {
   final List<String> serviceUuids;
 }
 
-/// Bluetooth LE scanning through the Android plugin.
+/// One thing to try on a connected device: write [value] to a
+/// characteristic of a service (both as 128-bit UUIDs, see [uuid16]).
+class GattWrite {
+  const GattWrite({
+    required this.service,
+    required this.characteristic,
+    required this.value,
+    this.subscribe = false,
+    this.noResponse = false,
+  });
+
+  final String service;
+  final String characteristic;
+  final List<int> value;
+
+  /// Switch notifications of the characteristic on before writing; some
+  /// devices only accept a command then.
+  final bool subscribe;
+
+  /// Write without waiting for the device to confirm.
+  final bool noResponse;
+
+  Map<String, Object?> toMap() => {
+    'service': service,
+    'characteristic': characteristic,
+    'value': Uint8List.fromList(value),
+    'subscribe': subscribe,
+    'noResponse': noResponse,
+  };
+}
+
+/// Bluetooth LE through the Android plugin.
 abstract final class TrackerScan {
   static const _channel = MethodChannel('metjou/tracker_scan');
+  static const _liveChannel = EventChannel('metjou/tracker_scan/live');
 
   static Future<BluetoothState> state() async =>
       BluetoothState.values.byName(await _channel.invokeMethod('state'));
@@ -116,5 +148,40 @@ abstract final class TrackerScan {
       },
     );
     return [for (final map in found ?? const []) BleAdvert.fromMap(map)];
+  }
+
+  /// Every matching advert as it arrives, until the listener cancels. One
+  /// listener at a time.
+  ///
+  /// The stream reports a [PlatformException] with code `permission`,
+  /// `bluetooth_off` or `scan_failed`.
+  static Stream<BleAdvert> live({required List<BleFilter> filters}) =>
+      _liveChannel
+          .receiveBroadcastStream({
+            'filters': [for (final f in filters) f.toMap()],
+          })
+          .map((event) => BleAdvert.fromMap(event as Map<Object?, Object?>));
+
+  /// Connects to the device at [address] and performs the first of [writes]
+  /// whose characteristic the device has. Stays connected for [hold], so a
+  /// sound can play, then hangs up. Returns the index of the write used.
+  ///
+  /// Throws a [PlatformException] with code `permission` (Bluetooth connect
+  /// not granted), `bluetooth_off`, `busy` (still connected from an earlier
+  /// call), `connect_failed`, `not_supported` (none of the characteristics
+  /// exist on the device), `write_failed` or `timeout`.
+  static Future<int> writeGatt({
+    required String address,
+    required List<GattWrite> writes,
+    Duration hold = const Duration(seconds: 8),
+    Duration timeout = const Duration(seconds: 15),
+  }) async {
+    final used = await _channel.invokeMethod<int>('writeGatt', {
+      'address': address,
+      'writes': [for (final w in writes) w.toMap()],
+      'holdMs': hold.inMilliseconds,
+      'timeoutMs': timeout.inMilliseconds,
+    });
+    return used ?? 0;
   }
 }

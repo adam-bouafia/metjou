@@ -5,5 +5,7 @@
   <!-- Android 12+. Not flagged neverForLocation: that flag makes Android drop
        some beacon adverts, and tracker sightings are stored with a place. -->
   <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+  <!-- Android 12+: connecting to a tracker to make it play a sound. -->
+  <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
   <uses-feature android:name="android.hardware.bluetooth_le" android:required="false" />
 </manifest>
