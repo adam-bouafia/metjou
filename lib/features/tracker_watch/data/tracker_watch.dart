@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
@@ -22,6 +23,15 @@ const _prunedKey = "trackerPruned";
 
 /// A background scan listens this long, as AirGuard does.
 const backgroundScanDuration = Duration(seconds: 20);
+
+/// While Get home safe sends the location, the user is on the way and wants
+/// to know sooner: the app scans every few minutes and warns after half an
+/// hour at two places (AirGuard's high sensitivity).
+const journeyInterval = Duration(minutes: 3);
+const journeyRule = FollowRule(
+  minDuration: Duration(minutes: 30),
+  minPlaces: 2,
+);
 
 /// At most one warning per tracker in this time.
 const alertPause = Duration(hours: 4);
@@ -140,10 +150,15 @@ abstract final class TrackerWatch {
   static Future<List<Follower>> followers(
     SightingStore store, {
     DateTime? now,
+    FollowRule rule = const FollowRule(),
   }) async {
     final at = now ?? DateTime.now();
-    final since = at.subtract(const FollowRule().window);
-    return findFollowers(await store.load(since: since), now: at);
+    final since = at.subtract(rule.window);
+    return findFollowers(
+      await store.load(since: since),
+      now: at,
+      rule: rule,
+    );
   }
 
   /// Device keys the user chose not to be warned about.
@@ -198,15 +213,45 @@ abstract final class TrackerWatch {
     await (await SharedPreferences.getInstance()).remove(_alertedKey);
   }
 
-  /// One round of the Workmanager task: scan, store, warn.
-  static Future<void> backgroundCheck() async {
+  static Timer? _journey;
+
+  /// Scans every few minutes with the stricter [journeyRule], for as long as
+  /// the app keeps running (Get home safe keeps it alive). Does nothing
+  /// while the watch is switched off.
+  static void startJourney() {
+    _journey ??= Timer.periodic(
+      journeyInterval,
+      (_) => _round(
+        rule: journeyRule,
+        scanFor: manualScanDuration,
+        ownIsolate: false,
+      ),
+    );
+  }
+
+  static void stopJourney() {
+    _journey?.cancel();
+    _journey = null;
+  }
+
+  /// One round of the Workmanager task, in its own isolate.
+  static Future<void> backgroundCheck() => _round(
+    rule: const FollowRule(),
+    scanFor: backgroundScanDuration,
+    ownIsolate: true,
+  );
+
+  /// One round: scan, store, warn.
+  static Future<void> _round({
+    required FollowRule rule,
+    required Duration scanFor,
+    required bool ownIsolate,
+  }) async {
     try {
       if (!await isEnabled()) return;
       // No questions in the background: with Bluetooth off or a permission
       // withdrawn the scan reports a blocker and this round does nothing.
-      final outcome = await TrackerScanner.scan(
-        duration: backgroundScanDuration,
-      );
+      final outcome = await TrackerScanner.scan(duration: scanFor);
       if (outcome.blocker != null) return;
       final now = DateTime.now();
       final prefs = await SharedPreferences.getInstance();
@@ -223,15 +268,17 @@ abstract final class TrackerWatch {
         lon: here?.lon,
       );
       final due = await takeDueAlerts(
-        await followers(store, now: now),
+        await followers(store, now: now, rule: rule),
         seenNow,
         now,
       );
       // Discreet mode: no notification; the app shows the warning instead.
       if (due.isNotEmpty && !await DiscreetMode.isEnabled()) {
         final text = trackerAlertText(await backgroundLocalizations(), due);
-        // This isolate has not set the notification plugin up yet.
-        await BackgroundServices.init();
+        // The Workmanager isolate has not set the notification plugin up.
+        // The app itself has, with its handler for taps, which this call
+        // would replace.
+        if (ownIsolate) await BackgroundServices.init();
         await BackgroundServices.showTrackerNotification(
           title: text.title,
           body: text.body,

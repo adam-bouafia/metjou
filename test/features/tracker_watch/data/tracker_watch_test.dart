@@ -117,6 +117,27 @@ void main() {
     expect(follower.places, 4);
   });
 
+  test('on the way home half an hour at two places is enough', () async {
+    await round(0, [tracker('AA:01')], place: 0);
+    await round(15, [tracker('AA:01')], place: 1);
+    await round(31, [tracker('AA:01')], place: 1);
+    expect(await TrackerWatch.followers(store, now: at(31)), isEmpty);
+    final follower = (await TrackerWatch.followers(
+      store,
+      now: at(31),
+      rule: journeyRule,
+    )).single;
+    expect(follower.device, 'AA:01');
+    expect(follower.places, 2);
+  });
+
+  test('the journey timer can be started twice and stopped', () {
+    TrackerWatch.startJourney();
+    TrackerWatch.startJourney();
+    TrackerWatch.stopJourney();
+    TrackerWatch.stopJourney();
+  });
+
   test('a tracker at home all evening is never a follower', () async {
     for (var minutes = 0; minutes <= 240; minutes += 15) {
       await round(minutes, [tracker('AA:01')], place: 0);

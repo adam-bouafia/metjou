@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:metjou/core/localization/app_locale.dart';
 import 'package:metjou/core/services/background_services.dart';
+import 'package:metjou/features/tracker_watch/data/tracker_watch.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:workmanager/workmanager.dart';
 
@@ -90,6 +91,7 @@ class GetHomeSafeService {
   static Future<void> stop() async {
     _timer?.cancel();
     _timer = null;
+    TrackerWatch.stopJourney();
     await Workmanager().cancelByUniqueName(getHomeSafeOnceTask);
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(_kActive, false);
@@ -117,6 +119,8 @@ class GetHomeSafeService {
       notificationText: l10n.getHomeSafeOn,
     );
     _timer = Timer.periodic(interval, (_) => _send(contact));
+    // On the way home the tracker watch looks more often.
+    TrackerWatch.startJourney();
   }
 
   static Future<void> _send(String contact) async {
