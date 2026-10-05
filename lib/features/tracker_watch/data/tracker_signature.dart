@@ -61,12 +61,15 @@ class Tracker {
   /// links the same tag across address changes, see `isSameTracker`.
   final int? aging;
 
-  Proximity get proximity => rssi >= -60
-      ? Proximity.veryClose
-      : rssi >= -75
-      ? Proximity.close
-      : Proximity.far;
+  Proximity get proximity => proximityOf(rssi);
 }
+
+/// Rough distance for a signal strength in dBm.
+Proximity proximityOf(num rssi) => rssi >= -60
+    ? Proximity.veryClose
+    : rssi >= -75
+    ? Proximity.close
+    : Proximity.far;
 
 /// Short code to tell trackers apart on screen: the last four hex digits
 /// of an id, such as `A2:3F`.
