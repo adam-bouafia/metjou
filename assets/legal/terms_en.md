@@ -1,6 +1,6 @@
 # Terms of Use
 
-Last updated: 26 September 2026
+Last updated: 5 October 2026
 
 These terms apply to the MetJou app, made by Adam Bouafia in the Netherlands. By using MetJou you accept these terms.
 
@@ -18,9 +18,13 @@ An alert depends on things MetJou cannot control, for example:
 - your phone being switched off, lost or broken;
 - the accuracy of your phone's location.
 
-The same applies to the check-in timer and the low battery message: Android can delay background work by a few minutes.
+The same applies to the check-in timer, the low battery message and the tracker watch: Android can delay background work by a few minutes.
 
 Test your alerts with your contacts, keep the app's permissions switched on, and exclude MetJou from battery optimisation for the best result.
+
+## The tracker watch has limits
+
+The tracker scan and the tracker watch look for the Bluetooth signals of the kinds of tags MetJou knows. They cannot find every tracker, for example a GPS tracker or a tag of another kind, they can miss one, and they can warn about a tag that is not following you. A warning is a reason to check, not proof. Find it and Play sound depend on the tag and do not always work.
 
 ## Your responsibilities
 

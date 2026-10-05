@@ -22,12 +22,13 @@ MetJou is een app voor persoonlijke veiligheid, gemaakt door Adam Bouafia in Ned
 | Incidentendagboek: tekst en foto's | Je eigen verslag van wat er gebeurde | Privémap van de app op je telefoon |
 | Medische ID: gezondheidsgegevens die je invult | Voor hulpverleners | Opslag van de app op je telefoon |
 | Geluidsopnames, alleen als je dit aanzet | Bewijs dat je zelf kunt gebruiken | Privémap van de app op je telefoon |
+| Waarnemingen van trackers, alleen als je opletten op de achtergrond aanzet: soort tracker, tijd en plek | Om een tracker op te merken die met je meereist | Privémap van de app op je telefoon, na 14 dagen verwijderd |
 
 Deze gegevens worden verwijderd als je de app verwijdert of de appgegevens wist in de instellingen van je telefoon.
 
 ## Locatie
 
-MetJou leest je locatie om een kaartlink aan SOS-berichten toe te voegen en voor Veilig thuiskomen. Als Safe Shake of Veilig thuiskomen aan staat, leest de app je locatie ook op de achtergrond; Android toont dan een melding.
+MetJou leest je locatie om een kaartlink aan SOS-berichten toe te voegen en voor Veilig thuiskomen. Als Safe Shake of Veilig thuiskomen aan staat, leest de app je locatie ook op de achtergrond; Android toont dan een melding. Als je het opletten op trackers aanzet, leest de app je locatie op de achtergrond alleen op het moment dat hij een tracker ziet die niet bij de eigenaar is.
 
 Je locatie wordt alleen verstuurd als je een alarm stuurt (knop, schudden, snelle-instellingentegel, widget of snelkoppeling), zolang Veilig thuiskomen aan staat, als je niet op tijd incheckt, of één keer bij een bijna lege batterij als je dat bericht hebt aangezet. Dat gebeurt per sms naar je gekozen contacten. Niemand anders ontvangt je locatie, ook de ontwikkelaar niet.
 
@@ -55,7 +56,11 @@ Als je het bericht bij lege batterij aanzet, leest MetJou elke 15 minuten het ba
 
 ## Trackers zoeken
 
-Als je op Nu zoeken tikt, luistert MetJou ongeveer tien seconden naar de bluetooth-signalen die AirTags, SmartTags, Tile en vergelijkbare tags uitzenden. Het resultaat staat alleen op je scherm; het wordt niet bewaard en nergens naartoe gestuurd. Android vraagt voor elke bluetooth-scan de toestemmingen Apparaten in de buurt en Exacte locatie. MetJou leest je locatie niet voor deze scan.
+Als je op Nu zoeken tikt, luistert MetJou ongeveer tien seconden naar de bluetooth-signalen die AirTags, SmartTags, Tile en vergelijkbare tags uitzenden. Android vraagt voor elke bluetooth-scan de toestemmingen Apparaten in de buurt en Exacte locatie. Staat opletten op de achtergrond uit, dan staat het resultaat alleen op je scherm: het wordt niet bewaard en MetJou leest er je locatie niet voor.
+
+Als je opletten op de achtergrond aanzet, zoekt MetJou ongeveer elke 15 minuten, ook als de app gesloten is. Van een tracker die niet bij de eigenaar is bewaart de app het soort tracker, een kenmerk uit het signaal, de tijd, de signaalsterkte en waar je telefoon op dat moment was. Trackers die bij hun eigenaar zijn worden niet bewaard. Zolang het opletten aan staat, wordt ook bewaard wat je vindt als je zelf zoekt. Deze waarnemingen blijven in de privémap van de app, worden nergens naartoe gestuurd en worden na 14 dagen verwijderd, of meteen als je op Geschiedenis wissen tikt. Hiermee kan MetJou je waarschuwen als dezelfde tracker op verschillende plekken opduikt. In de discrete modus krijg je geen melding; de waarschuwing staat dan in de app.
+
+Als je op Zoek de tracker tikt, blijft MetJou zoeken zolang dat scherm open is. Als je op Geluid afspelen tikt, maakt MetJou via bluetooth verbinding met de tracker en stuurt de opdracht om geluid te maken. Als je een tracker in je dagboek bewaart, komen de tijden en kaartlinks van de waarnemingen in een dagboeknotitie. Als je op Kaart tikt, opent Google Maps; Google verwerkt dat verzoek volgens zijn eigen privacybeleid.
 
 ## Sms en bellen
 
@@ -77,11 +82,11 @@ De pagina's met hulp en informatie verwijzen naar websites van organisaties zoal
 
 | Toestemming | Gebruikt voor |
 | --- | --- |
-| Locatie (ook op de achtergrond) | Kaartlink in alarmen, Safe Shake, Veilig thuiskomen |
+| Locatie (ook op de achtergrond) | Kaartlink in alarmen, Safe Shake, Veilig thuiskomen, de plek waar een tracker is gezien |
 | Sms | Alarmen naar je contacten sturen |
 | Telefoon | Nood- en hulplijnnummers bellen |
 | Microfoon | Geluidsopname, alleen als je die aanzet |
-| Apparaten in de buurt (bluetooth) | Trackers zoeken, alleen als je op Nu zoeken tikt |
+| Apparaten in de buurt (bluetooth) | Trackers zoeken en opletten op trackers; verbinding maken met een tracker als je op Geluid afspelen tikt |
 | Meldingen | Laten zien dat Safe Shake of een opname actief is |
 
 Je kunt elke toestemming altijd intrekken in de instellingen van je telefoon. Sommige functies werken dan niet meer.

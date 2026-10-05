@@ -22,12 +22,13 @@ MetJou is a personal safety app made by Adam Bouafia in the Netherlands. This po
 | Incident diary: text and photos | Your own record of what happened | Private app folder on your phone |
 | Medical ID: health details you fill in | For first responders | App storage on your phone |
 | Audio recordings, only if you turn this on | Evidence you can use yourself | Private app folder on your phone |
+| Tracker sightings, only if you turn on watching in the background: kind of tracker, time and place | To notice a tracker that travels with you | Private app folder on your phone, removed after 14 days |
 
 This data is removed when you delete the app or clear its data in your phone settings.
 
 ## Location
 
-MetJou reads your location to add a map link to SOS messages and for Get home safe. When Safe Shake or Get home safe is on, it also reads your location in the background; Android shows a notification while this happens.
+MetJou reads your location to add a map link to SOS messages and for Get home safe. When Safe Shake or Get home safe is on, it also reads your location in the background; Android shows a notification while this happens. The tracker watch, if you turn it on, reads your location in the background only at a moment when it sees a tracker that is away from its owner.
 
 Your location is only sent when you send an alert (button, shake, Quick Settings tile, widget or shortcut), while Get home safe is on, when you miss a check-in, or once when your battery is nearly empty if you turned on the low battery message. It goes by SMS to your chosen contacts. Nobody else receives it, including the developer.
 
@@ -55,7 +56,11 @@ If you turn on the low battery message, MetJou reads your battery level every 15
 
 ## Tracker scan
 
-When you tap Scan now, MetJou listens for about ten seconds for the Bluetooth signals that AirTags, SmartTags, Tile and similar tags send out. The result is only shown on your screen; it is not stored and not sent anywhere. Android requires the Nearby devices and precise location permissions for any Bluetooth scan. MetJou does not read your location for this scan.
+When you tap Scan now, MetJou listens for about ten seconds for the Bluetooth signals that AirTags, SmartTags, Tile and similar tags send out. Android requires the Nearby devices and precise location permissions for any Bluetooth scan. With watching in the background off, the result is only shown on your screen: it is not stored, and MetJou does not read your location for it.
+
+If you turn on watching in the background, MetJou scans about every 15 minutes, also when the app is closed. For a tracker that is away from its owner it stores the kind of tracker, an identifier from its signal, the time, the signal strength and where your phone was at that moment. Trackers that are with their owner are not stored. A scan you start yourself is stored in the same way while the watch is on. These sightings stay in the app's private folder, are never sent anywhere, and are removed after 14 days, or at once when you tap Delete history. They are what lets MetJou warn you when the same tracker shows up at several places. In discreet mode you get no notification; the warning is shown inside the app.
+
+When you tap Find it, MetJou keeps scanning while that screen is open. When you tap Play sound, MetJou connects to the tracker over Bluetooth and sends it the command to make a sound. When you save a tracker to your diary, the times and map links of its sightings become a diary entry. Tapping Map opens Google Maps, and Google processes that request under its own privacy policy.
 
 ## SMS and phone calls
 
@@ -77,11 +82,11 @@ The help and information pages link to the websites of organisations such as Vei
 
 | Permission | Used for |
 | --- | --- |
-| Location (also in the background) | Map link in alerts, Safe Shake, Get home safe |
+| Location (also in the background) | Map link in alerts, Safe Shake, Get home safe, the place of a tracker sighting |
 | SMS | Sending alerts to your contacts |
 | Phone | Calling emergency and helpline numbers |
 | Microphone | Audio recording, only if you turn it on |
-| Nearby devices (Bluetooth) | Tracker scan, only when you tap Scan now |
+| Nearby devices (Bluetooth) | Tracker scan and tracker watch; connecting to a tracker when you tap Play sound |
 | Notifications | Showing that Safe Shake or recording is active |
 
 You can withdraw any permission at any time in your phone settings. Some features will then stop working.

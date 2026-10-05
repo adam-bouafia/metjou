@@ -1,6 +1,6 @@
 # Gebruiksvoorwaarden
 
-Laatst bijgewerkt: 26 september 2026
+Laatst bijgewerkt: 5 oktober 2026
 
 Deze voorwaarden gelden voor de app MetJou, gemaakt door Adam Bouafia in Nederland. Door MetJou te gebruiken ga je akkoord met deze voorwaarden.
 
@@ -18,9 +18,13 @@ Een alarm hangt af van dingen waar MetJou geen invloed op heeft, bijvoorbeeld:
 - een telefoon die uit staat, kwijt is of kapot is;
 - de nauwkeurigheid van de locatie van je telefoon.
 
-Hetzelfde geldt voor de inchecktimer en het bericht bij lege batterij: Android kan achtergrondtaken een paar minuten uitstellen.
+Hetzelfde geldt voor de inchecktimer, het bericht bij lege batterij en het opletten op trackers: Android kan achtergrondtaken een paar minuten uitstellen.
 
 Test je alarmen samen met je contacten, laat de toestemmingen van de app aan staan en sluit MetJou uit van batterijoptimalisatie voor het beste resultaat.
+
+## Het opletten op trackers heeft grenzen
+
+Trackers zoeken en opletten op trackers kijken naar de bluetooth-signalen van de soorten tags die MetJou kent. Ze kunnen niet elke tracker vinden, bijvoorbeeld geen gps-tracker of een tag van een ander soort, ze kunnen er een missen, en ze kunnen waarschuwen voor een tag die je niet volgt. Een waarschuwing is een reden om te kijken, geen bewijs. Zoek de tracker en Geluid afspelen hangen af van de tag en werken niet altijd.
 
 ## Jouw verantwoordelijkheden
 
