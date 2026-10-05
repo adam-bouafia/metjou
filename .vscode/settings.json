@@ -1,8 +1,15 @@
 {
-    // Flutter builds android/ itself; the Java extension's Gradle import only
-    // starts extra daemons (on the system Java 25 JRE, which has no javac).
+    // Flutter builds android/ itself. Left alone, the Java and Gradle
+    // extensions import every android/ folder as a Gradle project and keep
+    // 5 to 7 daemons running (about 4 GB), which a 16 GB machine without
+    // swap cannot spare.
     "java.import.gradle.enabled": false,
     "java.configuration.updateBuildConfiguration": "disabled",
+    // Syntax help only: no project import, so no Gradle daemons.
+    "java.server.launchMode": "LightWeight",
+    "java.gradle.buildServer.enabled": "off",
+    // Gradle for Java: do not run Gradle to look for tasks.
+    "gradle.autoDetect": "off",
     // The writing assistant runs on code comments too; its style checks show
     // up as errors in Dart and Kotlin files. Keep the language checks only.
     "writing-assistant.analyses.readability": false,
