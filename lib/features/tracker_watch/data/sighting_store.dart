@@ -12,10 +12,11 @@ class Sighting {
     required this.at,
     required this.address,
     required this.rssi,
+    String? id,
     this.lat,
     this.lon,
     this.aging,
-  });
+  }) : id = id ?? address;
 
   /// Key that stays the same for one physical tracker, also when it changes
   /// its address (see `resolveDevice`).
@@ -25,6 +26,9 @@ class Sighting {
 
   /// Bluetooth address at that moment, to find or ring the tracker.
   final String address;
+
+  /// The tracker's own id at that moment (see `Tracker.id`).
+  final String id;
 
   /// Signal strength in dBm.
   final int rssi;
@@ -44,6 +48,7 @@ class Sighting {
     't': at.millisecondsSinceEpoch,
     'a': address,
     'r': rssi,
+    'i': ?(id == address ? null : id),
     'lat': ?lat,
     'lon': ?lon,
     'g': ?aging,
@@ -59,6 +64,7 @@ class Sighting {
         at: DateTime.fromMillisecondsSinceEpoch(j['t'] as int),
         address: j['a'] as String,
         rssi: j['r'] as int,
+        id: j['i'] as String?,
         lat: (j['lat'] as num?)?.toDouble(),
         lon: (j['lon'] as num?)?.toDouble(),
         aging: j['g'] as int?,
