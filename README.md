@@ -68,7 +68,7 @@ Feature-first layout:
 Finds AirTags, Samsung SmartTags, Tile, Chipolo, Pebblebee and Google Find Hub tags near the phone, and warns when one that is away from its owner travels along. Everything stays on the phone.
 
 - Scan now: one 10-second scan, a list of what is near and whether each tag is with its owner.
-- Watching in the background: a Workmanager task scans about every 15 minutes and stores tags that are not known to be with their owner, with the time and place (`sightings.jsonl` in the app's folder, kept 14 days). The warning comes when the same tag was seen at least 3 times, over at least an hour, at 3 places more than 150 m apart, within a day. In discreet mode there is no notification, only the warning in the app.
+- Watching in the background: a Workmanager task scans about every 15 minutes and stores tags that are not known to be with their owner, with the time and place (`sightings.jsonl` in the app's folder, kept 14 days). The warning comes when the same tag was seen at least 3 times, over at least an hour, at 3 places more than 150 m apart, within a day. Tile and Pebblebee tags need one place more. While Get home safe is sending the location, the app scans every 3 minutes and warns after half an hour at 2 places. In discreet mode there is no notification, only the warning in the app.
 - Per tracker: a finder that shows the signal strength, Play sound (AirTag, Find My, Google and Pebblebee tags), save to the diary, ignore, and what to do.
 
 It needs a real phone (no emulator) with Bluetooth and location on, and for the background watch location set to Allow all the time. In a debug build every match is printed with its raw bytes (`tracker_scan ...` in the log), to check the recognition against a real tag.
