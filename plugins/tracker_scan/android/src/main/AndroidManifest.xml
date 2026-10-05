@@ -1,0 +1,9 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+  <!-- Android 11 and older -->
+  <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30" />
+  <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:maxSdkVersion="30" />
+  <!-- Android 12+. Not flagged neverForLocation: that flag makes Android drop
+       some beacon adverts, and tracker sightings are stored with a place. -->
+  <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+  <uses-feature android:name="android.hardware.bluetooth_le" android:required="false" />
+</manifest>

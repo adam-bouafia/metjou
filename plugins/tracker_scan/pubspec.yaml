@@ -1,0 +1,24 @@
+name: tracker_scan
+description: Filtered Bluetooth LE scan for MetJou's tracker detection (Android).
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ^3.9.0
+  flutter: '>=3.3.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: io.github.adambouafia.tracker_scan
+        pluginClass: TrackerScanPlugin
