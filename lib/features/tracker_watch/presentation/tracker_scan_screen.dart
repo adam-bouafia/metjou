@@ -4,20 +4,8 @@ import 'package:metjou/core/localization/app_locale.dart';
 import 'package:metjou/core/theme/app_theme.dart';
 import 'package:metjou/features/tracker_watch/data/tracker_scanner.dart';
 import 'package:metjou/features/tracker_watch/data/tracker_signature.dart';
-import 'package:metjou/l10n/app_localizations.dart';
+import 'package:metjou/features/tracker_watch/data/tracker_text.dart';
 import 'package:permission_handler/permission_handler.dart';
-
-String trackerKindName(AppLocalizations l10n, TrackerKind kind) =>
-    switch (kind) {
-      TrackerKind.airTag => 'AirTag',
-      TrackerKind.findMy => l10n.trackerKindFindMy,
-      TrackerKind.airPods => 'AirPods',
-      TrackerKind.smartTag => 'Samsung SmartTag',
-      TrackerKind.googleFindMy => l10n.trackerKindGoogle,
-      TrackerKind.tile => 'Tile',
-      TrackerKind.chipolo => 'Chipolo',
-      TrackerKind.pebblebee => 'Pebblebee',
-    };
 
 /// Looks once for trackers nearby and lists them, those away from their
 /// owner first.
@@ -195,11 +183,13 @@ class _BlockerCard extends StatelessWidget {
       ScanBlocker.bluetoothOff => l10n.trackerBlockedBluetooth,
       ScanBlocker.permissionDenied => l10n.trackerBlockedPermission,
       ScanBlocker.locationOff => l10n.trackerBlockedLocation,
+      ScanBlocker.backgroundLocation => l10n.trackerBlockedBackground,
       ScanBlocker.failed => l10n.trackerBlockedFailed,
     };
-    // Only these two have a settings page the app can open.
+    // Only these have a settings page the app can open.
     final openSettings = switch (blocker) {
       ScanBlocker.permissionDenied => openAppSettings,
+      ScanBlocker.backgroundLocation => openAppSettings,
       ScanBlocker.locationOff => Geolocator.openLocationSettings,
       _ => null,
     };

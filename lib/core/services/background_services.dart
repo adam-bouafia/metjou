@@ -10,6 +10,7 @@ import 'package:metjou/core/localization/app_locale.dart';
 import 'package:metjou/core/services/low_battery.dart';
 import 'package:metjou/features/check_in/data/check_in_service.dart';
 import 'package:metjou/features/contacts/data/sos_contacts.dart';
+import 'package:metjou/features/tracker_watch/data/tracker_watch.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:workmanager/workmanager.dart';
@@ -157,6 +158,43 @@ class BackgroundServices {
     ),
   );
 
+  // Tracker watch: a tracker has been travelling with the user. The text is
+  // hidden on the lock screen when the phone hides sensitive notifications.
+
+  static const trackerPayload = "tracker_watch";
+  static const int _trackerNotificationID = 781;
+
+  static Future<void> showTrackerNotification({
+    required String title,
+    required String body,
+  }) => _notifications.show(
+    id: _trackerNotificationID,
+    title: title,
+    body: body,
+    payload: trackerPayload,
+    notificationDetails: NotificationDetails(
+      android: AndroidNotificationDetails(
+        "TRACKER_WATCH",
+        "Tracker watch",
+        channelDescription: 'A tracker may be travelling with you',
+        icon: _notificationIcon,
+        importance: Importance.high,
+        priority: Priority.high,
+        visibility: NotificationVisibility.private,
+        autoCancel: true,
+        styleInformation: BigTextStyleInformation(body),
+      ),
+    ),
+  );
+
+  /// Payload of the notification that started the app, or null when the app
+  /// was opened another way.
+  static Future<String?> launchPayload() async {
+    final details = await _notifications.getNotificationAppLaunchDetails();
+    if (details == null || !details.didNotificationLaunchApp) return null;
+    return details.notificationResponse?.payload;
+  }
+
   // Medical ID on the lock screen: silent, persistent and public, so first
   // responders can read it without unlocking.
 
@@ -293,9 +331,10 @@ class BackgroundServices {
     _positionSubscription = null;
   }
 
-  /// Best effort Google Maps link for the current position. Returns an empty
-  /// string when no fix is available; an alert must never wait on GPS.
-  static Future<String> currentLocationLink() async {
+  /// Best effort current position, or null when no fix is available. Waits
+  /// at most ten seconds, and may then return an older fix: check
+  /// [Position.timestamp] where that matters.
+  static Future<Position?> currentPosition() async {
     Position? position = _lastPosition;
     final isFresh =
         position != null &&
@@ -314,6 +353,13 @@ class BackgroundServices {
         position ??= await Geolocator.getLastKnownPosition();
       }
     }
+    return position;
+  }
+
+  /// Best effort Google Maps link for the current position. Returns an empty
+  /// string when no fix is available; an alert must never wait on GPS.
+  static Future<String> currentLocationLink() async {
+    final position = await currentPosition();
     if (position == null) return "";
     return "https://maps.google.com/?q=${position.latitude},${position.longitude}";
   }
@@ -457,7 +503,8 @@ class BackgroundServices {
 const getHomeSafeOnceTask = "get-home-safe-once";
 
 /// Runs Workmanager tasks in a background isolate: the one-off Get home
-/// safe message at the time the user chose and the low battery check.
+/// safe message at the time the user chose, the low battery check, the
+/// check-in backup and the tracker watch.
 @pragma('vm:entry-point')
 void callbackDispatcher() {
   Workmanager().executeTask((task, inputData) async {
@@ -467,6 +514,10 @@ void callbackDispatcher() {
     }
     if (task == checkInTask) {
       await CheckInService.fireIfMissed();
+      return true;
+    }
+    if (task == trackerWatchTask) {
+      await TrackerWatch.backgroundCheck();
       return true;
     }
     final contact = inputData?['contact'] as String?;

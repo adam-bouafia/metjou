@@ -11,6 +11,9 @@ enum ScanBlocker {
   bluetoothOff,
   permissionDenied,
   locationOff,
+
+  /// Background watching only: location is not allowed all the time.
+  backgroundLocation,
   failed,
 }
 
