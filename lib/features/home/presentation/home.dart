@@ -9,6 +9,7 @@ import 'package:metjou/features/emergency/presentation/emergency.dart';
 import 'package:metjou/features/safe_places/presentation/live_safe.dart';
 import 'package:metjou/features/check_in/presentation/check_in_card.dart';
 import 'package:metjou/features/get_home_safe/presentation/safe_home.dart';
+import 'package:metjou/features/tracker_watch/presentation/tracker_scan_card.dart';
 import 'package:metjou/core/localization/app_locale.dart';
 import 'package:metjou/core/widgets/entrance.dart';
 
@@ -69,6 +70,7 @@ class _HomeState extends State<Home> {
                 LiveSafe(),
                 SafeHome(),
                 CheckInCard(),
+                TrackerScanCard(),
               ].indexed)
                 Entrance(index: i, child: section),
               SizedBox(height: glassDockClearance),
