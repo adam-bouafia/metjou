@@ -19,14 +19,6 @@ String trackerKindName(AppLocalizations l10n, TrackerKind kind) =>
       TrackerKind.pebblebee => 'Pebblebee',
     };
 
-/// Short code to tell trackers apart: the end of the Bluetooth address.
-/// A tracker keeps it for a while, so the same code at another place means
-/// the same tracker.
-String trackerCode(Tracker tracker) {
-  final address = tracker.address;
-  return address.length > 5 ? address.substring(address.length - 5) : address;
-}
-
 /// Looks once for trackers nearby and lists them, those away from their
 /// owner first.
 class TrackerScanScreen extends StatefulWidget {
@@ -183,7 +175,7 @@ class _TrackerTile extends StatelessWidget {
         ),
         title: Text(trackerKindName(l10n, tracker.kind)),
         subtitle: Text("$owner · $proximity"),
-        trailing: Text(l10n.trackerCode(trackerCode(tracker))),
+        trailing: Text(l10n.trackerCode(deviceCode(tracker.id))),
       ),
     );
   }

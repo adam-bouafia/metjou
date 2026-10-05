@@ -173,19 +173,4 @@ void main() {
       expect(find.text('Samsung SmartTag'), findsOneWidget);
     });
   }
-
-  test('trackerCode is the end of the address', () {
-    expect(trackerCode(_airTagAway), 'A2:3F');
-    expect(
-      trackerCode(
-        const Tracker(
-          kind: TrackerKind.tile,
-          owner: OwnerState.unknown,
-          address: 'AB',
-          rssi: -50,
-        ),
-      ),
-      'AB',
-    );
-  });
 }

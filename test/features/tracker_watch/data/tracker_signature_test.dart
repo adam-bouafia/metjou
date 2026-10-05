@@ -159,6 +159,34 @@ void main() {
     });
   }
 
+  test('a full SmartTag advert gives its privacy ID and aging counter', () {
+    final tag = identifyTracker(
+      service(0xFD5A, [
+        0x12, // offline
+        0x03, 0x02, 0x01, // aging counter, low byte first
+        0xA1, 0xB2, 0xC3, 0xD4, 0xE5, 0xF6, 0x07, 0x18, // privacy ID
+        0x00,
+      ]),
+    )!;
+    expect(tag.id, 'a1b2c3d4e5f60718');
+    expect(tag.aging, 0x010203);
+    expect(tag.address, 'BB:BB:BB:BB:BB:BB');
+  });
+
+  test('other trackers are identified by their address', () {
+    final tag = identifyTracker(apple([0x12, 0x19, 0x10]))!;
+    expect(tag.id, tag.address);
+    expect(tag.aging, isNull);
+  });
+
+  for (final (id, code) in [
+    ('4C:11:22:33:A2:3F', 'A2:3F'),
+    ('a1b2c3d4e5f60718', '07:18'),
+    ('ab', 'AB'),
+  ]) {
+    test('deviceCode of $id is $code', () => expect(deviceCode(id), code));
+  }
+
   test('there is a scan filter for every tracker family', () {
     // Android only hands over adverts that match a filter, so a family
     // without one would never be seen.
