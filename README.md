@@ -49,13 +49,19 @@ Feature-first layout:
     android/wear/          Wear OS SOS app (native Kotlin)
     test/                  mirrors lib/
 
-## Tracker scan
+## Tracker watch
 
-The tracker scan lists AirTags, Samsung SmartTags, Tile, Chipolo, Pebblebee and Google Find Hub tags that are near the phone, and whether each one is away from its owner. It needs a real phone (no emulator) with Bluetooth and location on. In a debug build every match is printed with its raw bytes (`tracker_scan ...` in the log), to check the recognition against a real tag.
+Finds AirTags, Samsung SmartTags, Tile, Chipolo, Pebblebee and Google Find Hub tags near the phone, and warns when one that is away from its owner travels along. Everything stays on the phone.
+
+- Scan now: one 10-second scan, a list of what is near and whether each tag is with its owner.
+- Watching in the background: a Workmanager task scans about every 15 minutes and stores tags that are away from their owner with the time and place (`sightings.jsonl` in the app's folder, kept 14 days). The warning comes when the same tag was seen at least 3 times, over at least an hour, at 3 places more than 150 m apart, within a day. In discreet mode there is no notification, only the warning in the app.
+- Per tracker: a finder that shows the signal strength, Play sound (AirTag, Find My, Google and Pebblebee tags), save to the diary, ignore, and what to do.
+
+It needs a real phone (no emulator) with Bluetooth and location on, and for the background watch location set to Allow all the time. In a debug build every match is printed with its raw bytes (`tracker_scan ...` in the log), to check the recognition against a real tag.
 
 ## Credits
 
-Tracker recognition: the advert patterns and their decoding follow [AirGuard](https://github.com/seemoo-lab/AirGuard) (TU Darmstadt, Apache-2.0).
+Tracker watch: the advert patterns, the sound commands and the rule for a tracker that travels along follow [AirGuard](https://github.com/seemoo-lab/AirGuard) (TU Darmstadt, Apache-2.0).
 
 The help and information carousel shows previews of the organisations' own websites (Veilig Thuis, Centrum Seksueel Geweld, Slachtofferhulp Nederland, 113 Zelfmoordpreventie, Switchboard, Politie, Rijksoverheid), taken from their Open Graph images or homepage headers. They remain the property of those organisations.
 
