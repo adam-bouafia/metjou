@@ -20,6 +20,19 @@ Work in progress. The codebase is being modernised from the 2022 prototype:
 
 No account or backend is needed; contacts and settings stay on the device.
 
+## Building with little free memory
+
+A debug build needs about 4.5 GB next to everything else that is open. On a machine with 16 GB and no swap, use the wrapper instead of calling Flutter directly:
+
+    tool/dev.sh run        # flutter run
+    tool/dev.sh build      # flutter build apk --debug
+    tool/dev.sh test       # flutter test, two files at a time
+    tool/dev.sh analyze    # dart analyze lib test
+    tool/dev.sh mem        # who uses the memory right now
+    tool/dev.sh tidy       # stop Gradle and Kotlin daemons
+
+Each command runs in its own systemd scope with a memory limit and at low priority, and refuses to start when too little memory is free. Two settings in the repository help as well: the Gradle daemon leaves two minutes after a build (`android/gradle.properties`), and `.vscode/settings.json` stops the Java and Gradle extensions of VS Code from importing the `android/` folders, which otherwise keeps several Gradle daemons running.
+
 ## Wear OS app
 
 `android/wear` is a small watch app with one SOS button. It sends the press to the paired phone (Wearable Data Layer), which starts the SOS countdown. It shares the phone app's application ID and must be signed with the same key.
@@ -47,6 +60,7 @@ Feature-first layout:
     plugins/audio_background_record/   local plugin: foreground-service audio recorder
     plugins/tracker_scan/              local plugin: filtered Bluetooth LE scan
     android/wear/          Wear OS SOS app (native Kotlin)
+    tool/dev.sh            Flutter commands with a memory limit
     test/                  mirrors lib/
 
 ## Tracker watch
