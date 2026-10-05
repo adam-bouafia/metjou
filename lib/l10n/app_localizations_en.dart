@@ -285,6 +285,97 @@ class AppLocalizationsEn extends AppLocalizations {
   String get checkInDone => 'Checked in. Glad you\'re safe.';
 
   @override
+  String get trackerScan => 'Tracker scan';
+
+  @override
+  String get trackerScanSubtitle => 'Check for AirTags and other tags near you';
+
+  @override
+  String get trackerScanIntro =>
+      'Looks for AirTags, SmartTags, Tile and other location tags near you. A tag that is away from its owner and stays close to you could be tracking you.';
+
+  @override
+  String get trackerScanStart => 'Scan now';
+
+  @override
+  String get trackerScanAgain => 'Scan again';
+
+  @override
+  String get trackerScanRunning => 'Scanning…';
+
+  @override
+  String get trackerScanNone => 'No trackers found near you.';
+
+  @override
+  String trackerScanFound(int count) {
+    return 'Trackers nearby: $count';
+  }
+
+  @override
+  String trackerScanAway(int count) {
+    return 'Away from their owner: $count';
+  }
+
+  @override
+  String get trackerScanAwayHint =>
+      'A tag away from its owner is often just lost or left behind. Remember its code and scan again at another place: if the same code is there too, the tag is travelling with you.';
+
+  @override
+  String get trackerScanNote =>
+      'One scan shows what is near you right now. On its own it cannot tell whether a tag is following you.';
+
+  @override
+  String get trackerOwnerAway => 'Away from its owner';
+
+  @override
+  String get trackerOwnerNear => 'With its owner';
+
+  @override
+  String get trackerOwnerUnknown => 'Cannot tell if its owner is near';
+
+  @override
+  String get trackerVeryClose => 'Very close';
+
+  @override
+  String get trackerClose => 'Close';
+
+  @override
+  String get trackerFar => 'Further away';
+
+  @override
+  String trackerCode(String code) {
+    return 'Code $code';
+  }
+
+  @override
+  String get trackerKindFindMy => 'Find My tag (Apple)';
+
+  @override
+  String get trackerKindGoogle => 'Google Find Hub tag';
+
+  @override
+  String get trackerBlockedUnsupported =>
+      'This phone has no Bluetooth Low Energy, so it cannot scan for trackers.';
+
+  @override
+  String get trackerBlockedBluetooth => 'Turn on Bluetooth to scan.';
+
+  @override
+  String get trackerBlockedPermission =>
+      'MetJou needs the Nearby devices and precise location permissions. Without them Android gives no scan results.';
+
+  @override
+  String get trackerBlockedLocation =>
+      'Turn on location. Android gives no Bluetooth scan results while location is off.';
+
+  @override
+  String get trackerBlockedFailed =>
+      'The scan did not work. Wait a moment and try again.';
+
+  @override
+  String get openSettings => 'Open settings';
+
+  @override
   String get quickTools => 'Quick help';
 
   @override

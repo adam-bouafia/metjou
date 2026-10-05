@@ -287,6 +287,100 @@ class AppLocalizationsFr extends AppLocalizations {
   String get checkInDone => 'Confirmé. Heureux que vous alliez bien.';
 
   @override
+  String get trackerScan => 'Recherche de traceurs';
+
+  @override
+  String get trackerScanSubtitle =>
+      'Vérifiez si des AirTags ou d\'autres balises sont près de vous';
+
+  @override
+  String get trackerScanIntro =>
+      'Recherche les AirTags, SmartTags, Tile et autres balises de localisation près de vous. Une balise qui n\'est pas avec son propriétaire et qui reste près de vous pourrait vous suivre.';
+
+  @override
+  String get trackerScanStart => 'Lancer la recherche';
+
+  @override
+  String get trackerScanAgain => 'Relancer la recherche';
+
+  @override
+  String get trackerScanRunning => 'Recherche en cours…';
+
+  @override
+  String get trackerScanNone => 'Aucun traceur trouvé près de vous.';
+
+  @override
+  String trackerScanFound(int count) {
+    return 'Traceurs à proximité : $count';
+  }
+
+  @override
+  String trackerScanAway(int count) {
+    return 'Loin de leur propriétaire : $count';
+  }
+
+  @override
+  String get trackerScanAwayHint =>
+      'Une balise loin de son propriétaire est souvent simplement perdue ou oubliée. Retenez son code et relancez la recherche ailleurs : si le même code y apparaît aussi, la balise voyage avec vous.';
+
+  @override
+  String get trackerScanNote =>
+      'Une recherche montre ce qui est près de vous maintenant. À elle seule, elle ne permet pas de savoir si une balise vous suit.';
+
+  @override
+  String get trackerOwnerAway => 'Loin de son propriétaire';
+
+  @override
+  String get trackerOwnerNear => 'Avec son propriétaire';
+
+  @override
+  String get trackerOwnerUnknown =>
+      'Impossible de savoir si son propriétaire est proche';
+
+  @override
+  String get trackerVeryClose => 'Très proche';
+
+  @override
+  String get trackerClose => 'Proche';
+
+  @override
+  String get trackerFar => 'Plus loin';
+
+  @override
+  String trackerCode(String code) {
+    return 'Code $code';
+  }
+
+  @override
+  String get trackerKindFindMy => 'Balise Localiser (Apple)';
+
+  @override
+  String get trackerKindGoogle => 'Balise Google Find Hub';
+
+  @override
+  String get trackerBlockedUnsupported =>
+      'Ce téléphone n\'a pas le Bluetooth Low Energy et ne peut donc pas rechercher de traceurs.';
+
+  @override
+  String get trackerBlockedBluetooth =>
+      'Activez le Bluetooth pour lancer la recherche.';
+
+  @override
+  String get trackerBlockedPermission =>
+      'MetJou a besoin des autorisations Appareils à proximité et Position exacte. Sans elles, Android ne donne aucun résultat.';
+
+  @override
+  String get trackerBlockedLocation =>
+      'Activez la localisation. Android ne donne aucun résultat Bluetooth quand elle est désactivée.';
+
+  @override
+  String get trackerBlockedFailed =>
+      'La recherche n\'a pas fonctionné. Attendez un instant et réessayez.';
+
+  @override
+  String get openSettings => 'Ouvrir les paramètres';
+
+  @override
   String get quickTools => 'Aide rapide';
 
   @override

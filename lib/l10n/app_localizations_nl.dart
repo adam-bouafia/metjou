@@ -285,6 +285,98 @@ class AppLocalizationsNl extends AppLocalizations {
   String get checkInDone => 'Ingecheckt. Fijn dat je veilig bent.';
 
   @override
+  String get trackerScan => 'Trackers zoeken';
+
+  @override
+  String get trackerScanSubtitle =>
+      'Kijk of er AirTags of andere tags bij je in de buurt zijn';
+
+  @override
+  String get trackerScanIntro =>
+      'Zoekt naar AirTags, SmartTags, Tile en andere locatietags bij jou in de buurt. Een tag die niet bij de eigenaar is en dicht bij jou blijft, kan je volgen.';
+
+  @override
+  String get trackerScanStart => 'Nu zoeken';
+
+  @override
+  String get trackerScanAgain => 'Opnieuw zoeken';
+
+  @override
+  String get trackerScanRunning => 'Bezig met zoeken…';
+
+  @override
+  String get trackerScanNone => 'Geen trackers bij jou in de buurt gevonden.';
+
+  @override
+  String trackerScanFound(int count) {
+    return 'Trackers in de buurt: $count';
+  }
+
+  @override
+  String trackerScanAway(int count) {
+    return 'Niet bij de eigenaar: $count';
+  }
+
+  @override
+  String get trackerScanAwayHint =>
+      'Een tag die niet bij de eigenaar is, is vaak gewoon verloren of vergeten. Onthoud de code en zoek op een andere plek opnieuw: staat dezelfde code er weer, dan reist de tag met je mee.';
+
+  @override
+  String get trackerScanNote =>
+      'Eén keer zoeken laat zien wat er nu bij je in de buurt is. Daaruit alleen blijkt niet of een tag je volgt.';
+
+  @override
+  String get trackerOwnerAway => 'Niet bij de eigenaar';
+
+  @override
+  String get trackerOwnerNear => 'Bij de eigenaar';
+
+  @override
+  String get trackerOwnerUnknown => 'Onbekend of de eigenaar in de buurt is';
+
+  @override
+  String get trackerVeryClose => 'Heel dichtbij';
+
+  @override
+  String get trackerClose => 'Dichtbij';
+
+  @override
+  String get trackerFar => 'Verder weg';
+
+  @override
+  String trackerCode(String code) {
+    return 'Code $code';
+  }
+
+  @override
+  String get trackerKindFindMy => 'Zoek mijn-tag (Apple)';
+
+  @override
+  String get trackerKindGoogle => 'Google Find Hub-tag';
+
+  @override
+  String get trackerBlockedUnsupported =>
+      'Deze telefoon heeft geen Bluetooth Low Energy en kan daarom niet naar trackers zoeken.';
+
+  @override
+  String get trackerBlockedBluetooth => 'Zet bluetooth aan om te zoeken.';
+
+  @override
+  String get trackerBlockedPermission =>
+      'MetJou heeft de toestemmingen Apparaten in de buurt en Exacte locatie nodig. Zonder die toestemmingen geeft Android geen resultaten.';
+
+  @override
+  String get trackerBlockedLocation =>
+      'Zet locatie aan. Android geeft geen bluetooth-resultaten als locatie uit staat.';
+
+  @override
+  String get trackerBlockedFailed =>
+      'Het zoeken is niet gelukt. Wacht even en probeer het opnieuw.';
+
+  @override
+  String get openSettings => 'Instellingen openen';
+
+  @override
   String get quickTools => 'Snelle hulp';
 
   @override

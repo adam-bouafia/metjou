@@ -286,6 +286,99 @@ class AppLocalizationsEs extends AppLocalizations {
   String get checkInDone => 'Confirmado. Nos alegra que estés bien.';
 
   @override
+  String get trackerScan => 'Buscar rastreadores';
+
+  @override
+  String get trackerScanSubtitle =>
+      'Comprueba si hay AirTags u otras etiquetas cerca de ti';
+
+  @override
+  String get trackerScanIntro =>
+      'Busca AirTags, SmartTags, Tile y otras etiquetas de localización cerca de ti. Una etiqueta que no está con su dueño y sigue cerca de ti podría estar rastreándote.';
+
+  @override
+  String get trackerScanStart => 'Buscar ahora';
+
+  @override
+  String get trackerScanAgain => 'Buscar de nuevo';
+
+  @override
+  String get trackerScanRunning => 'Buscando…';
+
+  @override
+  String get trackerScanNone =>
+      'No se han encontrado rastreadores cerca de ti.';
+
+  @override
+  String trackerScanFound(int count) {
+    return 'Rastreadores cerca: $count';
+  }
+
+  @override
+  String trackerScanAway(int count) {
+    return 'Lejos de su dueño: $count';
+  }
+
+  @override
+  String get trackerScanAwayHint =>
+      'Una etiqueta lejos de su dueño suele estar simplemente perdida u olvidada. Recuerda su código y busca otra vez en otro lugar: si aparece el mismo código, la etiqueta viaja contigo.';
+
+  @override
+  String get trackerScanNote =>
+      'Una búsqueda muestra lo que hay cerca de ti ahora. Por sí sola no permite saber si una etiqueta te sigue.';
+
+  @override
+  String get trackerOwnerAway => 'Lejos de su dueño';
+
+  @override
+  String get trackerOwnerNear => 'Con su dueño';
+
+  @override
+  String get trackerOwnerUnknown => 'No se sabe si su dueño está cerca';
+
+  @override
+  String get trackerVeryClose => 'Muy cerca';
+
+  @override
+  String get trackerClose => 'Cerca';
+
+  @override
+  String get trackerFar => 'Más lejos';
+
+  @override
+  String trackerCode(String code) {
+    return 'Código $code';
+  }
+
+  @override
+  String get trackerKindFindMy => 'Etiqueta de Buscar (Apple)';
+
+  @override
+  String get trackerKindGoogle => 'Etiqueta de Google Find Hub';
+
+  @override
+  String get trackerBlockedUnsupported =>
+      'Este teléfono no tiene Bluetooth de baja energía, así que no puede buscar rastreadores.';
+
+  @override
+  String get trackerBlockedBluetooth => 'Activa el Bluetooth para buscar.';
+
+  @override
+  String get trackerBlockedPermission =>
+      'MetJou necesita los permisos Dispositivos cercanos y Ubicación precisa. Sin ellos, Android no da resultados.';
+
+  @override
+  String get trackerBlockedLocation =>
+      'Activa la ubicación. Android no da resultados de Bluetooth con la ubicación desactivada.';
+
+  @override
+  String get trackerBlockedFailed =>
+      'La búsqueda no ha funcionado. Espera un momento e inténtalo de nuevo.';
+
+  @override
+  String get openSettings => 'Abrir ajustes';
+
+  @override
   String get quickTools => 'Ayuda rápida';
 
   @override

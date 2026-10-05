@@ -284,6 +284,98 @@ class AppLocalizationsAr extends AppLocalizations {
   String get checkInDone => 'تم التأكيد. يسعدنا أنك بخير.';
 
   @override
+  String get trackerScan => 'البحث عن أجهزة التتبع';
+
+  @override
+  String get trackerScanSubtitle =>
+      'تحقق من وجود AirTag أو أجهزة تتبع أخرى بالقرب منك';
+
+  @override
+  String get trackerScanIntro =>
+      'يبحث عن AirTag وSmartTag وTile وغيرها من أجهزة تحديد الموقع القريبة منك. الجهاز البعيد عن صاحبه والذي يبقى قريبًا منك قد يكون يتتبعك.';
+
+  @override
+  String get trackerScanStart => 'ابحث الآن';
+
+  @override
+  String get trackerScanAgain => 'ابحث مرة أخرى';
+
+  @override
+  String get trackerScanRunning => 'جارٍ البحث…';
+
+  @override
+  String get trackerScanNone => 'لم يُعثر على أجهزة تتبع بالقرب منك.';
+
+  @override
+  String trackerScanFound(int count) {
+    return 'أجهزة تتبع قريبة: $count';
+  }
+
+  @override
+  String trackerScanAway(int count) {
+    return 'بعيدة عن أصحابها: $count';
+  }
+
+  @override
+  String get trackerScanAwayHint =>
+      'الجهاز البعيد عن صاحبه يكون غالبًا مفقودًا أو منسيًّا فقط. احفظ رمزه وابحث مرة أخرى في مكان آخر: إذا ظهر الرمز نفسه هناك أيضًا فالجهاز يتنقل معك.';
+
+  @override
+  String get trackerScanNote =>
+      'البحث يُظهر ما هو قريب منك الآن. وهو وحده لا يكفي لمعرفة ما إذا كان جهاز يتتبعك.';
+
+  @override
+  String get trackerOwnerAway => 'بعيد عن صاحبه';
+
+  @override
+  String get trackerOwnerNear => 'مع صاحبه';
+
+  @override
+  String get trackerOwnerUnknown => 'لا يمكن معرفة ما إذا كان صاحبه قريبًا';
+
+  @override
+  String get trackerVeryClose => 'قريب جدًا';
+
+  @override
+  String get trackerClose => 'قريب';
+
+  @override
+  String get trackerFar => 'أبعد';
+
+  @override
+  String trackerCode(String code) {
+    return 'الرمز $code';
+  }
+
+  @override
+  String get trackerKindFindMy => 'جهاز تتبع على شبكة «تحديد الموقع» (Apple)';
+
+  @override
+  String get trackerKindGoogle => 'جهاز تتبع على شبكة Google Find Hub';
+
+  @override
+  String get trackerBlockedUnsupported =>
+      'هذا الهاتف لا يدعم Bluetooth منخفض الطاقة، لذلك لا يمكنه البحث عن أجهزة التتبع.';
+
+  @override
+  String get trackerBlockedBluetooth => 'شغّل البلوتوث للبحث.';
+
+  @override
+  String get trackerBlockedPermission =>
+      'يحتاج MetJou إلى إذن «الأجهزة المجاورة» وإذن «الموقع الدقيق». بدونهما لا يعطي Android أي نتائج.';
+
+  @override
+  String get trackerBlockedLocation =>
+      'شغّل خدمة الموقع. لا يعطي Android نتائج البلوتوث عندما يكون الموقع متوقفًا.';
+
+  @override
+  String get trackerBlockedFailed =>
+      'لم ينجح البحث. انتظر قليلًا ثم حاول مرة أخرى.';
+
+  @override
+  String get openSettings => 'فتح الإعدادات';
+
+  @override
   String get quickTools => 'مساعدة سريعة';
 
   @override

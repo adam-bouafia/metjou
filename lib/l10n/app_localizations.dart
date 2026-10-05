@@ -608,6 +608,162 @@ abstract class AppLocalizations {
   /// **'Checked in. Glad you\'re safe.'**
   String get checkInDone;
 
+  /// No description provided for @trackerScan.
+  ///
+  /// In en, this message translates to:
+  /// **'Tracker scan'**
+  String get trackerScan;
+
+  /// No description provided for @trackerScanSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Check for AirTags and other tags near you'**
+  String get trackerScanSubtitle;
+
+  /// No description provided for @trackerScanIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Looks for AirTags, SmartTags, Tile and other location tags near you. A tag that is away from its owner and stays close to you could be tracking you.'**
+  String get trackerScanIntro;
+
+  /// No description provided for @trackerScanStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan now'**
+  String get trackerScanStart;
+
+  /// No description provided for @trackerScanAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan again'**
+  String get trackerScanAgain;
+
+  /// No description provided for @trackerScanRunning.
+  ///
+  /// In en, this message translates to:
+  /// **'Scanning…'**
+  String get trackerScanRunning;
+
+  /// No description provided for @trackerScanNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No trackers found near you.'**
+  String get trackerScanNone;
+
+  /// No description provided for @trackerScanFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Trackers nearby: {count}'**
+  String trackerScanFound(int count);
+
+  /// No description provided for @trackerScanAway.
+  ///
+  /// In en, this message translates to:
+  /// **'Away from their owner: {count}'**
+  String trackerScanAway(int count);
+
+  /// No description provided for @trackerScanAwayHint.
+  ///
+  /// In en, this message translates to:
+  /// **'A tag away from its owner is often just lost or left behind. Remember its code and scan again at another place: if the same code is there too, the tag is travelling with you.'**
+  String get trackerScanAwayHint;
+
+  /// No description provided for @trackerScanNote.
+  ///
+  /// In en, this message translates to:
+  /// **'One scan shows what is near you right now. On its own it cannot tell whether a tag is following you.'**
+  String get trackerScanNote;
+
+  /// No description provided for @trackerOwnerAway.
+  ///
+  /// In en, this message translates to:
+  /// **'Away from its owner'**
+  String get trackerOwnerAway;
+
+  /// No description provided for @trackerOwnerNear.
+  ///
+  /// In en, this message translates to:
+  /// **'With its owner'**
+  String get trackerOwnerNear;
+
+  /// No description provided for @trackerOwnerUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Cannot tell if its owner is near'**
+  String get trackerOwnerUnknown;
+
+  /// No description provided for @trackerVeryClose.
+  ///
+  /// In en, this message translates to:
+  /// **'Very close'**
+  String get trackerVeryClose;
+
+  /// No description provided for @trackerClose.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get trackerClose;
+
+  /// No description provided for @trackerFar.
+  ///
+  /// In en, this message translates to:
+  /// **'Further away'**
+  String get trackerFar;
+
+  /// No description provided for @trackerCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Code {code}'**
+  String trackerCode(String code);
+
+  /// No description provided for @trackerKindFindMy.
+  ///
+  /// In en, this message translates to:
+  /// **'Find My tag (Apple)'**
+  String get trackerKindFindMy;
+
+  /// No description provided for @trackerKindGoogle.
+  ///
+  /// In en, this message translates to:
+  /// **'Google Find Hub tag'**
+  String get trackerKindGoogle;
+
+  /// No description provided for @trackerBlockedUnsupported.
+  ///
+  /// In en, this message translates to:
+  /// **'This phone has no Bluetooth Low Energy, so it cannot scan for trackers.'**
+  String get trackerBlockedUnsupported;
+
+  /// No description provided for @trackerBlockedBluetooth.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn on Bluetooth to scan.'**
+  String get trackerBlockedBluetooth;
+
+  /// No description provided for @trackerBlockedPermission.
+  ///
+  /// In en, this message translates to:
+  /// **'MetJou needs the Nearby devices and precise location permissions. Without them Android gives no scan results.'**
+  String get trackerBlockedPermission;
+
+  /// No description provided for @trackerBlockedLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn on location. Android gives no Bluetooth scan results while location is off.'**
+  String get trackerBlockedLocation;
+
+  /// No description provided for @trackerBlockedFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'The scan did not work. Wait a moment and try again.'**
+  String get trackerBlockedFailed;
+
+  /// No description provided for @openSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Open settings'**
+  String get openSettings;
+
   /// No description provided for @quickTools.
   ///
   /// In en, this message translates to:
