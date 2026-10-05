@@ -57,4 +57,4 @@ Op deze voorwaarden is Nederlands recht van toepassing. Geschillen worden voorge
 ## Contact
 
 Adam Bouafia, Nederland
-E-mail: [CONTACT_EMAIL]
+E-mail: adam.bouafia@hotmail.com

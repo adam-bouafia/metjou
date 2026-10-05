@@ -57,4 +57,4 @@ Dutch law applies to these terms. Disputes are submitted to the competent court 
 ## Contact
 
 Adam Bouafia, the Netherlands
-E-mail: [CONTACT_EMAIL]
+E-mail: adam.bouafia@hotmail.com

@@ -110,4 +110,4 @@ If this policy changes, the new version is included in an app update with a new 
 ## Contact
 
 Adam Bouafia, the Netherlands
-E-mail: [CONTACT_EMAIL]
+E-mail: adam.bouafia@hotmail.com

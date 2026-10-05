@@ -110,4 +110,4 @@ Als deze verklaring verandert, komt de nieuwe versie met een app-update, met een
 ## Contact
 
 Adam Bouafia, Nederland
-E-mail: [CONTACT_EMAIL]
+E-mail: adam.bouafia@hotmail.com
