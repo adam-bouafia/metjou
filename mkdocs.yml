@@ -1,0 +1,55 @@
+site_name: MetJou
+site_description: Personal safety app for Android, built with Flutter
+repo_url: https://github.com/adam-bouafia/metjou
+repo_name: adam-bouafia/metjou
+docs_dir: docs
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - content.code.copy
+    - search.suggest
+
+nav:
+  - Home: index.md
+  - Features: features.md
+  - Architecture: architecture.md
+  - Tracker watch: tracker-watch.md
+  - Development: development.md
+
+markdown_extensions:
+  - admonition
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+exclude_docs: |
+  serve.sh
+  requirements.txt
