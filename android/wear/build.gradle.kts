@@ -1,7 +1,8 @@
 // MetJou for Wear OS: one SOS button that alerts through the paired phone.
 // Shares the phone app's applicationId so the Data Layer connects them.
 plugins {
-    // Kotlin comes with the Android plugin (built-in Kotlin), like in :app.
+    // No Kotlin plugin here: the Flutter Gradle plugin adds Kotlin support
+    // to every Android module of this build, as it does for :app.
     id("com.android.application")
 }
 
