@@ -49,13 +49,23 @@ The app is feature-first.
 | Where | What belongs there |
 | --- | --- |
 | `lib/features/<feature>/data` | Models, storage and rules of one feature. No widgets. Rules are plain functions where possible, so they can be tested without a phone. |
-| `lib/features/<feature>/presentation` | Screens and widgets of that feature. |
+| `lib/features/<feature>/presentation` | Screens and widgets (Views) of that feature, plus a `*_viewmodel.dart` where the feature has real state to manage. |
 | `lib/core/services` | What several features share: sending alerts, location, notifications, the countdown, launch actions, discreet mode. |
 | `lib/core/widgets`, `theme`, `localization`, `navigation` | Shared UI pieces, colours, language handling, and a navigator key for code that opens screens from outside the widget tree. |
 | `plugins/` | Android code that must also work in a background isolate. |
 | `android/app` | `MainActivity` and the Android entry points (tile, widget, watch listener). |
 
 A feature may use `core` and, where it makes sense, another feature's `data` (Get home safe starts the faster tracker scans, for example). `core` does not depend on screens of a feature, except for the launch actions, which open them.
+
+## State management (MVVM with Riverpod)
+
+Screens follow MVVM:
+
+- **View** — a `ConsumerWidget` (or `ConsumerStatefulWidget`, only when the screen needs genuine ephemeral UI state such as a `TextEditingController` or an `AnimationController`). It reads state with `ref.watch(...)` and calls the ViewModel for every action; it never holds business state itself and never calls a `data/` class directly.
+- **ViewModel** — a `Notifier<State>` (or `AsyncNotifier<State>` when it loads from storage first), in `presentation/<feature>_viewmodel.dart`. It holds the screen's state, calls into the feature's `data/` classes, and exposes plain methods for the View to call. State is a small immutable class.
+- **Model** — the existing `data/` classes. They are not wrapped in a repository interface: each has exactly one real implementation (`SharedPreferences`, a JSON file, or a plugin channel), so an extra interface would add a layer without a second implementation to justify it. The ViewModel calls them directly.
+
+Not every screen gets a ViewModel. A screen with no real state — static legal text, a one-shot splash redirect, an onboarding `PageView` whose only state is which page is showing — stays a plain widget. Forcing a ViewModel onto a screen with nothing to manage would be the pattern for its own sake.
 
 ## An alert, step by step
 

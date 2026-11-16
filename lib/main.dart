@@ -1,6 +1,7 @@
 import 'package:audio_background_record/audio_background_record.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:metjou/app.dart';
 import 'package:metjou/core/localization/app_locale.dart';
 import 'package:metjou/core/services/alert_countdown.dart';
@@ -84,7 +85,11 @@ Future<void> main() async {
   await loadSavedLocale();
   await loadThemeMode();
   final prefs = await SharedPreferences.getInstance();
-  runApp(MyApp(onboardingDone: prefs.getBool("appOpenedBefore") ?? false));
+  runApp(
+    ProviderScope(
+      child: MyApp(onboardingDone: prefs.getBool("appOpenedBefore") ?? false),
+    ),
+  );
   // After the first frame, so the navigator exists for opened screens.
   WidgetsBinding.instance.addPostFrameCallback((_) => LaunchActions.init());
 }
