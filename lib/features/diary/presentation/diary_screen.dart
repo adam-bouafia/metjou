@@ -1,12 +1,13 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:metjou/core/localization/app_locale.dart';
 import 'package:metjou/core/widgets/pin_guard.dart';
 import 'package:metjou/features/diary/data/diary.dart';
 import 'package:metjou/features/diary/data/diary_pdf.dart';
 import 'package:metjou/features/diary/presentation/diary_entry_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:metjou/features/diary/presentation/diary_viewmodel.dart';
 import 'package:share_plus/share_plus.dart';
 
 /// Opens the diary after the PIN check (when a PIN is set).
@@ -23,58 +24,40 @@ String formatDiaryDate(BuildContext context, DateTime when) {
   return "${m.formatFullDate(when)}, ${m.formatTimeOfDay(TimeOfDay.fromDateTime(when), alwaysUse24HourFormat: true)}";
 }
 
-class DiaryScreen extends StatefulWidget {
+class DiaryScreen extends ConsumerWidget {
   const DiaryScreen({super.key});
 
-  @override
-  State<DiaryScreen> createState() => _DiaryScreenState();
-}
-
-class _DiaryScreenState extends State<DiaryScreen> {
-  DiaryStore? _store;
-  List<DiaryEntry> _entries = [];
-  bool _hasPin = true;
-
-  @override
-  void initState() {
-    super.initState();
-    _reload();
-  }
-
-  Future<void> _reload() async {
-    final store = _store ?? await DiaryStore.open();
-    final entries = await store.load();
-    final pin = (await SharedPreferences.getInstance()).getInt('pin') ?? noPin;
-    if (!mounted) return;
-    setState(() {
-      _store = store;
-      _entries = entries;
-      _hasPin = pin != noPin;
-    });
-  }
-
-  Future<void> _edit(DiaryEntry? entry) async {
-    final store = _store;
-    if (store == null) return;
+  Future<void> _edit(
+    BuildContext context,
+    WidgetRef ref,
+    DiaryEntry? entry,
+  ) async {
+    final store = await ref
+        .read(diaryViewModelProvider.notifier)
+        .resolveStore();
+    if (!context.mounted) return;
     await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (_) => DiaryEntryScreen(store: store, entry: entry),
       ),
     );
-    await _reload();
+    await ref.read(diaryViewModelProvider.notifier).refresh();
   }
 
-  Future<void> _export() async {
-    final store = _store;
-    if (store == null || _entries.isEmpty) return;
+  Future<void> _export(
+    BuildContext context,
+    WidgetRef ref,
+    DiaryStore store,
+    List<DiaryEntry> entries,
+  ) async {
     final l10n = context.l10n;
     final rtl = Directionality.of(context) == TextDirection.rtl;
     final now = formatDiaryDate(context, DateTime.now());
     String format(DateTime d) => formatDiaryDate(context, d);
     final file = await exportDiaryPdf(
       store: store,
-      entries: _entries,
+      entries: entries,
       title: l10n.diaryTitle,
       generatedLine: l10n.diaryPdfGenerated(now),
       formatDate: format,
@@ -86,30 +69,34 @@ class _DiaryScreenState extends State<DiaryScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final scheme = Theme.of(context).colorScheme;
-    final store = _store;
+    final diary = ref.watch(diaryViewModelProvider);
+    final store = diary.store;
+    final entries = diary.entries;
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.diaryTitle),
         actions: [
           IconButton(
             tooltip: l10n.diaryExport,
-            onPressed: _entries.isEmpty ? null : _export,
+            onPressed: entries.isEmpty || store == null
+                ? null
+                : () => _export(context, ref, store, entries),
             icon: const Icon(Icons.picture_as_pdf_outlined),
           ),
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => _edit(null),
+        onPressed: () => _edit(context, ref, null),
         icon: const Icon(Icons.add),
         label: Text(l10n.diaryNew),
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 96),
         children: [
-          if (!_hasPin)
+          if (!diary.hasPin)
             Card(
               color: scheme.primaryContainer,
               child: ListTile(
@@ -117,7 +104,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
                 title: Text(l10n.diaryNoPin),
               ),
             ),
-          if (_entries.isEmpty)
+          if (entries.isEmpty)
             Padding(
               padding: const EdgeInsets.all(24),
               child: Text(
@@ -126,10 +113,10 @@ class _DiaryScreenState extends State<DiaryScreen> {
                 style: TextStyle(color: scheme.onSurfaceVariant, height: 1.5),
               ),
             ),
-          for (final e in _entries)
+          for (final e in entries)
             Card(
               child: ListTile(
-                onTap: () => _edit(e),
+                onTap: () => _edit(context, ref, e),
                 leading: e.photos.isNotEmpty && store != null
                     ? ClipRRect(
                         borderRadius: BorderRadius.circular(8),
