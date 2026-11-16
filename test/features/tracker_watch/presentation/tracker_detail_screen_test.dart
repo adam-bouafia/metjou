@@ -37,17 +37,19 @@ void main() {
     String lang = 'en',
     double textScale = 1.0,
   }) => testApp(
-    TrackerDetailScreen(
-      subject: subject,
-      diary: diary,
-      actions: TrackerActions(
-        live: () => const Stream.empty(),
-        playSound: (kind, address) async {
-          rung.add((kind, address));
-          return sound;
-        },
+    TrackerDetailScreen(subject: subject),
+    overrides: [
+      diaryStoreOverrideProvider.overrideWithValue(diary),
+      trackerActionsProvider.overrideWithValue(
+        TrackerActions(
+          live: () => const Stream.empty(),
+          playSound: (kind, address) async {
+            rung.add((kind, address));
+            return sound;
+          },
+        ),
       ),
-    ),
+    ],
     lang: lang,
     textScale: textScale,
   );

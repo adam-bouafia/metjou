@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:metjou/core/localization/app_locale.dart';
 import 'package:metjou/features/tracker_watch/data/signal_meter.dart';
 import 'package:metjou/features/tracker_watch/data/tracker_signature.dart';
@@ -9,25 +10,21 @@ import 'package:metjou/features/tracker_watch/presentation/tracker_actions.dart'
 
 /// Shows how strong one tracker's signal is while the user walks around, to
 /// find where it is hidden.
-class TrackerFinderScreen extends StatefulWidget {
-  const TrackerFinderScreen({
-    super.key,
-    required this.subject,
-    this.actions = const TrackerActions(),
-  });
+class TrackerFinderScreen extends ConsumerStatefulWidget {
+  const TrackerFinderScreen({super.key, required this.subject});
 
   final TrackerSubject subject;
-  final TrackerActions actions;
 
   @override
-  State<TrackerFinderScreen> createState() => _TrackerFinderScreenState();
+  ConsumerState<TrackerFinderScreen> createState() =>
+      _TrackerFinderScreenState();
 }
 
 /// After this many seconds without a reading the tracker counts as out of
 /// range.
 const _lostAfterSeconds = 6;
 
-class _TrackerFinderScreenState extends State<TrackerFinderScreen> {
+class _TrackerFinderScreenState extends ConsumerState<TrackerFinderScreen> {
   final _meter = SignalMeter();
   StreamSubscription<Tracker>? _adverts;
   Timer? _tick;
@@ -37,7 +34,7 @@ class _TrackerFinderScreenState extends State<TrackerFinderScreen> {
   @override
   void initState() {
     super.initState();
-    _adverts = widget.actions.live().listen((seen) {
+    _adverts = ref.read(trackerActionsProvider).live().listen((seen) {
       if (!widget.subject.matches(seen, DateTime.now())) return;
       setState(() {
         _meter.add(seen.rssi);

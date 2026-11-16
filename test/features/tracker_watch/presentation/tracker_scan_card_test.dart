@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:metjou/features/tracker_watch/data/tracker_watch.dart';
+import 'package:metjou/features/tracker_watch/presentation/tracker_actions.dart';
 import 'package:metjou/features/tracker_watch/presentation/tracker_scan_card.dart';
 import 'package:metjou/features/tracker_watch/presentation/tracker_scan_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -11,9 +12,8 @@ void main() {
   late FakeSightingStore store;
 
   Widget card({String lang = 'en', double textScale = 1.0}) => testApp(
-    Scaffold(
-      body: ListView(children: [TrackerScanCard(store: store)]),
-    ),
+    Scaffold(body: ListView(children: const [TrackerScanCard()])),
+    overrides: [sightingStoreOverrideProvider.overrideWithValue(store)],
     lang: lang,
     textScale: textScale,
   );

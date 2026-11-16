@@ -1,3 +1,5 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:metjou/features/diary/data/diary.dart';
 import 'package:metjou/features/tracker_watch/data/follow_detector.dart';
 import 'package:metjou/features/tracker_watch/data/sighting_store.dart';
 import 'package:metjou/features/tracker_watch/data/tracker_scanner.dart';
@@ -36,6 +38,19 @@ class TrackerActions {
   final Future<SoundResult> Function(TrackerKind kind, String address)
   playSound;
 }
+
+/// DI seam for the platform calls above; tests override this instead of
+/// passing a [TrackerActions] through every constructor.
+final trackerActionsProvider = Provider<TrackerActions>(
+  (ref) => const TrackerActions(),
+);
+
+/// DI seam for the sighting store; null means "use the app's own store",
+/// which tests override with a fake.
+final sightingStoreOverrideProvider = Provider<SightingStore?>((ref) => null);
+
+/// DI seam for the diary store, for the same reason.
+final diaryStoreOverrideProvider = Provider<DiaryStore?>((ref) => null);
 
 /// The tracker a detail or finder screen is about.
 class TrackerSubject {

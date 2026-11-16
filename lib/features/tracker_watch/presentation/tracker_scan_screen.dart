@@ -1,150 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:metjou/core/localization/app_locale.dart';
-import 'package:metjou/core/services/discreet_mode.dart';
 import 'package:metjou/core/theme/app_theme.dart';
 import 'package:metjou/core/widgets/pin_guard.dart';
 import 'package:metjou/features/tracker_watch/data/follow_detector.dart';
-import 'package:metjou/features/tracker_watch/data/sighting_store.dart';
 import 'package:metjou/features/tracker_watch/data/tracker_scanner.dart';
 import 'package:metjou/features/tracker_watch/data/tracker_signature.dart';
 import 'package:metjou/features/tracker_watch/data/tracker_text.dart';
-import 'package:metjou/features/tracker_watch/data/tracker_watch.dart';
 import 'package:metjou/features/tracker_watch/presentation/tracker_actions.dart';
 import 'package:metjou/features/tracker_watch/presentation/tracker_detail_screen.dart';
+import 'package:metjou/features/tracker_watch/presentation/tracker_scan_viewmodel.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 /// Opens the tracker screen after the PIN check (when a PIN is set): it
 /// shows where trackers were seen, which is where the user has been.
-Future<void> openTrackerScan(
-  BuildContext context, {
-  SightingStore? store,
-}) async {
+Future<void> openTrackerScan(BuildContext context) async {
   if (!await confirmPin(context) || !context.mounted) return;
   await Navigator.push(
     context,
-    MaterialPageRoute(builder: (_) => TrackerScanScreen(store: store)),
+    MaterialPageRoute(builder: (_) => const TrackerScanScreen()),
   );
 }
 
 /// Trackers that travel with the user, the switch for watching in the
 /// background, and a scan of what is nearby right now.
-class TrackerScanScreen extends StatefulWidget {
-  const TrackerScanScreen({
-    super.key,
-    this.actions = const TrackerActions(),
-    this.store,
-  });
+class TrackerScanScreen extends ConsumerWidget {
+  const TrackerScanScreen({super.key});
 
-  final TrackerActions actions;
-
-  /// Where sightings are kept; the app's own store when null.
-  final SightingStore? store;
-
-  @override
-  State<TrackerScanScreen> createState() => _TrackerScanScreenState();
-}
-
-class _TrackerScanScreenState extends State<TrackerScanScreen> {
-  SightingStore? _store;
-  bool _watching = false;
-  bool _discreet = false;
-  bool _hasHistory = false;
-  DateTime? _lastCheck;
-  List<Follower> _followers = [];
-  Set<String> _ignored = {};
-  ScanBlocker? _watchBlocker;
-
-  bool _scanning = false;
-  ScanOutcome? _outcome;
-
-  @override
-  void initState() {
-    super.initState();
-    _reload();
-  }
-
-  Future<void> _reload() async {
-    final store = _store ?? widget.store ?? await SightingStore.open();
-    final watching = await TrackerWatch.isEnabled();
-    final followers = await TrackerWatch.followers(store);
-    final ignored = await TrackerWatch.ignored();
-    final lastCheck = await TrackerWatch.lastCheck();
-    final discreet = await DiscreetMode.isEnabled();
-    final hasHistory = (await store.load()).isNotEmpty;
-    if (!mounted) return;
-    setState(() {
-      _store = store;
-      _watching = watching;
-      _followers = followers;
-      _ignored = ignored;
-      _lastCheck = lastCheck;
-      _discreet = discreet;
-      _hasHistory = hasHistory;
-    });
-  }
-
-  Future<void> _setWatching(bool on) async {
-    if (on) {
-      final blocker = await widget.actions.checkWatch();
-      if (!mounted) return;
-      setState(() => _watchBlocker = blocker);
-      if (blocker != null) return;
-    }
-    await widget.actions.setWatch(on);
-    if (!mounted) return;
-    setState(() {
-      _watching = on;
-      _watchBlocker = null;
-    });
-  }
-
-  Future<void> _scan() async {
-    setState(() => _scanning = true);
-    final outcome = await widget.actions.scan();
-    final store = _store;
-    // With the watch on, a manual scan adds to the history like a
-    // background round does.
-    if (outcome.blocker == null && _watching && store != null) {
-      final here = await widget.actions.place();
-      await TrackerWatch.record(
-        store,
-        outcome.trackers,
-        at: DateTime.now(),
-        lat: here?.lat,
-        lon: here?.lon,
-      );
-      await _reload();
-    }
-    if (!mounted) return;
-    setState(() {
-      _scanning = false;
-      _outcome = outcome;
-    });
-  }
-
-  Future<void> _open(TrackerSubject subject) async {
+  Future<void> _open(
+    BuildContext context,
+    WidgetRef ref,
+    TrackerSubject subject,
+  ) async {
     await Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (_) =>
-            TrackerDetailScreen(subject: subject, actions: widget.actions),
-      ),
+      MaterialPageRoute(builder: (_) => TrackerDetailScreen(subject: subject)),
     );
-    await _reload();
+    await ref.read(trackerScanViewModelProvider.notifier).refresh();
   }
 
-  Future<void> _openScanned(Tracker tracker) async {
+  Future<void> _openScanned(
+    BuildContext context,
+    WidgetRef ref,
+    Tracker tracker,
+  ) async {
     final now = DateTime.now();
-    final since = now.subtract(const FollowRule().window);
-    final recent = (await _store?.load(since: since) ?? []).reversed.toList();
-    await _open(TrackerSubject.ofScan(tracker, now, recent));
+    final recent = await ref
+        .read(trackerScanViewModelProvider.notifier)
+        .recentSince(const FollowRule().window);
+    if (!context.mounted) return;
+    await _open(context, ref, TrackerSubject.ofScan(tracker, now, recent));
   }
 
-  Future<void> _deleteHistory() async {
+  Future<void> _deleteHistory(BuildContext context, WidgetRef ref) async {
     final l10n = context.l10n;
-    final store = _store;
-    if (store == null) return;
     final ok = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
@@ -162,30 +72,35 @@ class _TrackerScanScreenState extends State<TrackerScanScreen> {
       ),
     );
     if (ok != true) return;
-    await TrackerWatch.deleteHistory(store);
-    await _reload();
+    await ref.read(trackerScanViewModelProvider.notifier).deleteHistory();
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final theme = Theme.of(context);
     final scheme = theme.colorScheme;
-    final outcome = _outcome;
+    final viewModel = ref.read(trackerScanViewModelProvider.notifier);
+    final state = ref.watch(trackerScanViewModelProvider);
+    final outcome = state.outcome;
     final blocker = outcome?.blocker;
     final trackers = outcome?.trackers ?? const <Tracker>[];
     final away = trackers.where((t) => t.owner == OwnerState.away).length;
-    final followers = _followers.where((f) => !_ignored.contains(f.device));
-    final ignored = _followers.where((f) => _ignored.contains(f.device));
-    final lastCheck = _lastCheck;
+    final followers = state.followers.where(
+      (f) => !state.ignored.contains(f.device),
+    );
+    final ignored = state.followers.where(
+      (f) => state.ignored.contains(f.device),
+    );
+    final lastCheck = state.lastCheck;
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.trackerScan),
         actions: [
-          if (_hasHistory)
+          if (state.hasHistory)
             IconButton(
               tooltip: l10n.trackerDeleteHistory,
-              onPressed: _deleteHistory,
+              onPressed: () => _deleteHistory(context, ref),
               icon: const Icon(Icons.delete_outline),
             ),
         ],
@@ -200,7 +115,8 @@ class _TrackerScanScreenState extends State<TrackerScanScreen> {
                 follower: follower,
                 // A caution, not an alarm: the tile leads to what to do.
                 color: Latte.peach.withValues(alpha: 0.16),
-                onTap: () => _open(TrackerSubject.ofFollower(follower)),
+                onTap: () =>
+                    _open(context, ref, TrackerSubject.ofFollower(follower)),
               ),
             const SizedBox(height: 8),
           ],
@@ -213,37 +129,39 @@ class _TrackerScanScreenState extends State<TrackerScanScreen> {
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 4),
               child: SwitchListTile(
-                value: _watching,
-                onChanged: _setWatching,
+                value: state.watching,
+                onChanged: viewModel.setWatching,
                 title: Text(l10n.trackerWatch),
                 subtitle: Text(
                   [
                     l10n.trackerWatchSubtitle,
-                    if (_watching && lastCheck != null)
+                    if (state.watching && lastCheck != null)
                       l10n.trackerWatchLastCheck(clockTime(lastCheck)),
-                    if (_watching && _discreet) l10n.trackerWatchDiscreet,
+                    if (state.watching && state.discreet)
+                      l10n.trackerWatchDiscreet,
                   ].join("\n"),
                 ),
               ),
             ),
           ),
-          if (_watchBlocker case final blocker?) _BlockerCard(blocker: blocker),
+          if (state.watchBlocker case final blocker?)
+            _BlockerCard(blocker: blocker),
           const SizedBox(height: 8),
           FilledButton.icon(
             style: FilledButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 14),
             ),
-            onPressed: _scanning ? null : _scan,
+            onPressed: state.scanning ? null : viewModel.scan,
             icon: const Icon(Icons.bluetooth_searching),
             label: Text(
-              _scanning
+              state.scanning
                   ? l10n.trackerScanRunning
                   : outcome == null
                   ? l10n.trackerScanStart
                   : l10n.trackerScanAgain,
             ),
           ),
-          if (_scanning)
+          if (state.scanning)
             Padding(
               padding: const EdgeInsets.only(top: 12),
               child: TweenAnimationBuilder<double>(
@@ -253,9 +171,9 @@ class _TrackerScanScreenState extends State<TrackerScanScreen> {
               ),
             ),
           const SizedBox(height: 12),
-          if (!_scanning && blocker != null)
+          if (!state.scanning && blocker != null)
             _BlockerCard(blocker: blocker)
-          else if (!_scanning && outcome != null && trackers.isEmpty)
+          else if (!state.scanning && outcome != null && trackers.isEmpty)
             Padding(
               padding: const EdgeInsets.all(24),
               child: Text(
@@ -264,7 +182,7 @@ class _TrackerScanScreenState extends State<TrackerScanScreen> {
                 style: theme.textTheme.titleMedium,
               ),
             )
-          else if (!_scanning && outcome != null) ...[
+          else if (!state.scanning && outcome != null) ...[
             _Heading(l10n.trackerScanFound(trackers.length)),
             if (away > 0)
               Card(
@@ -294,7 +212,7 @@ class _TrackerScanScreenState extends State<TrackerScanScreen> {
             for (final tracker in trackers)
               _TrackerTile(
                 tracker: tracker,
-                onTap: () => _openScanned(tracker),
+                onTap: () => _openScanned(context, ref, tracker),
               ),
           ],
           if (ignored.isNotEmpty) ...[
@@ -302,7 +220,8 @@ class _TrackerScanScreenState extends State<TrackerScanScreen> {
             for (final follower in ignored)
               _FollowerTile(
                 follower: follower,
-                onTap: () => _open(TrackerSubject.ofFollower(follower)),
+                onTap: () =>
+                    _open(context, ref, TrackerSubject.ofFollower(follower)),
               ),
           ],
           const SizedBox(height: 16),

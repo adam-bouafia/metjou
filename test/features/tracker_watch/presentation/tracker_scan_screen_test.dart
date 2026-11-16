@@ -45,18 +45,21 @@ void main() {
     String lang = 'en',
     double textScale = 1.0,
   }) => testApp(
-    TrackerScanScreen(
-      store: store,
-      actions: TrackerActions(
-        scan: scan,
-        checkWatch: () async {
-          watchChecks++;
-          return watchBlocker;
-        },
-        setWatch: (on) async => watchSwitched.add(on),
-        place: () async => (lat: 52.37, lon: 4.89),
+    const TrackerScanScreen(),
+    overrides: [
+      sightingStoreOverrideProvider.overrideWithValue(store),
+      trackerActionsProvider.overrideWithValue(
+        TrackerActions(
+          scan: scan,
+          checkWatch: () async {
+            watchChecks++;
+            return watchBlocker;
+          },
+          setWatch: (on) async => watchSwitched.add(on),
+          place: () async => (lat: 52.37, lon: 4.89),
+        ),
       ),
-    ),
+    ],
     lang: lang,
     textScale: textScale,
   );

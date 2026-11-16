@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:metjou/core/localization/app_locale.dart';
+import 'package:riverpod/misc.dart' show Override;
 import 'package:metjou/features/diary/data/diary.dart';
 import 'package:metjou/features/tracker_watch/data/sighting_store.dart';
 import 'package:metjou/features/tracker_watch/data/tracker_signature.dart';
@@ -56,20 +58,29 @@ class FakeDiaryStore implements DiaryStore {
   Future<String> addPhoto(String sourcePath) async => sourcePath;
 }
 
-/// The app shell the tracker screens need: localisation and a text scale.
-Widget testApp(Widget home, {String lang = 'en', double textScale = 1.0}) =>
-    MaterialApp(
-      locale: Locale(lang),
-      supportedLocales: supportedAppLocales,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      builder: (context, child) => MediaQuery(
-        data: MediaQuery.of(
-          context,
-        ).copyWith(textScaler: TextScaler.linear(textScale)),
-        child: child!,
-      ),
-      home: home,
-    );
+/// The app shell the tracker screens need: localisation, a text scale, and
+/// the Riverpod overrides (a fake store, fake actions) tests inject in
+/// place of the real platform calls.
+Widget testApp(
+  Widget home, {
+  String lang = 'en',
+  double textScale = 1.0,
+  List<Override> overrides = const [],
+}) => ProviderScope(
+  overrides: overrides,
+  child: MaterialApp(
+    locale: Locale(lang),
+    supportedLocales: supportedAppLocales,
+    localizationsDelegates: AppLocalizations.localizationsDelegates,
+    builder: (context, child) => MediaQuery(
+      data: MediaQuery.of(
+        context,
+      ).copyWith(textScaler: TextScaler.linear(textScale)),
+      child: child!,
+    ),
+    home: home,
+  ),
+);
 
 /// A sighting [minutesAgo] before now; every [place] step is about 222 m.
 Sighting sightingAgo(

@@ -28,8 +28,12 @@ void main() {
             device: _device,
             last: sightingAgo(_device, 0),
           ),
-          actions: TrackerActions(live: () => adverts.stream),
         ),
+        overrides: [
+          trackerActionsProvider.overrideWithValue(
+            TrackerActions(live: () => adverts.stream),
+          ),
+        ],
         lang: lang,
         textScale: lang == 'en' ? 1.0 : 1.3,
       ),

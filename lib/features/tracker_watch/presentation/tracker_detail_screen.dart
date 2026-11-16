@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:metjou/core/localization/app_locale.dart';
 import 'package:metjou/core/services/phone_call.dart';
 import 'package:metjou/features/diary/data/diary.dart';
@@ -25,25 +26,17 @@ const _maxHistoryRows = 30;
 
 /// Everything about one tracker: where it was seen, how to find it and
 /// what to do about it.
-class TrackerDetailScreen extends StatefulWidget {
-  const TrackerDetailScreen({
-    super.key,
-    required this.subject,
-    this.actions = const TrackerActions(),
-    this.diary,
-  });
+class TrackerDetailScreen extends ConsumerStatefulWidget {
+  const TrackerDetailScreen({super.key, required this.subject});
 
   final TrackerSubject subject;
-  final TrackerActions actions;
-
-  /// Where "Save to diary" writes; the app's diary when null.
-  final DiaryStore? diary;
 
   @override
-  State<TrackerDetailScreen> createState() => _TrackerDetailScreenState();
+  ConsumerState<TrackerDetailScreen> createState() =>
+      _TrackerDetailScreenState();
 }
 
-class _TrackerDetailScreenState extends State<TrackerDetailScreen> {
+class _TrackerDetailScreenState extends ConsumerState<TrackerDetailScreen> {
   bool _ignored = false;
   bool _ringing = false;
 
@@ -70,10 +63,9 @@ class _TrackerDetailScreenState extends State<TrackerDetailScreen> {
   Future<void> _playSound() async {
     final l10n = context.l10n;
     setState(() => _ringing = true);
-    final result = await widget.actions.playSound(
-      _subject.kind,
-      _subject.last.address,
-    );
+    final result = await ref
+        .read(trackerActionsProvider)
+        .playSound(_subject.kind, _subject.last.address);
     if (!mounted) return;
     setState(() => _ringing = false);
     _say(switch (result) {
@@ -104,7 +96,7 @@ class _TrackerDetailScreenState extends State<TrackerDetailScreen> {
             ).length,
             formatDate: _when,
           );
-    final diary = widget.diary ?? await DiaryStore.open();
+    final diary = ref.read(diaryStoreOverrideProvider) ?? await DiaryStore.open();
     final now = DateTime.now();
     await diary.save(
       DiaryEntry(
@@ -161,10 +153,7 @@ class _TrackerDetailScreenState extends State<TrackerDetailScreen> {
                 onPressed: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => TrackerFinderScreen(
-                      subject: _subject,
-                      actions: widget.actions,
-                    ),
+                    builder: (_) => TrackerFinderScreen(subject: _subject),
                   ),
                 ),
                 icon: const Icon(Icons.radar),
