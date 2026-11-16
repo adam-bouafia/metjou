@@ -67,6 +67,20 @@ Screens follow MVVM:
 
 Not every screen gets a ViewModel. A screen with no real state — static legal text, a one-shot splash redirect, an onboarding `PageView` whose only state is which page is showing — stays a plain widget. Forcing a ViewModel onto a screen with nothing to manage would be the pattern for its own sake.
 
+**Moved to a ViewModel**, each for a concrete reason, not as a mechanical pass:
+
+| Feature | Why |
+| --- | --- |
+| Tracker Scan | The watch switch, the last scan and the follower list were duplicated across the screen, the detail screen and the home card; one `TrackerScanViewModel` now backs all three. |
+| Get Home Safe | The sheet's form and the home card showed the same running schedule from two separate loads; one `GetHomeSafeViewModel` keeps them in sync without either one refreshing the other. |
+| Check-in | A thin `CheckInViewModel` mirrors the existing `CheckInService.deadline` `ValueNotifier` into Riverpod, replacing a manual `addListener`/`removeListener` pair. |
+| Contacts | The list used a `FutureBuilder(future: loadSosContacts())` that silently restarted the load on every unrelated rebuild of its parent; an `AsyncNotifier` loads it once. |
+| Home / SOS | "Is an alert running" is read by the SOS button and set by three different flows (button, PIN sheet, Get home safe); `SosViewModel` is the one place that state lives. |
+| Settings | A dozen independent `FutureBuilder`s, each re-fetching its own value on every rebuild; one `SettingsViewModel` loads all of them together. |
+| Diary (list) | Same `FutureBuilder`-on-every-rebuild problem as Contacts, plus it shares a DI seam (`diaryStoreOverrideProvider`) with the tracker detail screen, which also writes an entry. |
+
+**Left as `StatefulWidget` on purpose**, because the state is a resource or a draft owned by exactly one screen, with nothing to share and nothing a test needs to inject: Siren (`AudioPlayer`, a strobe `Timer`), Fake Call (`AnimationController`, the ringtone), the diary entry editor, the add-contact dialog, and Medical ID (eight `TextEditingController`s bound to one form). Wrapping a Notifier around a screen like this would move the same controller one layer away without fixing anything.
+
 ## An alert, step by step
 
 ```mermaid
