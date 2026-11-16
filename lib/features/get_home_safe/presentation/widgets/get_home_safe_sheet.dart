@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:metjou/core/localization/app_locale.dart';
 import 'package:metjou/core/theme/app_theme.dart';
-import 'package:metjou/features/contacts/data/sos_contacts.dart';
 import 'package:metjou/features/contacts/presentation/my_contacts.dart';
 import 'package:metjou/features/get_home_safe/data/get_home_safe_service.dart';
+import 'package:metjou/features/get_home_safe/presentation/get_home_safe_viewmodel.dart';
 
 const _presetMinutes = [1, 5, 15, 30];
 
@@ -23,50 +24,18 @@ String formatDateTime(BuildContext context, DateTime at) {
 }
 
 /// Bottom sheet to choose who gets the location and when. Returns once the
-/// user started or stopped Get home safe.
-class GetHomeSafeSheet extends StatefulWidget {
-  const GetHomeSafeSheet({super.key, required this.current});
+/// user started or stopped Get home safe. Reads and edits the same
+/// [GetHomeSafeViewModel] the home card shows, so starting or stopping here
+/// updates the card without either one refreshing the other.
+class GetHomeSafeSheet extends ConsumerWidget {
+  const GetHomeSafeSheet({super.key});
 
-  /// The running schedule, or null when Get home safe is off.
-  final GetHomeSafeState? current;
-
-  @override
-  State<GetHomeSafeSheet> createState() => _GetHomeSafeSheetState();
-}
-
-class _GetHomeSafeSheetState extends State<GetHomeSafeSheet> {
-  List<SosContact> _contacts = [];
-  String? _contact;
-  bool _repeat = true;
-  int _minutes = 15;
-  DateTime? _at;
-
-  bool get _active => widget.current != null;
-
-  @override
-  void initState() {
-    super.initState();
-    final current = widget.current;
-    if (current != null) {
-      _contact = current.contact;
-      switch (current.schedule) {
-        case RepeatEvery(:final interval):
-          _minutes = interval.inMinutes;
-        case SendOnceAt(:final at):
-          _repeat = false;
-          _at = at;
-      }
-    }
-    _loadContacts();
-  }
-
-  Future<void> _loadContacts() async {
-    final contacts = await loadSosContacts();
-    if (mounted) setState(() => _contacts = contacts);
-  }
-
-  Future<void> _pickCustomMinutes() async {
-    final controller = TextEditingController(text: "$_minutes");
+  Future<void> _pickCustomMinutes(
+    BuildContext context,
+    WidgetRef ref,
+    int current,
+  ) async {
+    final controller = TextEditingController(text: "$current");
     final minutes = await showDialog<int>(
       context: context,
       builder: (context) => AlertDialog(
@@ -86,67 +55,68 @@ class _GetHomeSafeSheetState extends State<GetHomeSafeSheet> {
         ],
       ),
     );
-    if (minutes != null && minutes >= 1) setState(() => _minutes = minutes);
+    if (minutes != null && minutes >= 1) {
+      ref.read(getHomeSafeViewModelProvider.notifier).setMinutes(minutes);
+    }
   }
 
-  Future<void> _pickDateTime() async {
+  Future<void> _pickDateTime(
+    BuildContext context,
+    WidgetRef ref,
+    DateTime? current,
+  ) async {
     final now = DateTime.now();
-    final initial = _at ?? now.add(const Duration(hours: 1));
+    final initial = current ?? now.add(const Duration(hours: 1));
     final date = await showDatePicker(
       context: context,
       initialDate: initial,
       firstDate: DateTime(now.year, now.month, now.day),
       lastDate: now.add(const Duration(days: 30)),
     );
-    if (date == null || !mounted) return;
+    if (date == null || !context.mounted) return;
     final time = await showTimePicker(
       context: context,
       initialTime: TimeOfDay.fromDateTime(initial),
     );
     if (time == null) return;
-    setState(
-      () => _at = DateTime(
-        date.year,
-        date.month,
-        date.day,
-        time.hour,
-        time.minute,
-      ),
-    );
+    ref
+        .read(getHomeSafeViewModelProvider.notifier)
+        .setAt(
+          DateTime(date.year, date.month, date.day, time.hour, time.minute),
+        );
   }
 
-  Future<void> _startOrStop() async {
+  Future<void> _startOrStop(BuildContext context, WidgetRef ref) async {
     final l10n = context.l10n;
-    if (_active) {
-      await GetHomeSafeService.stop();
-      Fluttertoast.showToast(msg: l10n.getHomeSafeOff);
-    } else {
-      final contact = _contact;
-      if (contact == null) {
+    final action = await ref
+        .read(getHomeSafeViewModelProvider.notifier)
+        .startOrStop();
+    switch (action) {
+      case GhsAction.stopped:
+        Fluttertoast.showToast(msg: l10n.getHomeSafeOff);
+      case GhsAction.started:
+        Fluttertoast.showToast(msg: l10n.getHomeSafeOn);
+      case GhsAction.noContactSelected:
         Fluttertoast.showToast(msg: l10n.selectContactFirst);
         return;
-      }
-      final GetHomeSafeSchedule schedule;
-      if (_repeat) {
-        schedule = RepeatEvery(Duration(minutes: _minutes));
-      } else {
-        final at = _at;
-        if (at == null || !at.isAfter(DateTime.now())) {
-          Fluttertoast.showToast(msg: l10n.ghsTimeInPast);
-          return;
-        }
-        schedule = SendOnceAt(at);
-      }
-      await GetHomeSafeService.start(contact, schedule);
-      Fluttertoast.showToast(msg: l10n.getHomeSafeOn);
+      case GhsAction.timeInPast:
+        Fluttertoast.showToast(msg: l10n.ghsTimeInPast);
+        return;
     }
-    if (mounted) Navigator.pop(context);
+    if (context.mounted) Navigator.pop(context);
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final theme = Theme.of(context);
+    final state = ref.watch(getHomeSafeViewModelProvider);
+    final active = state.active;
+    final contacts = state.contacts;
+    final contact = state.selectedContact;
+    final repeat = state.repeat;
+    final minutes = state.minutes;
+    final at = state.at;
     return SafeArea(
       child: SingleChildScrollView(
         padding: EdgeInsets.fromLTRB(
@@ -169,7 +139,7 @@ class _GetHomeSafeSheetState extends State<GetHomeSafeSheet> {
             ),
             const SizedBox(height: 16),
             Text(l10n.ghsChooseContact, style: theme.textTheme.titleSmall),
-            if (_contacts.isEmpty)
+            if (contacts.isEmpty)
               ListTile(
                 contentPadding: EdgeInsets.zero,
                 title: Text(l10n.noContacts),
@@ -177,22 +147,28 @@ class _GetHomeSafeSheetState extends State<GetHomeSafeSheet> {
                 trailing: const Icon(Icons.person_add_alt),
                 onTap: () async {
                   await addSosContactFlow(context);
-                  _loadContacts();
+                  ref
+                      .read(getHomeSafeViewModelProvider.notifier)
+                      .reloadContacts();
                 },
               )
             else
               RadioGroup<String>(
-                groupValue: _contact,
+                groupValue: contact,
                 onChanged: (value) {
-                  if (!_active) setState(() => _contact = value);
+                  if (!active) {
+                    ref
+                        .read(getHomeSafeViewModelProvider.notifier)
+                        .selectContact(value);
+                  }
                 },
                 child: Column(
                   children: [
-                    for (final c in _contacts)
+                    for (final c in contacts)
                       RadioListTile<String>(
                         contentPadding: EdgeInsets.zero,
                         value: c.phone,
-                        enabled: !_active,
+                        enabled: !active,
                         title: Text(c.name),
                         subtitle: Text(c.phone),
                       ),
@@ -213,13 +189,15 @@ class _GetHomeSafeSheetState extends State<GetHomeSafeSheet> {
                   label: Text(l10n.ghsOnce),
                 ),
               ],
-              selected: {_repeat},
-              onSelectionChanged: _active
+              selected: {repeat},
+              onSelectionChanged: active
                   ? null
-                  : (s) => setState(() => _repeat = s.first),
+                  : (s) => ref
+                        .read(getHomeSafeViewModelProvider.notifier)
+                        .setRepeat(s.first),
             ),
             const SizedBox(height: 12),
-            if (_repeat) ...[
+            if (repeat) ...[
               Wrap(
                 spacing: 8,
                 runSpacing: 8,
@@ -227,23 +205,27 @@ class _GetHomeSafeSheetState extends State<GetHomeSafeSheet> {
                   for (final m in _presetMinutes)
                     ChoiceChip(
                       label: Text(l10n.ghsEvery(m)),
-                      selected: _minutes == m,
-                      onSelected: _active
+                      selected: minutes == m,
+                      onSelected: active
                           ? null
-                          : (_) => setState(() => _minutes = m),
+                          : (_) => ref
+                                .read(getHomeSafeViewModelProvider.notifier)
+                                .setMinutes(m),
                     ),
                   ChoiceChip(
                     label: Text(
-                      _presetMinutes.contains(_minutes)
+                      _presetMinutes.contains(minutes)
                           ? l10n.ghsCustom
-                          : l10n.ghsEvery(_minutes),
+                          : l10n.ghsEvery(minutes),
                     ),
-                    selected: !_presetMinutes.contains(_minutes),
-                    onSelected: _active ? null : (_) => _pickCustomMinutes(),
+                    selected: !_presetMinutes.contains(minutes),
+                    onSelected: active
+                        ? null
+                        : (_) => _pickCustomMinutes(context, ref, minutes),
                   ),
                 ],
               ),
-              if (_minutes == 1) ...[
+              if (minutes == 1) ...[
                 const SizedBox(height: 8),
                 Text(
                   l10n.ghsEveryMinuteWarning,
@@ -254,12 +236,12 @@ class _GetHomeSafeSheetState extends State<GetHomeSafeSheet> {
               ],
             ] else
               OutlinedButton.icon(
-                onPressed: _active ? null : _pickDateTime,
+                onPressed: active
+                    ? null
+                    : () => _pickDateTime(context, ref, at),
                 icon: const Icon(Icons.event),
                 label: Text(
-                  _at == null
-                      ? l10n.ghsPickTime
-                      : formatDateTime(context, _at!),
+                  at == null ? l10n.ghsPickTime : formatDateTime(context, at),
                 ),
               ),
             const SizedBox(height: 20),
@@ -267,14 +249,14 @@ class _GetHomeSafeSheetState extends State<GetHomeSafeSheet> {
               width: double.infinity,
               child: FilledButton(
                 style: FilledButton.styleFrom(
-                  backgroundColor: _active
+                  backgroundColor: active
                       ? Theme.of(context).colorScheme.error
                       : Theme.of(context).colorScheme.primary,
                   padding: const EdgeInsets.symmetric(vertical: 14),
                 ),
-                onPressed: _startOrStop,
+                onPressed: () => _startOrStop(context, ref),
                 child: Text(
-                  _active ? l10n.ghsStop : l10n.ghsStart,
+                  active ? l10n.ghsStop : l10n.ghsStart,
                   style: const TextStyle(fontSize: 16),
                 ),
               ),

@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:metjou/core/localization/app_locale.dart';
-import 'package:metjou/features/get_home_safe/data/get_home_safe_service.dart';
 import 'package:metjou/features/get_home_safe/presentation/widgets/get_home_safe_sheet.dart';
 import 'package:metjou/l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-Widget _sheet({GetHomeSafeState? current}) => MaterialApp(
-  locale: const Locale('en'),
-  supportedLocales: supportedAppLocales,
-  localizationsDelegates: AppLocalizations.localizationsDelegates,
-  home: Scaffold(body: GetHomeSafeSheet(current: current)),
+Widget _sheet() => ProviderScope(
+  child: MaterialApp(
+    locale: const Locale('en'),
+    supportedLocales: supportedAppLocales,
+    localizationsDelegates: AppLocalizations.localizationsDelegates,
+    home: const Scaffold(body: GetHomeSafeSheet()),
+  ),
 );
 
 void main() {
@@ -36,14 +38,12 @@ void main() {
   });
 
   testWidgets('a running schedule offers Stop', (tester) async {
-    await tester.pumpWidget(
-      _sheet(
-        current: const GetHomeSafeState(
-          '0612345678',
-          RepeatEvery(Duration(minutes: 7)),
-        ),
-      ),
-    );
+    SharedPreferences.setMockInitialValues({
+      'getHomeSafe': true,
+      'ghs_contact': '0612345678',
+      'ghs_interval_min': 7,
+    });
+    await tester.pumpWidget(_sheet());
     await tester.pumpAndSettle();
     expect(find.text('Stop'), findsOneWidget);
     expect(find.text('Every 7 min'), findsOneWidget);

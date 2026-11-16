@@ -1,68 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:metjou/core/localization/app_locale.dart';
 import 'package:metjou/core/widgets/glass.dart';
-import 'package:metjou/core/services/background_services.dart';
-import 'package:metjou/features/check_in/data/check_in_service.dart';
-import 'package:metjou/features/get_home_safe/data/get_home_safe_service.dart';
+import 'package:metjou/features/get_home_safe/presentation/get_home_safe_viewmodel.dart';
 import 'package:metjou/features/get_home_safe/presentation/widgets/get_home_safe_sheet.dart';
 
 /// Home card for Get home safe: shows the running schedule and opens the
 /// panel to start or stop it.
-class SafeHome extends StatefulWidget {
+class SafeHome extends ConsumerWidget {
   const SafeHome({super.key});
-
-  @override
-  State<SafeHome> createState() => _SafeHomeState();
-}
-
-class _SafeHomeState extends State<SafeHome> {
-  GetHomeSafeState? current;
-
-  @override
-  void initState() {
-    super.initState();
-    _refresh();
-  }
-
-  Future<void> _refresh() async {
-    final state = await GetHomeSafeService.load();
-    if (mounted) setState(() => current = state);
-  }
 
   /// Tells the contacts you are home, and ends Get home safe and a
   /// running check-in timer in one tap.
-  Future<void> _imHome() async {
+  Future<void> _imHome(BuildContext context, WidgetRef ref) async {
     final l10n = context.l10n;
-    await GetHomeSafeService.stop();
-    await CheckInService.checkIn();
-    final sent = await BackgroundServices.sendSosAlert(
-      l10n.smsHome,
-      withLocation: false,
-    );
+    final sent = await ref
+        .read(getHomeSafeViewModelProvider.notifier)
+        .imHome(l10n.smsHome);
     Fluttertoast.showToast(
       msg: sent == 0 ? l10n.noContactsFound : l10n.imHomeSent,
     );
-    await _refresh();
   }
 
-  Future<void> _openSheet() async {
+  Future<void> _openSheet(BuildContext context) async {
     await showModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,
       showDragHandle: true,
-      builder: (_) => GetHomeSafeSheet(current: current),
+      builder: (_) => const GetHomeSafeSheet(),
     );
-    await _refresh();
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final current = ref.watch(getHomeSafeViewModelProvider).running;
     return Padding(
       padding: const EdgeInsets.fromLTRB(12, 6, 12, 10),
       child: GlassPanel(
-        onTap: _openSheet,
+        onTap: () => _openSheet(context),
         child: SizedBox(
           width: MediaQuery.of(context).size.width * 0.7,
           child: Column(
@@ -81,10 +58,7 @@ class _SafeHomeState extends State<SafeHome> {
                             subtitle: Text(
                               current == null
                                   ? context.l10n.getHomeSafeSubtitle
-                                  : describeSchedule(
-                                      context,
-                                      current!.schedule,
-                                    ),
+                                  : describeSchedule(context, current.schedule),
                             ),
                           ),
                           Visibility(
@@ -126,7 +100,7 @@ class _SafeHomeState extends State<SafeHome> {
                 child: SizedBox(
                   width: double.infinity,
                   child: FilledButton.tonalIcon(
-                    onPressed: _imHome,
+                    onPressed: () => _imHome(context, ref),
                     icon: const Icon(Icons.home_rounded),
                     label: Text(context.l10n.imHome),
                   ),
