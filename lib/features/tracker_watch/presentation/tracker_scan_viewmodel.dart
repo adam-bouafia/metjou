@@ -71,9 +71,8 @@ class TrackerScanViewModel extends Notifier<TrackerScanState> {
     return const TrackerScanState();
   }
 
-  Future<SightingStore> _resolveStore() async =>
-      _store ??=
-          ref.read(sightingStoreOverrideProvider) ?? await SightingStore.open();
+  Future<SightingStore> _resolveStore() async => _store ??=
+      ref.read(sightingStoreOverrideProvider) ?? await SightingStore.open();
 
   Future<void> _reload() async {
     final store = await _resolveStore();

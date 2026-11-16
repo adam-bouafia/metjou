@@ -96,7 +96,8 @@ class _TrackerDetailScreenState extends ConsumerState<TrackerDetailScreen> {
             ).length,
             formatDate: _when,
           );
-    final diary = ref.read(diaryStoreOverrideProvider) ?? await DiaryStore.open();
+    final diary =
+        ref.read(diaryStoreOverrideProvider) ?? await DiaryStore.open();
     final now = DateTime.now();
     await diary.save(
       DiaryEntry(

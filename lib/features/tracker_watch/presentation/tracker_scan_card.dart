@@ -11,7 +11,8 @@ import 'package:metjou/features/tracker_watch/presentation/tracker_scan_screen.d
 /// Whether a tracker is travelling with the user right now. The card's own
 /// tiny "ViewModel": one derived value, no need for a Notifier.
 final trackerFollowedProvider = FutureProvider<bool>((ref) async {
-  final store = ref.read(sightingStoreOverrideProvider) ?? await SightingStore.open();
+  final store =
+      ref.read(sightingStoreOverrideProvider) ?? await SightingStore.open();
   final ignored = await TrackerWatch.ignored();
   final followers = await TrackerWatch.followers(store);
   return followers.any((f) => !ignored.contains(f.device));
