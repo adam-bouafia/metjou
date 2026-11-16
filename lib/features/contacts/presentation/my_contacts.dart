@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:metjou/core/localization/app_locale.dart';
 import 'package:flutter_native_contact_picker/flutter_native_contact_picker.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -6,6 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:metjou/core/widgets/glass.dart';
 import 'package:metjou/core/widgets/pin_guard.dart';
 import 'package:metjou/features/contacts/data/sos_contacts.dart';
+import 'package:metjou/features/contacts/presentation/contacts_viewmodel.dart';
 import 'package:metjou/features/home/presentation/widgets/glass_dock.dart';
 
 /// Opens the system contact picker and saves the chosen number as an SOS
@@ -152,25 +154,23 @@ Future<bool> pickSosContact(BuildContext context) async {
   return added;
 }
 
-class MyContactsScreen extends StatefulWidget {
+class MyContactsScreen extends ConsumerWidget {
   const MyContactsScreen({super.key});
 
-  @override
-  State<MyContactsScreen> createState() => _MyContactsScreenState();
-}
-
-class _MyContactsScreenState extends State<MyContactsScreen> {
-  Future<void> _remove(List<SosContact> contacts, int index) async {
-    if (!await confirmPin(context) || !mounted) return;
+  Future<void> _remove(
+    BuildContext context,
+    WidgetRef ref,
+    SosContact contact,
+  ) async {
+    if (!await confirmPin(context) || !context.mounted) return;
     final l10n = context.l10n;
-    final removed = contacts.removeAt(index);
-    await saveSosContacts(contacts);
-    Fluttertoast.showToast(msg: l10n.contactRemoved(removed.name));
-    setState(() {});
+    await ref.read(contactsViewModelProvider.notifier).remove(contact);
+    Fluttertoast.showToast(msg: l10n.contactRemoved(contact.name));
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final contacts = ref.watch(contactsViewModelProvider).value ?? [];
     return Scaffold(
       // The dashboard's glass background shows through.
       backgroundColor: Colors.transparent,
@@ -182,75 +182,70 @@ class _MyContactsScreenState extends State<MyContactsScreen> {
           style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
         ),
       ),
-      body: FutureBuilder(
-        future: loadSosContacts(),
-        builder: (context, AsyncSnapshot<List<SosContact>> snap) {
-          final contacts = snap.data ?? [];
-          if (contacts.isEmpty) {
-            return Center(child: Text(context.l10n.noContacts));
-          }
-          return Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: Row(
-                  children: [
-                    Expanded(child: Divider(indent: 20, endIndent: 20)),
-                    Text(context.l10n.swipeToDelete),
-                    Expanded(child: Divider(indent: 20, endIndent: 20)),
-                  ],
+      body: contacts.isEmpty
+          ? Center(child: Text(context.l10n.noContacts))
+          : Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Row(
+                    children: [
+                      Expanded(child: Divider(indent: 20, endIndent: 20)),
+                      Text(context.l10n.swipeToDelete),
+                      Expanded(child: Divider(indent: 20, endIndent: 20)),
+                    ],
+                  ),
                 ),
-              ),
-              Text(context.l10n.contactCount(contacts.length, maxSosContacts)),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: contacts.length,
-                  itemBuilder: (context, index) {
-                    final contact = contacts[index];
-                    return Slidable(
-                      key: ValueKey(contact.phone),
-                      endActionPane: ActionPane(
-                        motion: const DrawerMotion(),
-                        extentRatio: 0.25,
-                        children: [
-                          SlidableAction(
-                            onPressed: (_) => _remove(contacts, index),
-                            backgroundColor: Theme.of(
-                              context,
-                            ).colorScheme.error,
-                            foregroundColor: Colors.white,
-                            icon: Icons.delete,
-                          ),
-                        ],
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 5,
-                        ),
-                        child: GlassPanel(
-                          radius: 16,
-                          child: ListTile(
-                            leading: CircleAvatar(
+                Text(
+                  context.l10n.contactCount(contacts.length, maxSosContacts),
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: contacts.length,
+                    itemBuilder: (context, index) {
+                      final contact = contacts[index];
+                      return Slidable(
+                        key: ValueKey(contact.phone),
+                        endActionPane: ActionPane(
+                          motion: const DrawerMotion(),
+                          extentRatio: 0.25,
+                          children: [
+                            SlidableAction(
+                              onPressed: (_) => _remove(context, ref, contact),
                               backgroundColor: Theme.of(
                                 context,
-                              ).colorScheme.surfaceContainerHighest,
-                              backgroundImage: AssetImage("assets/user.webp"),
+                              ).colorScheme.error,
+                              foregroundColor: Colors.white,
+                              icon: Icons.delete,
                             ),
-                            title: Text(contact.name),
-                            subtitle: Text(contact.phone),
+                          ],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 5,
+                          ),
+                          child: GlassPanel(
+                            radius: 16,
+                            child: ListTile(
+                              leading: CircleAvatar(
+                                backgroundColor: Theme.of(
+                                  context,
+                                ).colorScheme.surfaceContainerHighest,
+                                backgroundImage: AssetImage("assets/user.webp"),
+                              ),
+                              title: Text(contact.name),
+                              subtitle: Text(contact.phone),
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
-              ),
-              SizedBox(height: glassDockClearance),
-            ],
-          );
-        },
-      ),
+                SizedBox(height: glassDockClearance),
+              ],
+            ),
     );
   }
 }

@@ -1,49 +1,43 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:metjou/core/localization/app_locale.dart';
 import 'package:metjou/core/widgets/glass.dart';
-import 'package:metjou/features/check_in/data/check_in_service.dart';
+import 'package:metjou/features/check_in/presentation/check_in_viewmodel.dart';
 
 const _choices = [15, 30, 60, 120];
 const _extendBy = 15;
 
 /// Home card for the check-in timer: start it, see the time left, and
 /// check in or add time.
-class CheckInCard extends StatefulWidget {
+class CheckInCard extends ConsumerStatefulWidget {
   const CheckInCard({super.key});
 
   @override
-  State<CheckInCard> createState() => _CheckInCardState();
+  ConsumerState<CheckInCard> createState() => _CheckInCardState();
 }
 
-class _CheckInCardState extends State<CheckInCard> {
+class _CheckInCardState extends ConsumerState<CheckInCard> {
   Timer? _ticker;
 
   @override
-  void initState() {
-    super.initState();
-    CheckInService.deadline.addListener(_onDeadline);
-    _onDeadline();
-  }
-
-  @override
   void dispose() {
-    CheckInService.deadline.removeListener(_onDeadline);
     _ticker?.cancel();
     super.dispose();
   }
 
   /// Ticks once a second while a deadline runs, to update the time left.
-  void _onDeadline() {
-    _ticker?.cancel();
-    if (CheckInService.deadline.value != null) {
+  void _ensureTicking(bool active) {
+    if (active && _ticker == null) {
       _ticker = Timer.periodic(const Duration(seconds: 1), (_) {
         if (mounted) setState(() {});
       });
+    } else if (!active) {
+      _ticker?.cancel();
+      _ticker = null;
     }
-    if (mounted) setState(() {});
   }
 
   String _clock(DateTime time) => MaterialLocalizations.of(
@@ -93,12 +87,14 @@ class _CheckInCardState extends State<CheckInCard> {
       ),
     );
     if (minutes == null || !mounted) return;
-    await CheckInService.start(Duration(minutes: minutes), _clock);
+    await ref
+        .read(checkInViewModelProvider.notifier)
+        .start(Duration(minutes: minutes), _clock);
   }
 
   Future<void> _checkIn() async {
     final done = context.l10n.checkInDone;
-    await CheckInService.checkIn();
+    await ref.read(checkInViewModelProvider.notifier).checkIn();
     Fluttertoast.showToast(msg: done);
   }
 
@@ -106,7 +102,8 @@ class _CheckInCardState extends State<CheckInCard> {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final scheme = Theme.of(context).colorScheme;
-    final deadline = CheckInService.deadline.value;
+    final deadline = ref.watch(checkInViewModelProvider);
+    _ensureTicking(deadline != null);
     return Padding(
       padding: const EdgeInsets.fromLTRB(12, 6, 12, 10),
       child: GlassPanel(
@@ -156,10 +153,9 @@ class _CheckInCardState extends State<CheckInCard> {
                     ),
                     const SizedBox(width: 8),
                     OutlinedButton(
-                      onPressed: () => CheckInService.extend(
-                        const Duration(minutes: _extendBy),
-                        _clock,
-                      ),
+                      onPressed: () => ref
+                          .read(checkInViewModelProvider.notifier)
+                          .extend(const Duration(minutes: _extendBy), _clock),
                       child: Text(l10n.checkInExtend(_extendBy)),
                     ),
                   ],

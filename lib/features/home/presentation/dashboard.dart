@@ -1,5 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:metjou/core/theme/app_theme.dart';
 import 'package:metjou/core/localization/app_locale.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -9,25 +10,25 @@ import 'package:metjou/features/home/presentation/home.dart';
 import 'package:metjou/core/widgets/glass.dart';
 import 'package:metjou/features/home/presentation/widgets/glass_dock.dart';
 import 'package:metjou/features/home/presentation/widgets/sos_button.dart';
+import 'package:metjou/features/contacts/presentation/contacts_viewmodel.dart';
 import 'package:metjou/features/contacts/presentation/my_contacts.dart';
+import 'package:metjou/features/home/presentation/sos_viewmodel.dart';
 import 'package:metjou/core/services/alert_countdown.dart';
-import 'package:metjou/core/services/background_services.dart';
 import 'package:metjou/core/widgets/pin_input.dart';
 
-class Dashboard extends StatefulWidget {
+class Dashboard extends ConsumerStatefulWidget {
   const Dashboard({super.key, this.pageIndex = 0});
 
   final int pageIndex;
 
   @override
-  State<Dashboard> createState() => _DashboardState();
+  ConsumerState<Dashboard> createState() => _DashboardState();
 }
 
-class _DashboardState extends State<Dashboard> with WidgetsBindingObserver {
-  bool alerted = false;
-
+class _DashboardState extends ConsumerState<Dashboard>
+    with WidgetsBindingObserver {
   late int currentPage = widget.pageIndex;
-  SharedPreferences? prefs;
+  int? _pin;
 
   final TextEditingController _pinPutController = TextEditingController();
   final FocusNode _pinPutFocusNode = FocusNode();
@@ -35,7 +36,7 @@ class _DashboardState extends State<Dashboard> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    checkAlertSharedPreferences();
+    _loadPin();
     WidgetsBinding.instance.addObserver(this);
     AlertCountdown.remaining.addListener(_onCountdown);
     checkPermission();
@@ -50,27 +51,47 @@ class _DashboardState extends State<Dashboard> with WidgetsBindingObserver {
     super.dispose();
   }
 
+  Future<void> _loadPin() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (mounted) setState(() => _pin = prefs.getInt('pin'));
+  }
+
   /// An alert can also be sent by shaking, the Quick Settings tile, the
   /// widget or a shortcut; re-read the state when the app comes back and
   /// when a countdown ends, so the SOS button shows STOP.
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed) checkAlertSharedPreferences();
+    if (state == AppLifecycleState.resumed) {
+      ref.read(sosViewModelProvider.notifier).refresh();
+    }
   }
 
   void _onCountdown() {
     if (AlertCountdown.remaining.value == null) {
-      Future.delayed(const Duration(seconds: 3), checkAlertSharedPreferences);
+      Future.delayed(
+        const Duration(seconds: 3),
+        () => ref.read(sosViewModelProvider.notifier).refresh(),
+      );
     }
   }
 
-  Future<void> checkAlertSharedPreferences() async {
-    prefs = await SharedPreferences.getInstance();
-    await prefs!.reload();
-    if (mounted) {
-      setState(() {
-        alerted = prefs!.getBool("alerted") ?? false;
-      });
+  Future<void> sendAlertSMS(bool isAlert) async {
+    final l10n = context.l10n;
+    if (!isAlert) Fluttertoast.showToast(msg: l10n.notifyingSafe);
+    final sent = await ref
+        .read(sosViewModelProvider.notifier)
+        .setAlert(
+          isAlert,
+          isAlert ? l10n.smsSos : l10n.smsSafe,
+          withLocation: isAlert,
+        );
+    if (sent == 0) {
+      Fluttertoast.showToast(
+        msg: l10n.noContactsFound,
+        backgroundColor: Latte.red,
+      );
+    } else if (isAlert) {
+      Fluttertoast.showToast(msg: l10n.alertSent, backgroundColor: Latte.green);
     }
   }
 
@@ -86,34 +107,6 @@ class _DashboardState extends State<Dashboard> with WidgetsBindingObserver {
     ].request();
     if (await Permission.location.isGranted) {
       await Permission.locationAlways.request();
-    }
-  }
-
-  Future<void> sendAlertSMS(bool isAlert) async {
-    final l10n = context.l10n;
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool("alerted", isAlert);
-    setState(() => alerted = isAlert);
-
-    if (!isAlert) {
-      Fluttertoast.showToast(msg: l10n.notifyingSafe);
-    }
-    final sent = isAlert
-        ? await BackgroundServices.sendSosAlert(l10n.smsSos)
-        : await BackgroundServices.sendSosAlert(
-            l10n.smsSafe,
-            withLocation: false,
-          );
-
-    if (sent == 0) {
-      await prefs.setBool("alerted", false);
-      if (mounted) setState(() => alerted = false);
-      Fluttertoast.showToast(
-        msg: l10n.noContactsFound,
-        backgroundColor: Latte.red,
-      );
-    } else if (isAlert) {
-      Fluttertoast.showToast(msg: l10n.alertSent, backgroundColor: Latte.green);
     }
   }
 
@@ -181,12 +174,12 @@ class _DashboardState extends State<Dashboard> with WidgetsBindingObserver {
     }
   }
 
-  Future<void> _onSosPressed() async {
+  Future<void> _onSosPressed(bool alerted) async {
     if (!alerted) {
       sendAlertSMS(true);
       return;
     }
-    final pin = prefs?.getInt('pin') ?? -1111;
+    final pin = _pin ?? -1111;
     if (pin == -1111) {
       sendAlertSMS(false);
     } else {
@@ -196,13 +189,14 @@ class _DashboardState extends State<Dashboard> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
+    final alerted = ref.watch(sosViewModelProvider).alerted;
     return Scaffold(
       extendBody: true,
       floatingActionButton: currentPage == 1
           ? FloatingActionButton(
               onPressed: () async {
                 if (await addSosContactFlow(context)) {
-                  setState(() {});
+                  ref.read(contactsViewModelProvider.notifier).reload();
                 }
               },
               child: const Icon(Icons.person_add_alt_1),
@@ -213,7 +207,10 @@ class _DashboardState extends State<Dashboard> with WidgetsBindingObserver {
         onSelect: (page) {
           if (page != currentPage) setState(() => currentPage = page);
         },
-        center: SosButton(alerted: alerted, onPressed: _onSosPressed),
+        center: SosButton(
+          alerted: alerted,
+          onPressed: () => _onSosPressed(alerted),
+        ),
       ),
       body: GlassBackground(
         child: SafeArea(
