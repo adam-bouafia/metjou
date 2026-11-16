@@ -1,40 +1,20 @@
 import 'package:audio_background_record/audio_background_record.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:metjou/core/theme/app_theme.dart';
 import 'package:metjou/core/localization/app_locale.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:metjou/core/services/background_services.dart';
+import 'package:metjou/core/widgets/pin_guard.dart';
 import 'package:metjou/features/settings/presentation/about.dart';
 import 'package:metjou/features/settings/presentation/change_pin.dart';
-import 'package:metjou/core/services/alert_countdown.dart';
-import 'package:metjou/core/services/background_services.dart';
-import 'package:metjou/core/services/discreet_mode.dart';
-import 'package:metjou/core/services/fall_detection.dart';
-import 'package:metjou/core/services/low_battery.dart';
-import 'package:metjou/core/widgets/pin_guard.dart';
+import 'package:metjou/features/settings/presentation/settings_viewmodel.dart';
 import 'package:metjou/features/legal/presentation/policy_dialog.dart';
 import 'package:metjou/features/medical_id/presentation/medical_id_screen.dart';
 import 'package:metjou/core/localization/language_picker.dart';
 
-class SettingsScreen extends StatefulWidget {
+class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
-
-  @override
-  State<SettingsScreen> createState() => _SettingsScreenState();
-}
-
-class _SettingsScreenState extends State<SettingsScreen> {
-  bool switchValue = false;
-  bool switchAudioRecord = false;
-
-  /// Picked recordings folder, or null for the app's private folder.
-  String? recordFolder;
-
-  @override
-  void initState() {
-    super.initState();
-    checkService();
-  }
 
   static const _recordDurations = [
     Duration(minutes: 5),
@@ -64,15 +44,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
   }
 
-  Future<int> checkPIN() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    int pin = (prefs.getInt('pin') ?? -1111);
-    return pin;
-  }
-
   /// Lets the user pick any folder through Android's folder picker, or go
   /// back to the app's private folder.
-  Future<void> _selectRecordFolder(BuildContext context) async {
+  Future<void> _selectRecordFolder(BuildContext context, WidgetRef ref) async {
     final recorder = AudioBackgroundRecord.getInstance();
     final choice = await showModalBottomSheet<bool>(
       context: context,
@@ -95,17 +69,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ),
     );
     if (choice == null) return;
+    final viewModel = ref.read(settingsViewModelProvider.notifier);
     if (choice) {
       final folder = await recorder.pickDirectory();
-      if (folder == null || !mounted) return;
-      setState(() => recordFolder = folder);
+      if (folder != null) await viewModel.setRecordFolder(folder);
     } else {
-      await recorder.resetDirectory();
-      if (mounted) setState(() => recordFolder = null);
+      await viewModel.setRecordFolder(null);
     }
   }
 
-  Future<void> _selectCountdown(BuildContext context, int current) async {
+  Future<void> _selectCountdown(
+    BuildContext context,
+    WidgetRef ref,
+    int current,
+  ) async {
     final seconds = await showDialog<int>(
       context: context,
       builder: (context) => SimpleDialog(
@@ -131,14 +108,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ),
     );
     if (seconds == null) return;
-    await (await SharedPreferences.getInstance()).setInt(
-      countdownSecondsKey,
-      seconds,
-    );
-    if (mounted) setState(() {});
+    await ref.read(settingsViewModelProvider.notifier).setCountdown(seconds);
   }
 
-  Future<void> _setDiscreet(BuildContext context, bool on) async {
+  Future<void> _setDiscreet(
+    BuildContext context,
+    WidgetRef ref,
+    bool on,
+  ) async {
     if (on) {
       final ok = await showDialog<bool>(
         context: context,
@@ -159,18 +136,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
       );
       if (ok != true) return;
     }
-    await DiscreetMode.setEnabled(on);
-    BackgroundServices.discreet = on;
-    if (mounted) setState(() {});
+    await ref.read(settingsViewModelProvider.notifier).setDiscreet(on);
   }
 
   /// Without a PIN: create one. With a PIN: change it or turn it off; turning
   /// it off asks for the current PIN first.
-  Future<void> _onPinTap(BuildContext context, int pin) async {
-    Future<void> change() => Navigator.push(
-      context,
-      MaterialPageRoute(builder: (_) => ChangePinScreen(pin: pin)),
-    );
+  Future<void> _onPinTap(BuildContext context, WidgetRef ref, int pin) async {
+    final viewModel = ref.read(settingsViewModelProvider.notifier);
+    Future<void> change() async {
+      await Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => ChangePinScreen(pin: pin)),
+      );
+      await viewModel.refresh();
+    }
+
     if (pin == noPin) {
       await change();
     } else {
@@ -202,11 +182,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
       if (!turnOff) {
         await change();
       } else if (await confirmPin(context)) {
-        await (await SharedPreferences.getInstance()).setInt('pin', noPin);
+        await viewModel.turnPinOff();
         Fluttertoast.showToast(msg: l10n.pinTurnedOff);
       }
     }
-    if (mounted) setState(() {});
   }
 
   Future<void> _sendTestAlert(BuildContext context) async {
@@ -267,32 +246,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
     if (mode != null) await setThemeMode(mode);
   }
 
-  Future<void> checkService() async {
-    final folder = await AudioBackgroundRecord.getInstance()
-        .getRecordingDestination();
-    final prefs = await SharedPreferences.getInstance();
-    if (!mounted) return;
-    setState(() {
-      switchAudioRecord = prefs.getBool("bgRecord") ?? false;
-      switchValue = prefs.getBool("smsSend") ?? false;
-      recordFolder = folder;
-    });
-  }
-
-  Future<void> controllSafeShake(bool val) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool("smsSend", val);
-    await BackgroundServices.setSafeShake(val);
-  }
-
-  Future<void> controlAudioBgRecord(bool val) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool("bgRecord", val);
-    await BackgroundServices.setAudioRecording(val);
-  }
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(settingsViewModelProvider);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -313,48 +269,37 @@ class _SettingsScreenState extends State<SettingsScreen> {
               style: TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
             ),
           ),
-          FutureBuilder(
-            future: checkPIN(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return ListTile(
-                  onTap: () => _onPinTap(context, snapshot.data!),
-                  leading: CircleAvatar(
-                    backgroundColor: Theme.of(
-                      context,
-                    ).colorScheme.surfaceContainerHighest,
-                    child: Icon(
-                      Icons.password,
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
-                      size: 22,
-                    ),
-                  ),
-                  title: Text(
-                    snapshot.data == -1111
-                        ? context.l10n.createPin
-                        : context.l10n.changePin,
-                  ),
-                  subtitle: Text(context.l10n.pinRequired),
-                  trailing: CircleAvatar(
-                    radius: 7,
-                    backgroundColor: snapshot.data == -1111
-                        ? Latte.red
-                        : Colors.transparent,
-                    child: Center(
-                      child: Card(
-                        color: snapshot.data == -1111
-                            ? Latte.peach
-                            : Colors.transparent,
-                        shape: CircleBorder(),
-                        child: SizedBox(height: 5, width: 5),
-                      ),
-                    ),
-                  ),
-                );
-              } else {
-                return SizedBox();
-              }
-            },
+          ListTile(
+            onTap: () => _onPinTap(context, ref, state.pin),
+            leading: CircleAvatar(
+              backgroundColor: Theme.of(
+                context,
+              ).colorScheme.surfaceContainerHighest,
+              child: Icon(
+                Icons.password,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+                size: 22,
+              ),
+            ),
+            title: Text(
+              state.pin == noPin
+                  ? context.l10n.createPin
+                  : context.l10n.changePin,
+            ),
+            subtitle: Text(context.l10n.pinRequired),
+            trailing: CircleAvatar(
+              radius: 7,
+              backgroundColor: state.pin == noPin
+                  ? Latte.red
+                  : Colors.transparent,
+              child: Center(
+                child: Card(
+                  color: state.pin == noPin ? Latte.peach : Colors.transparent,
+                  shape: CircleBorder(),
+                  child: SizedBox(height: 5, width: 5),
+                ),
+              ),
+            ),
           ),
           Row(
             children: [
@@ -385,24 +330,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
             title: Text(context.l10n.language),
             subtitle: Text(context.l10n.changeLanguage),
           ),
-          FutureBuilder<bool>(
-            future: DiscreetMode.isEnabled(),
-            builder: (context, snap) => SwitchListTile(
-              value: snap.data ?? false,
-              onChanged: (on) => _setDiscreet(context, on),
-              secondary: CircleAvatar(
-                backgroundColor: Theme.of(
-                  context,
-                ).colorScheme.surfaceContainerHighest,
-                child: Icon(
-                  Icons.visibility_off_outlined,
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  size: 22,
-                ),
+          SwitchListTile(
+            value: state.discreet,
+            onChanged: (on) => _setDiscreet(context, ref, on),
+            secondary: CircleAvatar(
+              backgroundColor: Theme.of(
+                context,
+              ).colorScheme.surfaceContainerHighest,
+              child: Icon(
+                Icons.visibility_off_outlined,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+                size: 22,
               ),
-              title: Text(context.l10n.discreetMode),
-              subtitle: Text(context.l10n.discreetModeSubtitle),
             ),
+            title: Text(context.l10n.discreetMode),
+            subtitle: Text(context.l10n.discreetModeSubtitle),
           ),
           ValueListenableBuilder<ThemeMode>(
             valueListenable: appThemeMode,
@@ -424,13 +366,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           Divider(indent: 40, endIndent: 40),
           SwitchListTile(
-            onChanged: (val) {
-              setState(() {
-                switchValue = val;
-                controllSafeShake(val);
-              });
-            },
-            value: switchValue,
+            onChanged: (val) =>
+                ref.read(settingsViewModelProvider.notifier).setSafeShake(val),
+            value: state.safeShake,
             secondary: CircleAvatar(
               backgroundColor: Theme.of(
                 context,
@@ -477,86 +415,66 @@ class _SettingsScreenState extends State<SettingsScreen> {
             title: Text(context.l10n.testAlert),
             subtitle: Text(context.l10n.testAlertSubtitle),
           ),
-          FutureBuilder<bool>(
-            future: FallDetection.isEnabled(),
-            builder: (context, snap) => SwitchListTile(
-              value: snap.data ?? false,
-              onChanged: (on) async {
-                await FallDetection.setEnabled(on);
-                if (mounted) setState(() {});
-              },
-              secondary: CircleAvatar(
-                backgroundColor: Theme.of(
-                  context,
-                ).colorScheme.surfaceContainerHighest,
-                child: Icon(
-                  Icons.personal_injury_outlined,
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  size: 22,
-                ),
+          SwitchListTile(
+            value: state.fallDetection,
+            onChanged: (on) => ref
+                .read(settingsViewModelProvider.notifier)
+                .setFallDetection(on),
+            secondary: CircleAvatar(
+              backgroundColor: Theme.of(
+                context,
+              ).colorScheme.surfaceContainerHighest,
+              child: Icon(
+                Icons.personal_injury_outlined,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+                size: 22,
               ),
-              title: Text(context.l10n.fallDetection),
-              subtitle: Text(context.l10n.fallDetectionSubtitle),
             ),
+            title: Text(context.l10n.fallDetection),
+            subtitle: Text(context.l10n.fallDetectionSubtitle),
           ),
-          FutureBuilder<bool>(
-            future: LowBatteryAlert.isEnabled(),
-            builder: (context, snap) => SwitchListTile(
-              value: snap.data ?? false,
-              onChanged: (on) async {
-                await LowBatteryAlert.setEnabled(on);
-                if (mounted) setState(() {});
-              },
-              secondary: CircleAvatar(
-                backgroundColor: Theme.of(
-                  context,
-                ).colorScheme.surfaceContainerHighest,
-                child: Icon(
-                  Icons.battery_alert_outlined,
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  size: 22,
-                ),
+          SwitchListTile(
+            value: state.lowBattery,
+            onChanged: (on) =>
+                ref.read(settingsViewModelProvider.notifier).setLowBattery(on),
+            secondary: CircleAvatar(
+              backgroundColor: Theme.of(
+                context,
+              ).colorScheme.surfaceContainerHighest,
+              child: Icon(
+                Icons.battery_alert_outlined,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+                size: 22,
               ),
-              title: Text(context.l10n.lowBattery),
-              subtitle: Text(context.l10n.lowBatterySubtitle),
             ),
+            title: Text(context.l10n.lowBattery),
+            subtitle: Text(context.l10n.lowBatterySubtitle),
           ),
-          FutureBuilder<SharedPreferences>(
-            future: SharedPreferences.getInstance(),
-            builder: (context, snap) {
-              final seconds =
-                  snap.data?.getInt(countdownSecondsKey) ??
-                  defaultCountdownSeconds;
-              return ListTile(
-                onTap: () => _selectCountdown(context, seconds),
-                leading: CircleAvatar(
-                  backgroundColor: Theme.of(
-                    context,
-                  ).colorScheme.surfaceContainerHighest,
-                  child: Icon(
-                    Icons.timer_outlined,
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
-                    size: 22,
-                  ),
-                ),
-                title: Text(context.l10n.countdownSetting),
-                subtitle: Text(
-                  seconds == 0
-                      ? context.l10n.off
-                      : context.l10n.seconds(seconds),
-                ),
-              );
-            },
+          ListTile(
+            onTap: () => _selectCountdown(context, ref, state.countdownSeconds),
+            leading: CircleAvatar(
+              backgroundColor: Theme.of(
+                context,
+              ).colorScheme.surfaceContainerHighest,
+              child: Icon(
+                Icons.timer_outlined,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+                size: 22,
+              ),
+            ),
+            title: Text(context.l10n.countdownSetting),
+            subtitle: Text(
+              state.countdownSeconds == 0
+                  ? context.l10n.off
+                  : context.l10n.seconds(state.countdownSeconds),
+            ),
           ),
           Divider(indent: 40, endIndent: 40),
           SwitchListTile(
-            onChanged: (val) {
-              setState(() {
-                switchAudioRecord = val;
-                controlAudioBgRecord(val);
-              });
-            },
-            value: switchAudioRecord,
+            onChanged: (val) => ref
+                .read(settingsViewModelProvider.notifier)
+                .setAudioRecord(val),
+            value: state.audioRecord,
             secondary: CircleAvatar(
               backgroundColor: Theme.of(
                 context,
@@ -589,7 +507,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           Divider(indent: 40, endIndent: 40),
           ListTile(
-            onTap: () => _selectRecordFolder(context),
+            onTap: () => _selectRecordFolder(context, ref),
             trailing: Icon(Icons.keyboard_arrow_right),
             leading: CircleAvatar(
               backgroundColor: Theme.of(
@@ -603,7 +521,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             title: Text(context.l10n.audioRecordFolder),
             subtitle: Text(
-              recordFolder ?? context.l10n.audioRecordFolderPrivate,
+              state.recordFolder ?? context.l10n.audioRecordFolderPrivate,
             ),
           ),
           Divider(indent: 40, endIndent: 40),
